@@ -14,12 +14,17 @@ DiscoveryServer OWNS:
     - Service discovery API
     - Version negotiation endpoint
     - Health/readiness/metrics publication
+    - Federation status / audit / sync endpoints
+    - Authenticated registration endpoint
+    - Heartbeat / revocation endpoints
 
 DiscoveryServer does NOT OWN:
     - Service registration logic       → PlatformServiceRegistry
     - Lifecycle management             → LifecycleManager
     - Solver execution                 → Universal Solver Fabric
     - Contract validation              → RuntimeCore
+    - Federation protocol              → FederatedRegistryNode
+    - Certificate issuance             → ServiceCertificateAuthority
 """
 
 from __future__ import annotations
@@ -34,6 +39,7 @@ from urllib.parse import urlparse, parse_qs
 
 from platform_service_registry import (
     PlatformServiceRegistry,
+    PlatformServiceRecord,
     RegistrationEvidenceRecorder,
     PLATFORM_REGISTRY_VERSION,
 )
@@ -46,11 +52,12 @@ logger = logging.getLogger("tantra.platform.discovery")
 # Module-level state — set by start_discovery_server()
 _registry: Optional[PlatformServiceRegistry] = None
 _lifecycle: Optional[LifecycleManager] = None
+_federation_node = None  # Optional FederatedRegistryNode
 _start_time = time.time()
 _request_count = 0
 _request_lock = threading.Lock()
 
-DISCOVERY_SERVER_VERSION = "1.0.0"
+DISCOVERY_SERVER_VERSION = "2.0.0"
 
 
 # ---------------------------------------------------------------------------
@@ -110,6 +117,16 @@ class PlatformDiscoveryHandler(BaseHTTPRequestHandler):
         if path == "/platform/v1/version":
             return self._handle_version()
 
+        # --- Federation endpoints (GET) ---
+        if path == "/platform/v1/federation/status":
+            return self._handle_federation_status()
+
+        if path == "/platform/v1/federation/audit":
+            return self._handle_federation_audit()
+
+        if path == "/platform/v1/certificates":
+            return self._handle_list_certificates()
+
         # --- Per-service endpoints ---
         # /platform/v1/services/{service_id}
         # /platform/v1/services/{service_id}/versions
@@ -149,6 +166,36 @@ class PlatformDiscoveryHandler(BaseHTTPRequestHandler):
 
         if path == "/platform/v1/negotiate":
             return self._handle_negotiate()
+
+        if path == "/platform/v1/register":
+            return self._handle_register()
+
+        if path == "/platform/v1/heartbeat":
+            return self._handle_heartbeat()
+
+        if path == "/platform/v1/revoke":
+            return self._handle_revoke()
+
+        if path == "/platform/v1/federation/sync":
+            return self._handle_federation_sync()
+
+        # Handle mock execution POST request to service endpoints
+        parts = path.split("/")
+        if len(parts) == 5 and parts[1] == "platform" and parts[2] == "v1" and parts[3] == "services":
+            service_id = parts[4]
+            record = _registry.get_service(service_id) if _registry else None
+            if record:
+                self._write_json({
+                    "status": "EXECUTED",
+                    "service_id": service_id,
+                    "ack": True,
+                    "payload_received": True,
+                    "timestamp": time.strftime("%Y-%m-%dT%H:%M:%S+00:00", time.gmtime())
+                })
+                return
+            else:
+                self._write_json({"error": f"Service '{service_id}' not found"}, 404)
+                return
 
         self._write_json({"error": "Endpoint not found", "path": self.path}, 404)
 
@@ -305,6 +352,137 @@ class PlatformDiscoveryHandler(BaseHTTPRequestHandler):
         }
         self._write_json(result)
 
+    # -- Federation handler implementations ---------------------------------
+
+    def _handle_register(self):
+        """Authenticated service registration."""
+        if not _federation_node:
+            self._write_json({"error": "Federation not enabled"}, 503)
+            return
+        try:
+            body = self._read_body()
+        except Exception as e:
+            self._write_json({"error": f"Invalid request body: {e}"}, 400)
+            return
+
+        record_data = body.get("record")
+        if not record_data:
+            self._write_json({"error": "Missing 'record' in body"}, 400)
+            return
+
+        try:
+            record = PlatformServiceRecord(
+                platform_service_id=record_data["platform_service_id"],
+                capability_id=record_data.get("capability_id", ""),
+                service_name=record_data.get("service_name", ""),
+                version=record_data.get("version", "1.0.0"),
+                provider=record_data.get("provider", ""),
+                owner=record_data.get("owner", {}),
+                runtime_type=record_data.get("runtime_type", "PROCESS"),
+                service_classification=record_data.get("service_classification", "PLATFORM_SERVICE"),
+                capability_category=record_data.get("capability_category", "VERIFICATION"),
+                status=record_data.get("status", "ACTIVE"),
+            )
+        except (KeyError, TypeError) as e:
+            self._write_json({"error": f"Invalid record: {e}"}, 400)
+            return
+
+        result = _federation_node.register_service_authenticated(record)
+        status_code = 200 if result.get("status") in ("REGISTERED", "ALREADY_REGISTERED") else 403
+        self._write_json(result, status_code)
+
+    def _handle_heartbeat(self):
+        """Lease renewal heartbeat."""
+        if not _federation_node:
+            self._write_json({"error": "Federation not enabled"}, 503)
+            return
+        try:
+            body = self._read_body()
+        except Exception as e:
+            self._write_json({"error": f"Invalid request body: {e}"}, 400)
+            return
+
+        service_id = body.get("service_id")
+        if not service_id:
+            self._write_json({"error": "Missing 'service_id'"}, 400)
+            return
+
+        accepted = _federation_node.heartbeat.receive_heartbeat(service_id)
+        if accepted:
+            lease = _federation_node.heartbeat.get_lease(service_id)
+            self._write_json({
+                "status": "HEARTBEAT_ACCEPTED",
+                "service_id": service_id,
+                "lease": lease.to_dict() if lease else None,
+            })
+        else:
+            self._write_json({
+                "status": "HEARTBEAT_REJECTED",
+                "service_id": service_id,
+                "reason": "No active lease",
+            }, 404)
+
+    def _handle_revoke(self):
+        """Service revocation."""
+        if not _federation_node:
+            self._write_json({"error": "Federation not enabled"}, 503)
+            return
+        try:
+            body = self._read_body()
+        except Exception as e:
+            self._write_json({"error": f"Invalid request body: {e}"}, 400)
+            return
+
+        service_id = body.get("service_id")
+        reason = body.get("reason", "Revoked via API")
+        if not service_id:
+            self._write_json({"error": "Missing 'service_id'"}, 400)
+            return
+
+        result = _federation_node.revoke_service(service_id, reason)
+        self._write_json(result)
+
+    def _handle_federation_status(self):
+        """Federation topology and sync state."""
+        if not _federation_node:
+            self._write_json({"status": "STANDALONE", "federation_enabled": False})
+            return
+        self._write_json(_federation_node.get_federation_status())
+
+    def _handle_federation_audit(self):
+        """Federation audit log."""
+        if not _federation_node:
+            self._write_json({"events": [], "chain_valid": True})
+            return
+        events = _federation_node.get_audit_log()
+        self._write_json({
+            "events": events,
+            "count": len(events),
+            "chain_valid": _federation_node.audit_log.verify_chain(),
+        })
+
+    def _handle_federation_sync(self):
+        """Trigger federation sync with all peers."""
+        if not _federation_node:
+            self._write_json({"error": "Federation not enabled"}, 503)
+            return
+        results = _federation_node.anti_entropy_sync()
+        self._write_json({
+            "status": "SYNC_COMPLETED",
+            "results": results,
+        })
+
+    def _handle_list_certificates(self):
+        """List active service certificates."""
+        if not _federation_node:
+            self._write_json({"certificates": []})
+            return
+        certs = _federation_node.ca.list_active_certificates()
+        self._write_json({
+            "certificates": [c.to_dict() for c in certs],
+            "count": len(certs),
+        })
+
 
 # ---------------------------------------------------------------------------
 # Server lifecycle
@@ -319,19 +497,22 @@ class PlatformDiscoveryServer:
         port: int = 9010,
         registry: PlatformServiceRegistry = None,
         lifecycle: LifecycleManager = None,
+        federation_node=None,
     ):
         self.host = host
         self.port = port
         self.registry = registry
         self.lifecycle = lifecycle
+        self.federation_node = federation_node
         self.server: Optional[HTTPServer] = None
         self.thread: Optional[threading.Thread] = None
 
     def start(self):
         """Start the discovery server in a background thread."""
-        global _registry, _lifecycle, _start_time, _request_count
+        global _registry, _lifecycle, _federation_node, _start_time, _request_count
         _registry = self.registry
         _lifecycle = self.lifecycle
+        _federation_node = self.federation_node
         _start_time = time.time()
         _request_count = 0
 
@@ -339,7 +520,8 @@ class PlatformDiscoveryServer:
         self.thread = threading.Thread(target=self.server.serve_forever, daemon=True)
         self.thread.start()
         logger.info(
-            f"Platform Discovery Server started on http://{self.host}:{self.port}/platform/v1/"
+            f"Platform Discovery Server v{DISCOVERY_SERVER_VERSION} started on "
+            f"http://{self.host}:{self.port}/platform/v1/"
         )
 
     def stop(self):

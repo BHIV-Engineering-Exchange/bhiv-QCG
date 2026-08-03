@@ -1,0 +1,246 @@
+{
+  "suite": "Federated Ecosystem Validation",
+  "started_at": "2026-08-03T08:31:43.357167+00:00",
+  "steps": {
+    "setup": {
+      "status": "PASS",
+      "nodes": [
+        "FEDERATION-NODE-1",
+        "FEDERATION-NODE-2",
+        "FEDERATION-NODE-3"
+      ]
+    },
+    "1_discovery": {
+      "status": "PASS",
+      "services_discovered": 3,
+      "service_ids": [
+        "TANTRA-PSR-USF-001",
+        "TANTRA-PSR-QCG-001",
+        "TANTRA-PSR-DISCO-001"
+      ]
+    },
+    "2_authentication": {
+      "status": "PASS",
+      "results": [
+        {
+          "authenticated": true,
+          "service_id": "TANTRA-PSR-USF-001",
+          "reason": "Mutual authentication successful",
+          "trust_level": "CLASSICAL",
+          "certificate_serial": "TANTRA-CERT-1AC03B04F2EE",
+          "timestamp": "2026-08-03T08:31:44.823201+00:00"
+        },
+        {
+          "authenticated": true,
+          "service_id": "TANTRA-PSR-QCG-001",
+          "reason": "Mutual authentication successful",
+          "trust_level": "CLASSICAL",
+          "certificate_serial": "TANTRA-CERT-3E0A9C966910",
+          "timestamp": "2026-08-03T08:31:44.823601+00:00"
+        },
+        {
+          "authenticated": true,
+          "service_id": "TANTRA-PSR-DISCO-001",
+          "reason": "Mutual authentication successful",
+          "trust_level": "CLASSICAL",
+          "certificate_serial": "TANTRA-CERT-2CF0043424E1",
+          "timestamp": "2026-08-03T08:31:44.823967+00:00"
+        }
+      ]
+    },
+    "3_negotiation": {
+      "status": "PASS",
+      "test_cases": 4,
+      "passed": 4
+    },
+    "4_manifest_validation": {
+      "status": "PASS",
+      "results": [
+        {
+          "service_id": "TANTRA-PSR-USF-001",
+          "valid": true,
+          "errors": [],
+          "manifest_hash": "0bb45f1dad377e37660f97fb72b17871a540a9f3203b9f665f53649332292a60",
+          "operations_validated": 1,
+          "timestamp": "2026-08-03T08:31:44.828053+00:00"
+        },
+        {
+          "service_id": "TANTRA-PSR-QCG-001",
+          "valid": true,
+          "errors": [],
+          "manifest_hash": "9d3c9c3e30f2614aa794a8527022c71f812cec46a6fc4b09aef7d1928fcabb5b",
+          "operations_validated": 1,
+          "timestamp": "2026-08-03T08:31:44.828684+00:00"
+        },
+        {
+          "service_id": "TANTRA-PSR-DISCO-001",
+          "valid": true,
+          "errors": [],
+          "manifest_hash": "9d9e3c6be6340e9257d83a8dd64df260e149130519c0895caa6723507120c981",
+          "operations_validated": 1,
+          "timestamp": "2026-08-03T08:31:44.829305+00:00"
+        }
+      ]
+    },
+    "5_invocation": {
+      "status": "PASS",
+      "results": [
+        {
+          "invocation_id": "9041bdfe-c374-4b1b-9456-2af89ec4542e",
+          "service_id": "TANTRA-PSR-USF-001",
+          "operation": "discover_services",
+          "status": "SUCCESS",
+          "response": {
+            "status": "EXECUTED",
+            "service_id": "TANTRA-PSR-USF-001",
+            "ack": true,
+            "payload_received": true,
+            "timestamp": "2026-08-03T08:31:44+00:00"
+          },
+          "duration_ms": 1.8978118896484375,
+          "trust_method": "CLASSICAL",
+          "evidence": {
+            "invocation_id": "9041bdfe-c374-4b1b-9456-2af89ec4542e",
+            "service_id": "TANTRA-PSR-USF-001",
+            "operation": "discover_services",
+            "request_hash": "c8199439583dcc6fe0200ba90379a0031513fbaca73bdc746cf56cb5f4d261ac",
+            "response_hash": "41aadae92cef96d70aea34d7e8b2442032a1d4ce5ea4d1ddf47a01738f8966c2",
+            "trust_method": "CLASSICAL",
+            "duration_ms": 1.8978118896484375,
+            "status": "SUCCESS",
+            "timestamp": "2026-08-03T08:31:44.831281+00:00",
+            "evidence_hash": "0eedaff565fc9add70e1d9a80ade19198217ad5496fd456ee3e4929790d4b54a",
+            "previous_evidence_hash": "af05c09e9a7be20a81cd07438950d152676e85344e19430907ef24e9da1bbcb4"
+          },
+          "error": null,
+          "retry_count": 0,
+          "timestamp": "2026-08-03T08:31:44.831250+00:00"
+        },
+        {
+          "invocation_id": "7ea5bec2-48ec-498d-96bc-38c238998ad4",
+          "service_id": "TANTRA-PSR-QCG-001",
+          "operation": "discover_services",
+          "status": "SUCCESS",
+          "response": {
+            "status": "EXECUTED",
+            "service_id": "TANTRA-PSR-QCG-001",
+            "ack": true,
+            "payload_received": true,
+            "timestamp": "2026-08-03T08:31:44+00:00"
+          },
+          "duration_ms": 2.032041549682617,
+          "trust_method": "CLASSICAL",
+          "evidence": {
+            "invocation_id": "7ea5bec2-48ec-498d-96bc-38c238998ad4",
+            "service_id": "TANTRA-PSR-QCG-001",
+            "operation": "discover_services",
+            "request_hash": "0150d143b10d138061dfd9bfab2aad496f95b3c17bb343e21ad9bd5ea496a057",
+            "response_hash": "7bd620f3839f041c20ed1b5c8439af970a07f1ebfc7ee9dec5eff539296b1495",
+            "trust_method": "CLASSICAL",
+            "duration_ms": 2.032041549682617,
+            "status": "SUCCESS",
+            "timestamp": "2026-08-03T08:31:44.833387+00:00",
+            "evidence_hash": "2aa679c7b059563c8cdecf570276a7bcea1ba3f6d7b8d814bdb2d070c1107970",
+            "previous_evidence_hash": "0eedaff565fc9add70e1d9a80ade19198217ad5496fd456ee3e4929790d4b54a"
+          },
+          "error": null,
+          "retry_count": 0,
+          "timestamp": "2026-08-03T08:31:44.833360+00:00"
+        },
+        {
+          "invocation_id": "8bf470e7-26d6-4e45-b807-9ea975988b5c",
+          "service_id": "TANTRA-PSR-DISCO-001",
+          "operation": "discover_services",
+          "status": "SUCCESS",
+          "response": {
+            "status": "EXECUTED",
+            "service_id": "TANTRA-PSR-DISCO-001",
+            "ack": true,
+            "payload_received": true,
+            "timestamp": "2026-08-03T08:31:44+00:00"
+          },
+          "duration_ms": 1.8427371978759766,
+          "trust_method": "CLASSICAL",
+          "evidence": {
+            "invocation_id": "8bf470e7-26d6-4e45-b807-9ea975988b5c",
+            "service_id": "TANTRA-PSR-DISCO-001",
+            "operation": "discover_services",
+            "request_hash": "5d47271fc200287ffd2e0ff6026bea78701cba5983bad1fcf063b2aaaab93a71",
+            "response_hash": "6696c1d93de046435341ead7eda1dd729e7a88f3dd6036d8d98304286fc54097",
+            "trust_method": "CLASSICAL",
+            "duration_ms": 1.8427371978759766,
+            "status": "SUCCESS",
+            "timestamp": "2026-08-03T08:31:44.835290+00:00",
+            "evidence_hash": "8eae80656b5e92b8471d4fc4d3cf9817d2854ddfb9c31c8456db313256a3dbe5",
+            "previous_evidence_hash": "2aa679c7b059563c8cdecf570276a7bcea1ba3f6d7b8d814bdb2d070c1107970"
+          },
+          "error": null,
+          "retry_count": 0,
+          "timestamp": "2026-08-03T08:31:44.835265+00:00"
+        }
+      ]
+    },
+    "6_replay_verification": {
+      "status": "PASS",
+      "valid_count": 3,
+      "duplicate_detected": true
+    },
+    "7_evidence_generation": {
+      "status": "PASS",
+      "sdk_evidence_count": 3,
+      "sdk_chain_valid": true,
+      "registry_chain_valid": true,
+      "sdk_head_hash": "8eae80656b5e92b8471d4fc4d3cf9817d2854ddfb9c31c8456db313256a3dbe5"
+    },
+    "8_federated_audit": {
+      "status": "PASS",
+      "federation_consistent": true,
+      "no_duplicates": true,
+      "audit_chains_valid": true,
+      "node_service_counts": {
+        "FEDERATION-NODE-1": 3,
+        "FEDERATION-NODE-2": 3,
+        "FEDERATION-NODE-3": 3
+      }
+    },
+    "9_deployment_validation": {
+      "status": "PASS",
+      "health_results": [
+        {
+          "service_id": "TANTRA-PSR-USF-001",
+          "status": "UP",
+          "version": "1.0.0",
+          "uptime_seconds": 0.0,
+          "dependencies": {},
+          "timestamp": "2026-08-03T08:31:44.839078+00:00"
+        },
+        {
+          "service_id": "TANTRA-PSR-QCG-001",
+          "status": "UP",
+          "version": "1.0.0",
+          "uptime_seconds": 0.0,
+          "dependencies": {},
+          "timestamp": "2026-08-03T08:31:44.839630+00:00"
+        },
+        {
+          "service_id": "TANTRA-PSR-DISCO-001",
+          "status": "UP",
+          "version": "2.0.0",
+          "uptime_seconds": 0.0,
+          "dependencies": {},
+          "timestamp": "2026-08-03T08:31:44.840176+00:00"
+        }
+      ],
+      "quantum_trust_validated": true,
+      "qrng_validated": true,
+      "qkd_stubs_validated": true
+    }
+  },
+  "overall_status": "PASS",
+  "determinism_proof": {
+    "conflict_resolution_deterministic": true,
+    "evidence_hash_deterministic": true,
+    "winner_service": "TestB"
+  },
+  "completed_at": "2026-08-03T08:31:44.840685+00:00"
+}

@@ -1,0 +1,45 @@
+{
+  "sdk_evidence": [
+    {
+      "invocation_id": "9041bdfe-c374-4b1b-9456-2af89ec4542e",
+      "service_id": "TANTRA-PSR-USF-001",
+      "operation": "discover_services",
+      "request_hash": "c8199439583dcc6fe0200ba90379a0031513fbaca73bdc746cf56cb5f4d261ac",
+      "response_hash": "41aadae92cef96d70aea34d7e8b2442032a1d4ce5ea4d1ddf47a01738f8966c2",
+      "trust_method": "CLASSICAL",
+      "duration_ms": 1.8978118896484375,
+      "status": "SUCCESS",
+      "timestamp": "2026-08-03T08:31:44.831281+00:00",
+      "evidence_hash": "0eedaff565fc9add70e1d9a80ade19198217ad5496fd456ee3e4929790d4b54a",
+      "previous_evidence_hash": "af05c09e9a7be20a81cd07438950d152676e85344e19430907ef24e9da1bbcb4"
+    },
+    {
+      "invocation_id": "7ea5bec2-48ec-498d-96bc-38c238998ad4",
+      "service_id": "TANTRA-PSR-QCG-001",
+      "operation": "discover_services",
+      "request_hash": "0150d143b10d138061dfd9bfab2aad496f95b3c17bb343e21ad9bd5ea496a057",
+      "response_hash": "7bd620f3839f041c20ed1b5c8439af970a07f1ebfc7ee9dec5eff539296b1495",
+      "trust_method": "CLASSICAL",
+      "duration_ms": 2.032041549682617,
+      "status": "SUCCESS",
+      "timestamp": "2026-08-03T08:31:44.833387+00:00",
+      "evidence_hash": "2aa679c7b059563c8cdecf570276a7bcea1ba3f6d7b8d814bdb2d070c1107970",
+      "previous_evidence_hash": "0eedaff565fc9add70e1d9a80ade19198217ad5496fd456ee3e4929790d4b54a"
+    },
+    {
+      "invocation_id": "8bf470e7-26d6-4e45-b807-9ea975988b5c",
+      "service_id": "TANTRA-PSR-DISCO-001",
+      "operation": "discover_services",
+      "request_hash": "5d47271fc200287ffd2e0ff6026bea78701cba5983bad1fcf063b2aaaab93a71",
+      "response_hash": "6696c1d93de046435341ead7eda1dd729e7a88f3dd6036d8d98304286fc54097",
+      "trust_method": "CLASSICAL",
+      "duration_ms": 1.8427371978759766,
+      "status": "SUCCESS",
+      "timestamp": "2026-08-03T08:31:44.835290+00:00",
+      "evidence_hash": "8eae80656b5e92b8471d4fc4d3cf9817d2854ddfb9c31c8456db313256a3dbe5",
+      "previous_evidence_hash": "2aa679c7b059563c8cdecf570276a7bcea1ba3f6d7b8d814bdb2d070c1107970"
+    }
+  ],
+  "sdk_chain_valid": true,
+  "head_hash": "8eae80656b5e92b8471d4fc4d3cf9817d2854ddfb9c31c8456db313256a3dbe5"
+}

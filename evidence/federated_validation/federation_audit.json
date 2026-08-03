@@ -1,0 +1,1003 @@
+{
+  "nodes": {
+    "FEDERATION-NODE-1": {
+      "audit_events": [
+        {
+          "event_id": "b3946bb7-3652-47cb-b4cf-57418965e340",
+          "event_type": "SERVICE_REGISTERED",
+          "source_node_id": "FEDERATION-NODE-1",
+          "target_node_id": "",
+          "payload": {
+            "record": {
+              "platform_service_id": "TANTRA-PSR-USF-001",
+              "capability_id": "c8a1b2d3-e4f5-5678-9abc-def012345678",
+              "service_name": "UNIVERSAL_SOLVER_FABRIC",
+              "version": "1.0.0",
+              "provider": "TANTRA Platform Engineering",
+              "owner": {
+                "team": "TANTRA Sovereign Core",
+                "contact": "solver-fabric@tantra.internal"
+              },
+              "runtime_type": "PROCESS",
+              "service_classification": "PLATFORM_SERVICE",
+              "capability_category": "OPTIMIZATION",
+              "status": "ACTIVE",
+              "registration_timestamp": "2026-08-03T08:31:44.272347+00:00",
+              "description": "Universal Solver Fabric \u2014 agnostic optimization capability layer.",
+              "tags": [],
+              "endpoints": {
+                "execution": "http://127.0.0.1:9010/platform/v1/services/TANTRA-PSR-USF-001"
+              },
+              "dependencies": []
+            },
+            "manifest": {
+              "manifest_id": "USF-MANIFEST-001",
+              "service_name": "UNIVERSAL_SOLVER_FABRIC",
+              "version": "1.0.0",
+              "supported_operations": [
+                {
+                  "operation_name": "discover_solvers",
+                  "description": "Discover available solver capabilities",
+                  "input_contract": {
+                    "type": "object",
+                    "required": [
+                      "problem_type"
+                    ]
+                  },
+                  "output_contract": {
+                    "type": "object"
+                  },
+                  "execution_modes": [
+                    "SYNCHRONOUS"
+                  ],
+                  "idempotent": true
+                }
+              ],
+              "execution_modes": [
+                "SYNCHRONOUS"
+              ],
+              "determinism_guarantees": {
+                "deterministic_execution": true
+              },
+              "replay_guarantees": {
+                "replay_safe": true
+              },
+              "trust_requirements": {
+                "authentication": "TANTRA_SERVICE_IDENTITY"
+              },
+              "evidence_guarantees": {
+                "evidence_per_execution": true
+              },
+              "runtime_dependencies": [],
+              "version_compatibility": {
+                "compatible": [
+                  "1.0.0"
+                ],
+                "deprecated": [],
+                "unsupported": []
+              },
+              "security_requirements": {
+                "network_policy": "INTERNAL_ONLY"
+              },
+              "resource_requirements": {
+                "memory_mb_min": 256
+              },
+              "publication_timestamp": "2026-08-03T08:31:44.272394+00:00"
+            }
+          },
+          "vector_clock": {
+            "FEDERATION-NODE-1": 1,
+            "FEDERATION-NODE-2": 0,
+            "FEDERATION-NODE-3": 0
+          },
+          "timestamp": "2026-08-03T08:31:44.272773+00:00",
+          "nonce": "3a884e92c0f6b187aa10ed5231d63a7c",
+          "event_hash": "e9dca42ed8ff336138b37840113ac9fc713f21488fb4c300a0e6a807ec085065",
+          "previous_event_hash": "000a3545d300d9ae3ce855aa1dfb0c47c882f3e438438e76f7c9943f6f71ea40"
+        },
+        {
+          "event_id": "410ed9a4-921d-4a5f-8401-c62dfa65a1b4",
+          "event_type": "SERVICE_REGISTERED",
+          "source_node_id": "FEDERATION-NODE-1",
+          "target_node_id": "",
+          "payload": {
+            "record": {
+              "platform_service_id": "TANTRA-PSR-QCG-001",
+              "capability_id": "d9b2c3e4-f5a6-5789-abcd-ef0123456789",
+              "service_name": "QCG_TRUST_VERIFICATION",
+              "version": "1.0.0",
+              "provider": "TANTRA Platform Engineering",
+              "owner": {
+                "team": "TANTRA Sovereign Core",
+                "contact": "qcg-trust@tantra.internal"
+              },
+              "runtime_type": "PROCESS",
+              "service_classification": "PLATFORM_SERVICE",
+              "capability_category": "VERIFICATION",
+              "status": "ACTIVE",
+              "registration_timestamp": "2026-08-03T08:31:44.272368+00:00",
+              "description": "QCG Trust Verification \u2014 Hybrid Quantum Communication Gateway.",
+              "tags": [],
+              "endpoints": {
+                "execution": "http://127.0.0.1:9010/platform/v1/services/TANTRA-PSR-QCG-001"
+              },
+              "dependencies": []
+            },
+            "manifest": {
+              "manifest_id": "QCG-MANIFEST-001",
+              "service_name": "QCG_TRUST_VERIFICATION",
+              "version": "1.0.0",
+              "supported_operations": [
+                {
+                  "operation_name": "verify_replay",
+                  "description": "Verify replay safety",
+                  "input_contract": {
+                    "type": "object",
+                    "required": [
+                      "message_id",
+                      "issued_at"
+                    ]
+                  },
+                  "output_contract": {
+                    "type": "object"
+                  },
+                  "execution_modes": [
+                    "SYNCHRONOUS"
+                  ],
+                  "idempotent": true
+                }
+              ],
+              "execution_modes": [
+                "SYNCHRONOUS"
+              ],
+              "determinism_guarantees": {
+                "deterministic_execution": true
+              },
+              "replay_guarantees": {
+                "replay_safe": true,
+                "replay_authority": "CanonicalReplayAuthority"
+              },
+              "trust_requirements": {
+                "authentication": "ECDSA_SIGNATURE"
+              },
+              "evidence_guarantees": {
+                "evidence_per_execution": true
+              },
+              "runtime_dependencies": [],
+              "version_compatibility": {
+                "compatible": [
+                  "1.0.0"
+                ],
+                "deprecated": [
+                  "0.9.0"
+                ],
+                "unsupported": [
+                  "0.1.0"
+                ]
+              },
+              "security_requirements": {
+                "network_policy": "INTERNAL_ONLY"
+              },
+              "resource_requirements": {
+                "memory_mb_min": 128
+              },
+              "publication_timestamp": "2026-08-03T08:31:44.273188+00:00"
+            }
+          },
+          "vector_clock": {
+            "FEDERATION-NODE-1": 2,
+            "FEDERATION-NODE-2": 0,
+            "FEDERATION-NODE-3": 0
+          },
+          "timestamp": "2026-08-03T08:31:44.273325+00:00",
+          "nonce": "9478f2f18b71394a43236fb33f213412",
+          "event_hash": "0f6ca46773b0f929e794328dd82df3818b8ef46742cf162696ddaf0b827f3a21",
+          "previous_event_hash": "e9dca42ed8ff336138b37840113ac9fc713f21488fb4c300a0e6a807ec085065"
+        },
+        {
+          "event_id": "22d9ae2b-738c-4fee-8ebe-03fbb1766d5e",
+          "event_type": "SERVICE_REGISTERED",
+          "source_node_id": "FEDERATION-NODE-1",
+          "target_node_id": "",
+          "payload": {
+            "record": {
+              "platform_service_id": "TANTRA-PSR-DISCO-001",
+              "capability_id": "e0c3d4e5-f6a7-6890-bcde-f01234567890",
+              "service_name": "PLATFORM_DISCOVERY_SERVICE",
+              "version": "2.0.0",
+              "provider": "TANTRA Platform Engineering",
+              "owner": {
+                "team": "TANTRA Sovereign Core",
+                "contact": "discovery@tantra.internal"
+              },
+              "runtime_type": "PROCESS",
+              "service_classification": "PLATFORM_SERVICE",
+              "capability_category": "OBSERVABILITY",
+              "status": "ACTIVE",
+              "registration_timestamp": "2026-08-03T08:31:44.272375+00:00",
+              "description": "Secure Federated Discovery Platform \u2014 publication and trust layer.",
+              "tags": [],
+              "endpoints": {
+                "execution": "http://127.0.0.1:9010/platform/v1/services/TANTRA-PSR-DISCO-001"
+              },
+              "dependencies": []
+            },
+            "manifest": {
+              "manifest_id": "DISCO-MANIFEST-001",
+              "service_name": "PLATFORM_DISCOVERY_SERVICE",
+              "version": "2.0.0",
+              "supported_operations": [
+                {
+                  "operation_name": "discover_services",
+                  "description": "Discover registered platform services",
+                  "input_contract": {
+                    "type": "object",
+                    "required": []
+                  },
+                  "output_contract": {
+                    "type": "object"
+                  },
+                  "execution_modes": [
+                    "SYNCHRONOUS"
+                  ],
+                  "idempotent": true
+                }
+              ],
+              "execution_modes": [
+                "SYNCHRONOUS"
+              ],
+              "determinism_guarantees": {
+                "deterministic_execution": true
+              },
+              "replay_guarantees": {
+                "replay_safe": true
+              },
+              "trust_requirements": {
+                "authentication": "TANTRA_SERVICE_IDENTITY"
+              },
+              "evidence_guarantees": {
+                "evidence_per_execution": true
+              },
+              "runtime_dependencies": [],
+              "version_compatibility": {
+                "compatible": [
+                  "2.0.0",
+                  "1.0.0"
+                ],
+                "deprecated": [],
+                "unsupported": []
+              },
+              "security_requirements": {
+                "network_policy": "INTERNAL_ONLY"
+              },
+              "resource_requirements": {
+                "memory_mb_min": 128
+              },
+              "publication_timestamp": "2026-08-03T08:31:44.273603+00:00"
+            }
+          },
+          "vector_clock": {
+            "FEDERATION-NODE-1": 3,
+            "FEDERATION-NODE-2": 0,
+            "FEDERATION-NODE-3": 0
+          },
+          "timestamp": "2026-08-03T08:31:44.273720+00:00",
+          "nonce": "49437688487fe4374700734f74cb1e9c",
+          "event_hash": "bf9b37d3871a146e026809ab13091b93ba49c85cb760ecc224edc87586225883",
+          "previous_event_hash": "0f6ca46773b0f929e794328dd82df3818b8ef46742cf162696ddaf0b827f3a21"
+        },
+        {
+          "event_id": "9845e871-0fc7-4935-9ede-b59ea5bd48eb",
+          "event_type": "SYNC_COMPLETED",
+          "source_node_id": "FEDERATION-NODE-1",
+          "target_node_id": "FEDERATION-NODE-2",
+          "payload": {
+            "merged": 0,
+            "conflicts_resolved": 3,
+            "skipped": 0,
+            "peer_service_count": 3,
+            "local_service_count": 3
+          },
+          "vector_clock": {
+            "FEDERATION-NODE-1": 4,
+            "FEDERATION-NODE-2": 0,
+            "FEDERATION-NODE-3": 0
+          },
+          "timestamp": "2026-08-03T08:31:44.274431+00:00",
+          "nonce": "59e4c65387ee40579a89409908f39238",
+          "event_hash": "a59a31f31a6650eb484b084b4649d426139503507c6ce2c998139e1dd3af15a5",
+          "previous_event_hash": "bf9b37d3871a146e026809ab13091b93ba49c85cb760ecc224edc87586225883"
+        },
+        {
+          "event_id": "55f3ddd2-966f-48fe-8fa0-6a3b6859373d",
+          "event_type": "SYNC_COMPLETED",
+          "source_node_id": "FEDERATION-NODE-1",
+          "target_node_id": "FEDERATION-NODE-3",
+          "payload": {
+            "merged": 0,
+            "conflicts_resolved": 3,
+            "skipped": 0,
+            "peer_service_count": 3,
+            "local_service_count": 3
+          },
+          "vector_clock": {
+            "FEDERATION-NODE-1": 5,
+            "FEDERATION-NODE-2": 0,
+            "FEDERATION-NODE-3": 0
+          },
+          "timestamp": "2026-08-03T08:31:44.274712+00:00",
+          "nonce": "1ee195469623f1584ded71621454c731",
+          "event_hash": "939f38bea7de9f8f51b05f74559fcaa8b0a1da8b6cfbe3c34f0f21b093c8718f",
+          "previous_event_hash": "a59a31f31a6650eb484b084b4649d426139503507c6ce2c998139e1dd3af15a5"
+        }
+      ],
+      "chain_valid": true
+    },
+    "FEDERATION-NODE-2": {
+      "audit_events": [
+        {
+          "event_id": "b3946bb7-3652-47cb-b4cf-57418965e340",
+          "event_type": "SERVICE_REGISTERED",
+          "source_node_id": "FEDERATION-NODE-1",
+          "target_node_id": "",
+          "payload": {
+            "record": {
+              "platform_service_id": "TANTRA-PSR-USF-001",
+              "capability_id": "c8a1b2d3-e4f5-5678-9abc-def012345678",
+              "service_name": "UNIVERSAL_SOLVER_FABRIC",
+              "version": "1.0.0",
+              "provider": "TANTRA Platform Engineering",
+              "owner": {
+                "team": "TANTRA Sovereign Core",
+                "contact": "solver-fabric@tantra.internal"
+              },
+              "runtime_type": "PROCESS",
+              "service_classification": "PLATFORM_SERVICE",
+              "capability_category": "OPTIMIZATION",
+              "status": "ACTIVE",
+              "registration_timestamp": "2026-08-03T08:31:44.272347+00:00",
+              "description": "Universal Solver Fabric \u2014 agnostic optimization capability layer.",
+              "tags": [],
+              "endpoints": {
+                "execution": "http://127.0.0.1:9010/platform/v1/services/TANTRA-PSR-USF-001"
+              },
+              "dependencies": []
+            },
+            "manifest": {
+              "manifest_id": "USF-MANIFEST-001",
+              "service_name": "UNIVERSAL_SOLVER_FABRIC",
+              "version": "1.0.0",
+              "supported_operations": [
+                {
+                  "operation_name": "discover_solvers",
+                  "description": "Discover available solver capabilities",
+                  "input_contract": {
+                    "type": "object",
+                    "required": [
+                      "problem_type"
+                    ]
+                  },
+                  "output_contract": {
+                    "type": "object"
+                  },
+                  "execution_modes": [
+                    "SYNCHRONOUS"
+                  ],
+                  "idempotent": true
+                }
+              ],
+              "execution_modes": [
+                "SYNCHRONOUS"
+              ],
+              "determinism_guarantees": {
+                "deterministic_execution": true
+              },
+              "replay_guarantees": {
+                "replay_safe": true
+              },
+              "trust_requirements": {
+                "authentication": "TANTRA_SERVICE_IDENTITY"
+              },
+              "evidence_guarantees": {
+                "evidence_per_execution": true
+              },
+              "runtime_dependencies": [],
+              "version_compatibility": {
+                "compatible": [
+                  "1.0.0"
+                ],
+                "deprecated": [],
+                "unsupported": []
+              },
+              "security_requirements": {
+                "network_policy": "INTERNAL_ONLY"
+              },
+              "resource_requirements": {
+                "memory_mb_min": 256
+              },
+              "publication_timestamp": "2026-08-03T08:31:44.272394+00:00"
+            }
+          },
+          "vector_clock": {
+            "FEDERATION-NODE-1": 1,
+            "FEDERATION-NODE-2": 0,
+            "FEDERATION-NODE-3": 0
+          },
+          "timestamp": "2026-08-03T08:31:44.272773+00:00",
+          "nonce": "3a884e92c0f6b187aa10ed5231d63a7c",
+          "event_hash": "e9dca42ed8ff336138b37840113ac9fc713f21488fb4c300a0e6a807ec085065",
+          "previous_event_hash": "000a3545d300d9ae3ce855aa1dfb0c47c882f3e438438e76f7c9943f6f71ea40"
+        },
+        {
+          "event_id": "410ed9a4-921d-4a5f-8401-c62dfa65a1b4",
+          "event_type": "SERVICE_REGISTERED",
+          "source_node_id": "FEDERATION-NODE-1",
+          "target_node_id": "",
+          "payload": {
+            "record": {
+              "platform_service_id": "TANTRA-PSR-QCG-001",
+              "capability_id": "d9b2c3e4-f5a6-5789-abcd-ef0123456789",
+              "service_name": "QCG_TRUST_VERIFICATION",
+              "version": "1.0.0",
+              "provider": "TANTRA Platform Engineering",
+              "owner": {
+                "team": "TANTRA Sovereign Core",
+                "contact": "qcg-trust@tantra.internal"
+              },
+              "runtime_type": "PROCESS",
+              "service_classification": "PLATFORM_SERVICE",
+              "capability_category": "VERIFICATION",
+              "status": "ACTIVE",
+              "registration_timestamp": "2026-08-03T08:31:44.272368+00:00",
+              "description": "QCG Trust Verification \u2014 Hybrid Quantum Communication Gateway.",
+              "tags": [],
+              "endpoints": {
+                "execution": "http://127.0.0.1:9010/platform/v1/services/TANTRA-PSR-QCG-001"
+              },
+              "dependencies": []
+            },
+            "manifest": {
+              "manifest_id": "QCG-MANIFEST-001",
+              "service_name": "QCG_TRUST_VERIFICATION",
+              "version": "1.0.0",
+              "supported_operations": [
+                {
+                  "operation_name": "verify_replay",
+                  "description": "Verify replay safety",
+                  "input_contract": {
+                    "type": "object",
+                    "required": [
+                      "message_id",
+                      "issued_at"
+                    ]
+                  },
+                  "output_contract": {
+                    "type": "object"
+                  },
+                  "execution_modes": [
+                    "SYNCHRONOUS"
+                  ],
+                  "idempotent": true
+                }
+              ],
+              "execution_modes": [
+                "SYNCHRONOUS"
+              ],
+              "determinism_guarantees": {
+                "deterministic_execution": true
+              },
+              "replay_guarantees": {
+                "replay_safe": true,
+                "replay_authority": "CanonicalReplayAuthority"
+              },
+              "trust_requirements": {
+                "authentication": "ECDSA_SIGNATURE"
+              },
+              "evidence_guarantees": {
+                "evidence_per_execution": true
+              },
+              "runtime_dependencies": [],
+              "version_compatibility": {
+                "compatible": [
+                  "1.0.0"
+                ],
+                "deprecated": [
+                  "0.9.0"
+                ],
+                "unsupported": [
+                  "0.1.0"
+                ]
+              },
+              "security_requirements": {
+                "network_policy": "INTERNAL_ONLY"
+              },
+              "resource_requirements": {
+                "memory_mb_min": 128
+              },
+              "publication_timestamp": "2026-08-03T08:31:44.273188+00:00"
+            }
+          },
+          "vector_clock": {
+            "FEDERATION-NODE-1": 2,
+            "FEDERATION-NODE-2": 0,
+            "FEDERATION-NODE-3": 0
+          },
+          "timestamp": "2026-08-03T08:31:44.273325+00:00",
+          "nonce": "9478f2f18b71394a43236fb33f213412",
+          "event_hash": "0f6ca46773b0f929e794328dd82df3818b8ef46742cf162696ddaf0b827f3a21",
+          "previous_event_hash": "e9dca42ed8ff336138b37840113ac9fc713f21488fb4c300a0e6a807ec085065"
+        },
+        {
+          "event_id": "22d9ae2b-738c-4fee-8ebe-03fbb1766d5e",
+          "event_type": "SERVICE_REGISTERED",
+          "source_node_id": "FEDERATION-NODE-1",
+          "target_node_id": "",
+          "payload": {
+            "record": {
+              "platform_service_id": "TANTRA-PSR-DISCO-001",
+              "capability_id": "e0c3d4e5-f6a7-6890-bcde-f01234567890",
+              "service_name": "PLATFORM_DISCOVERY_SERVICE",
+              "version": "2.0.0",
+              "provider": "TANTRA Platform Engineering",
+              "owner": {
+                "team": "TANTRA Sovereign Core",
+                "contact": "discovery@tantra.internal"
+              },
+              "runtime_type": "PROCESS",
+              "service_classification": "PLATFORM_SERVICE",
+              "capability_category": "OBSERVABILITY",
+              "status": "ACTIVE",
+              "registration_timestamp": "2026-08-03T08:31:44.272375+00:00",
+              "description": "Secure Federated Discovery Platform \u2014 publication and trust layer.",
+              "tags": [],
+              "endpoints": {
+                "execution": "http://127.0.0.1:9010/platform/v1/services/TANTRA-PSR-DISCO-001"
+              },
+              "dependencies": []
+            },
+            "manifest": {
+              "manifest_id": "DISCO-MANIFEST-001",
+              "service_name": "PLATFORM_DISCOVERY_SERVICE",
+              "version": "2.0.0",
+              "supported_operations": [
+                {
+                  "operation_name": "discover_services",
+                  "description": "Discover registered platform services",
+                  "input_contract": {
+                    "type": "object",
+                    "required": []
+                  },
+                  "output_contract": {
+                    "type": "object"
+                  },
+                  "execution_modes": [
+                    "SYNCHRONOUS"
+                  ],
+                  "idempotent": true
+                }
+              ],
+              "execution_modes": [
+                "SYNCHRONOUS"
+              ],
+              "determinism_guarantees": {
+                "deterministic_execution": true
+              },
+              "replay_guarantees": {
+                "replay_safe": true
+              },
+              "trust_requirements": {
+                "authentication": "TANTRA_SERVICE_IDENTITY"
+              },
+              "evidence_guarantees": {
+                "evidence_per_execution": true
+              },
+              "runtime_dependencies": [],
+              "version_compatibility": {
+                "compatible": [
+                  "2.0.0",
+                  "1.0.0"
+                ],
+                "deprecated": [],
+                "unsupported": []
+              },
+              "security_requirements": {
+                "network_policy": "INTERNAL_ONLY"
+              },
+              "resource_requirements": {
+                "memory_mb_min": 128
+              },
+              "publication_timestamp": "2026-08-03T08:31:44.273603+00:00"
+            }
+          },
+          "vector_clock": {
+            "FEDERATION-NODE-1": 3,
+            "FEDERATION-NODE-2": 0,
+            "FEDERATION-NODE-3": 0
+          },
+          "timestamp": "2026-08-03T08:31:44.273720+00:00",
+          "nonce": "49437688487fe4374700734f74cb1e9c",
+          "event_hash": "bf9b37d3871a146e026809ab13091b93ba49c85cb760ecc224edc87586225883",
+          "previous_event_hash": "0f6ca46773b0f929e794328dd82df3818b8ef46742cf162696ddaf0b827f3a21"
+        },
+        {
+          "event_id": "18806ec3-01fa-4349-ab2e-bf339d0f96ce",
+          "event_type": "SYNC_COMPLETED",
+          "source_node_id": "FEDERATION-NODE-2",
+          "target_node_id": "FEDERATION-NODE-1",
+          "payload": {
+            "merged": 0,
+            "conflicts_resolved": 3,
+            "skipped": 0,
+            "peer_service_count": 3,
+            "local_service_count": 3
+          },
+          "vector_clock": {
+            "FEDERATION-NODE-2": 1,
+            "FEDERATION-NODE-1": 3,
+            "FEDERATION-NODE-3": 0
+          },
+          "timestamp": "2026-08-03T08:31:44.275022+00:00",
+          "nonce": "853a49e73761c6eaa16a24e340ef5590",
+          "event_hash": "894855454beb8b4c32e359dc2aa9fed774f27afc2f87b669bf4d1f2d1d32deb5",
+          "previous_event_hash": "bf9b37d3871a146e026809ab13091b93ba49c85cb760ecc224edc87586225883"
+        },
+        {
+          "event_id": "bba5ff3b-2278-4005-b1c8-423409a80746",
+          "event_type": "SYNC_COMPLETED",
+          "source_node_id": "FEDERATION-NODE-2",
+          "target_node_id": "FEDERATION-NODE-3",
+          "payload": {
+            "merged": 0,
+            "conflicts_resolved": 3,
+            "skipped": 0,
+            "peer_service_count": 3,
+            "local_service_count": 3
+          },
+          "vector_clock": {
+            "FEDERATION-NODE-2": 2,
+            "FEDERATION-NODE-1": 3,
+            "FEDERATION-NODE-3": 0
+          },
+          "timestamp": "2026-08-03T08:31:44.275339+00:00",
+          "nonce": "f2a859b30a57906570cc6a10198fb338",
+          "event_hash": "5317700500c37e562726462a6731541cff4e38c73975a4a8e7083d36ecce0b25",
+          "previous_event_hash": "894855454beb8b4c32e359dc2aa9fed774f27afc2f87b669bf4d1f2d1d32deb5"
+        }
+      ],
+      "chain_valid": true
+    },
+    "FEDERATION-NODE-3": {
+      "audit_events": [
+        {
+          "event_id": "b3946bb7-3652-47cb-b4cf-57418965e340",
+          "event_type": "SERVICE_REGISTERED",
+          "source_node_id": "FEDERATION-NODE-1",
+          "target_node_id": "",
+          "payload": {
+            "record": {
+              "platform_service_id": "TANTRA-PSR-USF-001",
+              "capability_id": "c8a1b2d3-e4f5-5678-9abc-def012345678",
+              "service_name": "UNIVERSAL_SOLVER_FABRIC",
+              "version": "1.0.0",
+              "provider": "TANTRA Platform Engineering",
+              "owner": {
+                "team": "TANTRA Sovereign Core",
+                "contact": "solver-fabric@tantra.internal"
+              },
+              "runtime_type": "PROCESS",
+              "service_classification": "PLATFORM_SERVICE",
+              "capability_category": "OPTIMIZATION",
+              "status": "ACTIVE",
+              "registration_timestamp": "2026-08-03T08:31:44.272347+00:00",
+              "description": "Universal Solver Fabric \u2014 agnostic optimization capability layer.",
+              "tags": [],
+              "endpoints": {
+                "execution": "http://127.0.0.1:9010/platform/v1/services/TANTRA-PSR-USF-001"
+              },
+              "dependencies": []
+            },
+            "manifest": {
+              "manifest_id": "USF-MANIFEST-001",
+              "service_name": "UNIVERSAL_SOLVER_FABRIC",
+              "version": "1.0.0",
+              "supported_operations": [
+                {
+                  "operation_name": "discover_solvers",
+                  "description": "Discover available solver capabilities",
+                  "input_contract": {
+                    "type": "object",
+                    "required": [
+                      "problem_type"
+                    ]
+                  },
+                  "output_contract": {
+                    "type": "object"
+                  },
+                  "execution_modes": [
+                    "SYNCHRONOUS"
+                  ],
+                  "idempotent": true
+                }
+              ],
+              "execution_modes": [
+                "SYNCHRONOUS"
+              ],
+              "determinism_guarantees": {
+                "deterministic_execution": true
+              },
+              "replay_guarantees": {
+                "replay_safe": true
+              },
+              "trust_requirements": {
+                "authentication": "TANTRA_SERVICE_IDENTITY"
+              },
+              "evidence_guarantees": {
+                "evidence_per_execution": true
+              },
+              "runtime_dependencies": [],
+              "version_compatibility": {
+                "compatible": [
+                  "1.0.0"
+                ],
+                "deprecated": [],
+                "unsupported": []
+              },
+              "security_requirements": {
+                "network_policy": "INTERNAL_ONLY"
+              },
+              "resource_requirements": {
+                "memory_mb_min": 256
+              },
+              "publication_timestamp": "2026-08-03T08:31:44.272394+00:00"
+            }
+          },
+          "vector_clock": {
+            "FEDERATION-NODE-1": 1,
+            "FEDERATION-NODE-2": 0,
+            "FEDERATION-NODE-3": 0
+          },
+          "timestamp": "2026-08-03T08:31:44.272773+00:00",
+          "nonce": "3a884e92c0f6b187aa10ed5231d63a7c",
+          "event_hash": "e9dca42ed8ff336138b37840113ac9fc713f21488fb4c300a0e6a807ec085065",
+          "previous_event_hash": "000a3545d300d9ae3ce855aa1dfb0c47c882f3e438438e76f7c9943f6f71ea40"
+        },
+        {
+          "event_id": "410ed9a4-921d-4a5f-8401-c62dfa65a1b4",
+          "event_type": "SERVICE_REGISTERED",
+          "source_node_id": "FEDERATION-NODE-1",
+          "target_node_id": "",
+          "payload": {
+            "record": {
+              "platform_service_id": "TANTRA-PSR-QCG-001",
+              "capability_id": "d9b2c3e4-f5a6-5789-abcd-ef0123456789",
+              "service_name": "QCG_TRUST_VERIFICATION",
+              "version": "1.0.0",
+              "provider": "TANTRA Platform Engineering",
+              "owner": {
+                "team": "TANTRA Sovereign Core",
+                "contact": "qcg-trust@tantra.internal"
+              },
+              "runtime_type": "PROCESS",
+              "service_classification": "PLATFORM_SERVICE",
+              "capability_category": "VERIFICATION",
+              "status": "ACTIVE",
+              "registration_timestamp": "2026-08-03T08:31:44.272368+00:00",
+              "description": "QCG Trust Verification \u2014 Hybrid Quantum Communication Gateway.",
+              "tags": [],
+              "endpoints": {
+                "execution": "http://127.0.0.1:9010/platform/v1/services/TANTRA-PSR-QCG-001"
+              },
+              "dependencies": []
+            },
+            "manifest": {
+              "manifest_id": "QCG-MANIFEST-001",
+              "service_name": "QCG_TRUST_VERIFICATION",
+              "version": "1.0.0",
+              "supported_operations": [
+                {
+                  "operation_name": "verify_replay",
+                  "description": "Verify replay safety",
+                  "input_contract": {
+                    "type": "object",
+                    "required": [
+                      "message_id",
+                      "issued_at"
+                    ]
+                  },
+                  "output_contract": {
+                    "type": "object"
+                  },
+                  "execution_modes": [
+                    "SYNCHRONOUS"
+                  ],
+                  "idempotent": true
+                }
+              ],
+              "execution_modes": [
+                "SYNCHRONOUS"
+              ],
+              "determinism_guarantees": {
+                "deterministic_execution": true
+              },
+              "replay_guarantees": {
+                "replay_safe": true,
+                "replay_authority": "CanonicalReplayAuthority"
+              },
+              "trust_requirements": {
+                "authentication": "ECDSA_SIGNATURE"
+              },
+              "evidence_guarantees": {
+                "evidence_per_execution": true
+              },
+              "runtime_dependencies": [],
+              "version_compatibility": {
+                "compatible": [
+                  "1.0.0"
+                ],
+                "deprecated": [
+                  "0.9.0"
+                ],
+                "unsupported": [
+                  "0.1.0"
+                ]
+              },
+              "security_requirements": {
+                "network_policy": "INTERNAL_ONLY"
+              },
+              "resource_requirements": {
+                "memory_mb_min": 128
+              },
+              "publication_timestamp": "2026-08-03T08:31:44.273188+00:00"
+            }
+          },
+          "vector_clock": {
+            "FEDERATION-NODE-1": 2,
+            "FEDERATION-NODE-2": 0,
+            "FEDERATION-NODE-3": 0
+          },
+          "timestamp": "2026-08-03T08:31:44.273325+00:00",
+          "nonce": "9478f2f18b71394a43236fb33f213412",
+          "event_hash": "0f6ca46773b0f929e794328dd82df3818b8ef46742cf162696ddaf0b827f3a21",
+          "previous_event_hash": "e9dca42ed8ff336138b37840113ac9fc713f21488fb4c300a0e6a807ec085065"
+        },
+        {
+          "event_id": "22d9ae2b-738c-4fee-8ebe-03fbb1766d5e",
+          "event_type": "SERVICE_REGISTERED",
+          "source_node_id": "FEDERATION-NODE-1",
+          "target_node_id": "",
+          "payload": {
+            "record": {
+              "platform_service_id": "TANTRA-PSR-DISCO-001",
+              "capability_id": "e0c3d4e5-f6a7-6890-bcde-f01234567890",
+              "service_name": "PLATFORM_DISCOVERY_SERVICE",
+              "version": "2.0.0",
+              "provider": "TANTRA Platform Engineering",
+              "owner": {
+                "team": "TANTRA Sovereign Core",
+                "contact": "discovery@tantra.internal"
+              },
+              "runtime_type": "PROCESS",
+              "service_classification": "PLATFORM_SERVICE",
+              "capability_category": "OBSERVABILITY",
+              "status": "ACTIVE",
+              "registration_timestamp": "2026-08-03T08:31:44.272375+00:00",
+              "description": "Secure Federated Discovery Platform \u2014 publication and trust layer.",
+              "tags": [],
+              "endpoints": {
+                "execution": "http://127.0.0.1:9010/platform/v1/services/TANTRA-PSR-DISCO-001"
+              },
+              "dependencies": []
+            },
+            "manifest": {
+              "manifest_id": "DISCO-MANIFEST-001",
+              "service_name": "PLATFORM_DISCOVERY_SERVICE",
+              "version": "2.0.0",
+              "supported_operations": [
+                {
+                  "operation_name": "discover_services",
+                  "description": "Discover registered platform services",
+                  "input_contract": {
+                    "type": "object",
+                    "required": []
+                  },
+                  "output_contract": {
+                    "type": "object"
+                  },
+                  "execution_modes": [
+                    "SYNCHRONOUS"
+                  ],
+                  "idempotent": true
+                }
+              ],
+              "execution_modes": [
+                "SYNCHRONOUS"
+              ],
+              "determinism_guarantees": {
+                "deterministic_execution": true
+              },
+              "replay_guarantees": {
+                "replay_safe": true
+              },
+              "trust_requirements": {
+                "authentication": "TANTRA_SERVICE_IDENTITY"
+              },
+              "evidence_guarantees": {
+                "evidence_per_execution": true
+              },
+              "runtime_dependencies": [],
+              "version_compatibility": {
+                "compatible": [
+                  "2.0.0",
+                  "1.0.0"
+                ],
+                "deprecated": [],
+                "unsupported": []
+              },
+              "security_requirements": {
+                "network_policy": "INTERNAL_ONLY"
+              },
+              "resource_requirements": {
+                "memory_mb_min": 128
+              },
+              "publication_timestamp": "2026-08-03T08:31:44.273603+00:00"
+            }
+          },
+          "vector_clock": {
+            "FEDERATION-NODE-1": 3,
+            "FEDERATION-NODE-2": 0,
+            "FEDERATION-NODE-3": 0
+          },
+          "timestamp": "2026-08-03T08:31:44.273720+00:00",
+          "nonce": "49437688487fe4374700734f74cb1e9c",
+          "event_hash": "bf9b37d3871a146e026809ab13091b93ba49c85cb760ecc224edc87586225883",
+          "previous_event_hash": "0f6ca46773b0f929e794328dd82df3818b8ef46742cf162696ddaf0b827f3a21"
+        },
+        {
+          "event_id": "cf62bdda-1c86-47c0-a167-c59abadf5e22",
+          "event_type": "SYNC_COMPLETED",
+          "source_node_id": "FEDERATION-NODE-3",
+          "target_node_id": "FEDERATION-NODE-1",
+          "payload": {
+            "merged": 0,
+            "conflicts_resolved": 3,
+            "skipped": 0,
+            "peer_service_count": 3,
+            "local_service_count": 3
+          },
+          "vector_clock": {
+            "FEDERATION-NODE-3": 1,
+            "FEDERATION-NODE-1": 3,
+            "FEDERATION-NODE-2": 0
+          },
+          "timestamp": "2026-08-03T08:31:44.275619+00:00",
+          "nonce": "bc30fc12a8350168934a3e3f0f42d14e",
+          "event_hash": "6d002f7894e41bc870adc0b3081b1f776d8637a70800622d53e8f5b56e89465a",
+          "previous_event_hash": "bf9b37d3871a146e026809ab13091b93ba49c85cb760ecc224edc87586225883"
+        },
+        {
+          "event_id": "67cdc2ae-97f1-4b89-8364-7f48ac136237",
+          "event_type": "SYNC_COMPLETED",
+          "source_node_id": "FEDERATION-NODE-3",
+          "target_node_id": "FEDERATION-NODE-2",
+          "payload": {
+            "merged": 0,
+            "conflicts_resolved": 3,
+            "skipped": 0,
+            "peer_service_count": 3,
+            "local_service_count": 3
+          },
+          "vector_clock": {
+            "FEDERATION-NODE-3": 2,
+            "FEDERATION-NODE-1": 3,
+            "FEDERATION-NODE-2": 0
+          },
+          "timestamp": "2026-08-03T08:31:44.275871+00:00",
+          "nonce": "cd8fb719ff64ca48cf6f1e91b0006875",
+          "event_hash": "77cfcbd945d312cd59b90e27d6ae92bb0421775399f9d20dfc5e4723e4417c92",
+          "previous_event_hash": "6d002f7894e41bc870adc0b3081b1f776d8637a70800622d53e8f5b56e89465a"
+        }
+      ],
+      "chain_valid": true
+    }
+  }
+}

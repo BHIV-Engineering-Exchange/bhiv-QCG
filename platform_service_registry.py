@@ -636,3 +636,74 @@ class PlatformServiceRegistry:
                 "runtime_type": record.runtime_type,
                 "capability_category": record.capability_category,
             }
+
+    # -- Federation hooks ---------------------------------------------------
+
+    def merge_remote_service(
+        self,
+        record: PlatformServiceRecord,
+        manifest: CapabilityManifest = None,
+        source_node_id: str = "",
+    ) -> Dict[str, Any]:
+        """
+        Merge a service received from a federated peer.
+
+        Overwrites any existing record with the same service_id.
+        Used by FederatedRegistryNode during sync — not for direct
+        external calls.
+        """
+        with self._lock:
+            sid = record.platform_service_id
+            self._services[sid] = record
+            if manifest:
+                self._manifests[sid] = manifest
+
+            evidence = self.evidence.record(
+                "SERVICE_MERGED_FROM_PEER",
+                sid,
+                {
+                    "source_node_id": source_node_id,
+                    "service_name": record.service_name,
+                    "version": record.version,
+                    "registration_hash": record.deterministic_hash(),
+                },
+            )
+
+            return {
+                "status": "MERGED",
+                "service_id": sid,
+                "source_node_id": source_node_id,
+                "evidence": evidence.to_dict(),
+            }
+
+    def remove_service(self, service_id: str, reason: str = "") -> Dict[str, Any]:
+        """
+        Remove a service from the registry.
+
+        Used by federation for lease-expiry cleanup, revocation,
+        and peer-propagated removals.
+        """
+        with self._lock:
+            if service_id not in self._services:
+                return {"status": "NOT_FOUND", "service_id": service_id}
+
+            record = self._services.pop(service_id)
+            self._manifests.pop(service_id, None)
+
+            evidence = self.evidence.record(
+                "SERVICE_REMOVED",
+                service_id,
+                {
+                    "service_name": record.service_name,
+                    "version": record.version,
+                    "reason": reason,
+                },
+            )
+
+            return {
+                "status": "REMOVED",
+                "service_id": service_id,
+                "reason": reason,
+                "evidence": evidence.to_dict(),
+            }
+
