@@ -1,6 +1,6 @@
 {
-  "manifest_version": "1.0.0",
-  "publication_timestamp": "2026-07-24T08:00:00Z",
+  "manifest_version": "2.0.0",
+  "publication_timestamp": "2026-08-04T07:00:00Z",
   "publisher": "TANTRA Sovereign Core",
   "services": [
     {
@@ -373,6 +373,130 @@
           "disk_mb_min": 50,
           "network": "INTERNAL_TCP",
           "consensus_nodes_min": 3
+        }
+      }
+    },
+    {
+      "platform_service_id": "TANTRA-PSR-DISCO-001",
+      "capability_id": "e0c3d4e5-f6a7-6890-bcde-f01234567890",
+      "service_name": "PLATFORM_DISCOVERY_SERVICE",
+      "version": "2.0.0",
+      "provider": "TANTRA Platform Engineering",
+      "owner": {
+        "team": "TANTRA Sovereign Core",
+        "contact": "discovery@tantra.internal"
+      },
+      "runtime_type": "PROCESS",
+      "service_classification": "PLATFORM_SERVICE",
+      "capability_category": "OBSERVABILITY",
+      "status": "ACTIVE",
+      "description": "Secure Federated Discovery Platform — publication and trust layer enabling sovereign BHIV capabilities to discover, trust, negotiate, authenticate, and invoke one another across multiple runtime environments.",
+      "tags": ["discovery", "federation", "zero-trust", "quantum-ready", "deterministic"],
+      "endpoints": {
+        "execution": "http://127.0.0.1:9010/platform/v1/services/TANTRA-PSR-DISCO-001",
+        "health": "http://127.0.0.1:9010/platform/v1/services/TANTRA-PSR-DISCO-001/health",
+        "readiness": "http://127.0.0.1:9010/platform/v1/readiness",
+        "metrics": "http://127.0.0.1:9010/platform/v1/metrics",
+        "evidence": "http://127.0.0.1:9010/platform/v1/evidence",
+        "federation_status": "http://127.0.0.1:9010/platform/v1/federation/status",
+        "federation_audit": "http://127.0.0.1:9010/platform/v1/federation/audit",
+        "certificates": "http://127.0.0.1:9010/platform/v1/certificates"
+      },
+      "manifest": {
+        "manifest_id": "DISCO-MANIFEST-001",
+        "supported_operations": [
+          {
+            "operation_name": "discover_services",
+            "description": "Discover all registered Platform Services across the federated fabric.",
+            "input_contract": {
+              "type": "object",
+              "required": [],
+              "properties": {
+                "filter": {
+                  "type": "object",
+                  "description": "Optional filters for service_classification, capability_category, status."
+                }
+              }
+            },
+            "output_contract": {
+              "type": "object",
+              "properties": {
+                "services": { "type": "array" },
+                "count": { "type": "integer" }
+              }
+            },
+            "execution_modes": ["SYNCHRONOUS"],
+            "idempotent": true
+          },
+          {
+            "operation_name": "negotiate_version",
+            "description": "Negotiate version compatibility for a service.",
+            "input_contract": {
+              "type": "object",
+              "required": ["service_id", "requested_version"],
+              "properties": {
+                "service_id": { "type": "string" },
+                "requested_version": { "type": "string" }
+              }
+            },
+            "output_contract": {
+              "type": "object",
+              "properties": {
+                "status": { "type": "string", "enum": ["COMPATIBLE", "DEPRECATED", "UNSUPPORTED", "UNKNOWN_SERVICE"] },
+                "negotiated_version": { "type": "string" }
+              }
+            },
+            "execution_modes": ["SYNCHRONOUS"],
+            "idempotent": true
+          },
+          {
+            "operation_name": "federation_sync",
+            "description": "Trigger anti-entropy synchronisation across federated peers.",
+            "input_contract": { "type": "object", "required": [] },
+            "output_contract": { "type": "object" },
+            "execution_modes": ["SYNCHRONOUS"],
+            "idempotent": true
+          }
+        ],
+        "execution_modes": ["SYNCHRONOUS"],
+        "determinism_guarantees": {
+          "deterministic_execution": true,
+          "deterministic_conflict_resolution": true,
+          "deterministic_evidence_hashing": true
+        },
+        "replay_guarantees": {
+          "replay_safe": true,
+          "nonce_based_deduplication": true,
+          "hash_chained_audit_log": true
+        },
+        "trust_requirements": {
+          "authentication": "TANTRA_SERVICE_IDENTITY",
+          "certificate_authority": "ServiceCertificateAuthority",
+          "mutual_authentication": true,
+          "trust_levels": ["CLASSICAL", "POST_QUANTUM", "HYBRID"]
+        },
+        "evidence_guarantees": {
+          "evidence_per_registration": true,
+          "evidence_per_federation_event": true,
+          "hash_chained": true
+        },
+        "runtime_dependencies": [],
+        "version_compatibility": {
+          "compatible": ["2.0.0", "1.0.0"],
+          "deprecated": [],
+          "unsupported": []
+        },
+        "security_requirements": {
+          "network_policy": "INTERNAL_ONLY",
+          "mTLS_supported": true,
+          "quantum_safe": true
+        },
+        "resource_requirements": {
+          "memory_mb_min": 128,
+          "cpu_cores_min": 1,
+          "disk_mb_min": 50,
+          "network": "INTERNAL_TCP",
+          "federation_nodes_min": 3
         }
       }
     }

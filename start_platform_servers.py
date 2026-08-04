@@ -1,5 +1,8 @@
 """
 start_platform_servers.py — Script to keep platform servers running for manual testing.
+
+Updated to launch a 3-node federated discovery fabric with heartbeat management,
+mutual authentication, and version negotiation.
 """
 
 import time
@@ -12,6 +15,7 @@ from capability_registry import CapabilityRegistryServer, CapabilityRegistryClie
 from platform_service_registry import PlatformServiceRegistry, PlatformServiceRecord, CapabilityManifest, RegistrationEvidenceRecorder, OperationContract
 from platform_lifecycle_manager import LifecycleManager
 from platform_service_discovery import PlatformDiscoveryServer
+from federated_registry import FederatedRegistryNode
 import config
 
 def _load_manifest_json():
@@ -19,8 +23,9 @@ def _load_manifest_json():
     with open(manifest_path) as f:
         return json.load(f)
 
-def _build_usf_manifest(manifest_data):
-    usf = manifest_data["services"][0]["manifest"]
+def _build_manifest_from_data(service_data):
+    """Build a CapabilityManifest from manifest JSON data."""
+    m = service_data["manifest"]
     ops = [OperationContract(
         operation_name=op["operation_name"],
         description=op["description"],
@@ -28,125 +33,133 @@ def _build_usf_manifest(manifest_data):
         output_contract=op["output_contract"],
         execution_modes=op["execution_modes"],
         idempotent=op.get("idempotent", False),
-    ) for op in usf["supported_operations"]]
+    ) for op in m["supported_operations"]]
     return CapabilityManifest(
-        manifest_id=usf["manifest_id"],
-        service_name="UNIVERSAL_SOLVER_FABRIC",
-        version="1.0.0",
+        manifest_id=m["manifest_id"],
+        service_name=service_data["service_name"],
+        version=service_data["version"],
         supported_operations=ops,
-        execution_modes=usf["execution_modes"],
-        determinism_guarantees=usf["determinism_guarantees"],
-        replay_guarantees=usf["replay_guarantees"],
-        trust_requirements=usf["trust_requirements"],
-        evidence_guarantees=usf["evidence_guarantees"],
-        runtime_dependencies=usf["runtime_dependencies"],
-        version_compatibility=usf["version_compatibility"],
-        security_requirements=usf["security_requirements"],
-        resource_requirements=usf["resource_requirements"],
-    )
-
-def _build_qcg_manifest(manifest_data):
-    qcg = manifest_data["services"][1]["manifest"]
-    ops = [OperationContract(
-        operation_name=op["operation_name"],
-        description=op["description"],
-        input_contract=op["input_contract"],
-        output_contract=op["output_contract"],
-        execution_modes=op["execution_modes"],
-        idempotent=op.get("idempotent", False),
-    ) for op in qcg["supported_operations"]]
-    return CapabilityManifest(
-        manifest_id=qcg["manifest_id"],
-        service_name="QCG_TRUST_VERIFICATION",
-        version="1.0.0",
-        supported_operations=ops,
-        execution_modes=qcg["execution_modes"],
-        determinism_guarantees=qcg["determinism_guarantees"],
-        replay_guarantees=qcg["replay_guarantees"],
-        trust_requirements=qcg["trust_requirements"],
-        evidence_guarantees=qcg["evidence_guarantees"],
-        runtime_dependencies=qcg["runtime_dependencies"],
-        version_compatibility=qcg["version_compatibility"],
-        security_requirements=qcg["security_requirements"],
-        resource_requirements=qcg["resource_requirements"],
+        execution_modes=m["execution_modes"],
+        determinism_guarantees=m["determinism_guarantees"],
+        replay_guarantees=m["replay_guarantees"],
+        trust_requirements=m["trust_requirements"],
+        evidence_guarantees=m["evidence_guarantees"],
+        runtime_dependencies=m["runtime_dependencies"],
+        version_compatibility=m["version_compatibility"],
+        security_requirements=m["security_requirements"],
+        resource_requirements=m["resource_requirements"],
     )
 
 def main():
+    num_nodes = int(os.environ.get("FEDERATION_NODES", "3"))
+    base_port = config.DISCOVERY_PORT_BASE
+
+    # --- Legacy Capability Registry ---
     print("Starting Capability Registry Server (Port 9000)...")
     cap_server = CapabilityRegistryServer("127.0.0.1", config.REGISTRY_PORT)
     cap_server.start()
     time.sleep(0.5)
 
-    print("Starting Platform Discovery Server (Port 9010)...")
-    evidence_recorder = RegistrationEvidenceRecorder()
-    platform_registry = PlatformServiceRegistry(evidence_recorder=evidence_recorder)
-    lifecycle_mgr = LifecycleManager()
+    # --- Federated Discovery Nodes ---
+    print(f"\nStarting {num_nodes} Federated Discovery Nodes...")
+    nodes = []
+    servers = []
+    for i in range(num_nodes):
+        node_id = f"FEDERATION-NODE-{i+1}"
+        port = base_port + i
+        registry = PlatformServiceRegistry(evidence_recorder=RegistrationEvidenceRecorder())
+        node = FederatedRegistryNode(node_id=node_id, registry=registry, port=port)
+        nodes.append(node)
 
-    discovery_port = 9010
-    discovery_server = PlatformDiscoveryServer(
-        host="127.0.0.1",
-        port=discovery_port,
-        registry=platform_registry,
-        lifecycle=lifecycle_mgr,
-    )
-    discovery_server.start()
+    # Wire peers
+    for i, node in enumerate(nodes):
+        for j, peer in enumerate(nodes):
+            if i != j:
+                node.add_peer(peer)
+
+    # Start HTTP servers
+    for i, node in enumerate(nodes):
+        port = base_port + i
+        server = PlatformDiscoveryServer(
+            host="127.0.0.1",
+            port=port,
+            registry=node.registry,
+            lifecycle=LifecycleManager(),
+            federation_node=node,
+        )
+        server.start()
+        servers.append(server)
+        time.sleep(0.3)
+
+    # --- Register services on Node 1 ---
+    print("\nRegistering capabilities on Node 1...")
+    manifest_data = _load_manifest_json()
+    node1 = nodes[0]
+
+    for svc_data in manifest_data.get("services", []):
+        record = PlatformServiceRecord(
+            platform_service_id=svc_data["platform_service_id"],
+            capability_id=svc_data["capability_id"],
+            service_name=svc_data["service_name"],
+            version=svc_data["version"],
+            provider=svc_data["provider"],
+            owner=svc_data["owner"],
+            runtime_type=svc_data["runtime_type"],
+            service_classification=svc_data["service_classification"],
+            capability_category=svc_data["capability_category"],
+            status=svc_data["status"],
+            endpoints=svc_data.get("endpoints", {}),
+        )
+        manifest = _build_manifest_from_data(svc_data)
+        node1.register_service_authenticated(record, manifest)
+
+        compat = svc_data.get("manifest", {}).get("version_compatibility", {})
+        for node in nodes:
+            node.registry.negotiator.register_compatibility(
+                svc_data["platform_service_id"],
+                compatible=compat.get("compatible", [svc_data["version"]]),
+                deprecated=compat.get("deprecated", []),
+                unsupported=compat.get("unsupported", []),
+            )
+        print(f"  Registered: {svc_data['platform_service_id']}")
+
+    # Federation sync
+    print("\nFederation sync...")
+    for node in nodes:
+        node.anti_entropy_sync()
     time.sleep(0.5)
 
-    print("Registering capabilities...")
-    manifest_data = _load_manifest_json()
+    for node in nodes:
+        count = len(node.registry.list_services())
+        print(f"  {node.node_id}: {count} services")
 
-    # USF
-    usf_data = manifest_data["services"][0]
-    usf_record = PlatformServiceRecord(
-        platform_service_id=usf_data["platform_service_id"],
-        capability_id=usf_data["capability_id"],
-        service_name=usf_data["service_name"],
-        version=usf_data["version"],
-        provider=usf_data["provider"],
-        owner=usf_data["owner"],
-        runtime_type=usf_data["runtime_type"],
-        service_classification=usf_data["service_classification"],
-        capability_category=usf_data["capability_category"],
-        status=usf_data["status"]
-    )
-    platform_registry.register_service(usf_record, _build_usf_manifest(manifest_data))
-    
-    # QCG
-    qcg_data = manifest_data["services"][1]
-    qcg_record = PlatformServiceRecord(
-        platform_service_id=qcg_data["platform_service_id"],
-        capability_id=qcg_data["capability_id"],
-        service_name=qcg_data["service_name"],
-        version=qcg_data["version"],
-        provider=qcg_data["provider"],
-        owner=qcg_data["owner"],
-        runtime_type=qcg_data["runtime_type"],
-        service_classification=qcg_data["service_classification"],
-        capability_category=qcg_data["capability_category"],
-        status=qcg_data["status"]
-    )
-    platform_registry.register_service(qcg_record, _build_qcg_manifest(manifest_data))
-
-    print("\nServers are running! Press Ctrl+C to exit.")
-    print("--------------------------------------------------")
-    print("Platform Discovery API:")
-    print("  List Services:    http://127.0.0.1:9010/platform/v1/services")
-    print("  Server Health:    http://127.0.0.1:9010/platform/v1/health")
-    print("  Server Metrics:   http://127.0.0.1:9010/platform/v1/metrics")
-    print("  Evidence Chain:   http://127.0.0.1:9010/platform/v1/evidence")
-    print("")
-    print("Legacy Capability Registry API:")
-    print("  List Legacy:      http://127.0.0.1:9000/capabilities")
-    print("--------------------------------------------------")
+    # Print endpoints
+    print("\n" + "=" * 60)
+    print("  FEDERATED DISCOVERY FABRIC RUNNING")
+    print("=" * 60)
+    for i in range(num_nodes):
+        port = base_port + i
+        print(f"\n  Node {i+1} (port {port}):")
+        print(f"    Services:    http://127.0.0.1:{port}/platform/v1/services")
+        print(f"    Health:      http://127.0.0.1:{port}/platform/v1/health")
+        print(f"    Federation:  http://127.0.0.1:{port}/platform/v1/federation/status")
+        print(f"    Audit:       http://127.0.0.1:{port}/platform/v1/federation/audit")
+        print(f"    Certs:       http://127.0.0.1:{port}/platform/v1/certificates")
+        print(f"    Evidence:    http://127.0.0.1:{port}/platform/v1/evidence")
+    print(f"\n  Legacy Registry: http://127.0.0.1:9000/capabilities")
+    print("=" * 60)
+    print("Press Ctrl+C to exit.\n")
 
     try:
         while True:
             time.sleep(1)
     except KeyboardInterrupt:
         print("\nStopping servers...")
-        discovery_server.stop()
+        for server in servers:
+            server.stop()
         cap_server.stop()
         print("Done.")
 
 if __name__ == "__main__":
     main()
+
