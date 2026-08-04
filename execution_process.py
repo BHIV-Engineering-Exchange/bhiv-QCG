@@ -177,6 +177,27 @@ def run(in_port: int, out_port: int, crash: bool = False, hb_port: int = 9102) -
         )
         snapshot = ledger.append(record)
 
+        # Publish Execution Evidence to Live Bucket
+        import bucket_client
+        from datetime import datetime, timezone
+        import uuid
+        
+        b_client = bucket_client.get_client()
+        bucket_payload = {
+            "artifact_id": str(uuid.uuid4()),
+            "trace_id": contract.trace_id,
+            "timestamp_utc": datetime.now(timezone.utc).isoformat(),
+            "schema_version": "1.0.0",
+            "source_module_id": "qcg_execution_process",
+            "artifact_type": "execution_certificate",
+            "parent_hash": "", 
+            "payload": {
+                "execution_record": record.__dict__,
+                "ledger_snapshot": snapshot.__dict__
+            }
+        }
+        success, response = b_client.publish_artifact(bucket_payload)
+        
         queue_out.put({
             "type": "EXECUTION_RESULT",
             "result": result.to_dict(),
@@ -185,7 +206,9 @@ def run(in_port: int, out_port: int, crash: bool = False, hb_port: int = 9102) -
             "issued_at": time.time(),
             "execution_certificate": {
                 "execution_record": record.__dict__,
-                "ledger_snapshot": snapshot.__dict__
+                "ledger_snapshot": snapshot.__dict__,
+                "bucket_hash": response.get("hash") if success else None,
+                "bucket_parent_hash": response.get("parent_hash") if success else None
             }
         })
 

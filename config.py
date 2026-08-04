@@ -76,6 +76,10 @@ KESHAV_API_URL: str             = _str("QCG_KESHAV_API_URL", "https://keshav-cia
 KESHAV_TIMEOUT_SECONDS: int     = _int("QCG_KESHAV_TIMEOUT_SECONDS", 15)
 KESHAV_ENABLED: bool            = _str("QCG_KESHAV_ENABLED", "true").lower() == "true"
 
+BUCKET_API_URL: str             = _str("QCG_BUCKET_API_URL", "https://bhiv-bucket-i1l6.onrender.com")
+BUCKET_TIMEOUT_SECONDS: int     = _int("QCG_BUCKET_TIMEOUT_SECONDS", 10)
+BUCKET_ENABLED: bool            = _str("QCG_BUCKET_ENABLED", "true").lower() == "true"
+
 
 def validate():
     """Validate config at startup. Raises ValueError on bad values."""

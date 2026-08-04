@@ -57,6 +57,35 @@ class ExecutionAdapter:
             "result": raw_result
         }
 
+        # 5. Publish to Live Bucket (Canonical Truth Layer)
+        import os
+        import sys
+        # Add parent directory to path so we can import bucket_client
+        parent_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+        if parent_dir not in sys.path:
+            sys.path.insert(0, parent_dir)
+        import bucket_client
+        from datetime import datetime, timezone
+
+        client = bucket_client.get_client()
+        bucket_payload = {
+            "artifact_id": str(uuid.uuid4()),
+            "trace_id": trace_id,
+            "timestamp_utc": datetime.now(timezone.utc).isoformat(),
+            "schema_version": "1.0.0",
+            "source_module_id": f"usf_{self.solver_metadata.get('solver_id', 'UNKNOWN').lower()}",
+            "artifact_type": "solver_evidence",
+            "parent_hash": "", # Let bucket_client dynamic trace continuity handle this if empty
+            "payload": evidence_package
+        }
+        
+        success, response = client.publish_artifact(bucket_payload)
+        
+        if success:
+            evidence_package["bucket_hash"] = response.get("hash")
+            evidence_package["bucket_parent_hash"] = response.get("parent_hash")
+            evidence_package["bucket_artifact_id"] = response.get("artifact_id")
+
         return evidence_package
 
 if __name__ == "__main__":
