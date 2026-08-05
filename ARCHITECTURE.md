@@ -76,6 +76,19 @@ The QCG integrates cleanly into the BHIV ecosystem without any product modificat
 | **Pravah** | `/verify` Response (`trace_continuity`) | Stream ingestion |
 | **KESHAV** | `ProducerVerificationLayer` | ECDSA Signature Verification |
 | **BHIV Core** | `GET /capabilities` | Capability Discovery |
+| **Evidence Ledger / MDU** | `GET /evidence/{hash}` | REST Merkle Exposer |
+| **Replay Authority** | `GET /replay/lineage/{trace_id}` | REST Lineage Resolver |
+
+---
+
+## 5. Integration Boundaries & Remaining Known Unknowns
+
+As part of the shift to a live Ecosystem Participant, QCG now operates with clear trust boundaries. However, prior to a final staging launch, the following items must be resolved:
+
+1. **Dhiraj Runtime Network Address:** The executable adapter `DhirajRuntimeClient` currently points to `http://dhiraj-runtime.bhiv.local/api/v1/execute`. The exact production FQDN must be supplied via Env Vars.
+2. **KESHAV Provider Auth Key:** To support authenticated routing (e.g., GC paths validating tokens), the `VALID_GC_TOKEN` is used as a bypass. In production, real RSA/ECDSA public keys must be synced.
+3. **Persistent Ledger Path:** The `EvidenceLedger` is transient per-process memory right now. Block store / LevelDB binding must be verified.
+4. **Adversarial Resiliency (Consensus):** Byzantine consensus is still simulated because there are no adjacent real-world TANTRA nodes yet deployed around QCG to test live quorum.
 
 ---
 

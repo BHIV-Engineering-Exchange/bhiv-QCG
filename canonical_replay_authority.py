@@ -91,6 +91,15 @@ class ReplayVerdict:
     @property
     def is_valid(self) -> bool:
         return self.status == "VALID"
+        
+    def to_dict(self) -> dict:
+        return {
+            "message_id": self.message_id,
+            "sequence_number": self.sequence_number,
+            "status": self.status,
+            "reason": self.reason,
+            "lineage_record": self.lineage_record.to_dict() if self.lineage_record else None
+        }
 
 
 # ---------------------------------------------------------------------------
