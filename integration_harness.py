@@ -4,6 +4,7 @@ integration_harness.py — Phase 3: Runtime Participation Harness
 Executes one continuous flow representing a TANTRA ecosystem integration:
 - Incoming BHIV contract
 - Replay validation
+- KESHAV live analysis (root-cause + severity)
 - Trust verification
 - Runtime execution
 - Consensus proof
@@ -12,6 +13,7 @@ Executes one continuous flow representing a TANTRA ecosystem integration:
 
 import tempfile
 import time
+import logging
 from pathlib import Path
 from typing import Dict, Any, Tuple
 
@@ -31,14 +33,21 @@ from integration_interfaces import (
     HealthStatusInterface
 )
 
+import config
+
+logger = logging.getLogger("qcg.harness")
+
 class TANTRAIntegrationHarness:
     """
-    Simulates a continuous execution pipeline connecting all standard BHIV interfaces.
+    Continuous execution pipeline connecting all standard BHIV interfaces,
+    including live KESHAV ecosystem integration.
     """
     def __init__(self):
         # 1. Initialize persistent stores
         self.replay_registry = ReplayRegistry(path=Path(tempfile.mktemp(suffix="_tantra_registry.json")))
         self.trust_registry = ProducerRegistry()
+        from evidence_ledger import EvidenceLedger
+        self.ledger = EvidenceLedger()
         
         # 2. Initialize Core Engines
         self.replay_auth = CanonicalReplayAuthority(self.replay_registry)
@@ -59,7 +68,58 @@ class TANTRAIntegrationHarness:
         self.consensus_iface = ConsensusVerifierInterface(self.consensus_engine)
         self.health_iface = HealthStatusInterface(self.replay_registry)
 
+<<<<<<< HEAD
     def process_incoming_contract(self, payload: Dict[str, Any], pub_key: str, auth_token: str = None) -> Tuple[bool, Dict[str, Any]]:
+=======
+        # 4. Initialize Live Ecosystem Clients
+        self.keshav_client = None
+        if config.KESHAV_ENABLED:
+            try:
+                from keshav_live_client import KeshavClient
+                self.keshav_client = KeshavClient()
+                logger.info("KESHAV live client initialized: %s", config.KESHAV_API_URL)
+            except Exception as e:
+                logger.warning("KESHAV client initialization failed: %s", e)
+
+    def _run_keshav_analysis(self, trace_id: str, payload: Dict[str, Any]) -> Dict[str, Any]:
+        """
+        Call KESHAV live /analyze endpoint for root-cause analysis.
+        Returns analysis result dict or fallback if unavailable.
+        """
+        if self.keshav_client is None:
+            return {
+                "status": "SKIPPED",
+                "reason": "KESHAV client not enabled",
+                "live": False,
+            }
+
+        try:
+            execution_id = payload.get("execution_id", f"exec-{trace_id}")
+            resp = self.keshav_client.analyze_from_contract(
+                trace_id=trace_id,
+                execution_id=execution_id,
+                payload=payload,
+            )
+            return {
+                "status": "COMPLETED",
+                "live": True,
+                "trace_id": resp.trace_id,
+                "root_cause": resp.root_cause,
+                "resolution_signal": resp.resolution_signal,
+                "impact_score": resp.impact_score,
+                "severity": resp.severity,
+                "timestamp": resp.timestamp,
+            }
+        except Exception as e:
+            logger.warning("KESHAV analysis failed for trace %s: %s", trace_id, e)
+            return {
+                "status": "FALLBACK",
+                "reason": str(e),
+                "live": False,
+            }
+
+    def process_incoming_contract(self, payload: Dict[str, Any], pub_key: str) -> Tuple[bool, Dict[str, Any]]:
+>>>>>>> c96e32b6778307b32387366a93d4a2e5748f1fa0
         """
         Main continuous flow for incoming TANTRA contracts.
         """
@@ -83,6 +143,10 @@ class TANTRAIntegrationHarness:
                 response["halt_reason"] = f"REPLAY_{replay_res['status']}"
                 self.health_iface.record_process(False)
                 return False, response
+
+            # 2. KESHAV Live Analysis (new ecosystem integration step)
+            keshav_res = self._run_keshav_analysis(trace_id, payload)
+            response["stages"]["keshav_analysis"] = keshav_res
                 
             # Parse Contract (Governance Boundary)
             try:
@@ -107,7 +171,7 @@ class TANTRAIntegrationHarness:
                 )
                 self.trust_registry.register(identity, allowed_types={contract.producer_type})
                 
-            # 2. Trust Verification
+            # 3. Trust Verification
             trust_res = self.trust_iface.verify_trust(contract)
             response["stages"]["trust"] = trust_res
             if not trust_res["passed"]:
@@ -116,7 +180,7 @@ class TANTRAIntegrationHarness:
                 self.health_iface.record_process(False)
                 return False, response
                 
-            # 3. Runtime Execution
+            # 4. Runtime Execution
             exec_res = self.execution_iface.validate_execution(contract)
             response["stages"]["execution"] = exec_res
             if "HALT" in exec_res["ack"]:
@@ -125,7 +189,7 @@ class TANTRAIntegrationHarness:
                 self.health_iface.record_process(False)
                 return False, response
                 
-            # 4. Consensus Proof
+            # 5. Consensus Proof
             cons_res = self.consensus_iface.verify_consensus(contract, pub_key)
             response["stages"]["consensus"] = cons_res
             
@@ -133,8 +197,30 @@ class TANTRAIntegrationHarness:
             response["trace_continuity"] = {
                 "sequence_number": replay_res["sequence_number"],
                 "runtime_hash": exec_res["runtime_hash"],
-                "final_hash": cons_res.get("final_hash")
+                "final_hash": cons_res.get("final_hash"),
+                "keshav_severity": keshav_res.get("severity"),
             }
+            
+            # Record Evidence
+            from execution_record import ExecutionRecord
+            import uuid
+            import hashlib
+            record = ExecutionRecord(
+                execution_id=str(uuid.uuid4()),
+                trace_id=trace_id,
+                replay_reference=replay_res["sequence_number"],
+                execution_sequence=len(self.ledger._records) + 1,
+                producer_identity=contract.producer_id,
+                runtime_identity="DHIRAJ_RUNTIME_v1",
+                governance_identity="TANTRA_GOVERNANCE",
+                execution_status=response["flow_status"],
+                runtime_hash=exec_res["runtime_hash"],
+                previous_execution_hash=self.ledger._current_head,
+                execution_hash=hashlib.sha256(f"{trace_id}:{exec_res['runtime_hash']}".encode()).hexdigest(),
+                execution_root_hash=self.ledger.get_merkle_root(),
+                schema_version="1.0.0"
+            )
+            self.ledger.append(record)
             
             response["flow_status"] = "COMPLETED"
             self.health_iface.record_process(True)
@@ -145,3 +231,10 @@ class TANTRAIntegrationHarness:
             response["error"] = str(e)
             self.health_iface.record_process(False)
             return False, response
+
+    def get_keshav_evidence(self) -> str:
+        """Return KESHAV integration evidence log as JSON."""
+        if self.keshav_client:
+            return self.keshav_client.get_evidence_log()
+        return "[]"
+

@@ -1,0 +1,352 @@
+openapi: "3.0.3"
+info:
+  title: TANTRA Platform Discovery API
+  version: "2.0.0"
+  description: |
+    Secure Federated Capability Fabric — REST API for zero-configuration
+    discovery, authentication, version negotiation, and federation management
+    of TANTRA Platform Services.
+
+    This API is a publication and trust layer only. It never performs
+    execution, orchestration, governance, or runtime decision-making.
+
+servers:
+  - url: http://127.0.0.1:9010
+    description: Federation Node 1
+  - url: http://127.0.0.1:9011
+    description: Federation Node 2
+  - url: http://127.0.0.1:9012
+    description: Federation Node 3
+
+paths:
+  /platform/v1/services:
+    get:
+      summary: List all registered Platform Services
+      operationId: listServices
+      responses:
+        "200":
+          description: Array of registered services
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  services:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/PlatformServiceRecord"
+                  count:
+                    type: integer
+                  registry_version:
+                    type: string
+
+  /platform/v1/services/{serviceId}:
+    get:
+      summary: Get a specific service by ID
+      operationId: getService
+      parameters:
+        - name: serviceId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Service record
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PlatformServiceRecord"
+        "404":
+          description: Service not found
+
+  /platform/v1/services/{serviceId}/metadata:
+    get:
+      summary: Get service metadata including manifest
+      operationId: getServiceMetadata
+      parameters:
+        - name: serviceId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Service metadata with manifest
+        "404":
+          description: Service not found
+
+  /platform/v1/services/{serviceId}/versions:
+    get:
+      summary: Get version compatibility matrix
+      operationId: getServiceVersions
+      parameters:
+        - name: serviceId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Version info
+
+  /platform/v1/services/{serviceId}/contracts:
+    get:
+      summary: Get operation contracts from manifest
+      operationId: getServiceContracts
+      parameters:
+        - name: serviceId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Operation contracts
+        "404":
+          description: Manifest not found
+
+  /platform/v1/services/{serviceId}/endpoints:
+    get:
+      summary: Get service endpoints
+      operationId: getServiceEndpoints
+      parameters:
+        - name: serviceId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Endpoint map
+
+  /platform/v1/services/{serviceId}/health:
+    get:
+      summary: Get service health status
+      operationId: getServiceHealth
+      parameters:
+        - name: serviceId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Health status
+
+  /platform/v1/services/{serviceId}/compatibility:
+    get:
+      summary: Get compatibility matrix
+      operationId: getServiceCompatibility
+      parameters:
+        - name: serviceId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Compatibility information
+
+  /platform/v1/health:
+    get:
+      summary: Discovery server health
+      operationId: getServerHealth
+      responses:
+        "200":
+          description: Server health with uptime and request count
+
+  /platform/v1/readiness:
+    get:
+      summary: Readiness probe
+      operationId: getReadiness
+      responses:
+        "200":
+          description: Readiness status
+
+  /platform/v1/metrics:
+    get:
+      summary: Prometheus-format metrics
+      operationId: getMetrics
+      responses:
+        "200":
+          description: Metrics in text/plain Prometheus format
+
+  /platform/v1/evidence:
+    get:
+      summary: Registration evidence chain
+      operationId: getEvidence
+      responses:
+        "200":
+          description: Evidence records with chain validity
+
+  /platform/v1/version:
+    get:
+      summary: API version information
+      operationId: getVersion
+      responses:
+        "200":
+          description: Version details
+
+  /platform/v1/negotiate:
+    post:
+      summary: Version negotiation
+      operationId: negotiateVersion
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [service_id, requested_version]
+              properties:
+                service_id:
+                  type: string
+                requested_version:
+                  type: string
+      responses:
+        "200":
+          description: Negotiation result (COMPATIBLE / DEPRECATED / UNSUPPORTED)
+
+  /platform/v1/register:
+    post:
+      summary: Authenticated service registration
+      operationId: registerService
+      description: |
+        Register a service through the federation node with optional
+        mutual authentication (mTLS proof + certificate).
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [record]
+              properties:
+                record:
+                  $ref: "#/components/schemas/PlatformServiceRecord"
+      responses:
+        "200":
+          description: Registration successful
+        "403":
+          description: Authentication failed
+        "503":
+          description: Federation not enabled
+
+  /platform/v1/heartbeat:
+    post:
+      summary: Lease renewal heartbeat
+      operationId: heartbeat
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [service_id]
+              properties:
+                service_id:
+                  type: string
+      responses:
+        "200":
+          description: Heartbeat accepted, lease renewed
+        "404":
+          description: No active lease for this service
+
+  /platform/v1/revoke:
+    post:
+      summary: Service revocation
+      operationId: revokeService
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [service_id]
+              properties:
+                service_id:
+                  type: string
+                reason:
+                  type: string
+      responses:
+        "200":
+          description: Revocation result
+
+  /platform/v1/federation/status:
+    get:
+      summary: Federation topology and sync state
+      operationId: getFederationStatus
+      responses:
+        "200":
+          description: Node ID, peers, vector clock, service count, audit stats
+
+  /platform/v1/federation/audit:
+    get:
+      summary: Federation audit log
+      operationId: getFederationAudit
+      responses:
+        "200":
+          description: Hash-chained audit events with chain validity
+
+  /platform/v1/federation/sync:
+    post:
+      summary: Trigger anti-entropy sync with all peers
+      operationId: triggerFederationSync
+      responses:
+        "200":
+          description: Sync results for each peer
+        "503":
+          description: Federation not enabled
+
+  /platform/v1/certificates:
+    get:
+      summary: List active service certificates
+      operationId: listCertificates
+      responses:
+        "200":
+          description: Array of active certificates
+
+components:
+  schemas:
+    PlatformServiceRecord:
+      type: object
+      required: [platform_service_id, service_name, version]
+      properties:
+        platform_service_id:
+          type: string
+        capability_id:
+          type: string
+        service_name:
+          type: string
+        version:
+          type: string
+        provider:
+          type: string
+        owner:
+          type: object
+        runtime_type:
+          type: string
+          enum: [PROCESS, CONTAINER, SERVERLESS]
+        service_classification:
+          type: string
+        capability_category:
+          type: string
+        status:
+          type: string
+          enum: [ACTIVE, INACTIVE, DEGRADED, MAINTENANCE]
+        registration_timestamp:
+          type: string
+          format: date-time
+        description:
+          type: string
+        tags:
+          type: array
+          items:
+            type: string
+        endpoints:
+          type: object
+        dependencies:
+          type: array
+          items:
+            type: string
