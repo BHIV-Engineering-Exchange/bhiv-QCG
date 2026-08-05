@@ -68,9 +68,6 @@ class TANTRAIntegrationHarness:
         self.consensus_iface = ConsensusVerifierInterface(self.consensus_engine)
         self.health_iface = HealthStatusInterface(self.replay_registry)
 
-<<<<<<< HEAD
-    def process_incoming_contract(self, payload: Dict[str, Any], pub_key: str, auth_token: str = None) -> Tuple[bool, Dict[str, Any]]:
-=======
         # 4. Initialize Live Ecosystem Clients
         self.keshav_client = None
         if config.KESHAV_ENABLED:
@@ -118,8 +115,7 @@ class TANTRAIntegrationHarness:
                 "live": False,
             }
 
-    def process_incoming_contract(self, payload: Dict[str, Any], pub_key: str) -> Tuple[bool, Dict[str, Any]]:
->>>>>>> c96e32b6778307b32387366a93d4a2e5748f1fa0
+    def process_incoming_contract(self, payload: Dict[str, Any], pub_key: str, auth_token: str = None) -> Tuple[bool, Dict[str, Any]]:
         """
         Main continuous flow for incoming TANTRA contracts.
         """
