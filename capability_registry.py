@@ -1,29 +1,26 @@
 """
 capability_registry.py - Dynamic Capability Registry and Discovery Client.
-Allows runtime services to register their capabilities and discover downstream endpoints.
+Upgraded to FastAPI for monolithic Render deployment.
 """
 
 import json
 import logging
-import urllib.request
-import urllib.error
-from http.server import BaseHTTPRequestHandler, HTTPServer
 import threading
 from typing import Dict, Any, List, Optional
+from fastapi import FastAPI, HTTPException, Request, Response
+from pydantic import BaseModel
 
 # Setup basic logging
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger("qcg.capability_registry")
+
+app = FastAPI(title="Capability Registry API")
 
 # In-memory database of registered capabilities
 _registry_db: Dict[str, Dict[str, Any]] = {}
 _registry_lock = threading.Lock()
 
 def validate_capability_payload(payload: Dict[str, Any]) -> tuple[bool, str]:
-    """
-    Validate capability payload against the core fields of capability_registry_schema.json.
-    Ensures structural correctness without requiring external jsonschema package.
-    """
     required_keys = [
         "capability_id", "capability_name", "owner", "version", "status", 
         "scope", "dependencies", "attachment_rules", "authority_limits", 
@@ -34,119 +31,60 @@ def validate_capability_payload(payload: Dict[str, Any]) -> tuple[bool, str]:
             return False, f"Missing required key: {key}"
             
     # Validate nested structures
-    owner = payload["owner"]
+    owner = payload.get("owner", {})
     if not isinstance(owner, dict) or "team" not in owner or "contact" not in owner:
         return False, "Invalid 'owner' structure: must contain 'team' and 'contact'."
         
-    attachment = payload["attachment_rules"]
+    attachment = payload.get("attachment_rules", {})
     if not isinstance(attachment, dict) or "attachment_type" not in attachment or "protocol" not in attachment:
         return False, "Invalid 'attachment_rules' structure: must contain 'attachment_type' and 'protocol'."
         
-    auth = payload["authority_limits"]
+    auth = payload.get("authority_limits", {})
     if not isinstance(auth, dict) or "owns" not in auth or "does_not_own" not in auth:
         return False, "Invalid 'authority_limits' structure: must contain 'owns' and 'does_not_own'."
         
     return True, ""
 
-class CapabilityRegistryHandler(BaseHTTPRequestHandler):
-    def log_message(self, format, *args):
-        pass # Suppress logging to stdout
+@app.get("/capabilities")
+async def list_capabilities():
+    with _registry_lock:
+        return list(_registry_db.values())
 
-    def _set_headers(self, status=200):
-        self.send_response(status)
-        self.send_header("Content-type", "application/json")
-        self.end_headers()
+@app.get("/capabilities/{cap_id}")
+async def get_capability(cap_id: str):
+    with _registry_lock:
+        if cap_id in _registry_db:
+            return _registry_db[cap_id]
+        raise HTTPException(status_code=404, detail=f"Capability {cap_id} not found")
 
-    def do_GET(self):
-        if self.path == "/capabilities":
-            with _registry_lock:
-                self._set_headers(200)
-                self.wfile.write(json.dumps(list(_registry_db.values())).encode("utf-8"))
-        elif self.path.startswith("/capabilities/"):
-            cap_id = self.path.split("/")[-1]
-            with _registry_lock:
-                if cap_id in _registry_db:
-                    self._set_headers(200)
-                    self.wfile.write(json.dumps(_registry_db[cap_id]).encode("utf-8"))
-                else:
-                    self._set_headers(404)
-                    self.wfile.write(json.dumps({"error": f"Capability {cap_id} not found"}).encode("utf-8"))
-        elif self.path.startswith("/discover/"):
-            cap_name = self.path.split("/")[-1]
-            found = None
-            with _registry_lock:
-                for cap in _registry_db.values():
-                    if cap["capability_name"].upper() == cap_name.upper():
-                        found = cap
-                        break
-            if found:
-                self._set_headers(200)
-                self.wfile.write(json.dumps(found).encode("utf-8"))
-            else:
-                self._set_headers(404)
-                self.wfile.write(json.dumps({"error": f"Capability with name {cap_name} not found"}).encode("utf-8"))
-        else:
-            self._set_headers(404)
-            self.wfile.write(json.dumps({"error": "Endpoint not found"}).encode("utf-8"))
+@app.get("/discover/{cap_name}")
+async def discover_capability(cap_name: str):
+    with _registry_lock:
+        for cap in _registry_db.values():
+            if cap["capability_name"].upper() == cap_name.upper():
+                return cap
+    raise HTTPException(status_code=404, detail=f"Capability with name {cap_name} not found")
 
-    def do_POST(self):
-        if self.path == "/register":
-            content_length = int(self.headers.get('Content-Length', 0))
-            if content_length == 0:
-                self._set_headers(400)
-                self.wfile.write(json.dumps({"error": "Empty body"}).encode("utf-8"))
-                return
-            body = self.rfile.read(content_length).decode("utf-8")
-            try:
-                payload = json.loads(body)
-            except Exception as e:
-                self._set_headers(400)
-                self.wfile.write(json.dumps({"error": f"Invalid JSON: {e}"}).encode("utf-8"))
-                return
+@app.post("/register")
+async def register_capability(request: Request):
+    try:
+        payload = await request.json()
+    except Exception as e:
+        raise HTTPException(status_code=400, detail=f"Invalid JSON: {e}")
 
-            valid, err_msg = validate_capability_payload(payload)
-            if not valid:
-                self._set_headers(400)
-                self.wfile.write(json.dumps({"error": f"Schema Validation Failure: {err_msg}"}).encode("utf-8"))
-                return
+    valid, err_msg = validate_capability_payload(payload)
+    if not valid:
+        raise HTTPException(status_code=400, detail=f"Schema Validation Failure: {err_msg}")
 
-            cap_id = payload["capability_id"]
-            with _registry_lock:
-                _registry_db[cap_id] = payload
-            logger.info(f"Registered capability '{payload['capability_name']}' version {payload['version']} (ID: {cap_id})")
-            
-            self._set_headers(200)
-            self.wfile.write(json.dumps({"status": "REGISTERED", "capability_id": cap_id}).encode("utf-8"))
-        else:
-            self._set_headers(404)
-            self.wfile.write(json.dumps({"error": "Endpoint not found"}).encode("utf-8"))
+    cap_id = payload["capability_id"]
+    with _registry_lock:
+        _registry_db[cap_id] = payload
+    
+    logger.info(f"Registered capability '{payload['capability_name']}' version {payload['version']} (ID: {cap_id})")
+    return {"status": "REGISTERED", "capability_id": cap_id}
 
-# -- Registry Server Control --------------------------------------------------
-
-class CapabilityRegistryServer:
-    def __init__(self, host: str = "127.0.0.1", port: int = 9000):
-        self.host = host
-        self.port = port
-        self.server = None
-        self.thread = None
-
-    def start(self):
-        self.server = HTTPServer((self.host, self.port), CapabilityRegistryHandler)
-        self.thread = threading.Thread(target=self.server.serve_forever, daemon=True)
-        self.thread.start()
-        logger.info(f"Capability Registry Server started on http://{self.host}:{self.port}")
-
-    def stop(self):
-        if self.server:
-            self.server.shutdown()
-            self.server.server_close()
-            self.server = None
-        if self.thread:
-            self.thread.join(timeout=5)
-            self.thread = None
-        logger.info("Capability Registry Server stopped")
-
-# -- Registry Client Helper ----------------------------------------------------
+import urllib.request
+import urllib.error
 
 class CapabilityRegistryClient:
     def __init__(self, registry_url: str = "http://127.0.0.1:9000"):

@@ -49,3 +49,16 @@ Once Render assigns your public URL (e.g., `https://tantra-platform-monolith.onr
     -H "Content-Type: application/json" \
     -d '{"trace_id": "test-123", "producer_type": "QUANTUM", "payload": {}, "confidence": 0.85}'
   ```
+### 3. Capability Registry (SANSKAR Integration)
+- **Check Capabilities:**
+  ```bash
+  curl https://tantra-platform-monolith.onrender.com/registry/capabilities/capabilities
+  ```
+
+### 4. Platform Discovery (SANSKAR Integration)
+- **Register Service:**
+  ```bash
+  curl -X POST https://tantra-platform-monolith.onrender.com/registry/platform/v1/register \
+    -H "Content-Type: application/json" \
+    -d '{"service_id": "TEST", "service_name": "Test Service", "version": "1.0", "endpoints": {}}'
+  ```

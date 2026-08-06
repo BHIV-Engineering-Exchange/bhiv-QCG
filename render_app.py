@@ -9,11 +9,15 @@ from web_server import app as qcg_app
 from external_runtime_server import app as runtime_app
 from external_platform_agent import app as agent_app
 
+# Import the upgraded FastAPI Platform Registries
+from capability_registry import app as capability_app
+from platform_discovery_fastapi import app as platform_app
+
 # Create a unified root app
 app = FastAPI(
     title="TANTRA QCG & Universal Solver Fabric (Monolith)",
-    description="Unified platform serving both the Core QCG Gateway and the External Quantum Node.",
-    version="1.0.0"
+    description="Unified platform serving the QCG Gateway, External Quantum Node, and Platform Registries.",
+    version="2.0.0"
 )
 
 # Namespace the QCG Gateway endpoints
@@ -23,8 +27,11 @@ app.mount("/qcg", qcg_app)
 external_app = FastAPI(title="External Quantum Node")
 external_app.include_router(runtime_app.router)
 external_app.include_router(agent_app.router)
-
 app.mount("/external", external_app)
+
+# Mount the backend registries
+app.mount("/registry/capabilities", capability_app)
+app.mount("/registry/platform", platform_app)
 
 @app.get("/")
 async def root():
@@ -33,13 +40,17 @@ async def root():
         "status": "ONLINE",
         "available_namespaces": {
             "Core Gateway": "/qcg",
-            "External Node Plugin": "/external"
+            "External Node Plugin": "/external",
+            "Capability Registry": "/registry/capabilities",
+            "Platform Discovery": "/registry/platform"
         },
         "key_endpoints": [
             "GET  /qcg/health - QCG Platform Health",
             "POST /qcg/verify - QCG Contract Verification",
             "POST /external/execute - External Node Execution",
-            "POST /external/platform/integrate - External Node USF Integration"
+            "POST /external/platform/integrate - External Node USF Integration",
+            "GET  /registry/capabilities/capabilities - List Capabilities",
+            "POST /registry/platform/platform/v1/register - Register Service"
         ]
     }
 
