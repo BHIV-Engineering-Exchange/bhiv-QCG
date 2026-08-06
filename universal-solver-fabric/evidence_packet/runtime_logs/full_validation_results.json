@@ -1,0 +1,1364 @@
+{
+  "contract_validation": {
+    "identity": {
+      "runtime_id": "TANTRA-PSR-USF-001",
+      "capability_id": "bhiv.capabilities.solver_fabric",
+      "permanent_identity": "Optimization.SolverFabric.v1",
+      "constitutional_layer": "Platform Service Layer / Agnostic Execution Layer",
+      "fabric_version": "1.0.0",
+      "schema_version": "1.0.0",
+      "api_version": "v1"
+    },
+    "authority_owns": [
+      "Solver Capability Contract enforcement",
+      "Deterministic Solver Selection",
+      "Execution Adapter lifecycle",
+      "Solver health tracking",
+      "Evidence package generation",
+      "Attachment mode negotiation",
+      "Solver Registry management"
+    ],
+    "authority_does_not_own": [
+      "Problem formulation / modeling",
+      "Business logic execution",
+      "Orchestration of external workflows",
+      "Master Directive definitions",
+      "Budget / cost approval",
+      "Data storage / persistence",
+      "Replay detection (primary)",
+      "Governance policy enforcement",
+      "Service registration",
+      "Certificate authority",
+      "Federation protocol"
+    ],
+    "version_negotiation": {
+      "1.0.0": {
+        "status": "COMPATIBLE",
+        "negotiated": "1.0.0"
+      },
+      "1.1.0": {
+        "status": "DEPRECATED",
+        "negotiated": "1.0.0"
+      },
+      "0.9.0": {
+        "status": "UNSUPPORTED",
+        "negotiated": "1.0.0"
+      },
+      "2.0.0": {
+        "status": "UNSUPPORTED",
+        "negotiated": "1.0.0"
+      },
+      "invalid": {
+        "status": "UNSUPPORTED",
+        "negotiated": "1.0.0"
+      }
+    },
+    "attachment_negotiation": {
+      "LOCAL": "LOCAL",
+      "REMOTE": "REMOTE",
+      "HYBRID": "HYBRID",
+      "INVALID": "LOCAL"
+    },
+    "consumer_validation": {
+      "valid": true,
+      "errors": []
+    },
+    "api_contract": {
+      "base_url": "https://api.bhiv.internal/platform/v1/optimization/solver-fabric",
+      "api_version": "v1",
+      "endpoints": [
+        {
+          "path": "/capabilities",
+          "method": "GET",
+          "description": "Discover available solvers matching query criteria",
+          "input_contract": {
+            "query_params": [
+              "problem_type",
+              "solver_type",
+              "deterministic"
+            ]
+          },
+          "output_contract": {
+            "solvers": "List[SolverCapability]"
+          },
+          "error_codes": [
+            "400"
+          ]
+        },
+        {
+          "path": "/execute",
+          "method": "POST",
+          "description": "Submit optimization problem for deterministic execution",
+          "input_contract": {
+            "required": [
+              "problem_schema"
+            ],
+            "properties": {
+              "problem_schema": {
+                "problem_type": "string",
+                "required_constraints": "List[str]"
+              },
+              "payload": {
+                "variables": "List",
+                "constraints": "List",
+                "objective": "List"
+              },
+              "execution_constraints": {
+                "max_time_ms": "int",
+                "max_memory_mb": "int"
+              }
+            }
+          },
+          "output_contract": {
+            "execution_id": "string",
+            "selected_solver": "string",
+            "status": "string",
+            "solution": "dict",
+            "telemetry": "dict",
+            "replay_metadata": "dict",
+            "confidence_score": "float"
+          },
+          "error_codes": [
+            "400",
+            "422",
+            "429",
+            "500",
+            "504"
+          ]
+        },
+        {
+          "path": "/health",
+          "method": "GET",
+          "description": "Runtime health status",
+          "input_contract": {},
+          "output_contract": {
+            "status": "string",
+            "solvers_registered": "int",
+            "uptime_seconds": "float"
+          },
+          "error_codes": []
+        },
+        {
+          "path": "/solvers/{id}",
+          "method": "GET",
+          "description": "Retrieve specific solver metadata",
+          "input_contract": {},
+          "output_contract": {
+            "solver": "SolverCapability"
+          },
+          "error_codes": [
+            "404"
+          ]
+        },
+        {
+          "path": "/solvers/{id}/status",
+          "method": "GET",
+          "description": "Solver health status",
+          "input_contract": {},
+          "output_contract": {
+            "status": "string"
+          },
+          "error_codes": [
+            "404"
+          ]
+        }
+      ]
+    },
+    "manifest": {
+      "identity": {
+        "runtime_id": "TANTRA-PSR-USF-001",
+        "capability_id": "bhiv.capabilities.solver_fabric",
+        "permanent_identity": "Optimization.SolverFabric.v1",
+        "constitutional_layer": "Platform Service Layer / Agnostic Execution Layer",
+        "fabric_version": "1.0.0",
+        "schema_version": "1.0.0",
+        "api_version": "v1"
+      },
+      "authority_matrix": {
+        "owns": [
+          "Solver Capability Contract enforcement",
+          "Deterministic Solver Selection",
+          "Execution Adapter lifecycle",
+          "Solver health tracking",
+          "Evidence package generation",
+          "Attachment mode negotiation",
+          "Solver Registry management"
+        ],
+        "does_not_own": [
+          "Problem formulation / modeling",
+          "Business logic execution",
+          "Orchestration of external workflows",
+          "Master Directive definitions",
+          "Budget / cost approval",
+          "Data storage / persistence",
+          "Replay detection (primary)",
+          "Governance policy enforcement",
+          "Service registration",
+          "Certificate authority",
+          "Federation protocol"
+        ],
+        "delegates_to": {
+          "PlatformServiceRegistry": "Service registration and lifecycle",
+          "CanonicalReplayAuthority": "Replay detection and enforcement",
+          "GovernanceLayer": "Pre-execution governance policy",
+          "HeartbeatManager": "Lease-based liveness protocol",
+          "TraceStore": "Observability trace storage"
+        }
+      },
+      "runtime_contract": {
+        "runtime_id": "TANTRA-PSR-USF-001",
+        "capability_id": "bhiv.capabilities.solver_fabric",
+        "permanent_identity": "Optimization.SolverFabric.v1",
+        "constitutional_layer": "Platform Service Layer / Agnostic Execution Layer",
+        "fabric_version": "1.0.0",
+        "schema_version": "1.0.0",
+        "api_version": "v1",
+        "valid_states": [
+          "REGISTERED",
+          "DISCOVERED",
+          "EXECUTING",
+          "COMPLETED",
+          "FAILED",
+          "DISABLED",
+          "DEREGISTERED"
+        ],
+        "valid_transitions": {
+          "REGISTERED": [
+            "DISCOVERED",
+            "DISABLED",
+            "DEREGISTERED"
+          ],
+          "DISCOVERED": [
+            "EXECUTING",
+            "DISABLED"
+          ],
+          "EXECUTING": [
+            "COMPLETED",
+            "FAILED"
+          ],
+          "COMPLETED": [
+            "DISCOVERED",
+            "DISABLED"
+          ],
+          "FAILED": [
+            "DISCOVERED",
+            "DISABLED"
+          ],
+          "DISABLED": [
+            "REGISTERED"
+          ],
+          "DEREGISTERED": []
+        }
+      },
+      "api_contract": {
+        "base_url": "https://api.bhiv.internal/platform/v1/optimization/solver-fabric",
+        "api_version": "v1",
+        "endpoints": [
+          {
+            "path": "/capabilities",
+            "method": "GET",
+            "description": "Discover available solvers matching query criteria",
+            "input_contract": {
+              "query_params": [
+                "problem_type",
+                "solver_type",
+                "deterministic"
+              ]
+            },
+            "output_contract": {
+              "solvers": "List[SolverCapability]"
+            },
+            "error_codes": [
+              "400"
+            ]
+          },
+          {
+            "path": "/execute",
+            "method": "POST",
+            "description": "Submit optimization problem for deterministic execution",
+            "input_contract": {
+              "required": [
+                "problem_schema"
+              ],
+              "properties": {
+                "problem_schema": {
+                  "problem_type": "string",
+                  "required_constraints": "List[str]"
+                },
+                "payload": {
+                  "variables": "List",
+                  "constraints": "List",
+                  "objective": "List"
+                },
+                "execution_constraints": {
+                  "max_time_ms": "int",
+                  "max_memory_mb": "int"
+                }
+              }
+            },
+            "output_contract": {
+              "execution_id": "string",
+              "selected_solver": "string",
+              "status": "string",
+              "solution": "dict",
+              "telemetry": "dict",
+              "replay_metadata": "dict",
+              "confidence_score": "float"
+            },
+            "error_codes": [
+              "400",
+              "422",
+              "429",
+              "500",
+              "504"
+            ]
+          },
+          {
+            "path": "/health",
+            "method": "GET",
+            "description": "Runtime health status",
+            "input_contract": {},
+            "output_contract": {
+              "status": "string",
+              "solvers_registered": "int",
+              "uptime_seconds": "float"
+            },
+            "error_codes": []
+          },
+          {
+            "path": "/solvers/{id}",
+            "method": "GET",
+            "description": "Retrieve specific solver metadata",
+            "input_contract": {},
+            "output_contract": {
+              "solver": "SolverCapability"
+            },
+            "error_codes": [
+              "404"
+            ]
+          },
+          {
+            "path": "/solvers/{id}/status",
+            "method": "GET",
+            "description": "Solver health status",
+            "input_contract": {},
+            "output_contract": {
+              "status": "string"
+            },
+            "error_codes": [
+              "404"
+            ]
+          }
+        ]
+      },
+      "attachment_contract": {
+        "supported_modes": [
+          "LOCAL",
+          "REMOTE",
+          "HYBRID"
+        ],
+        "default_mode": "LOCAL"
+      },
+      "event_contract": {
+        "valid_events": [
+          "solver_fabric.solver_registered",
+          "solver_fabric.solver_disabled",
+          "solver_fabric.solver_enabled",
+          "solver_fabric.execution_started",
+          "solver_fabric.execution_completed",
+          "solver_fabric.execution_failed",
+          "solver_fabric.registration_completed",
+          "solver_fabric.health_check"
+        ]
+      },
+      "version_negotiation": {
+        "current_version": "1.0.0",
+        "schema_version": "1.0.0",
+        "api_version": "v1"
+      },
+      "replay_guarantees": [
+        "Every execution produces a unique replay_id (UUID v4)",
+        "Every execution produces a unique trace_id (UUID v4)",
+        "Deterministic inputs are captured in the evidence package",
+        "Provenance metadata (timestamps, versions, solver info) is captured",
+        "Replay IDs are submitted to the platform Replay Registry",
+        "Cross-participant replay chains span Fabric \u2192 Gateway \u2192 Registry"
+      ],
+      "deterministic_guarantees": [
+        "Solver Selection Engine produces identical ordering for identical inputs",
+        "Evidence packages contain all state required for replay",
+        "Failure codes are deterministic and structured",
+        "State transitions follow the defined lifecycle FSM",
+        "Version negotiation is deterministic given the same inputs",
+        "Evidence chain hashes are deterministic and verifiable"
+      ],
+      "evidence_chain_head": "87b743b9ee9f17cbc706a992c703eb683ca531afb8769b6d0fece5355c90df11"
+    },
+    "status": "PASSED"
+  },
+  "registry_validation": {
+    "registrations": {
+      "capability_registry": {
+        "status": "REGISTERED",
+        "id": "bhiv.capabilities.solver_fabric",
+        "via": "local"
+      },
+      "runtime_registry": {
+        "status": "REGISTERED",
+        "id": "TANTRA-PSR-USF-001"
+      },
+      "replay_registry": {
+        "status": "REGISTERED",
+        "id": "USF-REPLAY-REGISTRATION-1.0.0"
+      },
+      "build_registry": {
+        "status": "REGISTERED",
+        "id": "USF-BUILD-1.0.0-4cea400f24809877"
+      },
+      "review_registry": {
+        "status": "REGISTERED",
+        "id": "USF-REVIEW-CONSTITUTIONAL-INTEGRATION"
+      }
+    },
+    "evidence": [
+      {
+        "registry_name": "Capability Registry",
+        "registration_id": "bhiv.capabilities.solver_fabric",
+        "registration_timestamp": "2026-08-06T08:34:17.381288+00:00",
+        "status": "REGISTERED",
+        "evidence_hash": "48e79002accc9975eb857661a1861c8fb06a502c45f9713c3f39f2b992f8d55e",
+        "payload_hash": "0df95cf6235c889ff8089ba4b7aa21ee181ce464129006592616894d82d97d69",
+        "details": {
+          "registered_via": "local"
+        }
+      },
+      {
+        "registry_name": "Runtime Registry",
+        "registration_id": "TANTRA-PSR-USF-001",
+        "registration_timestamp": "2026-08-06T08:34:17.381453+00:00",
+        "status": "REGISTERED",
+        "evidence_hash": "be5ccff03e25c2a4b858c171131fe2390f207891d2185c2648edbdc5d4da625e",
+        "payload_hash": "b662e7ceee3acc17e5c8b13f8f8ddd2d09a1548b7641046f81e443bd66345235",
+        "details": {
+          "service_classification": "PLATFORM_SERVICE"
+        }
+      },
+      {
+        "registry_name": "Replay Registry",
+        "registration_id": "USF-REPLAY-REGISTRATION-1.0.0",
+        "registration_timestamp": "2026-08-06T08:34:17.391569+00:00",
+        "status": "REGISTERED",
+        "evidence_hash": "e513e8f2dc4debda72adb72fe20d070552905cf315bc45cf1365e6cfeef46815",
+        "payload_hash": "af4d94ab2d1b4a8a6c459214cad753c85af8b4192bc080a5306b5efb1aaaf4a9",
+        "details": {}
+      },
+      {
+        "registry_name": "Build Registry",
+        "registration_id": "USF-BUILD-1.0.0-4cea400f24809877",
+        "registration_timestamp": "2026-08-06T08:34:17.391645+00:00",
+        "status": "REGISTERED",
+        "evidence_hash": "ffa3798471aa0068b31b7d779a49c14c1f7e9321a9bc180555cbae2adc73feaf",
+        "payload_hash": "59b6a16d44f7122f22a1d1dc328f179006e889aceaf710163bfc04bd1ded898c",
+        "details": {}
+      },
+      {
+        "registry_name": "Review Registry",
+        "registration_id": "USF-REVIEW-CONSTITUTIONAL-INTEGRATION",
+        "registration_timestamp": "2026-08-06T08:34:17.391679+00:00",
+        "status": "REGISTERED",
+        "evidence_hash": "23fbbb1f0f5547a045ccb09ae64c6622cc2675b4fffd0494b48baf799741d2ef",
+        "payload_hash": "39dfeb38f24d2563c94cf964d004757d2b6deb08cc918b45a9d33e054e99020f",
+        "details": {}
+      }
+    ],
+    "retrievals": {
+      "capability": true,
+      "runtime": true,
+      "replay": true,
+      "build": true,
+      "review": true
+    },
+    "all_registered": true,
+    "all_retrievable": true,
+    "evidence_chain_valid": true,
+    "status": "PASSED"
+  },
+  "replay_validation": {
+    "traces": [
+      {
+        "trace_id": "d3bb1497-9f2c-4abd-a9d9-7ecde9b5399e",
+        "replay_id": "83e7fdf6-7ac5-4ebf-a7a8-002448e93c4f",
+        "solver_id": "SOLVER_0",
+        "problem_type": "MILP",
+        "status": "COMPLETED",
+        "execution_duration_ms": 100.0,
+        "timestamp": "2026-08-06T08:34:17.392366+00:00",
+        "sequence": 1,
+        "solver_version": "1.0.0",
+        "attachment_mode": "LOCAL",
+        "confidence": 0.0,
+        "failure_code": "",
+        "failure_detail": "",
+        "evidence_hash": "7dc3291168dd9cf45aaecc488168bd5dba1f187828285b352317a6a5a003b344",
+        "gateway_bridge_id": "",
+        "replay_registry_seq": 0,
+        "consumer_id": ""
+      },
+      {
+        "trace_id": "d06b6a22-11cb-45c0-9298-a9c8fc6385fc",
+        "replay_id": "99adfd09-2708-4d1c-8db5-315b80c93d89",
+        "solver_id": "SOLVER_1",
+        "problem_type": "QUBO",
+        "status": "COMPLETED",
+        "execution_duration_ms": 125.0,
+        "timestamp": "2026-08-06T08:34:17.398357+00:00",
+        "sequence": 2,
+        "solver_version": "1.0.0",
+        "attachment_mode": "LOCAL",
+        "confidence": 0.0,
+        "failure_code": "",
+        "failure_detail": "",
+        "evidence_hash": "7065fb76d1fbbc431ee4a634ea76bfd074015939b18eafb02804760f29734e1b",
+        "gateway_bridge_id": "",
+        "replay_registry_seq": 0,
+        "consumer_id": ""
+      },
+      {
+        "trace_id": "053a65dc-14dc-4856-b0e8-ad358907a9c3",
+        "replay_id": "56f4c95b-6540-4ad6-acd1-271a28db2fa9",
+        "solver_id": "SOLVER_2",
+        "problem_type": "CP",
+        "status": "COMPLETED",
+        "execution_duration_ms": 150.0,
+        "timestamp": "2026-08-06T08:34:17.398412+00:00",
+        "sequence": 3,
+        "solver_version": "1.0.0",
+        "attachment_mode": "LOCAL",
+        "confidence": 0.0,
+        "failure_code": "",
+        "failure_detail": "",
+        "evidence_hash": "49fa40857f44a33ab41701691477f19edf85e5f0b088c495f95dd16b5f92ddb6",
+        "gateway_bridge_id": "",
+        "replay_registry_seq": 0,
+        "consumer_id": ""
+      },
+      {
+        "trace_id": "713d5c9d-dd29-4ab8-9f87-9e0dbc906aeb",
+        "replay_id": "a54e05dd-890b-4bd7-90d6-05fe323e05ce",
+        "solver_id": "SOLVER_0",
+        "problem_type": "MILP",
+        "status": "COMPLETED",
+        "execution_duration_ms": 175.0,
+        "timestamp": "2026-08-06T08:34:17.398443+00:00",
+        "sequence": 4,
+        "solver_version": "1.0.0",
+        "attachment_mode": "LOCAL",
+        "confidence": 0.0,
+        "failure_code": "",
+        "failure_detail": "",
+        "evidence_hash": "a23354a0e90d8cb050214cd186090afc8ff52cca300b533db2c1b7afc0bc19e4",
+        "gateway_bridge_id": "",
+        "replay_registry_seq": 0,
+        "consumer_id": ""
+      },
+      {
+        "trace_id": "c91de642-d4ef-419e-b931-fa31ada082bd",
+        "replay_id": "de98e9e6-567f-4c8f-8678-50f1d7f565af",
+        "solver_id": "SOLVER_1",
+        "problem_type": "QUBO",
+        "status": "COMPLETED",
+        "execution_duration_ms": 200.0,
+        "timestamp": "2026-08-06T08:34:17.398472+00:00",
+        "sequence": 5,
+        "solver_version": "1.0.0",
+        "attachment_mode": "LOCAL",
+        "confidence": 0.0,
+        "failure_code": "",
+        "failure_detail": "",
+        "evidence_hash": "e8e8a957dc56e3e956b6df9fb6e9f4e99ed7bb33d93cb68753997432b716d6a8",
+        "gateway_bridge_id": "",
+        "replay_registry_seq": 0,
+        "consumer_id": ""
+      },
+      {
+        "trace_id": "41c87e5d-0218-4b62-b850-d479a3a4ff9e",
+        "replay_id": "6e166d01-4e8a-45df-8ff4-e45a9c744eab",
+        "solver_id": "SOLVER_2",
+        "problem_type": "CP",
+        "status": "COMPLETED",
+        "execution_duration_ms": 225.0,
+        "timestamp": "2026-08-06T08:34:17.398499+00:00",
+        "sequence": 6,
+        "solver_version": "1.0.0",
+        "attachment_mode": "LOCAL",
+        "confidence": 0.0,
+        "failure_code": "",
+        "failure_detail": "",
+        "evidence_hash": "cedc6d876de4f78cc4e6d271bba802ccf3e099f0ec8db589f309b0510b2a3697",
+        "gateway_bridge_id": "",
+        "replay_registry_seq": 0,
+        "consumer_id": ""
+      },
+      {
+        "trace_id": "dae58945-2cac-4ca8-816d-852af97e6170",
+        "replay_id": "4acd2761-ef85-440b-bca8-f81cf1d4cec9",
+        "solver_id": "SOLVER_0",
+        "problem_type": "MILP",
+        "status": "COMPLETED",
+        "execution_duration_ms": 250.0,
+        "timestamp": "2026-08-06T08:34:17.398526+00:00",
+        "sequence": 7,
+        "solver_version": "1.0.0",
+        "attachment_mode": "LOCAL",
+        "confidence": 0.0,
+        "failure_code": "",
+        "failure_detail": "",
+        "evidence_hash": "14536d200e938e56017d4c904bf633bc81762026f4a9dcd02daea96066c415ba",
+        "gateway_bridge_id": "",
+        "replay_registry_seq": 0,
+        "consumer_id": ""
+      },
+      {
+        "trace_id": "346fa61b-a61d-47dd-849a-17257ed2796a",
+        "replay_id": "f305babb-d63b-462e-bd95-d1b211cd93dc",
+        "solver_id": "SOLVER_1",
+        "problem_type": "QUBO",
+        "status": "COMPLETED",
+        "execution_duration_ms": 275.0,
+        "timestamp": "2026-08-06T08:34:17.398551+00:00",
+        "sequence": 8,
+        "solver_version": "1.0.0",
+        "attachment_mode": "LOCAL",
+        "confidence": 0.0,
+        "failure_code": "",
+        "failure_detail": "",
+        "evidence_hash": "af4e2267131e49eee0288738a69daf0c4b70973f7ab69af74d4a02b5211668c2",
+        "gateway_bridge_id": "",
+        "replay_registry_seq": 0,
+        "consumer_id": ""
+      },
+      {
+        "trace_id": "c329d08b-8854-4c55-aab6-45c838e9e0b8",
+        "replay_id": "41f06cbf-ff9e-4021-8363-592d56e725fc",
+        "solver_id": "SOLVER_2",
+        "problem_type": "CP",
+        "status": "FAILED",
+        "execution_duration_ms": 300.0,
+        "timestamp": "2026-08-06T08:34:17.398575+00:00",
+        "sequence": 9,
+        "solver_version": "1.0.0",
+        "attachment_mode": "LOCAL",
+        "confidence": 0.0,
+        "failure_code": "",
+        "failure_detail": "",
+        "evidence_hash": "92497e179c6c3adbd9cf34f557b316e6105a79e1c533e1fe3169a151a70cfa08",
+        "gateway_bridge_id": "",
+        "replay_registry_seq": 0,
+        "consumer_id": ""
+      },
+      {
+        "trace_id": "eb305534-640b-4123-9772-a1d16a28fb79",
+        "replay_id": "5d2e8f1e-2246-4e7e-99ad-717b5c9cde24",
+        "solver_id": "SOLVER_0",
+        "problem_type": "MILP",
+        "status": "FAILED",
+        "execution_duration_ms": 325.0,
+        "timestamp": "2026-08-06T08:34:17.398608+00:00",
+        "sequence": 10,
+        "solver_version": "1.0.0",
+        "attachment_mode": "LOCAL",
+        "confidence": 0.0,
+        "failure_code": "",
+        "failure_detail": "",
+        "evidence_hash": "6c03328f47112bfdda66dc662051559064475c7d5b3b4eedeec4d24161151641",
+        "gateway_bridge_id": "",
+        "replay_registry_seq": 0,
+        "consumer_id": ""
+      }
+    ],
+    "chain_valid": true,
+    "chain_length": 10,
+    "replay_chain": [
+      {
+        "trace_id": "d3bb1497-9f2c-4abd-a9d9-7ecde9b5399e",
+        "replay_id": "83e7fdf6-7ac5-4ebf-a7a8-002448e93c4f",
+        "sequence": 1,
+        "participant": "TANTRA-PSR-USF-001",
+        "gateway_bridge_id": ""
+      },
+      {
+        "trace_id": "d06b6a22-11cb-45c0-9298-a9c8fc6385fc",
+        "replay_id": "99adfd09-2708-4d1c-8db5-315b80c93d89",
+        "sequence": 2,
+        "participant": "TANTRA-PSR-USF-001",
+        "gateway_bridge_id": ""
+      },
+      {
+        "trace_id": "053a65dc-14dc-4856-b0e8-ad358907a9c3",
+        "replay_id": "56f4c95b-6540-4ad6-acd1-271a28db2fa9",
+        "sequence": 3,
+        "participant": "TANTRA-PSR-USF-001",
+        "gateway_bridge_id": ""
+      },
+      {
+        "trace_id": "713d5c9d-dd29-4ab8-9f87-9e0dbc906aeb",
+        "replay_id": "a54e05dd-890b-4bd7-90d6-05fe323e05ce",
+        "sequence": 4,
+        "participant": "TANTRA-PSR-USF-001",
+        "gateway_bridge_id": ""
+      },
+      {
+        "trace_id": "c91de642-d4ef-419e-b931-fa31ada082bd",
+        "replay_id": "de98e9e6-567f-4c8f-8678-50f1d7f565af",
+        "sequence": 5,
+        "participant": "TANTRA-PSR-USF-001",
+        "gateway_bridge_id": ""
+      },
+      {
+        "trace_id": "41c87e5d-0218-4b62-b850-d479a3a4ff9e",
+        "replay_id": "6e166d01-4e8a-45df-8ff4-e45a9c744eab",
+        "sequence": 6,
+        "participant": "TANTRA-PSR-USF-001",
+        "gateway_bridge_id": ""
+      },
+      {
+        "trace_id": "dae58945-2cac-4ca8-816d-852af97e6170",
+        "replay_id": "4acd2761-ef85-440b-bca8-f81cf1d4cec9",
+        "sequence": 7,
+        "participant": "TANTRA-PSR-USF-001",
+        "gateway_bridge_id": ""
+      },
+      {
+        "trace_id": "346fa61b-a61d-47dd-849a-17257ed2796a",
+        "replay_id": "f305babb-d63b-462e-bd95-d1b211cd93dc",
+        "sequence": 8,
+        "participant": "TANTRA-PSR-USF-001",
+        "gateway_bridge_id": ""
+      },
+      {
+        "trace_id": "c329d08b-8854-4c55-aab6-45c838e9e0b8",
+        "replay_id": "41f06cbf-ff9e-4021-8363-592d56e725fc",
+        "sequence": 9,
+        "participant": "TANTRA-PSR-USF-001",
+        "gateway_bridge_id": ""
+      },
+      {
+        "trace_id": "eb305534-640b-4123-9772-a1d16a28fb79",
+        "replay_id": "5d2e8f1e-2246-4e7e-99ad-717b5c9cde24",
+        "sequence": 10,
+        "participant": "TANTRA-PSR-USF-001",
+        "gateway_bridge_id": ""
+      }
+    ],
+    "sequences_valid": true,
+    "status": "PASSED"
+  },
+  "gateway_validation": {
+    "results": [
+      {
+        "solver_trace_id": "2da68ca2-c04d-459e-8cb1-6e431372ab0d",
+        "bridge_status": "DEGRADED",
+        "transport_status": "ACK:OK",
+        "gateway_message_id": "569b644f-7042-5f85-b9ac-e006b0d17c4e"
+      },
+      {
+        "solver_trace_id": "02411953-d498-4e67-add2-a8fe345af9aa",
+        "bridge_status": "DEGRADED",
+        "transport_status": "ACK:OK",
+        "gateway_message_id": "16814d50-a59d-5142-a66b-3cd02bab4c4b"
+      },
+      {
+        "solver_trace_id": "303059b4-e4bf-4f69-bbc6-19399a757ac4",
+        "bridge_status": "DEGRADED",
+        "transport_status": "ACK:OK",
+        "gateway_message_id": "374eac27-1517-518e-8d6e-bac07929795a"
+      }
+    ],
+    "gateway_health": {
+      "status": "ok",
+      "receiver_seen_count": 3,
+      "rate_limit_per_minute": 120
+    },
+    "bridge_count": 3,
+    "bridge_log": [
+      {
+        "bridge_id": "92f890fb-7b19-468d-92b7-bb61f8c86496",
+        "solver_trace_id": "2da68ca2-c04d-459e-8cb1-6e431372ab0d",
+        "solver_replay_id": "407a2081-7f80-4942-b80a-3a23014f9aba",
+        "gateway_message_id": "569b644f-7042-5f85-b9ac-e006b0d17c4e",
+        "gateway_transport_status": "ACK:OK",
+        "gateway_translation_status": "OK",
+        "gateway_confidence": 0.95,
+        "bridge_timestamp": "2026-08-06T08:34:17.953795+00:00",
+        "status": "DEGRADED"
+      },
+      {
+        "bridge_id": "803bfbcc-5321-4e7f-bde7-ee989d9196f3",
+        "solver_trace_id": "02411953-d498-4e67-add2-a8fe345af9aa",
+        "solver_replay_id": "e370056c-cfca-49bd-88dc-be2e79b271d0",
+        "gateway_message_id": "16814d50-a59d-5142-a66b-3cd02bab4c4b",
+        "gateway_transport_status": "ACK:OK",
+        "gateway_translation_status": "OK",
+        "gateway_confidence": 0.95,
+        "bridge_timestamp": "2026-08-06T08:34:17.954917+00:00",
+        "status": "DEGRADED"
+      },
+      {
+        "bridge_id": "92ef9a58-b5c2-4b01-9211-80f69d83d4e4",
+        "solver_trace_id": "303059b4-e4bf-4f69-bbc6-19399a757ac4",
+        "solver_replay_id": "e4033119-f24d-4d62-a60c-eaf543de5f26",
+        "gateway_message_id": "374eac27-1517-518e-8d6e-bac07929795a",
+        "gateway_transport_status": "ACK:OK",
+        "gateway_translation_status": "OK",
+        "gateway_confidence": 0.95,
+        "bridge_timestamp": "2026-08-06T08:34:17.956016+00:00",
+        "status": "DEGRADED"
+      }
+    ],
+    "status": "PASSED"
+  },
+  "quantum_validation": {
+    "quantum_available": true,
+    "execution_result": {
+      "status": "INFEASIBLE",
+      "confidence": "UNBOUNDED",
+      "quantum_confidence": 0.874,
+      "solution": {
+        "decoded_result": "CORRUPTED",
+        "quantum_payload": {
+          "decoded_message": "CORRUPTED",
+          "transmission_status": "REJECTED",
+          "encoded_bits": "10",
+          "dominant_bits": "01"
+        },
+        "bitstring": "10"
+      },
+      "replay_metadata": {
+        "backend": "qiskit_aer_simulator",
+        "noise_model": 0.05,
+        "mode": "entangled",
+        "seed": 42,
+        "message_id": "ff521b61-0d9f-589f-9fac-383f676caefc",
+        "trace_reference": "ff521b61-0d9f-589f-9fac-383f676caefc"
+      },
+      "execution_metadata": {
+        "trace_id": "29472df8-7957-46c3-8029-77399e966ca9",
+        "execution_duration_ms": 17,
+        "quantum_runtime_used": true,
+        "runtime_id": "TANTRA-PSR-USF-001",
+        "fabric_version": "1.0.0"
+      }
+    },
+    "solver_metadata": {
+      "solver_id": "QISKIT_QAOA_LIVE_01",
+      "solver_name": "Qiskit QAOA Live Runtime",
+      "solver_type": "QUANTUM",
+      "version": "1.0.0",
+      "supported_problem_types": [
+        "QUBO"
+      ],
+      "supported_constraints": [
+        "QUADRATIC"
+      ],
+      "objective_support": [
+        "QUADRATIC"
+      ],
+      "optimization_direction": [
+        "MINIMIZE"
+      ],
+      "deterministic_capability": false,
+      "replay_capability": true,
+      "explainability_support": false,
+      "execution_requirements": {
+        "hardware": "QPU",
+        "distributed": false
+      },
+      "resource_requirements": {
+        "memory_mb_min": 2048,
+        "cores_min": 2
+      },
+      "estimated_cost": "MEDIUM",
+      "estimated_runtime": "SECONDS",
+      "confidence_model": "PROBABILISTIC",
+      "authority_limits": {
+        "max_variables": 100,
+        "max_constraints": 100
+      },
+      "attachment_mode": "REMOTE",
+      "schema_version": "1.0.0"
+    },
+    "health": "HEALTHY",
+    "status": "PASSED"
+  },
+  "observability_validation": {
+    "health": {
+      "status": "HEALTHY",
+      "runtime_id": "TANTRA-PSR-USF-001",
+      "capability_id": "bhiv.capabilities.solver_fabric",
+      "fabric_version": "1.0.0",
+      "uptime_seconds": 0.000617,
+      "solvers_registered": 3,
+      "executions_total": 5,
+      "failure_rate": 0.2,
+      "avg_execution_time_ms": 160.0
+    },
+    "metrics": {
+      "executions_total": 5,
+      "executions_successful": 4,
+      "executions_failed": 1,
+      "solvers_registered": 3,
+      "total_execution_time_ms": 800.0,
+      "total_selection_time_ms": 0.0,
+      "startup_timestamp": "2026-08-06T08:34:17.975986+00:00",
+      "last_execution_timestamp": "2026-08-06T08:34:17.976402+00:00",
+      "consumer_invocations": 3,
+      "replay_submissions": 0,
+      "evidence_records": 5,
+      "avg_execution_time_ms": 160.0,
+      "failure_rate": 0.2,
+      "uptime_seconds": 0.000647
+    },
+    "proof": {
+      "proof_id": "358272b4-e332-4250-9ec9-bcd8bed4d19f",
+      "generated_at": "2026-08-06T08:34:17.976642+00:00",
+      "runtime_id": "TANTRA-PSR-USF-001",
+      "capability_id": "bhiv.capabilities.solver_fabric",
+      "fabric_version": "1.0.0",
+      "health": {
+        "status": "HEALTHY",
+        "runtime_id": "TANTRA-PSR-USF-001",
+        "capability_id": "bhiv.capabilities.solver_fabric",
+        "fabric_version": "1.0.0",
+        "uptime_seconds": 0.000662,
+        "solvers_registered": 3,
+        "executions_total": 5,
+        "failure_rate": 0.2,
+        "avg_execution_time_ms": 160.0
+      },
+      "metrics": {
+        "executions_total": 5,
+        "executions_successful": 4,
+        "executions_failed": 1,
+        "solvers_registered": 3,
+        "total_execution_time_ms": 800.0,
+        "total_selection_time_ms": 0.0,
+        "startup_timestamp": "2026-08-06T08:34:17.975986+00:00",
+        "last_execution_timestamp": "2026-08-06T08:34:17.976402+00:00",
+        "consumer_invocations": 3,
+        "replay_submissions": 0,
+        "evidence_records": 5,
+        "avg_execution_time_ms": 160.0,
+        "failure_rate": 0.2,
+        "uptime_seconds": 0.000675
+      },
+      "execution_traces": [
+        {
+          "trace_id": "b4d94d72-c248-4ee3-bede-0502d9f0d6d6",
+          "replay_id": "50bde430-ff51-4779-b3fa-e65201f98a4b",
+          "solver_id": "SOLVER_0",
+          "problem_type": "MILP",
+          "status": "COMPLETED",
+          "execution_duration_ms": 100.0,
+          "timestamp": "2026-08-06T08:34:17.976020+00:00",
+          "sequence": 1,
+          "solver_version": "",
+          "attachment_mode": "LOCAL",
+          "confidence": 0.0,
+          "failure_code": "",
+          "failure_detail": "",
+          "evidence_hash": "45e50b142b15fdebd110245bec8ec0848055888e9695d85a4cedcb6af03bb49d",
+          "gateway_bridge_id": "",
+          "replay_registry_seq": 0,
+          "consumer_id": ""
+        },
+        {
+          "trace_id": "e4f53168-0a99-4a1f-810a-beec539c3690",
+          "replay_id": "0199f886-cdd0-4c5d-ab8f-78535fa2156a",
+          "solver_id": "SOLVER_1",
+          "problem_type": "MILP",
+          "status": "COMPLETED",
+          "execution_duration_ms": 130.0,
+          "timestamp": "2026-08-06T08:34:17.976083+00:00",
+          "sequence": 2,
+          "solver_version": "",
+          "attachment_mode": "LOCAL",
+          "confidence": 0.0,
+          "failure_code": "",
+          "failure_detail": "",
+          "evidence_hash": "0d79788ef4d9b7409932559fff21284854cd78c5f299cda75b7ee141aa302103",
+          "gateway_bridge_id": "",
+          "replay_registry_seq": 0,
+          "consumer_id": ""
+        },
+        {
+          "trace_id": "c843e357-16c0-41ca-baf7-f10ef0991cb7",
+          "replay_id": "68dae8ce-5a56-4b6b-9932-2378e1e94840",
+          "solver_id": "SOLVER_0",
+          "problem_type": "MILP",
+          "status": "COMPLETED",
+          "execution_duration_ms": 160.0,
+          "timestamp": "2026-08-06T08:34:17.976292+00:00",
+          "sequence": 3,
+          "solver_version": "",
+          "attachment_mode": "LOCAL",
+          "confidence": 0.0,
+          "failure_code": "",
+          "failure_detail": "",
+          "evidence_hash": "4a8656b1ad045b7eb0aa8ec5d58316cf296c42e90523d28fb3f105663a84d40e",
+          "gateway_bridge_id": "",
+          "replay_registry_seq": 0,
+          "consumer_id": ""
+        },
+        {
+          "trace_id": "15bfd89a-4c70-439e-b125-9aabae5aa557",
+          "replay_id": "81ff48fa-87d1-41e8-a05b-ae7bb51e4c31",
+          "solver_id": "SOLVER_1",
+          "problem_type": "MILP",
+          "status": "COMPLETED",
+          "execution_duration_ms": 190.0,
+          "timestamp": "2026-08-06T08:34:17.976357+00:00",
+          "sequence": 4,
+          "solver_version": "",
+          "attachment_mode": "LOCAL",
+          "confidence": 0.0,
+          "failure_code": "",
+          "failure_detail": "",
+          "evidence_hash": "d65e7ab4debbaee1f714befce9baa44f677c5790dc897b6ffff7a65a0dd93ece",
+          "gateway_bridge_id": "",
+          "replay_registry_seq": 0,
+          "consumer_id": ""
+        },
+        {
+          "trace_id": "a34c17a5-1a33-4733-af06-eb0797cea397",
+          "replay_id": "f62bb5d8-0b79-4c46-9ab0-f1d62ca15ded",
+          "solver_id": "SOLVER_0",
+          "problem_type": "MILP",
+          "status": "FAILED",
+          "execution_duration_ms": 220.0,
+          "timestamp": "2026-08-06T08:34:17.976402+00:00",
+          "sequence": 5,
+          "solver_version": "",
+          "attachment_mode": "LOCAL",
+          "confidence": 0.0,
+          "failure_code": "",
+          "failure_detail": "",
+          "evidence_hash": "af7d00883a05646051bebcd531865065cf1c485f1e7b2dac4a8d5e3e0705ea6f",
+          "gateway_bridge_id": "",
+          "replay_registry_seq": 0,
+          "consumer_id": ""
+        }
+      ],
+      "consumer_invocations": [
+        {
+          "invocation_id": "b283ce2a-f6f3-47ec-878d-2e0e6e02ffa5",
+          "consumer_id": "consumer-0",
+          "operation": "execute_optimization",
+          "timestamp": "2026-08-06T08:34:17.976480+00:00",
+          "request_hash": "30a3ade6db5bf79b11d048f339de56538c9a4e0304fc33d69e8e6c27be026ccb",
+          "response_status": "COMPLETED",
+          "duration_ms": 150.0,
+          "trace_id": ""
+        },
+        {
+          "invocation_id": "833bdaef-075b-42ff-87fe-a4c65e7e9ce9",
+          "consumer_id": "consumer-1",
+          "operation": "execute_optimization",
+          "timestamp": "2026-08-06T08:34:17.976515+00:00",
+          "request_hash": "deb1f170f415d80206f058cfbac4e59fb4f68f56fc7d4e48329a661566d1ef4c",
+          "response_status": "COMPLETED",
+          "duration_ms": 150.0,
+          "trace_id": ""
+        },
+        {
+          "invocation_id": "31f3354b-a792-43c2-8f44-e39d9ac30311",
+          "consumer_id": "consumer-2",
+          "operation": "execute_optimization",
+          "timestamp": "2026-08-06T08:34:17.976536+00:00",
+          "request_hash": "750176f8e12deba35211e955a2231ea98e79daca34cf0099388a660239ad5721",
+          "response_status": "COMPLETED",
+          "duration_ms": 150.0,
+          "trace_id": ""
+        }
+      ],
+      "failure_scenarios": [
+        {
+          "failure_id": "175475c0-ca59-4407-ade1-c6db8afc7cd6",
+          "trace_id": "7bf57b41-009b-4368-98cd-50b90767b15f",
+          "failure_code": "HALT:TIMEOUT",
+          "failure_detail": "Solver exceeded 60s limit",
+          "solver_id": "SLOW_SOLVER",
+          "problem_type": "NLP",
+          "timestamp": "2026-08-06T08:34:17.976556+00:00",
+          "recovery_action": "GRACEFUL_DEGRADATION",
+          "evidence_hash": "43898234a305a383174baa185f8ff427ce31c94ed9c51f7652d7be81b6598bb8"
+        }
+      ],
+      "compatibility_validations": [
+        {
+          "validation_id": "67325d41-cc24-4602-a1db-492a9bb30973",
+          "consumer_version": "1.0.0",
+          "fabric_version": "1.0.0",
+          "result": "COMPATIBLE",
+          "details": "",
+          "timestamp": "2026-08-06T08:34:17.976579+00:00"
+        },
+        {
+          "validation_id": "8bdaf9ba-61ae-47df-a061-69fb4a3a4b65",
+          "consumer_version": "2.0.0",
+          "fabric_version": "1.0.0",
+          "result": "UNSUPPORTED",
+          "details": "",
+          "timestamp": "2026-08-06T08:34:17.976592+00:00"
+        }
+      ],
+      "replay_chain": [
+        {
+          "trace_id": "b4d94d72-c248-4ee3-bede-0502d9f0d6d6",
+          "replay_id": "50bde430-ff51-4779-b3fa-e65201f98a4b",
+          "sequence": 1,
+          "participant": "TANTRA-PSR-USF-001",
+          "gateway_bridge_id": ""
+        },
+        {
+          "trace_id": "e4f53168-0a99-4a1f-810a-beec539c3690",
+          "replay_id": "0199f886-cdd0-4c5d-ab8f-78535fa2156a",
+          "sequence": 2,
+          "participant": "TANTRA-PSR-USF-001",
+          "gateway_bridge_id": ""
+        },
+        {
+          "trace_id": "c843e357-16c0-41ca-baf7-f10ef0991cb7",
+          "replay_id": "68dae8ce-5a56-4b6b-9932-2378e1e94840",
+          "sequence": 3,
+          "participant": "TANTRA-PSR-USF-001",
+          "gateway_bridge_id": ""
+        },
+        {
+          "trace_id": "15bfd89a-4c70-439e-b125-9aabae5aa557",
+          "replay_id": "81ff48fa-87d1-41e8-a05b-ae7bb51e4c31",
+          "sequence": 4,
+          "participant": "TANTRA-PSR-USF-001",
+          "gateway_bridge_id": ""
+        },
+        {
+          "trace_id": "a34c17a5-1a33-4733-af06-eb0797cea397",
+          "replay_id": "f62bb5d8-0b79-4c46-9ab0-f1d62ca15ded",
+          "sequence": 5,
+          "participant": "TANTRA-PSR-USF-001",
+          "gateway_bridge_id": ""
+        }
+      ],
+      "evidence_chain": {
+        "length": 5,
+        "head_hash": "1b7466378a16da8ffecc89a6786acb17ca656572dd5d9ccd9f470a08fbf62a91",
+        "valid": true,
+        "records": [
+          {
+            "trace_id": "b4d94d72-c248-4ee3-bede-0502d9f0d6d6",
+            "replay_id": "50bde430-ff51-4779-b3fa-e65201f98a4b",
+            "status": "COMPLETED",
+            "solver_id": "SOLVER_0",
+            "sequence": 1,
+            "previous_evidence_hash": "87b743b9ee9f17cbc706a992c703eb683ca531afb8769b6d0fece5355c90df11",
+            "evidence_hash": "f7d50d6e0946eeca09610f31d3020529acd652d473aa5ec8578a5f8e2f37a64f"
+          },
+          {
+            "trace_id": "e4f53168-0a99-4a1f-810a-beec539c3690",
+            "replay_id": "0199f886-cdd0-4c5d-ab8f-78535fa2156a",
+            "status": "COMPLETED",
+            "solver_id": "SOLVER_1",
+            "sequence": 2,
+            "previous_evidence_hash": "f7d50d6e0946eeca09610f31d3020529acd652d473aa5ec8578a5f8e2f37a64f",
+            "evidence_hash": "5a15b0baf04b8faf5a6005961ce4d8134ca287b22d9d38d8eca705bd661d2d10"
+          },
+          {
+            "trace_id": "c843e357-16c0-41ca-baf7-f10ef0991cb7",
+            "replay_id": "68dae8ce-5a56-4b6b-9932-2378e1e94840",
+            "status": "COMPLETED",
+            "solver_id": "SOLVER_0",
+            "sequence": 3,
+            "previous_evidence_hash": "5a15b0baf04b8faf5a6005961ce4d8134ca287b22d9d38d8eca705bd661d2d10",
+            "evidence_hash": "7a96bd1cb35b5cab59afb173726097925bb74929b072cefab91ca37620d2c59c"
+          },
+          {
+            "trace_id": "15bfd89a-4c70-439e-b125-9aabae5aa557",
+            "replay_id": "81ff48fa-87d1-41e8-a05b-ae7bb51e4c31",
+            "status": "COMPLETED",
+            "solver_id": "SOLVER_1",
+            "sequence": 4,
+            "previous_evidence_hash": "7a96bd1cb35b5cab59afb173726097925bb74929b072cefab91ca37620d2c59c",
+            "evidence_hash": "6a02ead9b81d8b630a4d2817b9651c547d36507f07e164f3ab826c6c8cd08cc3"
+          },
+          {
+            "trace_id": "a34c17a5-1a33-4733-af06-eb0797cea397",
+            "replay_id": "f62bb5d8-0b79-4c46-9ab0-f1d62ca15ded",
+            "status": "FAILED",
+            "solver_id": "SOLVER_0",
+            "sequence": 5,
+            "previous_evidence_hash": "6a02ead9b81d8b630a4d2817b9651c547d36507f07e164f3ab826c6c8cd08cc3",
+            "evidence_hash": "1b7466378a16da8ffecc89a6786acb17ca656572dd5d9ccd9f470a08fbf62a91"
+          }
+        ]
+      }
+    },
+    "status": "PASSED"
+  },
+  "version_compatibility": {
+    "matrix": [
+      {
+        "requested": "0.8.0",
+        "status": "UNSUPPORTED",
+        "negotiated": "1.0.0"
+      },
+      {
+        "requested": "0.9.0",
+        "status": "UNSUPPORTED",
+        "negotiated": "1.0.0"
+      },
+      {
+        "requested": "1.0.0",
+        "status": "COMPATIBLE",
+        "negotiated": "1.0.0"
+      },
+      {
+        "requested": "1.0.1",
+        "status": "COMPATIBLE",
+        "negotiated": "1.0.0"
+      },
+      {
+        "requested": "1.1.0",
+        "status": "DEPRECATED",
+        "negotiated": "1.0.0"
+      },
+      {
+        "requested": "1.2.0",
+        "status": "DEPRECATED",
+        "negotiated": "1.0.0"
+      },
+      {
+        "requested": "2.0.0",
+        "status": "UNSUPPORTED",
+        "negotiated": "1.0.0"
+      },
+      {
+        "requested": "3.0.0",
+        "status": "UNSUPPORTED",
+        "negotiated": "1.0.0"
+      }
+    ],
+    "supported_versions": [
+      "1.0.0"
+    ],
+    "status": "PASSED"
+  },
+  "api_samples": {
+    "discover_solvers": {
+      "request": {
+        "method": "GET",
+        "url": "/platform/v1/optimization/solver-fabric/capabilities",
+        "params": {
+          "problem_type": "MILP",
+          "deterministic": true
+        }
+      },
+      "response": {
+        "status": 200,
+        "body": {
+          "solvers": [
+            {
+              "solver_id": "ORTOOLS_CP_SAT_01",
+              "solver_name": "Google OR-Tools CP-SAT",
+              "version": "1.0.0",
+              "supported_problem_types": [
+                "MILP",
+                "CP"
+              ],
+              "deterministic_capability": true,
+              "estimated_cost": "LOW"
+            }
+          ]
+        }
+      }
+    },
+    "execute_optimization": {
+      "request": {
+        "method": "POST",
+        "url": "/platform/v1/optimization/solver-fabric/execute",
+        "body": {
+          "problem_schema": {
+            "problem_type": "MILP",
+            "required_constraints": [
+              "LINEAR"
+            ],
+            "require_deterministic": true
+          },
+          "payload": {
+            "variables": [
+              {
+                "name": "x1",
+                "type": "INTEGER",
+                "bounds": [
+                  0,
+                  100
+                ]
+              }
+            ],
+            "constraints": [
+              {
+                "type": "LINEAR",
+                "expression": "x1 <= 50"
+              }
+            ],
+            "objective": {
+              "type": "MINIMIZE",
+              "expression": "x1"
+            }
+          },
+          "execution_constraints": {
+            "max_time_ms": 60000,
+            "max_memory_mb": 4096
+          }
+        }
+      },
+      "response": {
+        "status": 200,
+        "body": {
+          "execution_id": "exec-65d590df",
+          "selected_solver": "ORTOOLS_CP_SAT_01",
+          "status": "Optimal",
+          "solution": {
+            "objective_value": 0.0,
+            "decision_variables": {
+              "x1": 0
+            }
+          },
+          "telemetry": {
+            "execution_time_ms": 150,
+            "peak_memory_mb": 128
+          },
+          "replay_metadata": {
+            "deterministic_seed": 42,
+            "fabric_version": "1.0.0",
+            "solver_version": "1.0.0"
+          },
+          "confidence_score": 0.99
+        }
+      }
+    },
+    "health_check": {
+      "request": {
+        "method": "GET",
+        "url": "/platform/v1/optimization/solver-fabric/health"
+      },
+      "response": {
+        "status": 200,
+        "body": {
+          "status": "HEALTHY",
+          "solvers_registered": 3,
+          "uptime_seconds": 3600.0,
+          "fabric_version": "1.0.0"
+        }
+      }
+    }
+  }
+}

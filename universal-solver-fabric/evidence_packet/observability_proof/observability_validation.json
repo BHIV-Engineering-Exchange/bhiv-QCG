@@ -1,0 +1,313 @@
+{
+  "health": {
+    "status": "HEALTHY",
+    "runtime_id": "TANTRA-PSR-USF-001",
+    "capability_id": "bhiv.capabilities.solver_fabric",
+    "fabric_version": "1.0.0",
+    "uptime_seconds": 0.000617,
+    "solvers_registered": 3,
+    "executions_total": 5,
+    "failure_rate": 0.2,
+    "avg_execution_time_ms": 160.0
+  },
+  "metrics": {
+    "executions_total": 5,
+    "executions_successful": 4,
+    "executions_failed": 1,
+    "solvers_registered": 3,
+    "total_execution_time_ms": 800.0,
+    "total_selection_time_ms": 0.0,
+    "startup_timestamp": "2026-08-06T08:34:17.975986+00:00",
+    "last_execution_timestamp": "2026-08-06T08:34:17.976402+00:00",
+    "consumer_invocations": 3,
+    "replay_submissions": 0,
+    "evidence_records": 5,
+    "avg_execution_time_ms": 160.0,
+    "failure_rate": 0.2,
+    "uptime_seconds": 0.000647
+  },
+  "proof": {
+    "proof_id": "358272b4-e332-4250-9ec9-bcd8bed4d19f",
+    "generated_at": "2026-08-06T08:34:17.976642+00:00",
+    "runtime_id": "TANTRA-PSR-USF-001",
+    "capability_id": "bhiv.capabilities.solver_fabric",
+    "fabric_version": "1.0.0",
+    "health": {
+      "status": "HEALTHY",
+      "runtime_id": "TANTRA-PSR-USF-001",
+      "capability_id": "bhiv.capabilities.solver_fabric",
+      "fabric_version": "1.0.0",
+      "uptime_seconds": 0.000662,
+      "solvers_registered": 3,
+      "executions_total": 5,
+      "failure_rate": 0.2,
+      "avg_execution_time_ms": 160.0
+    },
+    "metrics": {
+      "executions_total": 5,
+      "executions_successful": 4,
+      "executions_failed": 1,
+      "solvers_registered": 3,
+      "total_execution_time_ms": 800.0,
+      "total_selection_time_ms": 0.0,
+      "startup_timestamp": "2026-08-06T08:34:17.975986+00:00",
+      "last_execution_timestamp": "2026-08-06T08:34:17.976402+00:00",
+      "consumer_invocations": 3,
+      "replay_submissions": 0,
+      "evidence_records": 5,
+      "avg_execution_time_ms": 160.0,
+      "failure_rate": 0.2,
+      "uptime_seconds": 0.000675
+    },
+    "execution_traces": [
+      {
+        "trace_id": "b4d94d72-c248-4ee3-bede-0502d9f0d6d6",
+        "replay_id": "50bde430-ff51-4779-b3fa-e65201f98a4b",
+        "solver_id": "SOLVER_0",
+        "problem_type": "MILP",
+        "status": "COMPLETED",
+        "execution_duration_ms": 100.0,
+        "timestamp": "2026-08-06T08:34:17.976020+00:00",
+        "sequence": 1,
+        "solver_version": "",
+        "attachment_mode": "LOCAL",
+        "confidence": 0.0,
+        "failure_code": "",
+        "failure_detail": "",
+        "evidence_hash": "45e50b142b15fdebd110245bec8ec0848055888e9695d85a4cedcb6af03bb49d",
+        "gateway_bridge_id": "",
+        "replay_registry_seq": 0,
+        "consumer_id": ""
+      },
+      {
+        "trace_id": "e4f53168-0a99-4a1f-810a-beec539c3690",
+        "replay_id": "0199f886-cdd0-4c5d-ab8f-78535fa2156a",
+        "solver_id": "SOLVER_1",
+        "problem_type": "MILP",
+        "status": "COMPLETED",
+        "execution_duration_ms": 130.0,
+        "timestamp": "2026-08-06T08:34:17.976083+00:00",
+        "sequence": 2,
+        "solver_version": "",
+        "attachment_mode": "LOCAL",
+        "confidence": 0.0,
+        "failure_code": "",
+        "failure_detail": "",
+        "evidence_hash": "0d79788ef4d9b7409932559fff21284854cd78c5f299cda75b7ee141aa302103",
+        "gateway_bridge_id": "",
+        "replay_registry_seq": 0,
+        "consumer_id": ""
+      },
+      {
+        "trace_id": "c843e357-16c0-41ca-baf7-f10ef0991cb7",
+        "replay_id": "68dae8ce-5a56-4b6b-9932-2378e1e94840",
+        "solver_id": "SOLVER_0",
+        "problem_type": "MILP",
+        "status": "COMPLETED",
+        "execution_duration_ms": 160.0,
+        "timestamp": "2026-08-06T08:34:17.976292+00:00",
+        "sequence": 3,
+        "solver_version": "",
+        "attachment_mode": "LOCAL",
+        "confidence": 0.0,
+        "failure_code": "",
+        "failure_detail": "",
+        "evidence_hash": "4a8656b1ad045b7eb0aa8ec5d58316cf296c42e90523d28fb3f105663a84d40e",
+        "gateway_bridge_id": "",
+        "replay_registry_seq": 0,
+        "consumer_id": ""
+      },
+      {
+        "trace_id": "15bfd89a-4c70-439e-b125-9aabae5aa557",
+        "replay_id": "81ff48fa-87d1-41e8-a05b-ae7bb51e4c31",
+        "solver_id": "SOLVER_1",
+        "problem_type": "MILP",
+        "status": "COMPLETED",
+        "execution_duration_ms": 190.0,
+        "timestamp": "2026-08-06T08:34:17.976357+00:00",
+        "sequence": 4,
+        "solver_version": "",
+        "attachment_mode": "LOCAL",
+        "confidence": 0.0,
+        "failure_code": "",
+        "failure_detail": "",
+        "evidence_hash": "d65e7ab4debbaee1f714befce9baa44f677c5790dc897b6ffff7a65a0dd93ece",
+        "gateway_bridge_id": "",
+        "replay_registry_seq": 0,
+        "consumer_id": ""
+      },
+      {
+        "trace_id": "a34c17a5-1a33-4733-af06-eb0797cea397",
+        "replay_id": "f62bb5d8-0b79-4c46-9ab0-f1d62ca15ded",
+        "solver_id": "SOLVER_0",
+        "problem_type": "MILP",
+        "status": "FAILED",
+        "execution_duration_ms": 220.0,
+        "timestamp": "2026-08-06T08:34:17.976402+00:00",
+        "sequence": 5,
+        "solver_version": "",
+        "attachment_mode": "LOCAL",
+        "confidence": 0.0,
+        "failure_code": "",
+        "failure_detail": "",
+        "evidence_hash": "af7d00883a05646051bebcd531865065cf1c485f1e7b2dac4a8d5e3e0705ea6f",
+        "gateway_bridge_id": "",
+        "replay_registry_seq": 0,
+        "consumer_id": ""
+      }
+    ],
+    "consumer_invocations": [
+      {
+        "invocation_id": "b283ce2a-f6f3-47ec-878d-2e0e6e02ffa5",
+        "consumer_id": "consumer-0",
+        "operation": "execute_optimization",
+        "timestamp": "2026-08-06T08:34:17.976480+00:00",
+        "request_hash": "30a3ade6db5bf79b11d048f339de56538c9a4e0304fc33d69e8e6c27be026ccb",
+        "response_status": "COMPLETED",
+        "duration_ms": 150.0,
+        "trace_id": ""
+      },
+      {
+        "invocation_id": "833bdaef-075b-42ff-87fe-a4c65e7e9ce9",
+        "consumer_id": "consumer-1",
+        "operation": "execute_optimization",
+        "timestamp": "2026-08-06T08:34:17.976515+00:00",
+        "request_hash": "deb1f170f415d80206f058cfbac4e59fb4f68f56fc7d4e48329a661566d1ef4c",
+        "response_status": "COMPLETED",
+        "duration_ms": 150.0,
+        "trace_id": ""
+      },
+      {
+        "invocation_id": "31f3354b-a792-43c2-8f44-e39d9ac30311",
+        "consumer_id": "consumer-2",
+        "operation": "execute_optimization",
+        "timestamp": "2026-08-06T08:34:17.976536+00:00",
+        "request_hash": "750176f8e12deba35211e955a2231ea98e79daca34cf0099388a660239ad5721",
+        "response_status": "COMPLETED",
+        "duration_ms": 150.0,
+        "trace_id": ""
+      }
+    ],
+    "failure_scenarios": [
+      {
+        "failure_id": "175475c0-ca59-4407-ade1-c6db8afc7cd6",
+        "trace_id": "7bf57b41-009b-4368-98cd-50b90767b15f",
+        "failure_code": "HALT:TIMEOUT",
+        "failure_detail": "Solver exceeded 60s limit",
+        "solver_id": "SLOW_SOLVER",
+        "problem_type": "NLP",
+        "timestamp": "2026-08-06T08:34:17.976556+00:00",
+        "recovery_action": "GRACEFUL_DEGRADATION",
+        "evidence_hash": "43898234a305a383174baa185f8ff427ce31c94ed9c51f7652d7be81b6598bb8"
+      }
+    ],
+    "compatibility_validations": [
+      {
+        "validation_id": "67325d41-cc24-4602-a1db-492a9bb30973",
+        "consumer_version": "1.0.0",
+        "fabric_version": "1.0.0",
+        "result": "COMPATIBLE",
+        "details": "",
+        "timestamp": "2026-08-06T08:34:17.976579+00:00"
+      },
+      {
+        "validation_id": "8bdaf9ba-61ae-47df-a061-69fb4a3a4b65",
+        "consumer_version": "2.0.0",
+        "fabric_version": "1.0.0",
+        "result": "UNSUPPORTED",
+        "details": "",
+        "timestamp": "2026-08-06T08:34:17.976592+00:00"
+      }
+    ],
+    "replay_chain": [
+      {
+        "trace_id": "b4d94d72-c248-4ee3-bede-0502d9f0d6d6",
+        "replay_id": "50bde430-ff51-4779-b3fa-e65201f98a4b",
+        "sequence": 1,
+        "participant": "TANTRA-PSR-USF-001",
+        "gateway_bridge_id": ""
+      },
+      {
+        "trace_id": "e4f53168-0a99-4a1f-810a-beec539c3690",
+        "replay_id": "0199f886-cdd0-4c5d-ab8f-78535fa2156a",
+        "sequence": 2,
+        "participant": "TANTRA-PSR-USF-001",
+        "gateway_bridge_id": ""
+      },
+      {
+        "trace_id": "c843e357-16c0-41ca-baf7-f10ef0991cb7",
+        "replay_id": "68dae8ce-5a56-4b6b-9932-2378e1e94840",
+        "sequence": 3,
+        "participant": "TANTRA-PSR-USF-001",
+        "gateway_bridge_id": ""
+      },
+      {
+        "trace_id": "15bfd89a-4c70-439e-b125-9aabae5aa557",
+        "replay_id": "81ff48fa-87d1-41e8-a05b-ae7bb51e4c31",
+        "sequence": 4,
+        "participant": "TANTRA-PSR-USF-001",
+        "gateway_bridge_id": ""
+      },
+      {
+        "trace_id": "a34c17a5-1a33-4733-af06-eb0797cea397",
+        "replay_id": "f62bb5d8-0b79-4c46-9ab0-f1d62ca15ded",
+        "sequence": 5,
+        "participant": "TANTRA-PSR-USF-001",
+        "gateway_bridge_id": ""
+      }
+    ],
+    "evidence_chain": {
+      "length": 5,
+      "head_hash": "1b7466378a16da8ffecc89a6786acb17ca656572dd5d9ccd9f470a08fbf62a91",
+      "valid": true,
+      "records": [
+        {
+          "trace_id": "b4d94d72-c248-4ee3-bede-0502d9f0d6d6",
+          "replay_id": "50bde430-ff51-4779-b3fa-e65201f98a4b",
+          "status": "COMPLETED",
+          "solver_id": "SOLVER_0",
+          "sequence": 1,
+          "previous_evidence_hash": "87b743b9ee9f17cbc706a992c703eb683ca531afb8769b6d0fece5355c90df11",
+          "evidence_hash": "f7d50d6e0946eeca09610f31d3020529acd652d473aa5ec8578a5f8e2f37a64f"
+        },
+        {
+          "trace_id": "e4f53168-0a99-4a1f-810a-beec539c3690",
+          "replay_id": "0199f886-cdd0-4c5d-ab8f-78535fa2156a",
+          "status": "COMPLETED",
+          "solver_id": "SOLVER_1",
+          "sequence": 2,
+          "previous_evidence_hash": "f7d50d6e0946eeca09610f31d3020529acd652d473aa5ec8578a5f8e2f37a64f",
+          "evidence_hash": "5a15b0baf04b8faf5a6005961ce4d8134ca287b22d9d38d8eca705bd661d2d10"
+        },
+        {
+          "trace_id": "c843e357-16c0-41ca-baf7-f10ef0991cb7",
+          "replay_id": "68dae8ce-5a56-4b6b-9932-2378e1e94840",
+          "status": "COMPLETED",
+          "solver_id": "SOLVER_0",
+          "sequence": 3,
+          "previous_evidence_hash": "5a15b0baf04b8faf5a6005961ce4d8134ca287b22d9d38d8eca705bd661d2d10",
+          "evidence_hash": "7a96bd1cb35b5cab59afb173726097925bb74929b072cefab91ca37620d2c59c"
+        },
+        {
+          "trace_id": "15bfd89a-4c70-439e-b125-9aabae5aa557",
+          "replay_id": "81ff48fa-87d1-41e8-a05b-ae7bb51e4c31",
+          "status": "COMPLETED",
+          "solver_id": "SOLVER_1",
+          "sequence": 4,
+          "previous_evidence_hash": "7a96bd1cb35b5cab59afb173726097925bb74929b072cefab91ca37620d2c59c",
+          "evidence_hash": "6a02ead9b81d8b630a4d2817b9651c547d36507f07e164f3ab826c6c8cd08cc3"
+        },
+        {
+          "trace_id": "a34c17a5-1a33-4733-af06-eb0797cea397",
+          "replay_id": "f62bb5d8-0b79-4c46-9ab0-f1d62ca15ded",
+          "status": "FAILED",
+          "solver_id": "SOLVER_0",
+          "sequence": 5,
+          "previous_evidence_hash": "6a02ead9b81d8b630a4d2817b9651c547d36507f07e164f3ab826c6c8cd08cc3",
+          "evidence_hash": "1b7466378a16da8ffecc89a6786acb17ca656572dd5d9ccd9f470a08fbf62a91"
+        }
+      ]
+    }
+  },
+  "status": "PASSED"
+}

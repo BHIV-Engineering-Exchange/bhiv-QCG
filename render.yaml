@@ -1,0 +1,10 @@
+services:
+  # Monolithic Deployment: QCG Gateway + USF External Runtime Plugin
+  - type: web
+    name: tantra-platform-monolith
+    env: python
+    buildCommand: "pip install -r requirements.txt"
+    startCommand: "uvicorn render_app:app --host 0.0.0.0 --port $PORT"
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.0

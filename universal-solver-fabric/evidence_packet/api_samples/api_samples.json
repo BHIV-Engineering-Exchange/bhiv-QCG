@@ -1,0 +1,110 @@
+{
+  "discover_solvers": {
+    "request": {
+      "method": "GET",
+      "url": "/platform/v1/optimization/solver-fabric/capabilities",
+      "params": {
+        "problem_type": "MILP",
+        "deterministic": true
+      }
+    },
+    "response": {
+      "status": 200,
+      "body": {
+        "solvers": [
+          {
+            "solver_id": "ORTOOLS_CP_SAT_01",
+            "solver_name": "Google OR-Tools CP-SAT",
+            "version": "1.0.0",
+            "supported_problem_types": [
+              "MILP",
+              "CP"
+            ],
+            "deterministic_capability": true,
+            "estimated_cost": "LOW"
+          }
+        ]
+      }
+    }
+  },
+  "execute_optimization": {
+    "request": {
+      "method": "POST",
+      "url": "/platform/v1/optimization/solver-fabric/execute",
+      "body": {
+        "problem_schema": {
+          "problem_type": "MILP",
+          "required_constraints": [
+            "LINEAR"
+          ],
+          "require_deterministic": true
+        },
+        "payload": {
+          "variables": [
+            {
+              "name": "x1",
+              "type": "INTEGER",
+              "bounds": [
+                0,
+                100
+              ]
+            }
+          ],
+          "constraints": [
+            {
+              "type": "LINEAR",
+              "expression": "x1 <= 50"
+            }
+          ],
+          "objective": {
+            "type": "MINIMIZE",
+            "expression": "x1"
+          }
+        },
+        "execution_constraints": {
+          "max_time_ms": 60000,
+          "max_memory_mb": 4096
+        }
+      }
+    },
+    "response": {
+      "status": 200,
+      "body": {
+        "execution_id": "exec-65d590df",
+        "selected_solver": "ORTOOLS_CP_SAT_01",
+        "status": "Optimal",
+        "solution": {
+          "objective_value": 0.0,
+          "decision_variables": {
+            "x1": 0
+          }
+        },
+        "telemetry": {
+          "execution_time_ms": 150,
+          "peak_memory_mb": 128
+        },
+        "replay_metadata": {
+          "deterministic_seed": 42,
+          "fabric_version": "1.0.0",
+          "solver_version": "1.0.0"
+        },
+        "confidence_score": 0.99
+      }
+    }
+  },
+  "health_check": {
+    "request": {
+      "method": "GET",
+      "url": "/platform/v1/optimization/solver-fabric/health"
+    },
+    "response": {
+      "status": 200,
+      "body": {
+        "status": "HEALTHY",
+        "solvers_registered": 3,
+        "uptime_seconds": 3600.0,
+        "fabric_version": "1.0.0"
+      }
+    }
+  }
+}

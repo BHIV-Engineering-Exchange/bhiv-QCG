@@ -15,9 +15,9 @@ To stand up the complete Live Ecosystem Capability:
    ```bash
    python replay_and_gc_server.py
    ```
-2. **Start the Dhiraj Runtime API:**
+2. **Start the External Runtime API:**
    ```bash
-   python dhiraj_runtime_server.py
+   python external_runtime_server.py
    ```
 3. **Start the main QCG Web Server (Operational Readiness API):**
    ```bash
@@ -63,7 +63,7 @@ Incoming POST /verify
        │ → Invalid → HALT
        ▼
 [5] Runtime Execution (RuntimeCore)
-       │ → Blind deterministic execution via Dhiraj Runtime API
+       │ → Blind deterministic execution via External Runtime API
        │ → LOW_CONFIDENCE → HALT
        ▼
 [6] Consensus Proof (ConsensusEngine)
@@ -141,7 +141,7 @@ Caller receives complete verification proof
       "confidence": 0.99,
       "runtime_hash": "a1b2c3d4e5f6...",
       "execution_timestamp": "1696932000.123",
-      "runtime": "DHIRAJ_RUNTIME_v1"
+      "runtime": "EXTERNAL_RUNTIME_v1"
     },
     "consensus": { "consensus_reached": true, "agreement_percentage": 100.0, "final_hash": "f9e8d7c6b5a4..." }
   },
@@ -158,7 +158,7 @@ Caller receives complete verification proof
 | Duplicate trace_id | `HALTED`, `REPLAY_DUPLICATE` | Replay enforcer rejects (or `replay_and_gc_server.py`) |
 | Stale message (TTL) | `HALTED`, `REPLAY_STALE` | TTL check in CanonicalReplayAuthority |
 | Invalid ECDSA sig | `HALTED`, `INVALID_SIGNATURE`| Trust verification fails |
-| Low confidence (<0.40) | `HALTED`, `HALT:LOW_CONFIDENCE`| RuntimeCore / `dhiraj_runtime_server.py` rejects |
+| Low confidence (<0.40) | `HALTED`, `HALT:LOW_CONFIDENCE`| RuntimeCore / `external_runtime_server.py` rejects |
 | Unauthorized Producer| `HALTED`, `UNAUTHORIZED_PRODUCER` | `replay_and_gc_server.py` rejects |
 | KESHAV unreachable | Pipeline continues, `fallback` | Graceful degradation logged |
 
@@ -170,7 +170,7 @@ Caller receives complete verification proof
 |---------|--------|----------|
 | **KESHAV Identity** | ✅ Validated (Live) | `evidence/keshav_live_integration.json` |
 | **Pritesh Quantum** | ✅ Validated (Local) | `evidence/pritesh_evidence.json` |
-| **Dhiraj Runtime** | ✅ Validated (Local Simulation) | Handled via `dhiraj_runtime_server.py` |
+| **External Runtime** | ✅ Validated (Local Simulation) | Handled via `external_runtime_server.py` |
 | **Raj Governance (GC)** | ✅ Validated (Local Simulation) | Handled via `replay_and_gc_server.py` |
 | Pravah Lineage | ⏳ Unavailable Dependency | `evidence/unavailable_services.json` |
 | InsightFlow Telemetry | ⏳ Unavailable Dependency | `evidence/unavailable_services.json` |
@@ -198,11 +198,11 @@ Evidence is collected in `review_packets/evidence/`:
 
 ### Critical Execution Files
 1. `web_server.py`: Exposes HTTP interfaces for contract verification (`/verify`) and provenance querying (`/evidence/certificate/{execution_id}`).
-2. `integration_harness.py`: The main controller that processes incoming contracts, calls live APIs for Replay/GC, invokes Dhiraj runtime, runs consensus, and records evidence to the Evidence Ledger.
-3. `integration_interfaces.py`: Defines the translation layer from Python objects to standard HTTP requests targeting external (simulated via live endpoints) systems like Dhiraj, GC, and Replay Authority.
+2. `integration_harness.py`: The main controller that processes incoming contracts, calls live APIs for Replay/GC, invokes External runtime, runs consensus, and records evidence to the Evidence Ledger.
+3. `integration_interfaces.py`: Defines the translation layer from Python objects to standard HTTP requests targeting external (simulated via live endpoints) systems like External, GC, and Replay Authority.
 
 ### Files Added
-- `dhiraj_runtime_server.py`: Dedicated live endpoint representing Dhiraj Runtime.
+- `external_runtime_server.py`: Dedicated live endpoint representing External Runtime.
 - `replay_and_gc_server.py`: Dedicated live endpoint representing Replay Auth and GC Governance.
 - `k8s/deployment.yaml`, `k8s/service.yaml`, `k8s/hpa.yaml`: Kubernetes deployment manifests.
 - `load_testing/locustfile.py`: Distributed load testing script for the APIs.
@@ -213,5 +213,5 @@ Evidence is collected in `review_packets/evidence/`:
 
 ## 9. Known Unknowns & Remaining Dependencies
 - Production ECDSA key distribution mechanism (KESHAV sync) is currently simulated using trusted public keys in memory.
-- Dhiraj runtime logic here represents a mock deterministic endpoint. Real logic would need actual physics/computational payloads.
+- External runtime logic here represents a mock deterministic endpoint. Real logic would need actual physics/computational payloads.
 - MDU endpoint push vs pull: We implemented a pull API (`GET /evidence/certificate/{execution_id}`), but MDU may require streaming Kafka push in the future.

@@ -8,12 +8,12 @@
     "documented_at": "2026-07-18T07:39:11.503455+00:00",
     "services": [
       {
-        "service": "Dhiraj Runtime",
+        "service": "External Runtime",
         "role": "Runtime Execution",
         "status": "UNAVAILABLE",
         "reason": "No live API URL provided. Service endpoint not yet deployed or communicated.",
         "evidence": "No URL available for HTTP connection attempt",
-        "required_followup": "Dhiraj to provide live runtime API URL",
+        "required_followup": "External to provide live runtime API URL",
         "qcg_readiness": "Integration harness ready \u2014 ExecutionValidatorInterface implemented and tested locally"
       },
       {

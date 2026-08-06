@@ -16,7 +16,8 @@ cleanup() {
 trap cleanup SIGINT SIGTERM
 
 # Start FastAPI server via Uvicorn
-uvicorn web_server:app --host 0.0.0.0 --port 8080 --workers 2 &
+PORT=${PORT:-8080}
+uvicorn web_server:app --host 0.0.0.0 --port $PORT --workers 2 &
 child=$!
 
 echo "QCG is ready and accepting requests."

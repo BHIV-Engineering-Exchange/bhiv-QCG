@@ -216,7 +216,7 @@ class ExecutionValidatorInterface(StandardizedInterface):
     
     def __init__(self, runtime=None):
         self.runtime = runtime
-        self.dhiraj_endpoint = "http://127.0.0.1:8001/execute"
+        self.external_endpoint = "http://127.0.0.1:8001/execute"
 
     def validate_execution(self, contract: ComputationExecutionContract) -> Dict[str, Any]:
         import requests
@@ -227,7 +227,7 @@ class ExecutionValidatorInterface(StandardizedInterface):
                 "payload": contract.payload,
                 "confidence": contract.confidence
             }
-            resp = requests.post(self.dhiraj_endpoint, json=req_data, timeout=5)
+            resp = requests.post(self.external_endpoint, json=req_data, timeout=5)
             resp.raise_for_status()
             return resp.json()
         except requests.RequestException as e:

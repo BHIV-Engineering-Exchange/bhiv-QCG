@@ -1,12 +1,61 @@
-# TMS: Threat Modeling & Security
+# DEP — Task Management Summary (TMS)
 
-This document outlines the Threat Modeling & Security (TMS) posture for the Universal Solver Fabric.
+## Sprint: Constitutional Runtime Integration
 
-## 1. Isolation & Determinism
-The execution adapter (`execution_adapter.py`) strictly enforces isolation between the fabric and underlying solvers. External solver execution is assumed to be untrusted; therefore, all outputs are normalized before being passed back up to the Platform Service.
+## Completed Tasks
 
-## 2. Replay Integrity
-All execution requests produce deterministic `trace_id` and `replay_id` artifacts. These ensure that runtime evidence cannot be forged and can be deterministically reproduced to prove execution integrity.
+### Phase 1 — Constitutional Runtime Identity
+- [x] Created RUNTIME_IDENTITY_CARD.md with all 21 mandatory fields
+- [x] Established permanent constitutional position
 
-## 3. Capability Spoofing
-The `solver_contract.schema.json` strictly validates solver registrations. Solvers cannot declare capabilities they don't possess (e.g. deterministic execution) without being explicitly filtered or failing post-execution trace validation.
+### Phase 2 — Constitutional Runtime Participant Contract
+- [x] Implemented Authority Matrix
+- [x] Implemented Runtime Contract with lifecycle FSM
+- [x] Implemented API Contract (5 endpoints)
+- [x] Implemented Event Contract (8 event types)
+- [x] Implemented Attachment Contract (LOCAL/REMOTE/HYBRID)
+- [x] Implemented Version Negotiation
+- [x] Implemented Consumer/Producer Compatibility
+- [x] Implemented Failure Behaviour
+- [x] Implemented Replay & Evidence Guarantees
+
+### Phase 3 — Live Runtime Participation
+- [x] Integrated with Communication Gateway (fabric_gateway_bridge.py)
+- [x] Integrated with Quantum Runtime (fabric_quantum_runtime.py)
+- [x] Integrated with Capability Registry (fabric_registry_participant.py)
+- [x] Demonstrated discovery, registration, negotiation, invocation, execution, replay, evidence, observability
+
+### Phase 4 — Registry Participation
+- [x] Capability Registry registration
+- [x] Runtime Registry registration
+- [x] Replay Registry registration
+- [x] Build Registry registration
+- [x] Review Registry registration
+- [x] Deterministic registration and retrieval verified
+
+### Phase 5 — Replay, Evidence & Observability
+- [x] Trace IDs and replay IDs generated
+- [x] Evidence chain (SHA-256 append-only)
+- [x] Capability registration evidence
+- [x] Runtime health metrics
+- [x] Consumer invocation logs
+- [x] Failure scenario evidence
+- [x] Compatibility validation
+- [x] Cross-participant replay chain
+
+### Phase 6 — Testing & Production Readiness
+- [x] 68 integration tests passing
+- [x] 7 original fabric tests passing
+- [x] Production readiness report generated
+- [x] All evidence files generated
+
+### Phase 7 — Documentation & Handover
+- [x] README.md updated
+- [x] ARCHITECTURE.md updated
+- [x] INTEGRATION.md updated
+- [x] REVIEW_INDEX.md updated
+- [x] HANDOVER.md updated
+- [x] CHANGELOG.md updated
+- [x] REVIEW_PACKET.md updated
+- [x] Evidence packet structure created
+- [x] DEP structure updated

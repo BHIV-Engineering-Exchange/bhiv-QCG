@@ -5,7 +5,7 @@ The Quantum Communication Gateway (QCG) is fully operational with live ecosystem
 
 - **Unit and Integration Tests:** 384 tests collected, passing.
 - **Live Federation:** KESHAV integration validated with 5/5 live API tests passing.
-- **Pending Federations:** Dhiraj Runtime, Pritesh Quantum, Raj Governance, Pravah Lineage, InsightFlow — awaiting live URLs (integration code ready).
+- **Pending Federations:** External Runtime, Pritesh Quantum, Raj Governance, Pravah Lineage, InsightFlow — awaiting live URLs (integration code ready).
 - **Deployment Mechanics:** Fully dockerized with K8s deployment manifests.
 - **Reliability:** Byzantine fault tests, crash-recovery tests, and zero replay attacks via `ReplayEnforcer`.
 
@@ -53,7 +53,7 @@ All behavior is toggled via `.env` (refer to `.env.example`).
 
 ## Technical Debt & Known Limitations
 
-- **Other ecosystem services:** Dhiraj Runtime, Raj Governance, Pravah Lineage, InsightFlow are not yet live. Integration code is ready; only URLs are pending.
+- **Other ecosystem services:** External Runtime, Raj Governance, Pravah Lineage, InsightFlow are not yet live. Integration code is ready; only URLs are pending.
 - **Replay Registry storage:** The default JSON file storage is not suitable for multi-node horizontal scaling without shared NFS or Redis.
 - **KESHAV latency:** Live calls to KESHAV add ~250-650ms per request (Render free tier). Consider caching or timeout tuning for production workloads.
 

@@ -3,7 +3,7 @@ e2e_ecosystem_flow.py
 
 Demonstrates the full Ecosystem Integration for Phase 2.
 Flow: Producer -> Replay -> Trust -> Execution -> Consensus -> Telemetry -> Lineage -> Response
-Integrates simulated: Dhiraj Runtime, Pritesh Quantum Engine, BHIV Runtime, InsightFlow, Pravah, KESHAV.
+Integrates simulated: External Runtime, Pritesh Quantum Engine, BHIV Runtime, InsightFlow, Pravah, KESHAV.
 """
 import time
 import json
@@ -61,7 +61,7 @@ def run_flow():
         print("\n--- Pipeline Stages ---")
         print(f"1. REPLAY    : Valid={stages['replay']['is_valid']} (Seq: {stages['replay']['sequence_number']})")
         print(f"2. TRUST     : Passed={stages['trust']['passed']} (Simulated KESHAV sync for {producer_id})")
-        print(f"3. EXECUTION : ACK={stages['execution']['ack']} (Executed via Dhiraj Runtime)")
+        print(f"3. EXECUTION : ACK={stages['execution']['ack']} (Executed via External Runtime)")
         print(f"4. CONSENSUS : Reached={stages['consensus']['consensus_reached']} (Quorum gathered)")
         
         print("\n--- Pravah Lineage Handoff ---")

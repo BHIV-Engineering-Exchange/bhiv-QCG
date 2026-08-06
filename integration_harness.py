@@ -203,7 +203,7 @@ class TANTRAIntegrationHarness:
                 replay_reference=replay_res["sequence_number"],
                 execution_sequence=len(self.ledger._records) + 1,
                 producer_identity=contract.producer_id,
-                runtime_identity="DHIRAJ_RUNTIME_v1",
+                runtime_identity="EXTERNAL_RUNTIME_v1",
                 governance_identity="TANTRA_GOVERNANCE",
                 execution_status=response["flow_status"],
                 runtime_hash=exec_res["runtime_hash"],

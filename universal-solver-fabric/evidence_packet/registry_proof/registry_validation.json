@@ -1,0 +1,87 @@
+{
+  "registrations": {
+    "capability_registry": {
+      "status": "REGISTERED",
+      "id": "bhiv.capabilities.solver_fabric",
+      "via": "local"
+    },
+    "runtime_registry": {
+      "status": "REGISTERED",
+      "id": "TANTRA-PSR-USF-001"
+    },
+    "replay_registry": {
+      "status": "REGISTERED",
+      "id": "USF-REPLAY-REGISTRATION-1.0.0"
+    },
+    "build_registry": {
+      "status": "REGISTERED",
+      "id": "USF-BUILD-1.0.0-4cea400f24809877"
+    },
+    "review_registry": {
+      "status": "REGISTERED",
+      "id": "USF-REVIEW-CONSTITUTIONAL-INTEGRATION"
+    }
+  },
+  "evidence": [
+    {
+      "registry_name": "Capability Registry",
+      "registration_id": "bhiv.capabilities.solver_fabric",
+      "registration_timestamp": "2026-08-06T08:34:17.381288+00:00",
+      "status": "REGISTERED",
+      "evidence_hash": "48e79002accc9975eb857661a1861c8fb06a502c45f9713c3f39f2b992f8d55e",
+      "payload_hash": "0df95cf6235c889ff8089ba4b7aa21ee181ce464129006592616894d82d97d69",
+      "details": {
+        "registered_via": "local"
+      }
+    },
+    {
+      "registry_name": "Runtime Registry",
+      "registration_id": "TANTRA-PSR-USF-001",
+      "registration_timestamp": "2026-08-06T08:34:17.381453+00:00",
+      "status": "REGISTERED",
+      "evidence_hash": "be5ccff03e25c2a4b858c171131fe2390f207891d2185c2648edbdc5d4da625e",
+      "payload_hash": "b662e7ceee3acc17e5c8b13f8f8ddd2d09a1548b7641046f81e443bd66345235",
+      "details": {
+        "service_classification": "PLATFORM_SERVICE"
+      }
+    },
+    {
+      "registry_name": "Replay Registry",
+      "registration_id": "USF-REPLAY-REGISTRATION-1.0.0",
+      "registration_timestamp": "2026-08-06T08:34:17.391569+00:00",
+      "status": "REGISTERED",
+      "evidence_hash": "e513e8f2dc4debda72adb72fe20d070552905cf315bc45cf1365e6cfeef46815",
+      "payload_hash": "af4d94ab2d1b4a8a6c459214cad753c85af8b4192bc080a5306b5efb1aaaf4a9",
+      "details": {}
+    },
+    {
+      "registry_name": "Build Registry",
+      "registration_id": "USF-BUILD-1.0.0-4cea400f24809877",
+      "registration_timestamp": "2026-08-06T08:34:17.391645+00:00",
+      "status": "REGISTERED",
+      "evidence_hash": "ffa3798471aa0068b31b7d779a49c14c1f7e9321a9bc180555cbae2adc73feaf",
+      "payload_hash": "59b6a16d44f7122f22a1d1dc328f179006e889aceaf710163bfc04bd1ded898c",
+      "details": {}
+    },
+    {
+      "registry_name": "Review Registry",
+      "registration_id": "USF-REVIEW-CONSTITUTIONAL-INTEGRATION",
+      "registration_timestamp": "2026-08-06T08:34:17.391679+00:00",
+      "status": "REGISTERED",
+      "evidence_hash": "23fbbb1f0f5547a045ccb09ae64c6622cc2675b4fffd0494b48baf799741d2ef",
+      "payload_hash": "39dfeb38f24d2563c94cf964d004757d2b6deb08cc918b45a9d33e054e99020f",
+      "details": {}
+    }
+  ],
+  "retrievals": {
+    "capability": true,
+    "runtime": true,
+    "replay": true,
+    "build": true,
+    "review": true
+  },
+  "all_registered": true,
+  "all_retrievable": true,
+  "evidence_chain_valid": true,
+  "status": "PASSED"
+}

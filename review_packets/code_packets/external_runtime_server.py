@@ -4,7 +4,7 @@ from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 import time
 
-app = FastAPI(title="Dhiraj Runtime API")
+app = FastAPI(title="External Runtime API")
 
 class ExecutionRequest(BaseModel):
     trace_id: str
@@ -15,7 +15,7 @@ class ExecutionRequest(BaseModel):
 @app.post("/execute")
 async def execute_task(req: ExecutionRequest):
     """
-    Simulates remote execution by the Dhiraj Runtime.
+    Simulates remote execution by the External Runtime.
     Returns deterministic status and an acknowledgment payload.
     """
     if req.confidence < 0.3:
@@ -38,12 +38,12 @@ async def execute_task(req: ExecutionRequest):
         "confidence": req.confidence,
         "runtime_hash": runtime_hash,
         "execution_timestamp": str(time.time()),
-        "runtime": "DHIRAJ_RUNTIME_v1"
+        "runtime": "EXTERNAL_RUNTIME_v1"
     }
 
 @app.get("/health")
 async def health_check():
-    return {"status": "UP", "runtime": "Dhiraj"}
+    return {"status": "UP", "runtime": "External"}
 
 if __name__ == "__main__":
     uvicorn.run(app, host="127.0.0.1", port=8001)

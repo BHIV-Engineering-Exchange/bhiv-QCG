@@ -1,0 +1,64 @@
+{
+  "results": [
+    {
+      "solver_trace_id": "2da68ca2-c04d-459e-8cb1-6e431372ab0d",
+      "bridge_status": "DEGRADED",
+      "transport_status": "ACK:OK",
+      "gateway_message_id": "569b644f-7042-5f85-b9ac-e006b0d17c4e"
+    },
+    {
+      "solver_trace_id": "02411953-d498-4e67-add2-a8fe345af9aa",
+      "bridge_status": "DEGRADED",
+      "transport_status": "ACK:OK",
+      "gateway_message_id": "16814d50-a59d-5142-a66b-3cd02bab4c4b"
+    },
+    {
+      "solver_trace_id": "303059b4-e4bf-4f69-bbc6-19399a757ac4",
+      "bridge_status": "DEGRADED",
+      "transport_status": "ACK:OK",
+      "gateway_message_id": "374eac27-1517-518e-8d6e-bac07929795a"
+    }
+  ],
+  "gateway_health": {
+    "status": "ok",
+    "receiver_seen_count": 3,
+    "rate_limit_per_minute": 120
+  },
+  "bridge_count": 3,
+  "bridge_log": [
+    {
+      "bridge_id": "92f890fb-7b19-468d-92b7-bb61f8c86496",
+      "solver_trace_id": "2da68ca2-c04d-459e-8cb1-6e431372ab0d",
+      "solver_replay_id": "407a2081-7f80-4942-b80a-3a23014f9aba",
+      "gateway_message_id": "569b644f-7042-5f85-b9ac-e006b0d17c4e",
+      "gateway_transport_status": "ACK:OK",
+      "gateway_translation_status": "OK",
+      "gateway_confidence": 0.95,
+      "bridge_timestamp": "2026-08-06T08:34:17.953795+00:00",
+      "status": "DEGRADED"
+    },
+    {
+      "bridge_id": "803bfbcc-5321-4e7f-bde7-ee989d9196f3",
+      "solver_trace_id": "02411953-d498-4e67-add2-a8fe345af9aa",
+      "solver_replay_id": "e370056c-cfca-49bd-88dc-be2e79b271d0",
+      "gateway_message_id": "16814d50-a59d-5142-a66b-3cd02bab4c4b",
+      "gateway_transport_status": "ACK:OK",
+      "gateway_translation_status": "OK",
+      "gateway_confidence": 0.95,
+      "bridge_timestamp": "2026-08-06T08:34:17.954917+00:00",
+      "status": "DEGRADED"
+    },
+    {
+      "bridge_id": "92ef9a58-b5c2-4b01-9211-80f69d83d4e4",
+      "solver_trace_id": "303059b4-e4bf-4f69-bbc6-19399a757ac4",
+      "solver_replay_id": "e4033119-f24d-4d62-a60c-eaf543de5f26",
+      "gateway_message_id": "374eac27-1517-518e-8d6e-bac07929795a",
+      "gateway_transport_status": "ACK:OK",
+      "gateway_translation_status": "OK",
+      "gateway_confidence": 0.95,
+      "bridge_timestamp": "2026-08-06T08:34:17.956016+00:00",
+      "status": "DEGRADED"
+    }
+  ],
+  "status": "PASSED"
+}
