@@ -76,6 +76,11 @@ KESHAV_API_URL: str             = _str("QCG_KESHAV_API_URL", "https://keshav-cia
 KESHAV_TIMEOUT_SECONDS: int     = _int("QCG_KESHAV_TIMEOUT_SECONDS", 15)
 KESHAV_ENABLED: bool            = _str("QCG_KESHAV_ENABLED", "true").lower() == "true"
 
+<<<<<<< HEAD
+BUCKET_API_URL: str             = _str("QCG_BUCKET_API_URL", "https://bhiv-bucket-i1l6.onrender.com")
+BUCKET_TIMEOUT_SECONDS: int     = _int("QCG_BUCKET_TIMEOUT_SECONDS", 10)
+BUCKET_ENABLED: bool            = _str("QCG_BUCKET_ENABLED", "true").lower() == "true"
+=======
 # -- Federated Discovery Platform -------------------------------------------
 FEDERATION_NODE_COUNT: int          = _int("QCG_FEDERATION_NODE_COUNT", 3)
 FEDERATION_SYNC_INTERVAL_SECONDS: int = _int("QCG_FEDERATION_SYNC_INTERVAL", 10)
@@ -98,6 +103,7 @@ SDK_REQUEST_TIMEOUT: int            = _int("QCG_SDK_REQUEST_TIMEOUT", 10)
 
 # -- Quantum Trust ------------------------------------------------------------
 QUANTUM_TRUST_LEVEL: str            = _str("QCG_QUANTUM_TRUST_LEVEL", "CLASSICAL")  # CLASSICAL | POST_QUANTUM | HYBRID
+>>>>>>> 0ac128b3848232197b90d3396f05e570a3fc8323
 
 
 def validate():

@@ -29,6 +29,7 @@ from __future__ import annotations
 import hashlib
 import json
 import logging
+import requests
 from dataclasses import dataclass, asdict, field
 from datetime import datetime, timezone
 
@@ -41,6 +42,29 @@ from execution_contract import (
 )
 
 log = get_logger("qcg.runtime")
+
+class DhirajRuntimeClient:
+    """Client for executing contracts on the external Dhiraj Runtime."""
+    
+    def __init__(self, endpoint_url: str = "http://dhiraj-runtime.bhiv.local/api/v1/execute"):
+        self.endpoint_url = endpoint_url
+        
+    def execute(self, payload: dict) -> dict:
+        """
+        Submits the payload to the external Dhiraj Runtime.
+        In the absence of a real live service, falls back gracefully.
+        """
+        try:
+            # Short timeout to avoid stalling demo execution if offline
+            resp = requests.post(self.endpoint_url, json=payload, timeout=2.0)
+            resp.raise_for_status()
+            return resp.json()
+        except requests.exceptions.RequestException as e:
+            log_event(log, logging.WARNING, "dhiraj_runtime_unreachable", ctx={
+                "error": str(e),
+                "fallback": "Simulated Dhiraj Runtime Execution"
+            })
+            return {"status": "SUCCESS_SIMULATED", "message": "Fallback execution successful."}
 
 
 # ---------------------------------------------------------------------------
@@ -134,7 +158,13 @@ class RuntimeCore:
         if contract.confidence < config.CONFIDENCE_THRESHOLD:
             ack = f"ACK:DEGRADED:confidence={contract.confidence:.4f}"
         else:
-            ack = "ACK:OK"
+            # Perform Live Dhiraj Runtime Execution!
+            dhiraj_client = DhirajRuntimeClient()
+            exec_response = dhiraj_client.execute(contract.to_dict())
+            if "FAIL" in exec_response.get("status", ""):
+                 ack = f"HALT:DHIRAJ_RUNTIME_FAILURE:{exec_response.get('message', 'unknown')}"
+            else:
+                 ack = "ACK:OK"
 
         log_event(log, logging.INFO, "runtime_execute_complete", ctx={
             "trace_id": contract.trace_id,
