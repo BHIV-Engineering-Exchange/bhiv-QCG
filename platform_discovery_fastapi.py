@@ -143,14 +143,29 @@ async def register(request: Request):
     if not service_id:
         raise HTTPException(status_code=400, detail="Missing service_id")
 
-    # Simple dict-to-record conversion matching registry logic
-    record = data  # In a real system, you'd parse to PlatformServiceRecord
+    # Convert incoming data to a PlatformServiceRecord
+    try:
+        # Filter out fields that are not part of the dataclass to avoid TypeError
+        import inspect
+        from platform_service_registry import PlatformServiceRecord
+        
+        valid_fields = set(inspect.signature(PlatformServiceRecord).parameters.keys())
+        filtered_data = {k: v for k, v in data.items() if k in valid_fields}
+        
+        record = PlatformServiceRecord(**filtered_data)
+    except Exception as e:
+        raise HTTPException(status_code=400, detail=f"Invalid PlatformServiceRecord: {e}")
 
-    success, msg = registry.register_service(record, signature=data.get("signature"))
-    if success:
-        return {"status": "REGISTERED", "service_id": service_id, "message": msg}
-    else:
-        raise HTTPException(status_code=400, detail=msg)
+    try:
+        # Call register_service which returns a dictionary, not a tuple
+        result = registry.register_service(record)
+        
+        if result.get("status") == "REGISTERED" or result.get("status") == "ALREADY_REGISTERED":
+            return result
+        else:
+            raise HTTPException(status_code=400, detail=result)
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Registration failed: {e}")
 
 @app.post("/v1/heartbeat")
 async def heartbeat(request: Request):
