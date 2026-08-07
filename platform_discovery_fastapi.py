@@ -139,33 +139,44 @@ async def register(request: Request):
     except Exception:
         raise HTTPException(status_code=400, detail="Invalid JSON")
     
-    service_id = data.get("service_id")
+    record_data = data.get("record", data)
+    service_id = record_data.get("platform_service_id") or record_data.get("service_id") or data.get("service_id")
     if not service_id:
-        raise HTTPException(status_code=400, detail="Missing service_id")
+        raise HTTPException(status_code=400, detail="Missing service_id or platform_service_id")
 
-    # Convert incoming data to a PlatformServiceRecord
     try:
-        # Filter out fields that are not part of the dataclass to avoid TypeError
-        import inspect
         from platform_service_registry import PlatformServiceRecord
-        
-        valid_fields = set(inspect.signature(PlatformServiceRecord).parameters.keys())
-        filtered_data = {k: v for k, v in data.items() if k in valid_fields}
-        
-        record = PlatformServiceRecord(**filtered_data)
+        record = PlatformServiceRecord(
+            platform_service_id=service_id,
+            capability_id=record_data.get("capability_id", service_id),
+            service_name=record_data.get("service_name", service_id),
+            version=record_data.get("version", "1.0.0"),
+            provider=record_data.get("provider", "Generic Provider"),
+            owner=record_data.get("owner", {}),
+            runtime_type=record_data.get("runtime_type", "PROCESS"),
+            service_classification=record_data.get("service_classification", "DOMAIN_SERVICE"),
+            capability_category=record_data.get("capability_category", "EXECUTION"),
+            status=record_data.get("status", "ACTIVE"),
+            description=record_data.get("description", ""),
+            tags=record_data.get("tags", []),
+            endpoints=record_data.get("endpoints", {}),
+            dependencies=record_data.get("dependencies", []),
+        )
     except Exception as e:
-        raise HTTPException(status_code=400, detail=f"Invalid PlatformServiceRecord: {e}")
+        raise HTTPException(status_code=400, detail=f"Invalid PlatformServiceRecord: {str(e)}")
 
     try:
-        # Call register_service which returns a dictionary, not a tuple
         result = registry.register_service(record)
-        
-        if result.get("status") == "REGISTERED" or result.get("status") == "ALREADY_REGISTERED":
-            return result
-        else:
-            raise HTTPException(status_code=400, detail=result)
+        if isinstance(result, dict) and "status" in result:
+            if result.get("status") in ["REGISTERED", "ALREADY_REGISTERED"]:
+                return result
+            else:
+                raise HTTPException(status_code=400, detail=result)
+        return {"status": "REGISTERED", "service_id": service_id, "details": result}
+    except HTTPException:
+        raise
     except Exception as e:
-        raise HTTPException(status_code=500, detail=f"Registration failed: {e}")
+        raise HTTPException(status_code=500, detail=f"Registration failed: {str(e)}")
 
 @app.post("/v1/heartbeat")
 async def heartbeat(request: Request):
