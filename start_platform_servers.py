@@ -11,7 +11,7 @@ import sys
 import os
 import json
 
-from capability_registry import CapabilityRegistryServer, CapabilityRegistryClient
+from capability_registry import CapabilityRegistryClient
 from platform_service_registry import PlatformServiceRegistry, PlatformServiceRecord, CapabilityManifest, RegistrationEvidenceRecorder, OperationContract
 from platform_lifecycle_manager import LifecycleManager
 from platform_service_discovery import PlatformDiscoveryServer
@@ -55,10 +55,7 @@ def main():
     base_port = config.DISCOVERY_PORT_BASE
 
     # --- Legacy Capability Registry ---
-    print("Starting Capability Registry Server (Port 9000)...")
-    cap_server = CapabilityRegistryServer("127.0.0.1", config.REGISTRY_PORT)
-    cap_server.start()
-    time.sleep(0.5)
+    print("Legacy Capability Registry (Port 9000) should be started separately via uvicorn.")
 
     # --- Federated Discovery Nodes ---
     print(f"\nStarting {num_nodes} Federated Discovery Nodes...")
