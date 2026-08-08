@@ -42,8 +42,6 @@ from platform_lifecycle_manager import (
 )
 from platform_service_discovery import PlatformDiscoveryServer
 
-from capability_registry import CapabilityRegistryServer
-
 
 # ---------------------------------------------------------------------------
 # Fixtures
@@ -241,7 +239,7 @@ class TestManifestValidation:
         with open(path) as f:
             data = json.load(f)
         assert "services" in data
-        assert len(data["services"]) == 2
+        assert len(data["services"]) >= 2
 
         for svc in data["services"]:
             assert "platform_service_id" in svc

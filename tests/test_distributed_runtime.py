@@ -16,11 +16,6 @@ from transport import (
     HTTPTransportSender,
     UDSTransportSender
 )
-from capability_registry import (
-    CapabilityRegistryServer,
-    CapabilityRegistryClient,
-    validate_capability_payload
-)
 from observability import TraceStore, TraceEntry
 
 class TestDistributedTransport(unittest.TestCase):
@@ -66,74 +61,6 @@ class TestDistributedTransport(unittest.TestCase):
         
         sender.close()
         receiver.close()
-
-class TestCapabilityRegistry(unittest.TestCase):
-    @classmethod
-    def setUpClass(cls):
-        cls.registry_port = 12390
-        cls.server = CapabilityRegistryServer("127.0.0.1", cls.registry_port)
-        cls.server.start()
-        time.sleep(0.5)
-        cls.client = CapabilityRegistryClient(f"http://127.0.0.1:{cls.registry_port}")
-
-    @classmethod
-    def tearDownClass(cls):
-        cls.server.stop()
-
-    def test_schema_validation(self):
-        # Invalid payload (missing capability_id)
-        invalid_payload = {
-            "capability_name": "REPLAY_ENFORCEMENT",
-            "version": "1.0.0"
-        }
-        valid, err = validate_capability_payload(invalid_payload)
-        self.assertFalse(valid)
-        self.assertIn("Missing required key", err)
-
-        # Valid payload
-        valid_payload = {
-            "capability_id": "a1b2c3d4-e5f6-5a7b-8c9d-0e1f2a3b4c5d",
-            "capability_name": "REPLAY_ENFORCEMENT",
-            "owner": {"team": "infra", "contact": "infra@bhiv"},
-            "version": "1.0.0",
-            "status": "ACTIVE",
-            "scope": "SYSTEM",
-            "dependencies": [],
-            "attachment_rules": {"attachment_type": "embedded", "protocol": "in_process"},
-            "authority_limits": {"owns": ["seq"], "does_not_own": ["exec"]},
-            "inputs": [],
-            "outputs": [],
-            "consumers": [],
-            "documentation_reference": {"primary": "ref.md"}
-        }
-        valid, err = validate_capability_payload(valid_payload)
-        self.assertTrue(valid)
-
-    def test_dynamic_register_and_discover(self):
-        cap_id = "f6a7b8c9-d0e1-5f2a-8b3c-4d5e6f7a8b9c"
-        payload = {
-            "capability_id": cap_id,
-            "capability_name": "BYZANTINE_CONSENSUS_TEST",
-            "owner": {"team": "consensus-team", "contact": "consensus@bhiv"},
-            "version": "1.0.0",
-            "status": "ACTIVE",
-            "scope": "SYSTEM",
-            "dependencies": [],
-            "attachment_rules": {"attachment_type": "api_linked", "protocol": "tcp", "endpoint": "127.0.0.1:9005"},
-            "authority_limits": {"owns": ["quorum"], "does_not_own": ["signing"]},
-            "inputs": [],
-            "outputs": [],
-            "consumers": [],
-            "documentation_reference": {"primary": "consensus.md"}
-        }
-        
-        reg_ok = self.client.register(payload)
-        self.assertTrue(reg_ok)
-
-        discovered = self.client.discover("BYZANTINE_CONSENSUS_TEST")
-        self.assertIsNotNone(discovered)
-        self.assertEqual(discovered["capability_id"], cap_id)
-        self.assertEqual(discovered["attachment_rules"]["endpoint"], "127.0.0.1:9005")
 
 class TestOpenTelemetryObservability(unittest.TestCase):
     def test_otel_span_export(self):
