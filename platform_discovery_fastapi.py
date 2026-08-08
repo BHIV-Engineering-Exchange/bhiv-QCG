@@ -145,6 +145,7 @@ async def register(request: Request):
         raise HTTPException(status_code=400, detail="Missing service_id or platform_service_id")
 
     try:
+        from platform_service_registry import PlatformServiceRecord
         record = PlatformServiceRecord(
             platform_service_id=service_id,
             capability_id=record_data.get("capability_id", service_id),
@@ -164,10 +165,18 @@ async def register(request: Request):
     except Exception as e:
         raise HTTPException(status_code=400, detail=f"Invalid PlatformServiceRecord: {str(e)}")
 
-    result = registry.register_service(record)
-    if isinstance(result, dict) and "status" in result:
-        return result
-    return {"status": "REGISTERED", "service_id": service_id, "details": result}
+    try:
+        result = registry.register_service(record)
+        if isinstance(result, dict) and "status" in result:
+            if result.get("status") in ["REGISTERED", "ALREADY_REGISTERED"]:
+                return result
+            else:
+                raise HTTPException(status_code=400, detail=result)
+        return {"status": "REGISTERED", "service_id": service_id, "details": result}
+    except HTTPException:
+        raise
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Registration failed: {str(e)}")
 
 @app.post("/v1/heartbeat")
 async def heartbeat(request: Request):
