@@ -1,0 +1,81 @@
+Metadata-Version: 2.4
+Name: tantra-platform-sdk
+Version: 1.0.0
+Summary: Official Platform Capability SDK for the TANTRA Secure Federated Capability Fabric
+Author-email: Kanishk <kanishk@bhiv.dev>
+License: MIT
+Keywords: tantra,platform,sdk,federation,capability
+Requires-Python: >=3.10
+Description-Content-Type: text/markdown
+Requires-Dist: cryptography>=42.0.0
+Provides-Extra: dev
+Requires-Dist: pytest>=7.0; extra == "dev"
+
+# TANTRA Platform Capability SDK
+
+Official SDK for external participants integrating with the TANTRA Secure Federated Capability Fabric.
+
+## Installation
+
+### From GitHub (recommended)
+```bash
+pip install git+https://github.com/PriteshPatra-BHIV/QCG_task1.git#subdirectory=sdk
+```
+
+### Editable / development mode
+```bash
+git clone https://github.com/PriteshPatra-BHIV/QCG_task1.git
+cd QCG_task1/sdk
+pip install -e .
+```
+
+## Quick Start
+
+```python
+from tantra_platform_sdk import PlatformCapabilitySDK
+
+sdk = PlatformCapabilitySDK(
+    discovery_urls=["https://bhiv-qcg.onrender.com"],
+    service_id="MY-SERVICE-001"
+)
+
+# Discover registered services
+services = sdk.discover_services()
+
+# Negotiate version compatibility
+neg = sdk.negotiate_version("TANTRA-PSR-USF-001", "1.0.0")
+print(neg.status)  # COMPATIBLE | DEPRECATED | UNSUPPORTED
+
+# Invoke a capability
+result = sdk.invoke_capability(
+    service_id="TANTRA-PSR-USF-001",
+    operation="discover_solvers",
+    payload={"problem_type": "QUBO"}
+)
+print(result.status)      # SUCCESS
+print(result.evidence)    # hash-chained invocation proof
+```
+
+## What's Included
+
+| Module | Purpose |
+|--------|---------|
+| `tantra_platform_sdk.sdk` | Core `PlatformCapabilitySDK` class |
+| `tantra_platform_sdk.models` | `InvocationResult`, `NegotiationResult`, `InvocationEvidence`, etc. |
+| `tantra_platform_sdk.auth` | `SDKAuthenticator` — request signing & response verification |
+| `tantra_platform_sdk.trust` | `TrustProvider` interface (Classical / PostQuantum / Hybrid) |
+
+## Dependencies
+
+- `cryptography >= 42.0.0`
+- Python >= 3.10 (stdlib only otherwise)
+
+## Environment Variables
+
+| Variable | Default | Purpose |
+|----------|---------|---------|
+| `QCG_MOCK_SDK` | `0` | Set to `1` for offline testing without live endpoints |
+
+## License
+
+MIT

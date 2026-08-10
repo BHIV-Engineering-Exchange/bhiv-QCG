@@ -132,6 +132,36 @@ async def get_evidence():
 
 # -- POST routes --
 
+@app.post("/v1/negotiate")
+async def negotiate_version(request: Request):
+    """Version negotiation endpoint — delegates to registry.negotiate_version()."""
+    try:
+        data = await request.json()
+    except Exception:
+        raise HTTPException(status_code=400, detail="Invalid JSON")
+
+    service_id = data.get("service_id")
+    requested_version = data.get("version") or data.get("requested_version")
+    if not service_id or not requested_version:
+        raise HTTPException(
+            status_code=400,
+            detail="Missing required fields: 'service_id' and 'version' (or 'requested_version')"
+        )
+
+    record = registry.get_service(service_id)
+    if not record:
+        return {
+            "service_id": service_id,
+            "status": "UNKNOWN_SERVICE",
+            "requested_version": requested_version,
+            "negotiated_version": None,
+            "message": f"Service '{service_id}' not found in registry",
+        }
+
+    result = registry.negotiate_version(service_id, requested_version)
+    return result
+
+
 @app.post("/v1/register")
 async def register(request: Request):
     try:
