@@ -446,6 +446,27 @@ class PlatformServiceRegistry:
 
             self._services[sid] = record
 
+            # Auto-populate the version negotiator
+            compatible_versions = [record.version]
+            deprecated_versions = []
+            unsupported_versions = []
+
+            if manifest and hasattr(manifest, "version_compatibility"):
+                vc = manifest.version_compatibility or {}
+                if "compatible" in vc:
+                    compatible_versions = vc["compatible"]
+                if "deprecated" in vc:
+                    deprecated_versions = vc["deprecated"]
+                if "unsupported" in vc:
+                    unsupported_versions = vc["unsupported"]
+
+            self.negotiator.register_compatibility(
+                service_id=sid,
+                compatible=compatible_versions,
+                deprecated=deprecated_versions,
+                unsupported=unsupported_versions,
+            )
+
             if manifest:
                 self._manifests[sid] = manifest
 
