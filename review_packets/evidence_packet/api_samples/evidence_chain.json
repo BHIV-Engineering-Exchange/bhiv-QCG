@@ -1,45 +1,1448 @@
 {
-  "sdk_evidence": [
-    {
-      "invocation_id": "a7b2dfe8-433e-43eb-9044-da445803f9a9",
-      "service_id": "TANTRA-PSR-USF-001",
-      "operation": "discover_services",
-      "request_hash": "0771ebe8f6433f9f6b543ccaeae82b6e127f705e72138824a767acc4626aca01",
-      "response_hash": "6577533cfa6240ddf1c28d7c15935e495c41b1bf1a0d886e73de50d00bda5254",
-      "trust_method": "CLASSICAL",
-      "duration_ms": 5.739688873291016,
-      "status": "SUCCESS",
-      "timestamp": "2026-08-04T07:25:00.661832+00:00",
-      "evidence_hash": "00d770be425bfdba091d96bf5d2e5cab6297623ab8257b023f9cff4c212c2c8c",
-      "previous_evidence_hash": "af05c09e9a7be20a81cd07438950d152676e85344e19430907ef24e9da1bbcb4"
+  "status": "VERIFIED",
+  "sdk_evidence": {
+    "chain_valid": true,
+    "chain_length": 3,
+    "evidence_entries": [
+      {
+        "invocation_id": "5d36a451-8011-4eea-bea5-752e5617c0ef",
+        "service_id": "insightflow.runtime.intelligence.v1",
+        "operation": "execute",
+        "request_hash": "aa99aca31535ee9689b939dc17d4cbad264c3eb07e5111a4bb94a6778e0d0bda",
+        "response_hash": "37a129545e69001ab9eae4288acd4bb94e23d4518f638dfbf6e1eb249cd2ca4c",
+        "trust_method": "CLASSICAL",
+        "duration_ms": 359.59887504577637,
+        "status": "SUCCESS",
+        "timestamp": "2026-08-14T10:26:44.868166+00:00",
+        "evidence_hash": "77611e942dbdd79f0a86ee84ea0de2fb5a17b5e44c73c41a241379f4a520306c",
+        "previous_evidence_hash": "af05c09e9a7be20a81cd07438950d152676e85344e19430907ef24e9da1bbcb4"
+      },
+      {
+        "invocation_id": "1cace1f0-a84b-456b-b442-39ac7ecade5e",
+        "service_id": "keshav.analysis.identity.v1",
+        "operation": "analyze",
+        "request_hash": "e9a504b62ed3878462f83ee5f51e1ca98eb6e2e1e54815cb4e30dcbf9c0a739b",
+        "response_hash": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+        "trust_method": "CLASSICAL",
+        "duration_ms": 7739.117383956909,
+        "status": "FAILED",
+        "timestamp": "2026-08-14T10:26:52.607283+00:00",
+        "evidence_hash": "9be31d8aa14cdde683e1e6936ee431574bdff574d851d84814c3def16e1bc700",
+        "previous_evidence_hash": "77611e942dbdd79f0a86ee84ea0de2fb5a17b5e44c73c41a241379f4a520306c"
+      },
+      {
+        "invocation_id": "07bcf5b7-d300-4a0f-b1ec-71676f828a0d",
+        "service_id": "qcg.verification.quantum.v1",
+        "operation": "verify",
+        "request_hash": "298f2ef2005ce01ddff1a24c05662670f4e8bd9ac14c4504d50ecb71706fcd01",
+        "response_hash": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+        "trust_method": "CLASSICAL",
+        "duration_ms": 20564.186334609985,
+        "status": "FAILED",
+        "timestamp": "2026-08-14T10:27:13.171470+00:00",
+        "evidence_hash": "f929860222f10b4b3f5796f509e9fa93a6775797c89b9253750d5c533915f71a",
+        "previous_evidence_hash": "9be31d8aa14cdde683e1e6936ee431574bdff574d851d84814c3def16e1bc700"
+      }
+    ]
+  },
+  "registry_evidence": {
+    "PROOF-NODE-1": {
+      "chain_valid": true,
+      "chain_length": 12,
+      "head_hash": "c4cb32268e74453582d3fa74b874e2aaf420225ce1374c37d7a204d5839853a0"
     },
-    {
-      "invocation_id": "44836518-32f5-4903-8bf5-48af4c2927bf",
-      "service_id": "TANTRA-PSR-QCG-001",
-      "operation": "discover_services",
-      "request_hash": "ef4f2b49a197c95c88f3222f71fff4f9cd77b6a0349c222e4c24579f17956684",
-      "response_hash": "cec1ead05b0485d1d3f50846bafacb459a6bf14a7960aa03758d0e79008bcada",
-      "trust_method": "CLASSICAL",
-      "duration_ms": 1.9137859344482422,
-      "status": "SUCCESS",
-      "timestamp": "2026-08-04T07:25:00.663817+00:00",
-      "evidence_hash": "fc5a5a572ef69895ea5809e7d8f6488bc1095b014a0439817feef7033a762b7d",
-      "previous_evidence_hash": "00d770be425bfdba091d96bf5d2e5cab6297623ab8257b023f9cff4c212c2c8c"
+    "PROOF-NODE-2": {
+      "chain_valid": true,
+      "chain_length": 12,
+      "head_hash": "2fc35c09b6279077e500a081a64e67a07ead4ee56bdfdd4f73e9bdf745fbbbe6"
     },
-    {
-      "invocation_id": "9dafdab9-99e6-4131-8efb-e7b030376db3",
-      "service_id": "TANTRA-PSR-DISCO-001",
-      "operation": "discover_services",
-      "request_hash": "2ab751b74f5651e414766310cdd741bd71235a1b645db38f51059630a55423c4",
-      "response_hash": "8c81c587087e82df7bf51a6171d9f63847abd4566def4b1c650b355b15350366",
-      "trust_method": "CLASSICAL",
-      "duration_ms": 1.9421577453613281,
-      "status": "SUCCESS",
-      "timestamp": "2026-08-04T07:25:00.665819+00:00",
-      "evidence_hash": "d15316b9e27a259741da6341c2baa87eccba6a1ae014f0a96ce1419296e10ee4",
-      "previous_evidence_hash": "fc5a5a572ef69895ea5809e7d8f6488bc1095b014a0439817feef7033a762b7d"
+    "PROOF-NODE-3": {
+      "chain_valid": true,
+      "chain_length": 20,
+      "head_hash": "07840a1868c2cf0a2dc57b76ddb841c3488c7ddb95334210ddaeea8c6836508e"
     }
-  ],
-  "sdk_chain_valid": true,
-  "head_hash": "d15316b9e27a259741da6341c2baa87eccba6a1ae014f0a96ce1419296e10ee4"
+  },
+  "federation_audit": {
+    "PROOF-NODE-1": {
+      "chain_valid": true,
+      "event_count": 5,
+      "head_hash": "0572364ba41f2a0ce6c7e3ac89c581c5e60ab87ab291f2abbba298059d76f66a",
+      "events": [
+        {
+          "event_id": "65e1a252-ddc2-4c94-8d8b-45643fe428ac",
+          "event_type": "SERVICE_REGISTERED",
+          "source_node_id": "PROOF-NODE-1",
+          "target_node_id": "",
+          "payload": {
+            "record": {
+              "platform_service_id": "insightflow.runtime.intelligence.v1",
+              "capability_id": "insightflow-intelligence-cap",
+              "service_name": "InsightFlow Runtime Intelligence",
+              "version": "1.0.2",
+              "provider": "Insight Stack (Ganesh)",
+              "owner": {
+                "team": "Insight Stack",
+                "contact": "ganesh@bhiv.internal"
+              },
+              "runtime_type": "CONTAINER",
+              "service_classification": "DOMAIN_SERVICE",
+              "capability_category": "EXECUTION",
+              "status": "ACTIVE",
+              "registration_timestamp": "2026-08-14T10:26:44.424911+00:00",
+              "description": "InsightFlow live runtime participant - intelligence execution",
+              "tags": [
+                "insight",
+                "intelligence",
+                "live"
+              ],
+              "endpoints": {
+                "execution": "https://insight-constitutional-runtime.onrender.com/api/v1/execute",
+                "health": "https://insight-constitutional-runtime.onrender.com/api/v1/health/insightflow.runtime.intelligence.v1"
+              },
+              "dependencies": [
+                "PlatformCapabilitySDK",
+                "PlatformDiscovery",
+                "RuntimeCore"
+              ]
+            },
+            "manifest": {
+              "manifest_id": "insightflow-manifest-001",
+              "service_name": "InsightFlow Runtime Intelligence",
+              "version": "1.0.2",
+              "supported_operations": [
+                {
+                  "operation_name": "execute",
+                  "description": "Execute intelligence analysis via InsightFlow",
+                  "input_contract": {
+                    "type": "object",
+                    "required": [
+                      "service_id",
+                      "operation",
+                      "payload"
+                    ],
+                    "properties": {
+                      "service_id": {
+                        "type": "string"
+                      },
+                      "operation": {
+                        "type": "string"
+                      },
+                      "version": {
+                        "type": "string"
+                      },
+                      "invocation_id": {
+                        "type": "string"
+                      },
+                      "payload": {
+                        "type": "object"
+                      }
+                    }
+                  },
+                  "output_contract": {
+                    "type": "object",
+                    "properties": {
+                      "status": {
+                        "type": "string"
+                      },
+                      "response": {
+                        "type": "object"
+                      },
+                      "evidence": {
+                        "type": "object"
+                      }
+                    }
+                  },
+                  "execution_modes": [
+                    "SYNCHRONOUS"
+                  ],
+                  "idempotent": true
+                }
+              ],
+              "execution_modes": [
+                "SYNCHRONOUS"
+              ],
+              "determinism_guarantees": {
+                "deterministic_output": true,
+                "replay_safe": true
+              },
+              "replay_guarantees": {
+                "replay_safe": true,
+                "idempotent": true
+              },
+              "trust_requirements": {
+                "min_trust_level": "CLASSICAL"
+              },
+              "evidence_guarantees": {
+                "hash_chained": true,
+                "tamper_evident": true
+              },
+              "runtime_dependencies": [
+                {
+                  "name": "PlatformSDK",
+                  "version": "1.0.0"
+                }
+              ],
+              "version_compatibility": {
+                "compatible": [
+                  "1.0.2",
+                  "1.0.1"
+                ],
+                "deprecated": [
+                  "1.0.0"
+                ],
+                "unsupported": [
+                  "0.9.0"
+                ]
+              },
+              "security_requirements": {
+                "authentication": "mTLS",
+                "encryption": "TLS_1_3"
+              },
+              "resource_requirements": {
+                "memory_mb": 256,
+                "cpu_cores": 1
+              },
+              "publication_timestamp": "2026-08-14T10:26:44.424911+00:00"
+            }
+          },
+          "vector_clock": {
+            "PROOF-NODE-1": 1,
+            "PROOF-NODE-2": 0,
+            "PROOF-NODE-3": 0
+          },
+          "timestamp": "2026-08-14T10:26:44.425419+00:00",
+          "nonce": "fc92dc791eb4d1becb26fd2c54495e93",
+          "event_hash": "3f427939e242676b48f03ca70de70f82162d0b20612a46198e27db796c076db7",
+          "previous_event_hash": "000a3545d300d9ae3ce855aa1dfb0c47c882f3e438438e76f7c9943f6f71ea40"
+        },
+        {
+          "event_id": "1cbc2c28-d2f3-4b22-b9c5-8e9ae9bb3ba8",
+          "event_type": "SERVICE_REGISTERED",
+          "source_node_id": "PROOF-NODE-1",
+          "target_node_id": "",
+          "payload": {
+            "record": {
+              "platform_service_id": "qcg.verification.quantum.v1",
+              "capability_id": "qcg-quantum-verification-cap",
+              "service_name": "QCG Quantum Verification",
+              "version": "2.0.0",
+              "provider": "QCG Platform (Pritesh/Kanishk)",
+              "owner": {
+                "team": "QCG Platform Engineering",
+                "contact": "kanishk@bhiv.internal"
+              },
+              "runtime_type": "PROCESS",
+              "service_classification": "PLATFORM_SERVICE",
+              "capability_category": "VERIFICATION",
+              "status": "ACTIVE",
+              "registration_timestamp": "2026-08-14T10:26:44.425948+00:00",
+              "description": "QCG quantum/classical contract verification via local runtime",
+              "tags": [
+                "qcg",
+                "quantum",
+                "verification",
+                "live"
+              ],
+              "endpoints": {
+                "execution": "http://localhost:8080/verify",
+                "health": "http://localhost:8080/health"
+              },
+              "dependencies": [
+                "PlatformCapabilitySDK",
+                "PlatformDiscovery"
+              ]
+            },
+            "manifest": {
+              "manifest_id": "qcg-verification-manifest-001",
+              "service_name": "QCG Quantum Verification",
+              "version": "2.0.0",
+              "supported_operations": [
+                {
+                  "operation_name": "verify",
+                  "description": "Verify quantum/classical execution contracts",
+                  "input_contract": {
+                    "type": "object",
+                    "required": [
+                      "contract",
+                      "producer_public_key"
+                    ],
+                    "properties": {
+                      "contract": {
+                        "type": "object"
+                      },
+                      "producer_public_key": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "output_contract": {
+                    "type": "object",
+                    "properties": {
+                      "trace_id": {
+                        "type": "string"
+                      },
+                      "flow_status": {
+                        "type": "string"
+                      },
+                      "stages": {
+                        "type": "object"
+                      }
+                    }
+                  },
+                  "execution_modes": [
+                    "SYNCHRONOUS"
+                  ],
+                  "idempotent": false
+                }
+              ],
+              "execution_modes": [
+                "SYNCHRONOUS"
+              ],
+              "determinism_guarantees": {
+                "deterministic_output": true,
+                "replay_safe": true
+              },
+              "replay_guarantees": {
+                "replay_safe": true,
+                "sequence_tracked": true
+              },
+              "trust_requirements": {
+                "min_trust_level": "CLASSICAL"
+              },
+              "evidence_guarantees": {
+                "hash_chained": true,
+                "merkle_proof": true
+              },
+              "runtime_dependencies": [],
+              "version_compatibility": {
+                "compatible": [
+                  "2.0.0"
+                ],
+                "deprecated": [
+                  "1.0.0"
+                ],
+                "unsupported": [
+                  "0.5.0"
+                ]
+              },
+              "security_requirements": {
+                "authentication": "ECDSA",
+                "encryption": "TLS_1_3"
+              },
+              "resource_requirements": {
+                "memory_mb": 512,
+                "cpu_cores": 2
+              },
+              "publication_timestamp": "2026-08-14T10:26:44.425948+00:00"
+            }
+          },
+          "vector_clock": {
+            "PROOF-NODE-1": 2,
+            "PROOF-NODE-2": 0,
+            "PROOF-NODE-3": 0
+          },
+          "timestamp": "2026-08-14T10:26:44.425948+00:00",
+          "nonce": "25d0476cfbaeaf9a09e94a5591a493ca",
+          "event_hash": "d867f55fbae897e99892081906322ece6b8d13f5d11ec412f3752961c5d5531a",
+          "previous_event_hash": "3f427939e242676b48f03ca70de70f82162d0b20612a46198e27db796c076db7"
+        },
+        {
+          "event_id": "47f456b2-b5ad-4bdd-aa0a-bc6cd433cece",
+          "event_type": "SERVICE_REGISTERED",
+          "source_node_id": "PROOF-NODE-1",
+          "target_node_id": "",
+          "payload": {
+            "record": {
+              "platform_service_id": "keshav.analysis.identity.v1",
+              "capability_id": "keshav-analysis-cap",
+              "service_name": "KESHAV Identity & Analysis",
+              "version": "1.0.0",
+              "provider": "KESHAV Service (Live)",
+              "owner": {
+                "team": "KESHAV Engineering",
+                "contact": "keshav@bhiv.internal"
+              },
+              "runtime_type": "CONTAINER",
+              "service_classification": "DOMAIN_SERVICE",
+              "capability_category": "VERIFICATION",
+              "status": "ACTIVE",
+              "registration_timestamp": "2026-08-14T10:26:44.426591+00:00",
+              "description": "KESHAV live root-cause analysis and severity classification",
+              "tags": [
+                "keshav",
+                "analysis",
+                "identity",
+                "live"
+              ],
+              "endpoints": {
+                "execution": "https://keshav-cia7.onrender.com/analyze",
+                "health": "https://keshav-cia7.onrender.com/health",
+                "metrics": "https://keshav-cia7.onrender.com/metrics/json"
+              },
+              "dependencies": [
+                "PlatformCapabilitySDK"
+              ]
+            },
+            "manifest": {
+              "manifest_id": "keshav-analysis-manifest-001",
+              "service_name": "KESHAV Identity & Analysis",
+              "version": "1.0.0",
+              "supported_operations": [
+                {
+                  "operation_name": "analyze",
+                  "description": "Root-cause analysis and severity classification",
+                  "input_contract": {
+                    "type": "object",
+                    "required": [
+                      "trace_id",
+                      "execution_id",
+                      "tasks"
+                    ],
+                    "properties": {
+                      "trace_id": {
+                        "type": "string"
+                      },
+                      "execution_id": {
+                        "type": "string"
+                      },
+                      "tasks": {
+                        "type": "array"
+                      },
+                      "constraint_results": {
+                        "type": "array"
+                      },
+                      "propagation_results": {
+                        "type": "array"
+                      }
+                    }
+                  },
+                  "output_contract": {
+                    "type": "object",
+                    "properties": {
+                      "trace_id": {
+                        "type": "string"
+                      },
+                      "root_cause": {},
+                      "severity": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "execution_modes": [
+                    "SYNCHRONOUS"
+                  ],
+                  "idempotent": true
+                }
+              ],
+              "execution_modes": [
+                "SYNCHRONOUS"
+              ],
+              "determinism_guarantees": {
+                "deterministic_output": true
+              },
+              "replay_guarantees": {
+                "replay_safe": true
+              },
+              "trust_requirements": {
+                "min_trust_level": "CLASSICAL"
+              },
+              "evidence_guarantees": {
+                "hash_chained": true
+              },
+              "runtime_dependencies": [],
+              "version_compatibility": {
+                "compatible": [
+                  "1.0.0"
+                ],
+                "deprecated": [],
+                "unsupported": []
+              },
+              "security_requirements": {
+                "authentication": "API_KEY"
+              },
+              "resource_requirements": {
+                "memory_mb": 128,
+                "cpu_cores": 1
+              },
+              "publication_timestamp": "2026-08-14T10:26:44.426591+00:00"
+            }
+          },
+          "vector_clock": {
+            "PROOF-NODE-1": 3,
+            "PROOF-NODE-2": 0,
+            "PROOF-NODE-3": 0
+          },
+          "timestamp": "2026-08-14T10:26:44.426591+00:00",
+          "nonce": "830b3041b3e2e77acbc01237c53822b0",
+          "event_hash": "0b47998c488ad6d8d23a4120666cdbea95fa45e6fd46373daf4681799faf4981",
+          "previous_event_hash": "d867f55fbae897e99892081906322ece6b8d13f5d11ec412f3752961c5d5531a"
+        },
+        {
+          "event_id": "0a5bea63-c03e-4595-9e0c-9f5421337678",
+          "event_type": "SYNC_COMPLETED",
+          "source_node_id": "PROOF-NODE-1",
+          "target_node_id": "PROOF-NODE-2",
+          "payload": {
+            "merged": 0,
+            "conflicts_resolved": 3,
+            "skipped": 0,
+            "peer_service_count": 3,
+            "local_service_count": 3
+          },
+          "vector_clock": {
+            "PROOF-NODE-1": 4,
+            "PROOF-NODE-2": 0,
+            "PROOF-NODE-3": 0
+          },
+          "timestamp": "2026-08-14T10:26:44.428351+00:00",
+          "nonce": "a1d075390aae7012802203e90ab5df5c",
+          "event_hash": "7898e8707183f32f447090cdce96ee0e8fcaf99f94369d91dcffb16bc511d6bc",
+          "previous_event_hash": "0b47998c488ad6d8d23a4120666cdbea95fa45e6fd46373daf4681799faf4981"
+        },
+        {
+          "event_id": "13b0d13f-7de6-4ded-b03e-4e0453803b37",
+          "event_type": "SYNC_COMPLETED",
+          "source_node_id": "PROOF-NODE-1",
+          "target_node_id": "PROOF-NODE-3",
+          "payload": {
+            "merged": 0,
+            "conflicts_resolved": 3,
+            "skipped": 0,
+            "peer_service_count": 3,
+            "local_service_count": 3
+          },
+          "vector_clock": {
+            "PROOF-NODE-1": 5,
+            "PROOF-NODE-2": 0,
+            "PROOF-NODE-3": 0
+          },
+          "timestamp": "2026-08-14T10:26:44.428919+00:00",
+          "nonce": "1068c501033c58c2b9ba766209b48a77",
+          "event_hash": "0572364ba41f2a0ce6c7e3ac89c581c5e60ab87ab291f2abbba298059d76f66a",
+          "previous_event_hash": "7898e8707183f32f447090cdce96ee0e8fcaf99f94369d91dcffb16bc511d6bc"
+        }
+      ]
+    },
+    "PROOF-NODE-2": {
+      "chain_valid": true,
+      "event_count": 5,
+      "head_hash": "79975a150cab5454d2c7be0f94f4ee20cb7ab59d61d7bc2e34b6ef908260b2de",
+      "events": [
+        {
+          "event_id": "65e1a252-ddc2-4c94-8d8b-45643fe428ac",
+          "event_type": "SERVICE_REGISTERED",
+          "source_node_id": "PROOF-NODE-1",
+          "target_node_id": "",
+          "payload": {
+            "record": {
+              "platform_service_id": "insightflow.runtime.intelligence.v1",
+              "capability_id": "insightflow-intelligence-cap",
+              "service_name": "InsightFlow Runtime Intelligence",
+              "version": "1.0.2",
+              "provider": "Insight Stack (Ganesh)",
+              "owner": {
+                "team": "Insight Stack",
+                "contact": "ganesh@bhiv.internal"
+              },
+              "runtime_type": "CONTAINER",
+              "service_classification": "DOMAIN_SERVICE",
+              "capability_category": "EXECUTION",
+              "status": "ACTIVE",
+              "registration_timestamp": "2026-08-14T10:26:44.424911+00:00",
+              "description": "InsightFlow live runtime participant - intelligence execution",
+              "tags": [
+                "insight",
+                "intelligence",
+                "live"
+              ],
+              "endpoints": {
+                "execution": "https://insight-constitutional-runtime.onrender.com/api/v1/execute",
+                "health": "https://insight-constitutional-runtime.onrender.com/api/v1/health/insightflow.runtime.intelligence.v1"
+              },
+              "dependencies": [
+                "PlatformCapabilitySDK",
+                "PlatformDiscovery",
+                "RuntimeCore"
+              ]
+            },
+            "manifest": {
+              "manifest_id": "insightflow-manifest-001",
+              "service_name": "InsightFlow Runtime Intelligence",
+              "version": "1.0.2",
+              "supported_operations": [
+                {
+                  "operation_name": "execute",
+                  "description": "Execute intelligence analysis via InsightFlow",
+                  "input_contract": {
+                    "type": "object",
+                    "required": [
+                      "service_id",
+                      "operation",
+                      "payload"
+                    ],
+                    "properties": {
+                      "service_id": {
+                        "type": "string"
+                      },
+                      "operation": {
+                        "type": "string"
+                      },
+                      "version": {
+                        "type": "string"
+                      },
+                      "invocation_id": {
+                        "type": "string"
+                      },
+                      "payload": {
+                        "type": "object"
+                      }
+                    }
+                  },
+                  "output_contract": {
+                    "type": "object",
+                    "properties": {
+                      "status": {
+                        "type": "string"
+                      },
+                      "response": {
+                        "type": "object"
+                      },
+                      "evidence": {
+                        "type": "object"
+                      }
+                    }
+                  },
+                  "execution_modes": [
+                    "SYNCHRONOUS"
+                  ],
+                  "idempotent": true
+                }
+              ],
+              "execution_modes": [
+                "SYNCHRONOUS"
+              ],
+              "determinism_guarantees": {
+                "deterministic_output": true,
+                "replay_safe": true
+              },
+              "replay_guarantees": {
+                "replay_safe": true,
+                "idempotent": true
+              },
+              "trust_requirements": {
+                "min_trust_level": "CLASSICAL"
+              },
+              "evidence_guarantees": {
+                "hash_chained": true,
+                "tamper_evident": true
+              },
+              "runtime_dependencies": [
+                {
+                  "name": "PlatformSDK",
+                  "version": "1.0.0"
+                }
+              ],
+              "version_compatibility": {
+                "compatible": [
+                  "1.0.2",
+                  "1.0.1"
+                ],
+                "deprecated": [
+                  "1.0.0"
+                ],
+                "unsupported": [
+                  "0.9.0"
+                ]
+              },
+              "security_requirements": {
+                "authentication": "mTLS",
+                "encryption": "TLS_1_3"
+              },
+              "resource_requirements": {
+                "memory_mb": 256,
+                "cpu_cores": 1
+              },
+              "publication_timestamp": "2026-08-14T10:26:44.424911+00:00"
+            }
+          },
+          "vector_clock": {
+            "PROOF-NODE-1": 1,
+            "PROOF-NODE-2": 0,
+            "PROOF-NODE-3": 0
+          },
+          "timestamp": "2026-08-14T10:26:44.425419+00:00",
+          "nonce": "fc92dc791eb4d1becb26fd2c54495e93",
+          "event_hash": "3f427939e242676b48f03ca70de70f82162d0b20612a46198e27db796c076db7",
+          "previous_event_hash": "000a3545d300d9ae3ce855aa1dfb0c47c882f3e438438e76f7c9943f6f71ea40"
+        },
+        {
+          "event_id": "1cbc2c28-d2f3-4b22-b9c5-8e9ae9bb3ba8",
+          "event_type": "SERVICE_REGISTERED",
+          "source_node_id": "PROOF-NODE-1",
+          "target_node_id": "",
+          "payload": {
+            "record": {
+              "platform_service_id": "qcg.verification.quantum.v1",
+              "capability_id": "qcg-quantum-verification-cap",
+              "service_name": "QCG Quantum Verification",
+              "version": "2.0.0",
+              "provider": "QCG Platform (Pritesh/Kanishk)",
+              "owner": {
+                "team": "QCG Platform Engineering",
+                "contact": "kanishk@bhiv.internal"
+              },
+              "runtime_type": "PROCESS",
+              "service_classification": "PLATFORM_SERVICE",
+              "capability_category": "VERIFICATION",
+              "status": "ACTIVE",
+              "registration_timestamp": "2026-08-14T10:26:44.425948+00:00",
+              "description": "QCG quantum/classical contract verification via local runtime",
+              "tags": [
+                "qcg",
+                "quantum",
+                "verification",
+                "live"
+              ],
+              "endpoints": {
+                "execution": "http://localhost:8080/verify",
+                "health": "http://localhost:8080/health"
+              },
+              "dependencies": [
+                "PlatformCapabilitySDK",
+                "PlatformDiscovery"
+              ]
+            },
+            "manifest": {
+              "manifest_id": "qcg-verification-manifest-001",
+              "service_name": "QCG Quantum Verification",
+              "version": "2.0.0",
+              "supported_operations": [
+                {
+                  "operation_name": "verify",
+                  "description": "Verify quantum/classical execution contracts",
+                  "input_contract": {
+                    "type": "object",
+                    "required": [
+                      "contract",
+                      "producer_public_key"
+                    ],
+                    "properties": {
+                      "contract": {
+                        "type": "object"
+                      },
+                      "producer_public_key": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "output_contract": {
+                    "type": "object",
+                    "properties": {
+                      "trace_id": {
+                        "type": "string"
+                      },
+                      "flow_status": {
+                        "type": "string"
+                      },
+                      "stages": {
+                        "type": "object"
+                      }
+                    }
+                  },
+                  "execution_modes": [
+                    "SYNCHRONOUS"
+                  ],
+                  "idempotent": false
+                }
+              ],
+              "execution_modes": [
+                "SYNCHRONOUS"
+              ],
+              "determinism_guarantees": {
+                "deterministic_output": true,
+                "replay_safe": true
+              },
+              "replay_guarantees": {
+                "replay_safe": true,
+                "sequence_tracked": true
+              },
+              "trust_requirements": {
+                "min_trust_level": "CLASSICAL"
+              },
+              "evidence_guarantees": {
+                "hash_chained": true,
+                "merkle_proof": true
+              },
+              "runtime_dependencies": [],
+              "version_compatibility": {
+                "compatible": [
+                  "2.0.0"
+                ],
+                "deprecated": [
+                  "1.0.0"
+                ],
+                "unsupported": [
+                  "0.5.0"
+                ]
+              },
+              "security_requirements": {
+                "authentication": "ECDSA",
+                "encryption": "TLS_1_3"
+              },
+              "resource_requirements": {
+                "memory_mb": 512,
+                "cpu_cores": 2
+              },
+              "publication_timestamp": "2026-08-14T10:26:44.425948+00:00"
+            }
+          },
+          "vector_clock": {
+            "PROOF-NODE-1": 2,
+            "PROOF-NODE-2": 0,
+            "PROOF-NODE-3": 0
+          },
+          "timestamp": "2026-08-14T10:26:44.425948+00:00",
+          "nonce": "25d0476cfbaeaf9a09e94a5591a493ca",
+          "event_hash": "d867f55fbae897e99892081906322ece6b8d13f5d11ec412f3752961c5d5531a",
+          "previous_event_hash": "3f427939e242676b48f03ca70de70f82162d0b20612a46198e27db796c076db7"
+        },
+        {
+          "event_id": "47f456b2-b5ad-4bdd-aa0a-bc6cd433cece",
+          "event_type": "SERVICE_REGISTERED",
+          "source_node_id": "PROOF-NODE-1",
+          "target_node_id": "",
+          "payload": {
+            "record": {
+              "platform_service_id": "keshav.analysis.identity.v1",
+              "capability_id": "keshav-analysis-cap",
+              "service_name": "KESHAV Identity & Analysis",
+              "version": "1.0.0",
+              "provider": "KESHAV Service (Live)",
+              "owner": {
+                "team": "KESHAV Engineering",
+                "contact": "keshav@bhiv.internal"
+              },
+              "runtime_type": "CONTAINER",
+              "service_classification": "DOMAIN_SERVICE",
+              "capability_category": "VERIFICATION",
+              "status": "ACTIVE",
+              "registration_timestamp": "2026-08-14T10:26:44.426591+00:00",
+              "description": "KESHAV live root-cause analysis and severity classification",
+              "tags": [
+                "keshav",
+                "analysis",
+                "identity",
+                "live"
+              ],
+              "endpoints": {
+                "execution": "https://keshav-cia7.onrender.com/analyze",
+                "health": "https://keshav-cia7.onrender.com/health",
+                "metrics": "https://keshav-cia7.onrender.com/metrics/json"
+              },
+              "dependencies": [
+                "PlatformCapabilitySDK"
+              ]
+            },
+            "manifest": {
+              "manifest_id": "keshav-analysis-manifest-001",
+              "service_name": "KESHAV Identity & Analysis",
+              "version": "1.0.0",
+              "supported_operations": [
+                {
+                  "operation_name": "analyze",
+                  "description": "Root-cause analysis and severity classification",
+                  "input_contract": {
+                    "type": "object",
+                    "required": [
+                      "trace_id",
+                      "execution_id",
+                      "tasks"
+                    ],
+                    "properties": {
+                      "trace_id": {
+                        "type": "string"
+                      },
+                      "execution_id": {
+                        "type": "string"
+                      },
+                      "tasks": {
+                        "type": "array"
+                      },
+                      "constraint_results": {
+                        "type": "array"
+                      },
+                      "propagation_results": {
+                        "type": "array"
+                      }
+                    }
+                  },
+                  "output_contract": {
+                    "type": "object",
+                    "properties": {
+                      "trace_id": {
+                        "type": "string"
+                      },
+                      "root_cause": {},
+                      "severity": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "execution_modes": [
+                    "SYNCHRONOUS"
+                  ],
+                  "idempotent": true
+                }
+              ],
+              "execution_modes": [
+                "SYNCHRONOUS"
+              ],
+              "determinism_guarantees": {
+                "deterministic_output": true
+              },
+              "replay_guarantees": {
+                "replay_safe": true
+              },
+              "trust_requirements": {
+                "min_trust_level": "CLASSICAL"
+              },
+              "evidence_guarantees": {
+                "hash_chained": true
+              },
+              "runtime_dependencies": [],
+              "version_compatibility": {
+                "compatible": [
+                  "1.0.0"
+                ],
+                "deprecated": [],
+                "unsupported": []
+              },
+              "security_requirements": {
+                "authentication": "API_KEY"
+              },
+              "resource_requirements": {
+                "memory_mb": 128,
+                "cpu_cores": 1
+              },
+              "publication_timestamp": "2026-08-14T10:26:44.426591+00:00"
+            }
+          },
+          "vector_clock": {
+            "PROOF-NODE-1": 3,
+            "PROOF-NODE-2": 0,
+            "PROOF-NODE-3": 0
+          },
+          "timestamp": "2026-08-14T10:26:44.426591+00:00",
+          "nonce": "830b3041b3e2e77acbc01237c53822b0",
+          "event_hash": "0b47998c488ad6d8d23a4120666cdbea95fa45e6fd46373daf4681799faf4981",
+          "previous_event_hash": "d867f55fbae897e99892081906322ece6b8d13f5d11ec412f3752961c5d5531a"
+        },
+        {
+          "event_id": "a5906ba6-19d8-4cb8-83f2-dccec6e2ccb0",
+          "event_type": "SYNC_COMPLETED",
+          "source_node_id": "PROOF-NODE-2",
+          "target_node_id": "PROOF-NODE-1",
+          "payload": {
+            "merged": 0,
+            "conflicts_resolved": 3,
+            "skipped": 0,
+            "peer_service_count": 3,
+            "local_service_count": 3
+          },
+          "vector_clock": {
+            "PROOF-NODE-2": 1,
+            "PROOF-NODE-1": 3,
+            "PROOF-NODE-3": 0
+          },
+          "timestamp": "2026-08-14T10:26:44.428919+00:00",
+          "nonce": "f5a0a2c981959acb503f393364d4bd79",
+          "event_hash": "6135b5e88d785facfee9f3a4c82d607fb1172b14f8bc274984e2d745a647667c",
+          "previous_event_hash": "0b47998c488ad6d8d23a4120666cdbea95fa45e6fd46373daf4681799faf4981"
+        },
+        {
+          "event_id": "957bb6a8-62ac-45b6-9642-105c9968ca71",
+          "event_type": "SYNC_COMPLETED",
+          "source_node_id": "PROOF-NODE-2",
+          "target_node_id": "PROOF-NODE-3",
+          "payload": {
+            "merged": 0,
+            "conflicts_resolved": 3,
+            "skipped": 0,
+            "peer_service_count": 3,
+            "local_service_count": 3
+          },
+          "vector_clock": {
+            "PROOF-NODE-2": 2,
+            "PROOF-NODE-1": 3,
+            "PROOF-NODE-3": 0
+          },
+          "timestamp": "2026-08-14T10:26:44.429739+00:00",
+          "nonce": "557f8542f64ba60077cc7a177a5b1f14",
+          "event_hash": "79975a150cab5454d2c7be0f94f4ee20cb7ab59d61d7bc2e34b6ef908260b2de",
+          "previous_event_hash": "6135b5e88d785facfee9f3a4c82d607fb1172b14f8bc274984e2d745a647667c"
+        }
+      ]
+    },
+    "PROOF-NODE-3": {
+      "chain_valid": true,
+      "event_count": 5,
+      "head_hash": "87f2fc33fc30bfdaf3190d59e143a7fc82ad4b48225dd26176658151ca4fc092",
+      "events": [
+        {
+          "event_id": "65e1a252-ddc2-4c94-8d8b-45643fe428ac",
+          "event_type": "SERVICE_REGISTERED",
+          "source_node_id": "PROOF-NODE-1",
+          "target_node_id": "",
+          "payload": {
+            "record": {
+              "platform_service_id": "insightflow.runtime.intelligence.v1",
+              "capability_id": "insightflow-intelligence-cap",
+              "service_name": "InsightFlow Runtime Intelligence",
+              "version": "1.0.2",
+              "provider": "Insight Stack (Ganesh)",
+              "owner": {
+                "team": "Insight Stack",
+                "contact": "ganesh@bhiv.internal"
+              },
+              "runtime_type": "CONTAINER",
+              "service_classification": "DOMAIN_SERVICE",
+              "capability_category": "EXECUTION",
+              "status": "ACTIVE",
+              "registration_timestamp": "2026-08-14T10:26:44.424911+00:00",
+              "description": "InsightFlow live runtime participant - intelligence execution",
+              "tags": [
+                "insight",
+                "intelligence",
+                "live"
+              ],
+              "endpoints": {
+                "execution": "https://insight-constitutional-runtime.onrender.com/api/v1/execute",
+                "health": "https://insight-constitutional-runtime.onrender.com/api/v1/health/insightflow.runtime.intelligence.v1"
+              },
+              "dependencies": [
+                "PlatformCapabilitySDK",
+                "PlatformDiscovery",
+                "RuntimeCore"
+              ]
+            },
+            "manifest": {
+              "manifest_id": "insightflow-manifest-001",
+              "service_name": "InsightFlow Runtime Intelligence",
+              "version": "1.0.2",
+              "supported_operations": [
+                {
+                  "operation_name": "execute",
+                  "description": "Execute intelligence analysis via InsightFlow",
+                  "input_contract": {
+                    "type": "object",
+                    "required": [
+                      "service_id",
+                      "operation",
+                      "payload"
+                    ],
+                    "properties": {
+                      "service_id": {
+                        "type": "string"
+                      },
+                      "operation": {
+                        "type": "string"
+                      },
+                      "version": {
+                        "type": "string"
+                      },
+                      "invocation_id": {
+                        "type": "string"
+                      },
+                      "payload": {
+                        "type": "object"
+                      }
+                    }
+                  },
+                  "output_contract": {
+                    "type": "object",
+                    "properties": {
+                      "status": {
+                        "type": "string"
+                      },
+                      "response": {
+                        "type": "object"
+                      },
+                      "evidence": {
+                        "type": "object"
+                      }
+                    }
+                  },
+                  "execution_modes": [
+                    "SYNCHRONOUS"
+                  ],
+                  "idempotent": true
+                }
+              ],
+              "execution_modes": [
+                "SYNCHRONOUS"
+              ],
+              "determinism_guarantees": {
+                "deterministic_output": true,
+                "replay_safe": true
+              },
+              "replay_guarantees": {
+                "replay_safe": true,
+                "idempotent": true
+              },
+              "trust_requirements": {
+                "min_trust_level": "CLASSICAL"
+              },
+              "evidence_guarantees": {
+                "hash_chained": true,
+                "tamper_evident": true
+              },
+              "runtime_dependencies": [
+                {
+                  "name": "PlatformSDK",
+                  "version": "1.0.0"
+                }
+              ],
+              "version_compatibility": {
+                "compatible": [
+                  "1.0.2",
+                  "1.0.1"
+                ],
+                "deprecated": [
+                  "1.0.0"
+                ],
+                "unsupported": [
+                  "0.9.0"
+                ]
+              },
+              "security_requirements": {
+                "authentication": "mTLS",
+                "encryption": "TLS_1_3"
+              },
+              "resource_requirements": {
+                "memory_mb": 256,
+                "cpu_cores": 1
+              },
+              "publication_timestamp": "2026-08-14T10:26:44.424911+00:00"
+            }
+          },
+          "vector_clock": {
+            "PROOF-NODE-1": 1,
+            "PROOF-NODE-2": 0,
+            "PROOF-NODE-3": 0
+          },
+          "timestamp": "2026-08-14T10:26:44.425419+00:00",
+          "nonce": "fc92dc791eb4d1becb26fd2c54495e93",
+          "event_hash": "3f427939e242676b48f03ca70de70f82162d0b20612a46198e27db796c076db7",
+          "previous_event_hash": "000a3545d300d9ae3ce855aa1dfb0c47c882f3e438438e76f7c9943f6f71ea40"
+        },
+        {
+          "event_id": "1cbc2c28-d2f3-4b22-b9c5-8e9ae9bb3ba8",
+          "event_type": "SERVICE_REGISTERED",
+          "source_node_id": "PROOF-NODE-1",
+          "target_node_id": "",
+          "payload": {
+            "record": {
+              "platform_service_id": "qcg.verification.quantum.v1",
+              "capability_id": "qcg-quantum-verification-cap",
+              "service_name": "QCG Quantum Verification",
+              "version": "2.0.0",
+              "provider": "QCG Platform (Pritesh/Kanishk)",
+              "owner": {
+                "team": "QCG Platform Engineering",
+                "contact": "kanishk@bhiv.internal"
+              },
+              "runtime_type": "PROCESS",
+              "service_classification": "PLATFORM_SERVICE",
+              "capability_category": "VERIFICATION",
+              "status": "ACTIVE",
+              "registration_timestamp": "2026-08-14T10:26:44.425948+00:00",
+              "description": "QCG quantum/classical contract verification via local runtime",
+              "tags": [
+                "qcg",
+                "quantum",
+                "verification",
+                "live"
+              ],
+              "endpoints": {
+                "execution": "http://localhost:8080/verify",
+                "health": "http://localhost:8080/health"
+              },
+              "dependencies": [
+                "PlatformCapabilitySDK",
+                "PlatformDiscovery"
+              ]
+            },
+            "manifest": {
+              "manifest_id": "qcg-verification-manifest-001",
+              "service_name": "QCG Quantum Verification",
+              "version": "2.0.0",
+              "supported_operations": [
+                {
+                  "operation_name": "verify",
+                  "description": "Verify quantum/classical execution contracts",
+                  "input_contract": {
+                    "type": "object",
+                    "required": [
+                      "contract",
+                      "producer_public_key"
+                    ],
+                    "properties": {
+                      "contract": {
+                        "type": "object"
+                      },
+                      "producer_public_key": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "output_contract": {
+                    "type": "object",
+                    "properties": {
+                      "trace_id": {
+                        "type": "string"
+                      },
+                      "flow_status": {
+                        "type": "string"
+                      },
+                      "stages": {
+                        "type": "object"
+                      }
+                    }
+                  },
+                  "execution_modes": [
+                    "SYNCHRONOUS"
+                  ],
+                  "idempotent": false
+                }
+              ],
+              "execution_modes": [
+                "SYNCHRONOUS"
+              ],
+              "determinism_guarantees": {
+                "deterministic_output": true,
+                "replay_safe": true
+              },
+              "replay_guarantees": {
+                "replay_safe": true,
+                "sequence_tracked": true
+              },
+              "trust_requirements": {
+                "min_trust_level": "CLASSICAL"
+              },
+              "evidence_guarantees": {
+                "hash_chained": true,
+                "merkle_proof": true
+              },
+              "runtime_dependencies": [],
+              "version_compatibility": {
+                "compatible": [
+                  "2.0.0"
+                ],
+                "deprecated": [
+                  "1.0.0"
+                ],
+                "unsupported": [
+                  "0.5.0"
+                ]
+              },
+              "security_requirements": {
+                "authentication": "ECDSA",
+                "encryption": "TLS_1_3"
+              },
+              "resource_requirements": {
+                "memory_mb": 512,
+                "cpu_cores": 2
+              },
+              "publication_timestamp": "2026-08-14T10:26:44.425948+00:00"
+            }
+          },
+          "vector_clock": {
+            "PROOF-NODE-1": 2,
+            "PROOF-NODE-2": 0,
+            "PROOF-NODE-3": 0
+          },
+          "timestamp": "2026-08-14T10:26:44.425948+00:00",
+          "nonce": "25d0476cfbaeaf9a09e94a5591a493ca",
+          "event_hash": "d867f55fbae897e99892081906322ece6b8d13f5d11ec412f3752961c5d5531a",
+          "previous_event_hash": "3f427939e242676b48f03ca70de70f82162d0b20612a46198e27db796c076db7"
+        },
+        {
+          "event_id": "47f456b2-b5ad-4bdd-aa0a-bc6cd433cece",
+          "event_type": "SERVICE_REGISTERED",
+          "source_node_id": "PROOF-NODE-1",
+          "target_node_id": "",
+          "payload": {
+            "record": {
+              "platform_service_id": "keshav.analysis.identity.v1",
+              "capability_id": "keshav-analysis-cap",
+              "service_name": "KESHAV Identity & Analysis",
+              "version": "1.0.0",
+              "provider": "KESHAV Service (Live)",
+              "owner": {
+                "team": "KESHAV Engineering",
+                "contact": "keshav@bhiv.internal"
+              },
+              "runtime_type": "CONTAINER",
+              "service_classification": "DOMAIN_SERVICE",
+              "capability_category": "VERIFICATION",
+              "status": "ACTIVE",
+              "registration_timestamp": "2026-08-14T10:26:44.426591+00:00",
+              "description": "KESHAV live root-cause analysis and severity classification",
+              "tags": [
+                "keshav",
+                "analysis",
+                "identity",
+                "live"
+              ],
+              "endpoints": {
+                "execution": "https://keshav-cia7.onrender.com/analyze",
+                "health": "https://keshav-cia7.onrender.com/health",
+                "metrics": "https://keshav-cia7.onrender.com/metrics/json"
+              },
+              "dependencies": [
+                "PlatformCapabilitySDK"
+              ]
+            },
+            "manifest": {
+              "manifest_id": "keshav-analysis-manifest-001",
+              "service_name": "KESHAV Identity & Analysis",
+              "version": "1.0.0",
+              "supported_operations": [
+                {
+                  "operation_name": "analyze",
+                  "description": "Root-cause analysis and severity classification",
+                  "input_contract": {
+                    "type": "object",
+                    "required": [
+                      "trace_id",
+                      "execution_id",
+                      "tasks"
+                    ],
+                    "properties": {
+                      "trace_id": {
+                        "type": "string"
+                      },
+                      "execution_id": {
+                        "type": "string"
+                      },
+                      "tasks": {
+                        "type": "array"
+                      },
+                      "constraint_results": {
+                        "type": "array"
+                      },
+                      "propagation_results": {
+                        "type": "array"
+                      }
+                    }
+                  },
+                  "output_contract": {
+                    "type": "object",
+                    "properties": {
+                      "trace_id": {
+                        "type": "string"
+                      },
+                      "root_cause": {},
+                      "severity": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "execution_modes": [
+                    "SYNCHRONOUS"
+                  ],
+                  "idempotent": true
+                }
+              ],
+              "execution_modes": [
+                "SYNCHRONOUS"
+              ],
+              "determinism_guarantees": {
+                "deterministic_output": true
+              },
+              "replay_guarantees": {
+                "replay_safe": true
+              },
+              "trust_requirements": {
+                "min_trust_level": "CLASSICAL"
+              },
+              "evidence_guarantees": {
+                "hash_chained": true
+              },
+              "runtime_dependencies": [],
+              "version_compatibility": {
+                "compatible": [
+                  "1.0.0"
+                ],
+                "deprecated": [],
+                "unsupported": []
+              },
+              "security_requirements": {
+                "authentication": "API_KEY"
+              },
+              "resource_requirements": {
+                "memory_mb": 128,
+                "cpu_cores": 1
+              },
+              "publication_timestamp": "2026-08-14T10:26:44.426591+00:00"
+            }
+          },
+          "vector_clock": {
+            "PROOF-NODE-1": 3,
+            "PROOF-NODE-2": 0,
+            "PROOF-NODE-3": 0
+          },
+          "timestamp": "2026-08-14T10:26:44.426591+00:00",
+          "nonce": "830b3041b3e2e77acbc01237c53822b0",
+          "event_hash": "0b47998c488ad6d8d23a4120666cdbea95fa45e6fd46373daf4681799faf4981",
+          "previous_event_hash": "d867f55fbae897e99892081906322ece6b8d13f5d11ec412f3752961c5d5531a"
+        },
+        {
+          "event_id": "7122f943-967a-4e62-8330-524b47bafc20",
+          "event_type": "SYNC_COMPLETED",
+          "source_node_id": "PROOF-NODE-3",
+          "target_node_id": "PROOF-NODE-1",
+          "payload": {
+            "merged": 0,
+            "conflicts_resolved": 3,
+            "skipped": 0,
+            "peer_service_count": 3,
+            "local_service_count": 3
+          },
+          "vector_clock": {
+            "PROOF-NODE-3": 1,
+            "PROOF-NODE-1": 3,
+            "PROOF-NODE-2": 0
+          },
+          "timestamp": "2026-08-14T10:26:44.430828+00:00",
+          "nonce": "479d0a257ad778af0ac8c53a98e11991",
+          "event_hash": "90843fc39da969a1f4eae7c69e514be4ffc454e038724a80062bee25a1428d1f",
+          "previous_event_hash": "0b47998c488ad6d8d23a4120666cdbea95fa45e6fd46373daf4681799faf4981"
+        },
+        {
+          "event_id": "37ba9fc5-0c31-4802-899a-c36db3ec3131",
+          "event_type": "SYNC_COMPLETED",
+          "source_node_id": "PROOF-NODE-3",
+          "target_node_id": "PROOF-NODE-2",
+          "payload": {
+            "merged": 0,
+            "conflicts_resolved": 3,
+            "skipped": 0,
+            "peer_service_count": 3,
+            "local_service_count": 3
+          },
+          "vector_clock": {
+            "PROOF-NODE-3": 2,
+            "PROOF-NODE-1": 3,
+            "PROOF-NODE-2": 0
+          },
+          "timestamp": "2026-08-14T10:26:44.431867+00:00",
+          "nonce": "4cbe5cdb3d6c746446bccd6dbddc8e3c",
+          "event_hash": "87f2fc33fc30bfdaf3190d59e143a7fc82ad4b48225dd26176658151ca4fc092",
+          "previous_event_hash": "90843fc39da969a1f4eae7c69e514be4ffc454e038724a80062bee25a1428d1f"
+        }
+      ]
+    }
+  },
+  "timestamp": "2026-08-14T10:27:13.174615+00:00"
 }

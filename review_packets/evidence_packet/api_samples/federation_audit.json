@@ -1,1003 +1,1382 @@
 {
-  "nodes": {
-    "FEDERATION-NODE-1": {
-      "audit_events": [
-        {
-          "event_id": "3d6c0b65-9ae9-469d-a698-601d3b6dba37",
-          "event_type": "SERVICE_REGISTERED",
-          "source_node_id": "FEDERATION-NODE-1",
-          "target_node_id": "",
-          "payload": {
-            "record": {
-              "platform_service_id": "TANTRA-PSR-USF-001",
-              "capability_id": "c8a1b2d3-e4f5-5678-9abc-def012345678",
-              "service_name": "UNIVERSAL_SOLVER_FABRIC",
-              "version": "1.0.0",
-              "provider": "TANTRA Platform Engineering",
-              "owner": {
-                "team": "TANTRA Sovereign Core",
-                "contact": "solver-fabric@tantra.internal"
-              },
-              "runtime_type": "PROCESS",
-              "service_classification": "PLATFORM_SERVICE",
-              "capability_category": "OPTIMIZATION",
-              "status": "ACTIVE",
-              "registration_timestamp": "2026-08-04T07:24:59.931658+00:00",
-              "description": "Universal Solver Fabric \u2014 agnostic optimization capability layer.",
-              "tags": [],
-              "endpoints": {
-                "execution": "http://127.0.0.1:9010/platform/v1/services/TANTRA-PSR-USF-001"
-              },
-              "dependencies": []
+  "PROOF-NODE-1": {
+    "chain_valid": true,
+    "event_count": 5,
+    "head_hash": "0572364ba41f2a0ce6c7e3ac89c581c5e60ab87ab291f2abbba298059d76f66a",
+    "events": [
+      {
+        "event_id": "65e1a252-ddc2-4c94-8d8b-45643fe428ac",
+        "event_type": "SERVICE_REGISTERED",
+        "source_node_id": "PROOF-NODE-1",
+        "target_node_id": "",
+        "payload": {
+          "record": {
+            "platform_service_id": "insightflow.runtime.intelligence.v1",
+            "capability_id": "insightflow-intelligence-cap",
+            "service_name": "InsightFlow Runtime Intelligence",
+            "version": "1.0.2",
+            "provider": "Insight Stack (Ganesh)",
+            "owner": {
+              "team": "Insight Stack",
+              "contact": "ganesh@bhiv.internal"
             },
-            "manifest": {
-              "manifest_id": "USF-MANIFEST-001",
-              "service_name": "UNIVERSAL_SOLVER_FABRIC",
-              "version": "1.0.0",
-              "supported_operations": [
-                {
-                  "operation_name": "discover_solvers",
-                  "description": "Discover available solver capabilities",
-                  "input_contract": {
-                    "type": "object",
-                    "required": [
-                      "problem_type"
-                    ]
-                  },
-                  "output_contract": {
-                    "type": "object"
-                  },
-                  "execution_modes": [
-                    "SYNCHRONOUS"
-                  ],
-                  "idempotent": true
-                }
-              ],
-              "execution_modes": [
-                "SYNCHRONOUS"
-              ],
-              "determinism_guarantees": {
-                "deterministic_execution": true
-              },
-              "replay_guarantees": {
-                "replay_safe": true
-              },
-              "trust_requirements": {
-                "authentication": "TANTRA_SERVICE_IDENTITY"
-              },
-              "evidence_guarantees": {
-                "evidence_per_execution": true
-              },
-              "runtime_dependencies": [],
-              "version_compatibility": {
-                "compatible": [
-                  "1.0.0"
-                ],
-                "deprecated": [],
-                "unsupported": []
-              },
-              "security_requirements": {
-                "network_policy": "INTERNAL_ONLY"
-              },
-              "resource_requirements": {
-                "memory_mb_min": 256
-              },
-              "publication_timestamp": "2026-08-04T07:24:59.931706+00:00"
-            }
-          },
-          "vector_clock": {
-            "FEDERATION-NODE-1": 1,
-            "FEDERATION-NODE-2": 0,
-            "FEDERATION-NODE-3": 0
-          },
-          "timestamp": "2026-08-04T07:24:59.973509+00:00",
-          "nonce": "317fd7018cfc51e1210d27a0707e7a01",
-          "event_hash": "8c965178c4c5f5f32112c1ded889aea0a7cc288098cf8bdcdac4a2c3643cf875",
-          "previous_event_hash": "000a3545d300d9ae3ce855aa1dfb0c47c882f3e438438e76f7c9943f6f71ea40"
-        },
-        {
-          "event_id": "00c9c6eb-ecc9-4354-90f0-00e32f1c8c95",
-          "event_type": "SERVICE_REGISTERED",
-          "source_node_id": "FEDERATION-NODE-1",
-          "target_node_id": "",
-          "payload": {
-            "record": {
-              "platform_service_id": "TANTRA-PSR-QCG-001",
-              "capability_id": "d9b2c3e4-f5a6-5789-abcd-ef0123456789",
-              "service_name": "QCG_TRUST_VERIFICATION",
-              "version": "1.0.0",
-              "provider": "TANTRA Platform Engineering",
-              "owner": {
-                "team": "TANTRA Sovereign Core",
-                "contact": "qcg-trust@tantra.internal"
-              },
-              "runtime_type": "PROCESS",
-              "service_classification": "PLATFORM_SERVICE",
-              "capability_category": "VERIFICATION",
-              "status": "ACTIVE",
-              "registration_timestamp": "2026-08-04T07:24:59.931679+00:00",
-              "description": "QCG Trust Verification \u2014 Hybrid Quantum Communication Gateway.",
-              "tags": [],
-              "endpoints": {
-                "execution": "http://127.0.0.1:9010/platform/v1/services/TANTRA-PSR-QCG-001"
-              },
-              "dependencies": []
+            "runtime_type": "CONTAINER",
+            "service_classification": "DOMAIN_SERVICE",
+            "capability_category": "EXECUTION",
+            "status": "ACTIVE",
+            "registration_timestamp": "2026-08-14T10:26:44.424911+00:00",
+            "description": "InsightFlow live runtime participant - intelligence execution",
+            "tags": [
+              "insight",
+              "intelligence",
+              "live"
+            ],
+            "endpoints": {
+              "execution": "https://insight-constitutional-runtime.onrender.com/api/v1/execute",
+              "health": "https://insight-constitutional-runtime.onrender.com/api/v1/health/insightflow.runtime.intelligence.v1"
             },
-            "manifest": {
-              "manifest_id": "QCG-MANIFEST-001",
-              "service_name": "QCG_TRUST_VERIFICATION",
-              "version": "1.0.0",
-              "supported_operations": [
-                {
-                  "operation_name": "verify_replay",
-                  "description": "Verify replay safety",
-                  "input_contract": {
-                    "type": "object",
-                    "required": [
-                      "message_id",
-                      "issued_at"
-                    ]
-                  },
-                  "output_contract": {
-                    "type": "object"
-                  },
-                  "execution_modes": [
-                    "SYNCHRONOUS"
+            "dependencies": [
+              "PlatformCapabilitySDK",
+              "PlatformDiscovery",
+              "RuntimeCore"
+            ]
+          },
+          "manifest": {
+            "manifest_id": "insightflow-manifest-001",
+            "service_name": "InsightFlow Runtime Intelligence",
+            "version": "1.0.2",
+            "supported_operations": [
+              {
+                "operation_name": "execute",
+                "description": "Execute intelligence analysis via InsightFlow",
+                "input_contract": {
+                  "type": "object",
+                  "required": [
+                    "service_id",
+                    "operation",
+                    "payload"
                   ],
-                  "idempotent": true
-                }
-              ],
-              "execution_modes": [
-                "SYNCHRONOUS"
-              ],
-              "determinism_guarantees": {
-                "deterministic_execution": true
-              },
-              "replay_guarantees": {
-                "replay_safe": true,
-                "replay_authority": "CanonicalReplayAuthority"
-              },
-              "trust_requirements": {
-                "authentication": "ECDSA_SIGNATURE"
-              },
-              "evidence_guarantees": {
-                "evidence_per_execution": true
-              },
-              "runtime_dependencies": [],
-              "version_compatibility": {
-                "compatible": [
-                  "1.0.0"
+                  "properties": {
+                    "service_id": {
+                      "type": "string"
+                    },
+                    "operation": {
+                      "type": "string"
+                    },
+                    "version": {
+                      "type": "string"
+                    },
+                    "invocation_id": {
+                      "type": "string"
+                    },
+                    "payload": {
+                      "type": "object"
+                    }
+                  }
+                },
+                "output_contract": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string"
+                    },
+                    "response": {
+                      "type": "object"
+                    },
+                    "evidence": {
+                      "type": "object"
+                    }
+                  }
+                },
+                "execution_modes": [
+                  "SYNCHRONOUS"
                 ],
-                "deprecated": [
-                  "0.9.0"
-                ],
-                "unsupported": [
-                  "0.1.0"
-                ]
-              },
-              "security_requirements": {
-                "network_policy": "INTERNAL_ONLY"
-              },
-              "resource_requirements": {
-                "memory_mb_min": 128
-              },
-              "publication_timestamp": "2026-08-04T07:24:59.973969+00:00"
-            }
-          },
-          "vector_clock": {
-            "FEDERATION-NODE-1": 2,
-            "FEDERATION-NODE-2": 0,
-            "FEDERATION-NODE-3": 0
-          },
-          "timestamp": "2026-08-04T07:24:59.974151+00:00",
-          "nonce": "bf9eb93c49611efcd98336343b50033c",
-          "event_hash": "6fbee1e9b897398dc83464b6adff867bd3cfedb1bac86676309b4c23998326eb",
-          "previous_event_hash": "8c965178c4c5f5f32112c1ded889aea0a7cc288098cf8bdcdac4a2c3643cf875"
-        },
-        {
-          "event_id": "6b9fda81-737f-4d7b-a0da-e99950d7d6be",
-          "event_type": "SERVICE_REGISTERED",
-          "source_node_id": "FEDERATION-NODE-1",
-          "target_node_id": "",
-          "payload": {
-            "record": {
-              "platform_service_id": "TANTRA-PSR-DISCO-001",
-              "capability_id": "e0c3d4e5-f6a7-6890-bcde-f01234567890",
-              "service_name": "PLATFORM_DISCOVERY_SERVICE",
-              "version": "2.0.0",
-              "provider": "TANTRA Platform Engineering",
-              "owner": {
-                "team": "TANTRA Sovereign Core",
-                "contact": "discovery@tantra.internal"
-              },
-              "runtime_type": "PROCESS",
-              "service_classification": "PLATFORM_SERVICE",
-              "capability_category": "OBSERVABILITY",
-              "status": "ACTIVE",
-              "registration_timestamp": "2026-08-04T07:24:59.931687+00:00",
-              "description": "Secure Federated Discovery Platform \u2014 publication and trust layer.",
-              "tags": [],
-              "endpoints": {
-                "execution": "http://127.0.0.1:9010/platform/v1/services/TANTRA-PSR-DISCO-001"
-              },
-              "dependencies": []
+                "idempotent": true
+              }
+            ],
+            "execution_modes": [
+              "SYNCHRONOUS"
+            ],
+            "determinism_guarantees": {
+              "deterministic_output": true,
+              "replay_safe": true
             },
-            "manifest": {
-              "manifest_id": "DISCO-MANIFEST-001",
-              "service_name": "PLATFORM_DISCOVERY_SERVICE",
-              "version": "2.0.0",
-              "supported_operations": [
-                {
-                  "operation_name": "discover_services",
-                  "description": "Discover registered platform services",
-                  "input_contract": {
-                    "type": "object",
-                    "required": []
-                  },
-                  "output_contract": {
-                    "type": "object"
-                  },
-                  "execution_modes": [
-                    "SYNCHRONOUS"
-                  ],
-                  "idempotent": true
-                }
-              ],
-              "execution_modes": [
-                "SYNCHRONOUS"
-              ],
-              "determinism_guarantees": {
-                "deterministic_execution": true
-              },
-              "replay_guarantees": {
-                "replay_safe": true
-              },
-              "trust_requirements": {
-                "authentication": "TANTRA_SERVICE_IDENTITY"
-              },
-              "evidence_guarantees": {
-                "evidence_per_execution": true
-              },
-              "runtime_dependencies": [],
-              "version_compatibility": {
-                "compatible": [
-                  "2.0.0",
-                  "1.0.0"
-                ],
-                "deprecated": [],
-                "unsupported": []
-              },
-              "security_requirements": {
-                "network_policy": "INTERNAL_ONLY"
-              },
-              "resource_requirements": {
-                "memory_mb_min": 128
-              },
-              "publication_timestamp": "2026-08-04T07:24:59.974492+00:00"
-            }
-          },
-          "vector_clock": {
-            "FEDERATION-NODE-1": 3,
-            "FEDERATION-NODE-2": 0,
-            "FEDERATION-NODE-3": 0
-          },
-          "timestamp": "2026-08-04T07:24:59.974618+00:00",
-          "nonce": "bb62657284367d6e3967d9da5e31bf70",
-          "event_hash": "3cb2b95ae6e317876b0dd3f14585721a38dfda2889c35634f3415001cec6422b",
-          "previous_event_hash": "6fbee1e9b897398dc83464b6adff867bd3cfedb1bac86676309b4c23998326eb"
-        },
-        {
-          "event_id": "f7d39409-14af-4a47-8b93-634c895237d5",
-          "event_type": "SYNC_COMPLETED",
-          "source_node_id": "FEDERATION-NODE-1",
-          "target_node_id": "FEDERATION-NODE-2",
-          "payload": {
-            "merged": 0,
-            "conflicts_resolved": 3,
-            "skipped": 0,
-            "peer_service_count": 3,
-            "local_service_count": 3
-          },
-          "vector_clock": {
-            "FEDERATION-NODE-1": 4,
-            "FEDERATION-NODE-2": 0,
-            "FEDERATION-NODE-3": 0
-          },
-          "timestamp": "2026-08-04T07:24:59.975162+00:00",
-          "nonce": "cbf9fe8400f3d4bed33b64cf061b3dc1",
-          "event_hash": "b10c2ce65e799f5c60545e43fff35802df254bc5f279fb23fc3dc002910af149",
-          "previous_event_hash": "3cb2b95ae6e317876b0dd3f14585721a38dfda2889c35634f3415001cec6422b"
-        },
-        {
-          "event_id": "8a91b996-6a77-4f78-a6cd-61ec0a9886bd",
-          "event_type": "SYNC_COMPLETED",
-          "source_node_id": "FEDERATION-NODE-1",
-          "target_node_id": "FEDERATION-NODE-3",
-          "payload": {
-            "merged": 0,
-            "conflicts_resolved": 3,
-            "skipped": 0,
-            "peer_service_count": 3,
-            "local_service_count": 3
-          },
-          "vector_clock": {
-            "FEDERATION-NODE-1": 5,
-            "FEDERATION-NODE-2": 0,
-            "FEDERATION-NODE-3": 0
-          },
-          "timestamp": "2026-08-04T07:24:59.975431+00:00",
-          "nonce": "5b4db33be23ffbb393aa551efc3b62de",
-          "event_hash": "f0fe41d70a9d31b4d8dcd0ef49277449874b323b4d444c1ad2635c2b5954d7e8",
-          "previous_event_hash": "b10c2ce65e799f5c60545e43fff35802df254bc5f279fb23fc3dc002910af149"
-        }
-      ],
-      "chain_valid": true
-    },
-    "FEDERATION-NODE-2": {
-      "audit_events": [
-        {
-          "event_id": "3d6c0b65-9ae9-469d-a698-601d3b6dba37",
-          "event_type": "SERVICE_REGISTERED",
-          "source_node_id": "FEDERATION-NODE-1",
-          "target_node_id": "",
-          "payload": {
-            "record": {
-              "platform_service_id": "TANTRA-PSR-USF-001",
-              "capability_id": "c8a1b2d3-e4f5-5678-9abc-def012345678",
-              "service_name": "UNIVERSAL_SOLVER_FABRIC",
-              "version": "1.0.0",
-              "provider": "TANTRA Platform Engineering",
-              "owner": {
-                "team": "TANTRA Sovereign Core",
-                "contact": "solver-fabric@tantra.internal"
-              },
-              "runtime_type": "PROCESS",
-              "service_classification": "PLATFORM_SERVICE",
-              "capability_category": "OPTIMIZATION",
-              "status": "ACTIVE",
-              "registration_timestamp": "2026-08-04T07:24:59.931658+00:00",
-              "description": "Universal Solver Fabric \u2014 agnostic optimization capability layer.",
-              "tags": [],
-              "endpoints": {
-                "execution": "http://127.0.0.1:9010/platform/v1/services/TANTRA-PSR-USF-001"
-              },
-              "dependencies": []
+            "replay_guarantees": {
+              "replay_safe": true,
+              "idempotent": true
             },
-            "manifest": {
-              "manifest_id": "USF-MANIFEST-001",
-              "service_name": "UNIVERSAL_SOLVER_FABRIC",
-              "version": "1.0.0",
-              "supported_operations": [
-                {
-                  "operation_name": "discover_solvers",
-                  "description": "Discover available solver capabilities",
-                  "input_contract": {
-                    "type": "object",
-                    "required": [
-                      "problem_type"
-                    ]
-                  },
-                  "output_contract": {
-                    "type": "object"
-                  },
-                  "execution_modes": [
-                    "SYNCHRONOUS"
-                  ],
-                  "idempotent": true
-                }
-              ],
-              "execution_modes": [
-                "SYNCHRONOUS"
-              ],
-              "determinism_guarantees": {
-                "deterministic_execution": true
-              },
-              "replay_guarantees": {
-                "replay_safe": true
-              },
-              "trust_requirements": {
-                "authentication": "TANTRA_SERVICE_IDENTITY"
-              },
-              "evidence_guarantees": {
-                "evidence_per_execution": true
-              },
-              "runtime_dependencies": [],
-              "version_compatibility": {
-                "compatible": [
-                  "1.0.0"
-                ],
-                "deprecated": [],
-                "unsupported": []
-              },
-              "security_requirements": {
-                "network_policy": "INTERNAL_ONLY"
-              },
-              "resource_requirements": {
-                "memory_mb_min": 256
-              },
-              "publication_timestamp": "2026-08-04T07:24:59.931706+00:00"
-            }
-          },
-          "vector_clock": {
-            "FEDERATION-NODE-1": 1,
-            "FEDERATION-NODE-2": 0,
-            "FEDERATION-NODE-3": 0
-          },
-          "timestamp": "2026-08-04T07:24:59.973509+00:00",
-          "nonce": "317fd7018cfc51e1210d27a0707e7a01",
-          "event_hash": "8c965178c4c5f5f32112c1ded889aea0a7cc288098cf8bdcdac4a2c3643cf875",
-          "previous_event_hash": "000a3545d300d9ae3ce855aa1dfb0c47c882f3e438438e76f7c9943f6f71ea40"
-        },
-        {
-          "event_id": "00c9c6eb-ecc9-4354-90f0-00e32f1c8c95",
-          "event_type": "SERVICE_REGISTERED",
-          "source_node_id": "FEDERATION-NODE-1",
-          "target_node_id": "",
-          "payload": {
-            "record": {
-              "platform_service_id": "TANTRA-PSR-QCG-001",
-              "capability_id": "d9b2c3e4-f5a6-5789-abcd-ef0123456789",
-              "service_name": "QCG_TRUST_VERIFICATION",
-              "version": "1.0.0",
-              "provider": "TANTRA Platform Engineering",
-              "owner": {
-                "team": "TANTRA Sovereign Core",
-                "contact": "qcg-trust@tantra.internal"
-              },
-              "runtime_type": "PROCESS",
-              "service_classification": "PLATFORM_SERVICE",
-              "capability_category": "VERIFICATION",
-              "status": "ACTIVE",
-              "registration_timestamp": "2026-08-04T07:24:59.931679+00:00",
-              "description": "QCG Trust Verification \u2014 Hybrid Quantum Communication Gateway.",
-              "tags": [],
-              "endpoints": {
-                "execution": "http://127.0.0.1:9010/platform/v1/services/TANTRA-PSR-QCG-001"
-              },
-              "dependencies": []
+            "trust_requirements": {
+              "min_trust_level": "CLASSICAL"
             },
-            "manifest": {
-              "manifest_id": "QCG-MANIFEST-001",
-              "service_name": "QCG_TRUST_VERIFICATION",
-              "version": "1.0.0",
-              "supported_operations": [
-                {
-                  "operation_name": "verify_replay",
-                  "description": "Verify replay safety",
-                  "input_contract": {
-                    "type": "object",
-                    "required": [
-                      "message_id",
-                      "issued_at"
-                    ]
-                  },
-                  "output_contract": {
-                    "type": "object"
-                  },
-                  "execution_modes": [
-                    "SYNCHRONOUS"
-                  ],
-                  "idempotent": true
-                }
-              ],
-              "execution_modes": [
-                "SYNCHRONOUS"
-              ],
-              "determinism_guarantees": {
-                "deterministic_execution": true
-              },
-              "replay_guarantees": {
-                "replay_safe": true,
-                "replay_authority": "CanonicalReplayAuthority"
-              },
-              "trust_requirements": {
-                "authentication": "ECDSA_SIGNATURE"
-              },
-              "evidence_guarantees": {
-                "evidence_per_execution": true
-              },
-              "runtime_dependencies": [],
-              "version_compatibility": {
-                "compatible": [
-                  "1.0.0"
-                ],
-                "deprecated": [
-                  "0.9.0"
-                ],
-                "unsupported": [
-                  "0.1.0"
-                ]
-              },
-              "security_requirements": {
-                "network_policy": "INTERNAL_ONLY"
-              },
-              "resource_requirements": {
-                "memory_mb_min": 128
-              },
-              "publication_timestamp": "2026-08-04T07:24:59.973969+00:00"
-            }
-          },
-          "vector_clock": {
-            "FEDERATION-NODE-1": 2,
-            "FEDERATION-NODE-2": 0,
-            "FEDERATION-NODE-3": 0
-          },
-          "timestamp": "2026-08-04T07:24:59.974151+00:00",
-          "nonce": "bf9eb93c49611efcd98336343b50033c",
-          "event_hash": "6fbee1e9b897398dc83464b6adff867bd3cfedb1bac86676309b4c23998326eb",
-          "previous_event_hash": "8c965178c4c5f5f32112c1ded889aea0a7cc288098cf8bdcdac4a2c3643cf875"
-        },
-        {
-          "event_id": "6b9fda81-737f-4d7b-a0da-e99950d7d6be",
-          "event_type": "SERVICE_REGISTERED",
-          "source_node_id": "FEDERATION-NODE-1",
-          "target_node_id": "",
-          "payload": {
-            "record": {
-              "platform_service_id": "TANTRA-PSR-DISCO-001",
-              "capability_id": "e0c3d4e5-f6a7-6890-bcde-f01234567890",
-              "service_name": "PLATFORM_DISCOVERY_SERVICE",
-              "version": "2.0.0",
-              "provider": "TANTRA Platform Engineering",
-              "owner": {
-                "team": "TANTRA Sovereign Core",
-                "contact": "discovery@tantra.internal"
-              },
-              "runtime_type": "PROCESS",
-              "service_classification": "PLATFORM_SERVICE",
-              "capability_category": "OBSERVABILITY",
-              "status": "ACTIVE",
-              "registration_timestamp": "2026-08-04T07:24:59.931687+00:00",
-              "description": "Secure Federated Discovery Platform \u2014 publication and trust layer.",
-              "tags": [],
-              "endpoints": {
-                "execution": "http://127.0.0.1:9010/platform/v1/services/TANTRA-PSR-DISCO-001"
-              },
-              "dependencies": []
+            "evidence_guarantees": {
+              "hash_chained": true,
+              "tamper_evident": true
             },
-            "manifest": {
-              "manifest_id": "DISCO-MANIFEST-001",
-              "service_name": "PLATFORM_DISCOVERY_SERVICE",
-              "version": "2.0.0",
-              "supported_operations": [
-                {
-                  "operation_name": "discover_services",
-                  "description": "Discover registered platform services",
-                  "input_contract": {
-                    "type": "object",
-                    "required": []
-                  },
-                  "output_contract": {
-                    "type": "object"
-                  },
-                  "execution_modes": [
-                    "SYNCHRONOUS"
-                  ],
-                  "idempotent": true
-                }
+            "runtime_dependencies": [
+              {
+                "name": "PlatformSDK",
+                "version": "1.0.0"
+              }
+            ],
+            "version_compatibility": {
+              "compatible": [
+                "1.0.2",
+                "1.0.1"
               ],
-              "execution_modes": [
-                "SYNCHRONOUS"
+              "deprecated": [
+                "1.0.0"
               ],
-              "determinism_guarantees": {
-                "deterministic_execution": true
-              },
-              "replay_guarantees": {
-                "replay_safe": true
-              },
-              "trust_requirements": {
-                "authentication": "TANTRA_SERVICE_IDENTITY"
-              },
-              "evidence_guarantees": {
-                "evidence_per_execution": true
-              },
-              "runtime_dependencies": [],
-              "version_compatibility": {
-                "compatible": [
-                  "2.0.0",
-                  "1.0.0"
-                ],
-                "deprecated": [],
-                "unsupported": []
-              },
-              "security_requirements": {
-                "network_policy": "INTERNAL_ONLY"
-              },
-              "resource_requirements": {
-                "memory_mb_min": 128
-              },
-              "publication_timestamp": "2026-08-04T07:24:59.974492+00:00"
-            }
-          },
-          "vector_clock": {
-            "FEDERATION-NODE-1": 3,
-            "FEDERATION-NODE-2": 0,
-            "FEDERATION-NODE-3": 0
-          },
-          "timestamp": "2026-08-04T07:24:59.974618+00:00",
-          "nonce": "bb62657284367d6e3967d9da5e31bf70",
-          "event_hash": "3cb2b95ae6e317876b0dd3f14585721a38dfda2889c35634f3415001cec6422b",
-          "previous_event_hash": "6fbee1e9b897398dc83464b6adff867bd3cfedb1bac86676309b4c23998326eb"
-        },
-        {
-          "event_id": "a8f5a041-8400-4799-8525-73f700e19097",
-          "event_type": "SYNC_COMPLETED",
-          "source_node_id": "FEDERATION-NODE-2",
-          "target_node_id": "FEDERATION-NODE-1",
-          "payload": {
-            "merged": 0,
-            "conflicts_resolved": 3,
-            "skipped": 0,
-            "peer_service_count": 3,
-            "local_service_count": 3
-          },
-          "vector_clock": {
-            "FEDERATION-NODE-2": 1,
-            "FEDERATION-NODE-1": 3,
-            "FEDERATION-NODE-3": 0
-          },
-          "timestamp": "2026-08-04T07:24:59.975695+00:00",
-          "nonce": "0a598e665b77fd5773ecb7fc68321bcc",
-          "event_hash": "a51ad3fd79f2b3492bdf9fc71b8d04aa8fc078d7e5459ab496ce72885c820f28",
-          "previous_event_hash": "3cb2b95ae6e317876b0dd3f14585721a38dfda2889c35634f3415001cec6422b"
-        },
-        {
-          "event_id": "bd642600-6646-4f00-9029-7c0fb6e0d612",
-          "event_type": "SYNC_COMPLETED",
-          "source_node_id": "FEDERATION-NODE-2",
-          "target_node_id": "FEDERATION-NODE-3",
-          "payload": {
-            "merged": 0,
-            "conflicts_resolved": 3,
-            "skipped": 0,
-            "peer_service_count": 3,
-            "local_service_count": 3
-          },
-          "vector_clock": {
-            "FEDERATION-NODE-2": 2,
-            "FEDERATION-NODE-1": 3,
-            "FEDERATION-NODE-3": 0
-          },
-          "timestamp": "2026-08-04T07:24:59.975949+00:00",
-          "nonce": "abb1a0b8bdce8c33df05856066f50cf5",
-          "event_hash": "2278966d0afa6e2549a46feeec4a240f98210a464a296a45c89d05454c3f15ff",
-          "previous_event_hash": "a51ad3fd79f2b3492bdf9fc71b8d04aa8fc078d7e5459ab496ce72885c820f28"
-        }
-      ],
-      "chain_valid": true
-    },
-    "FEDERATION-NODE-3": {
-      "audit_events": [
-        {
-          "event_id": "3d6c0b65-9ae9-469d-a698-601d3b6dba37",
-          "event_type": "SERVICE_REGISTERED",
-          "source_node_id": "FEDERATION-NODE-1",
-          "target_node_id": "",
-          "payload": {
-            "record": {
-              "platform_service_id": "TANTRA-PSR-USF-001",
-              "capability_id": "c8a1b2d3-e4f5-5678-9abc-def012345678",
-              "service_name": "UNIVERSAL_SOLVER_FABRIC",
-              "version": "1.0.0",
-              "provider": "TANTRA Platform Engineering",
-              "owner": {
-                "team": "TANTRA Sovereign Core",
-                "contact": "solver-fabric@tantra.internal"
-              },
-              "runtime_type": "PROCESS",
-              "service_classification": "PLATFORM_SERVICE",
-              "capability_category": "OPTIMIZATION",
-              "status": "ACTIVE",
-              "registration_timestamp": "2026-08-04T07:24:59.931658+00:00",
-              "description": "Universal Solver Fabric \u2014 agnostic optimization capability layer.",
-              "tags": [],
-              "endpoints": {
-                "execution": "http://127.0.0.1:9010/platform/v1/services/TANTRA-PSR-USF-001"
-              },
-              "dependencies": []
+              "unsupported": [
+                "0.9.0"
+              ]
             },
-            "manifest": {
-              "manifest_id": "USF-MANIFEST-001",
-              "service_name": "UNIVERSAL_SOLVER_FABRIC",
-              "version": "1.0.0",
-              "supported_operations": [
-                {
-                  "operation_name": "discover_solvers",
-                  "description": "Discover available solver capabilities",
-                  "input_contract": {
-                    "type": "object",
-                    "required": [
-                      "problem_type"
-                    ]
-                  },
-                  "output_contract": {
-                    "type": "object"
-                  },
-                  "execution_modes": [
-                    "SYNCHRONOUS"
-                  ],
-                  "idempotent": true
-                }
-              ],
-              "execution_modes": [
-                "SYNCHRONOUS"
-              ],
-              "determinism_guarantees": {
-                "deterministic_execution": true
-              },
-              "replay_guarantees": {
-                "replay_safe": true
-              },
-              "trust_requirements": {
-                "authentication": "TANTRA_SERVICE_IDENTITY"
-              },
-              "evidence_guarantees": {
-                "evidence_per_execution": true
-              },
-              "runtime_dependencies": [],
-              "version_compatibility": {
-                "compatible": [
-                  "1.0.0"
-                ],
-                "deprecated": [],
-                "unsupported": []
-              },
-              "security_requirements": {
-                "network_policy": "INTERNAL_ONLY"
-              },
-              "resource_requirements": {
-                "memory_mb_min": 256
-              },
-              "publication_timestamp": "2026-08-04T07:24:59.931706+00:00"
-            }
-          },
-          "vector_clock": {
-            "FEDERATION-NODE-1": 1,
-            "FEDERATION-NODE-2": 0,
-            "FEDERATION-NODE-3": 0
-          },
-          "timestamp": "2026-08-04T07:24:59.973509+00:00",
-          "nonce": "317fd7018cfc51e1210d27a0707e7a01",
-          "event_hash": "8c965178c4c5f5f32112c1ded889aea0a7cc288098cf8bdcdac4a2c3643cf875",
-          "previous_event_hash": "000a3545d300d9ae3ce855aa1dfb0c47c882f3e438438e76f7c9943f6f71ea40"
-        },
-        {
-          "event_id": "00c9c6eb-ecc9-4354-90f0-00e32f1c8c95",
-          "event_type": "SERVICE_REGISTERED",
-          "source_node_id": "FEDERATION-NODE-1",
-          "target_node_id": "",
-          "payload": {
-            "record": {
-              "platform_service_id": "TANTRA-PSR-QCG-001",
-              "capability_id": "d9b2c3e4-f5a6-5789-abcd-ef0123456789",
-              "service_name": "QCG_TRUST_VERIFICATION",
-              "version": "1.0.0",
-              "provider": "TANTRA Platform Engineering",
-              "owner": {
-                "team": "TANTRA Sovereign Core",
-                "contact": "qcg-trust@tantra.internal"
-              },
-              "runtime_type": "PROCESS",
-              "service_classification": "PLATFORM_SERVICE",
-              "capability_category": "VERIFICATION",
-              "status": "ACTIVE",
-              "registration_timestamp": "2026-08-04T07:24:59.931679+00:00",
-              "description": "QCG Trust Verification \u2014 Hybrid Quantum Communication Gateway.",
-              "tags": [],
-              "endpoints": {
-                "execution": "http://127.0.0.1:9010/platform/v1/services/TANTRA-PSR-QCG-001"
-              },
-              "dependencies": []
+            "security_requirements": {
+              "authentication": "mTLS",
+              "encryption": "TLS_1_3"
             },
-            "manifest": {
-              "manifest_id": "QCG-MANIFEST-001",
-              "service_name": "QCG_TRUST_VERIFICATION",
-              "version": "1.0.0",
-              "supported_operations": [
-                {
-                  "operation_name": "verify_replay",
-                  "description": "Verify replay safety",
-                  "input_contract": {
-                    "type": "object",
-                    "required": [
-                      "message_id",
-                      "issued_at"
-                    ]
-                  },
-                  "output_contract": {
-                    "type": "object"
-                  },
-                  "execution_modes": [
-                    "SYNCHRONOUS"
-                  ],
-                  "idempotent": true
-                }
-              ],
-              "execution_modes": [
-                "SYNCHRONOUS"
-              ],
-              "determinism_guarantees": {
-                "deterministic_execution": true
-              },
-              "replay_guarantees": {
-                "replay_safe": true,
-                "replay_authority": "CanonicalReplayAuthority"
-              },
-              "trust_requirements": {
-                "authentication": "ECDSA_SIGNATURE"
-              },
-              "evidence_guarantees": {
-                "evidence_per_execution": true
-              },
-              "runtime_dependencies": [],
-              "version_compatibility": {
-                "compatible": [
-                  "1.0.0"
-                ],
-                "deprecated": [
-                  "0.9.0"
-                ],
-                "unsupported": [
-                  "0.1.0"
-                ]
-              },
-              "security_requirements": {
-                "network_policy": "INTERNAL_ONLY"
-              },
-              "resource_requirements": {
-                "memory_mb_min": 128
-              },
-              "publication_timestamp": "2026-08-04T07:24:59.973969+00:00"
-            }
-          },
-          "vector_clock": {
-            "FEDERATION-NODE-1": 2,
-            "FEDERATION-NODE-2": 0,
-            "FEDERATION-NODE-3": 0
-          },
-          "timestamp": "2026-08-04T07:24:59.974151+00:00",
-          "nonce": "bf9eb93c49611efcd98336343b50033c",
-          "event_hash": "6fbee1e9b897398dc83464b6adff867bd3cfedb1bac86676309b4c23998326eb",
-          "previous_event_hash": "8c965178c4c5f5f32112c1ded889aea0a7cc288098cf8bdcdac4a2c3643cf875"
-        },
-        {
-          "event_id": "6b9fda81-737f-4d7b-a0da-e99950d7d6be",
-          "event_type": "SERVICE_REGISTERED",
-          "source_node_id": "FEDERATION-NODE-1",
-          "target_node_id": "",
-          "payload": {
-            "record": {
-              "platform_service_id": "TANTRA-PSR-DISCO-001",
-              "capability_id": "e0c3d4e5-f6a7-6890-bcde-f01234567890",
-              "service_name": "PLATFORM_DISCOVERY_SERVICE",
-              "version": "2.0.0",
-              "provider": "TANTRA Platform Engineering",
-              "owner": {
-                "team": "TANTRA Sovereign Core",
-                "contact": "discovery@tantra.internal"
-              },
-              "runtime_type": "PROCESS",
-              "service_classification": "PLATFORM_SERVICE",
-              "capability_category": "OBSERVABILITY",
-              "status": "ACTIVE",
-              "registration_timestamp": "2026-08-04T07:24:59.931687+00:00",
-              "description": "Secure Federated Discovery Platform \u2014 publication and trust layer.",
-              "tags": [],
-              "endpoints": {
-                "execution": "http://127.0.0.1:9010/platform/v1/services/TANTRA-PSR-DISCO-001"
-              },
-              "dependencies": []
+            "resource_requirements": {
+              "memory_mb": 256,
+              "cpu_cores": 1
             },
-            "manifest": {
-              "manifest_id": "DISCO-MANIFEST-001",
-              "service_name": "PLATFORM_DISCOVERY_SERVICE",
-              "version": "2.0.0",
-              "supported_operations": [
-                {
-                  "operation_name": "discover_services",
-                  "description": "Discover registered platform services",
-                  "input_contract": {
-                    "type": "object",
-                    "required": []
-                  },
-                  "output_contract": {
-                    "type": "object"
-                  },
-                  "execution_modes": [
-                    "SYNCHRONOUS"
+            "publication_timestamp": "2026-08-14T10:26:44.424911+00:00"
+          }
+        },
+        "vector_clock": {
+          "PROOF-NODE-1": 1,
+          "PROOF-NODE-2": 0,
+          "PROOF-NODE-3": 0
+        },
+        "timestamp": "2026-08-14T10:26:44.425419+00:00",
+        "nonce": "fc92dc791eb4d1becb26fd2c54495e93",
+        "event_hash": "3f427939e242676b48f03ca70de70f82162d0b20612a46198e27db796c076db7",
+        "previous_event_hash": "000a3545d300d9ae3ce855aa1dfb0c47c882f3e438438e76f7c9943f6f71ea40"
+      },
+      {
+        "event_id": "1cbc2c28-d2f3-4b22-b9c5-8e9ae9bb3ba8",
+        "event_type": "SERVICE_REGISTERED",
+        "source_node_id": "PROOF-NODE-1",
+        "target_node_id": "",
+        "payload": {
+          "record": {
+            "platform_service_id": "qcg.verification.quantum.v1",
+            "capability_id": "qcg-quantum-verification-cap",
+            "service_name": "QCG Quantum Verification",
+            "version": "2.0.0",
+            "provider": "QCG Platform (Pritesh/Kanishk)",
+            "owner": {
+              "team": "QCG Platform Engineering",
+              "contact": "kanishk@bhiv.internal"
+            },
+            "runtime_type": "PROCESS",
+            "service_classification": "PLATFORM_SERVICE",
+            "capability_category": "VERIFICATION",
+            "status": "ACTIVE",
+            "registration_timestamp": "2026-08-14T10:26:44.425948+00:00",
+            "description": "QCG quantum/classical contract verification via local runtime",
+            "tags": [
+              "qcg",
+              "quantum",
+              "verification",
+              "live"
+            ],
+            "endpoints": {
+              "execution": "http://localhost:8080/verify",
+              "health": "http://localhost:8080/health"
+            },
+            "dependencies": [
+              "PlatformCapabilitySDK",
+              "PlatformDiscovery"
+            ]
+          },
+          "manifest": {
+            "manifest_id": "qcg-verification-manifest-001",
+            "service_name": "QCG Quantum Verification",
+            "version": "2.0.0",
+            "supported_operations": [
+              {
+                "operation_name": "verify",
+                "description": "Verify quantum/classical execution contracts",
+                "input_contract": {
+                  "type": "object",
+                  "required": [
+                    "contract",
+                    "producer_public_key"
                   ],
-                  "idempotent": true
-                }
-              ],
-              "execution_modes": [
-                "SYNCHRONOUS"
-              ],
-              "determinism_guarantees": {
-                "deterministic_execution": true
-              },
-              "replay_guarantees": {
-                "replay_safe": true
-              },
-              "trust_requirements": {
-                "authentication": "TANTRA_SERVICE_IDENTITY"
-              },
-              "evidence_guarantees": {
-                "evidence_per_execution": true
-              },
-              "runtime_dependencies": [],
-              "version_compatibility": {
-                "compatible": [
-                  "2.0.0",
-                  "1.0.0"
+                  "properties": {
+                    "contract": {
+                      "type": "object"
+                    },
+                    "producer_public_key": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "output_contract": {
+                  "type": "object",
+                  "properties": {
+                    "trace_id": {
+                      "type": "string"
+                    },
+                    "flow_status": {
+                      "type": "string"
+                    },
+                    "stages": {
+                      "type": "object"
+                    }
+                  }
+                },
+                "execution_modes": [
+                  "SYNCHRONOUS"
                 ],
-                "deprecated": [],
-                "unsupported": []
-              },
-              "security_requirements": {
-                "network_policy": "INTERNAL_ONLY"
-              },
-              "resource_requirements": {
-                "memory_mb_min": 128
-              },
-              "publication_timestamp": "2026-08-04T07:24:59.974492+00:00"
-            }
-          },
-          "vector_clock": {
-            "FEDERATION-NODE-1": 3,
-            "FEDERATION-NODE-2": 0,
-            "FEDERATION-NODE-3": 0
-          },
-          "timestamp": "2026-08-04T07:24:59.974618+00:00",
-          "nonce": "bb62657284367d6e3967d9da5e31bf70",
-          "event_hash": "3cb2b95ae6e317876b0dd3f14585721a38dfda2889c35634f3415001cec6422b",
-          "previous_event_hash": "6fbee1e9b897398dc83464b6adff867bd3cfedb1bac86676309b4c23998326eb"
+                "idempotent": false
+              }
+            ],
+            "execution_modes": [
+              "SYNCHRONOUS"
+            ],
+            "determinism_guarantees": {
+              "deterministic_output": true,
+              "replay_safe": true
+            },
+            "replay_guarantees": {
+              "replay_safe": true,
+              "sequence_tracked": true
+            },
+            "trust_requirements": {
+              "min_trust_level": "CLASSICAL"
+            },
+            "evidence_guarantees": {
+              "hash_chained": true,
+              "merkle_proof": true
+            },
+            "runtime_dependencies": [],
+            "version_compatibility": {
+              "compatible": [
+                "2.0.0"
+              ],
+              "deprecated": [
+                "1.0.0"
+              ],
+              "unsupported": [
+                "0.5.0"
+              ]
+            },
+            "security_requirements": {
+              "authentication": "ECDSA",
+              "encryption": "TLS_1_3"
+            },
+            "resource_requirements": {
+              "memory_mb": 512,
+              "cpu_cores": 2
+            },
+            "publication_timestamp": "2026-08-14T10:26:44.425948+00:00"
+          }
         },
-        {
-          "event_id": "ad683bc8-7570-4a63-8305-7c14576a6aab",
-          "event_type": "SYNC_COMPLETED",
-          "source_node_id": "FEDERATION-NODE-3",
-          "target_node_id": "FEDERATION-NODE-1",
-          "payload": {
-            "merged": 0,
-            "conflicts_resolved": 3,
-            "skipped": 0,
-            "peer_service_count": 3,
-            "local_service_count": 3
-          },
-          "vector_clock": {
-            "FEDERATION-NODE-3": 1,
-            "FEDERATION-NODE-1": 3,
-            "FEDERATION-NODE-2": 0
-          },
-          "timestamp": "2026-08-04T07:24:59.976206+00:00",
-          "nonce": "08e4dc808b4738f72342ce8f56617ada",
-          "event_hash": "c24f627a68fb11a96bfe2ec7fb605617574eb77739d408f8ae41a57f8254e5b8",
-          "previous_event_hash": "3cb2b95ae6e317876b0dd3f14585721a38dfda2889c35634f3415001cec6422b"
+        "vector_clock": {
+          "PROOF-NODE-1": 2,
+          "PROOF-NODE-2": 0,
+          "PROOF-NODE-3": 0
         },
-        {
-          "event_id": "c4cd11b3-706d-40d1-9de6-de46f00b97c6",
-          "event_type": "SYNC_COMPLETED",
-          "source_node_id": "FEDERATION-NODE-3",
-          "target_node_id": "FEDERATION-NODE-2",
-          "payload": {
-            "merged": 0,
-            "conflicts_resolved": 3,
-            "skipped": 0,
-            "peer_service_count": 3,
-            "local_service_count": 3
+        "timestamp": "2026-08-14T10:26:44.425948+00:00",
+        "nonce": "25d0476cfbaeaf9a09e94a5591a493ca",
+        "event_hash": "d867f55fbae897e99892081906322ece6b8d13f5d11ec412f3752961c5d5531a",
+        "previous_event_hash": "3f427939e242676b48f03ca70de70f82162d0b20612a46198e27db796c076db7"
+      },
+      {
+        "event_id": "47f456b2-b5ad-4bdd-aa0a-bc6cd433cece",
+        "event_type": "SERVICE_REGISTERED",
+        "source_node_id": "PROOF-NODE-1",
+        "target_node_id": "",
+        "payload": {
+          "record": {
+            "platform_service_id": "keshav.analysis.identity.v1",
+            "capability_id": "keshav-analysis-cap",
+            "service_name": "KESHAV Identity & Analysis",
+            "version": "1.0.0",
+            "provider": "KESHAV Service (Live)",
+            "owner": {
+              "team": "KESHAV Engineering",
+              "contact": "keshav@bhiv.internal"
+            },
+            "runtime_type": "CONTAINER",
+            "service_classification": "DOMAIN_SERVICE",
+            "capability_category": "VERIFICATION",
+            "status": "ACTIVE",
+            "registration_timestamp": "2026-08-14T10:26:44.426591+00:00",
+            "description": "KESHAV live root-cause analysis and severity classification",
+            "tags": [
+              "keshav",
+              "analysis",
+              "identity",
+              "live"
+            ],
+            "endpoints": {
+              "execution": "https://keshav-cia7.onrender.com/analyze",
+              "health": "https://keshav-cia7.onrender.com/health",
+              "metrics": "https://keshav-cia7.onrender.com/metrics/json"
+            },
+            "dependencies": [
+              "PlatformCapabilitySDK"
+            ]
           },
-          "vector_clock": {
-            "FEDERATION-NODE-3": 2,
-            "FEDERATION-NODE-1": 3,
-            "FEDERATION-NODE-2": 0
+          "manifest": {
+            "manifest_id": "keshav-analysis-manifest-001",
+            "service_name": "KESHAV Identity & Analysis",
+            "version": "1.0.0",
+            "supported_operations": [
+              {
+                "operation_name": "analyze",
+                "description": "Root-cause analysis and severity classification",
+                "input_contract": {
+                  "type": "object",
+                  "required": [
+                    "trace_id",
+                    "execution_id",
+                    "tasks"
+                  ],
+                  "properties": {
+                    "trace_id": {
+                      "type": "string"
+                    },
+                    "execution_id": {
+                      "type": "string"
+                    },
+                    "tasks": {
+                      "type": "array"
+                    },
+                    "constraint_results": {
+                      "type": "array"
+                    },
+                    "propagation_results": {
+                      "type": "array"
+                    }
+                  }
+                },
+                "output_contract": {
+                  "type": "object",
+                  "properties": {
+                    "trace_id": {
+                      "type": "string"
+                    },
+                    "root_cause": {},
+                    "severity": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "execution_modes": [
+                  "SYNCHRONOUS"
+                ],
+                "idempotent": true
+              }
+            ],
+            "execution_modes": [
+              "SYNCHRONOUS"
+            ],
+            "determinism_guarantees": {
+              "deterministic_output": true
+            },
+            "replay_guarantees": {
+              "replay_safe": true
+            },
+            "trust_requirements": {
+              "min_trust_level": "CLASSICAL"
+            },
+            "evidence_guarantees": {
+              "hash_chained": true
+            },
+            "runtime_dependencies": [],
+            "version_compatibility": {
+              "compatible": [
+                "1.0.0"
+              ],
+              "deprecated": [],
+              "unsupported": []
+            },
+            "security_requirements": {
+              "authentication": "API_KEY"
+            },
+            "resource_requirements": {
+              "memory_mb": 128,
+              "cpu_cores": 1
+            },
+            "publication_timestamp": "2026-08-14T10:26:44.426591+00:00"
+          }
+        },
+        "vector_clock": {
+          "PROOF-NODE-1": 3,
+          "PROOF-NODE-2": 0,
+          "PROOF-NODE-3": 0
+        },
+        "timestamp": "2026-08-14T10:26:44.426591+00:00",
+        "nonce": "830b3041b3e2e77acbc01237c53822b0",
+        "event_hash": "0b47998c488ad6d8d23a4120666cdbea95fa45e6fd46373daf4681799faf4981",
+        "previous_event_hash": "d867f55fbae897e99892081906322ece6b8d13f5d11ec412f3752961c5d5531a"
+      },
+      {
+        "event_id": "0a5bea63-c03e-4595-9e0c-9f5421337678",
+        "event_type": "SYNC_COMPLETED",
+        "source_node_id": "PROOF-NODE-1",
+        "target_node_id": "PROOF-NODE-2",
+        "payload": {
+          "merged": 0,
+          "conflicts_resolved": 3,
+          "skipped": 0,
+          "peer_service_count": 3,
+          "local_service_count": 3
+        },
+        "vector_clock": {
+          "PROOF-NODE-1": 4,
+          "PROOF-NODE-2": 0,
+          "PROOF-NODE-3": 0
+        },
+        "timestamp": "2026-08-14T10:26:44.428351+00:00",
+        "nonce": "a1d075390aae7012802203e90ab5df5c",
+        "event_hash": "7898e8707183f32f447090cdce96ee0e8fcaf99f94369d91dcffb16bc511d6bc",
+        "previous_event_hash": "0b47998c488ad6d8d23a4120666cdbea95fa45e6fd46373daf4681799faf4981"
+      },
+      {
+        "event_id": "13b0d13f-7de6-4ded-b03e-4e0453803b37",
+        "event_type": "SYNC_COMPLETED",
+        "source_node_id": "PROOF-NODE-1",
+        "target_node_id": "PROOF-NODE-3",
+        "payload": {
+          "merged": 0,
+          "conflicts_resolved": 3,
+          "skipped": 0,
+          "peer_service_count": 3,
+          "local_service_count": 3
+        },
+        "vector_clock": {
+          "PROOF-NODE-1": 5,
+          "PROOF-NODE-2": 0,
+          "PROOF-NODE-3": 0
+        },
+        "timestamp": "2026-08-14T10:26:44.428919+00:00",
+        "nonce": "1068c501033c58c2b9ba766209b48a77",
+        "event_hash": "0572364ba41f2a0ce6c7e3ac89c581c5e60ab87ab291f2abbba298059d76f66a",
+        "previous_event_hash": "7898e8707183f32f447090cdce96ee0e8fcaf99f94369d91dcffb16bc511d6bc"
+      }
+    ]
+  },
+  "PROOF-NODE-2": {
+    "chain_valid": true,
+    "event_count": 5,
+    "head_hash": "79975a150cab5454d2c7be0f94f4ee20cb7ab59d61d7bc2e34b6ef908260b2de",
+    "events": [
+      {
+        "event_id": "65e1a252-ddc2-4c94-8d8b-45643fe428ac",
+        "event_type": "SERVICE_REGISTERED",
+        "source_node_id": "PROOF-NODE-1",
+        "target_node_id": "",
+        "payload": {
+          "record": {
+            "platform_service_id": "insightflow.runtime.intelligence.v1",
+            "capability_id": "insightflow-intelligence-cap",
+            "service_name": "InsightFlow Runtime Intelligence",
+            "version": "1.0.2",
+            "provider": "Insight Stack (Ganesh)",
+            "owner": {
+              "team": "Insight Stack",
+              "contact": "ganesh@bhiv.internal"
+            },
+            "runtime_type": "CONTAINER",
+            "service_classification": "DOMAIN_SERVICE",
+            "capability_category": "EXECUTION",
+            "status": "ACTIVE",
+            "registration_timestamp": "2026-08-14T10:26:44.424911+00:00",
+            "description": "InsightFlow live runtime participant - intelligence execution",
+            "tags": [
+              "insight",
+              "intelligence",
+              "live"
+            ],
+            "endpoints": {
+              "execution": "https://insight-constitutional-runtime.onrender.com/api/v1/execute",
+              "health": "https://insight-constitutional-runtime.onrender.com/api/v1/health/insightflow.runtime.intelligence.v1"
+            },
+            "dependencies": [
+              "PlatformCapabilitySDK",
+              "PlatformDiscovery",
+              "RuntimeCore"
+            ]
           },
-          "timestamp": "2026-08-04T07:24:59.976458+00:00",
-          "nonce": "50fc9d9836b732e8285c66fd7e7754b8",
-          "event_hash": "d17fb0e73814bf356f490617161b055578ff44d9af06a626875739a2f0057ebd",
-          "previous_event_hash": "c24f627a68fb11a96bfe2ec7fb605617574eb77739d408f8ae41a57f8254e5b8"
-        }
-      ],
-      "chain_valid": true
-    }
+          "manifest": {
+            "manifest_id": "insightflow-manifest-001",
+            "service_name": "InsightFlow Runtime Intelligence",
+            "version": "1.0.2",
+            "supported_operations": [
+              {
+                "operation_name": "execute",
+                "description": "Execute intelligence analysis via InsightFlow",
+                "input_contract": {
+                  "type": "object",
+                  "required": [
+                    "service_id",
+                    "operation",
+                    "payload"
+                  ],
+                  "properties": {
+                    "service_id": {
+                      "type": "string"
+                    },
+                    "operation": {
+                      "type": "string"
+                    },
+                    "version": {
+                      "type": "string"
+                    },
+                    "invocation_id": {
+                      "type": "string"
+                    },
+                    "payload": {
+                      "type": "object"
+                    }
+                  }
+                },
+                "output_contract": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string"
+                    },
+                    "response": {
+                      "type": "object"
+                    },
+                    "evidence": {
+                      "type": "object"
+                    }
+                  }
+                },
+                "execution_modes": [
+                  "SYNCHRONOUS"
+                ],
+                "idempotent": true
+              }
+            ],
+            "execution_modes": [
+              "SYNCHRONOUS"
+            ],
+            "determinism_guarantees": {
+              "deterministic_output": true,
+              "replay_safe": true
+            },
+            "replay_guarantees": {
+              "replay_safe": true,
+              "idempotent": true
+            },
+            "trust_requirements": {
+              "min_trust_level": "CLASSICAL"
+            },
+            "evidence_guarantees": {
+              "hash_chained": true,
+              "tamper_evident": true
+            },
+            "runtime_dependencies": [
+              {
+                "name": "PlatformSDK",
+                "version": "1.0.0"
+              }
+            ],
+            "version_compatibility": {
+              "compatible": [
+                "1.0.2",
+                "1.0.1"
+              ],
+              "deprecated": [
+                "1.0.0"
+              ],
+              "unsupported": [
+                "0.9.0"
+              ]
+            },
+            "security_requirements": {
+              "authentication": "mTLS",
+              "encryption": "TLS_1_3"
+            },
+            "resource_requirements": {
+              "memory_mb": 256,
+              "cpu_cores": 1
+            },
+            "publication_timestamp": "2026-08-14T10:26:44.424911+00:00"
+          }
+        },
+        "vector_clock": {
+          "PROOF-NODE-1": 1,
+          "PROOF-NODE-2": 0,
+          "PROOF-NODE-3": 0
+        },
+        "timestamp": "2026-08-14T10:26:44.425419+00:00",
+        "nonce": "fc92dc791eb4d1becb26fd2c54495e93",
+        "event_hash": "3f427939e242676b48f03ca70de70f82162d0b20612a46198e27db796c076db7",
+        "previous_event_hash": "000a3545d300d9ae3ce855aa1dfb0c47c882f3e438438e76f7c9943f6f71ea40"
+      },
+      {
+        "event_id": "1cbc2c28-d2f3-4b22-b9c5-8e9ae9bb3ba8",
+        "event_type": "SERVICE_REGISTERED",
+        "source_node_id": "PROOF-NODE-1",
+        "target_node_id": "",
+        "payload": {
+          "record": {
+            "platform_service_id": "qcg.verification.quantum.v1",
+            "capability_id": "qcg-quantum-verification-cap",
+            "service_name": "QCG Quantum Verification",
+            "version": "2.0.0",
+            "provider": "QCG Platform (Pritesh/Kanishk)",
+            "owner": {
+              "team": "QCG Platform Engineering",
+              "contact": "kanishk@bhiv.internal"
+            },
+            "runtime_type": "PROCESS",
+            "service_classification": "PLATFORM_SERVICE",
+            "capability_category": "VERIFICATION",
+            "status": "ACTIVE",
+            "registration_timestamp": "2026-08-14T10:26:44.425948+00:00",
+            "description": "QCG quantum/classical contract verification via local runtime",
+            "tags": [
+              "qcg",
+              "quantum",
+              "verification",
+              "live"
+            ],
+            "endpoints": {
+              "execution": "http://localhost:8080/verify",
+              "health": "http://localhost:8080/health"
+            },
+            "dependencies": [
+              "PlatformCapabilitySDK",
+              "PlatformDiscovery"
+            ]
+          },
+          "manifest": {
+            "manifest_id": "qcg-verification-manifest-001",
+            "service_name": "QCG Quantum Verification",
+            "version": "2.0.0",
+            "supported_operations": [
+              {
+                "operation_name": "verify",
+                "description": "Verify quantum/classical execution contracts",
+                "input_contract": {
+                  "type": "object",
+                  "required": [
+                    "contract",
+                    "producer_public_key"
+                  ],
+                  "properties": {
+                    "contract": {
+                      "type": "object"
+                    },
+                    "producer_public_key": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "output_contract": {
+                  "type": "object",
+                  "properties": {
+                    "trace_id": {
+                      "type": "string"
+                    },
+                    "flow_status": {
+                      "type": "string"
+                    },
+                    "stages": {
+                      "type": "object"
+                    }
+                  }
+                },
+                "execution_modes": [
+                  "SYNCHRONOUS"
+                ],
+                "idempotent": false
+              }
+            ],
+            "execution_modes": [
+              "SYNCHRONOUS"
+            ],
+            "determinism_guarantees": {
+              "deterministic_output": true,
+              "replay_safe": true
+            },
+            "replay_guarantees": {
+              "replay_safe": true,
+              "sequence_tracked": true
+            },
+            "trust_requirements": {
+              "min_trust_level": "CLASSICAL"
+            },
+            "evidence_guarantees": {
+              "hash_chained": true,
+              "merkle_proof": true
+            },
+            "runtime_dependencies": [],
+            "version_compatibility": {
+              "compatible": [
+                "2.0.0"
+              ],
+              "deprecated": [
+                "1.0.0"
+              ],
+              "unsupported": [
+                "0.5.0"
+              ]
+            },
+            "security_requirements": {
+              "authentication": "ECDSA",
+              "encryption": "TLS_1_3"
+            },
+            "resource_requirements": {
+              "memory_mb": 512,
+              "cpu_cores": 2
+            },
+            "publication_timestamp": "2026-08-14T10:26:44.425948+00:00"
+          }
+        },
+        "vector_clock": {
+          "PROOF-NODE-1": 2,
+          "PROOF-NODE-2": 0,
+          "PROOF-NODE-3": 0
+        },
+        "timestamp": "2026-08-14T10:26:44.425948+00:00",
+        "nonce": "25d0476cfbaeaf9a09e94a5591a493ca",
+        "event_hash": "d867f55fbae897e99892081906322ece6b8d13f5d11ec412f3752961c5d5531a",
+        "previous_event_hash": "3f427939e242676b48f03ca70de70f82162d0b20612a46198e27db796c076db7"
+      },
+      {
+        "event_id": "47f456b2-b5ad-4bdd-aa0a-bc6cd433cece",
+        "event_type": "SERVICE_REGISTERED",
+        "source_node_id": "PROOF-NODE-1",
+        "target_node_id": "",
+        "payload": {
+          "record": {
+            "platform_service_id": "keshav.analysis.identity.v1",
+            "capability_id": "keshav-analysis-cap",
+            "service_name": "KESHAV Identity & Analysis",
+            "version": "1.0.0",
+            "provider": "KESHAV Service (Live)",
+            "owner": {
+              "team": "KESHAV Engineering",
+              "contact": "keshav@bhiv.internal"
+            },
+            "runtime_type": "CONTAINER",
+            "service_classification": "DOMAIN_SERVICE",
+            "capability_category": "VERIFICATION",
+            "status": "ACTIVE",
+            "registration_timestamp": "2026-08-14T10:26:44.426591+00:00",
+            "description": "KESHAV live root-cause analysis and severity classification",
+            "tags": [
+              "keshav",
+              "analysis",
+              "identity",
+              "live"
+            ],
+            "endpoints": {
+              "execution": "https://keshav-cia7.onrender.com/analyze",
+              "health": "https://keshav-cia7.onrender.com/health",
+              "metrics": "https://keshav-cia7.onrender.com/metrics/json"
+            },
+            "dependencies": [
+              "PlatformCapabilitySDK"
+            ]
+          },
+          "manifest": {
+            "manifest_id": "keshav-analysis-manifest-001",
+            "service_name": "KESHAV Identity & Analysis",
+            "version": "1.0.0",
+            "supported_operations": [
+              {
+                "operation_name": "analyze",
+                "description": "Root-cause analysis and severity classification",
+                "input_contract": {
+                  "type": "object",
+                  "required": [
+                    "trace_id",
+                    "execution_id",
+                    "tasks"
+                  ],
+                  "properties": {
+                    "trace_id": {
+                      "type": "string"
+                    },
+                    "execution_id": {
+                      "type": "string"
+                    },
+                    "tasks": {
+                      "type": "array"
+                    },
+                    "constraint_results": {
+                      "type": "array"
+                    },
+                    "propagation_results": {
+                      "type": "array"
+                    }
+                  }
+                },
+                "output_contract": {
+                  "type": "object",
+                  "properties": {
+                    "trace_id": {
+                      "type": "string"
+                    },
+                    "root_cause": {},
+                    "severity": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "execution_modes": [
+                  "SYNCHRONOUS"
+                ],
+                "idempotent": true
+              }
+            ],
+            "execution_modes": [
+              "SYNCHRONOUS"
+            ],
+            "determinism_guarantees": {
+              "deterministic_output": true
+            },
+            "replay_guarantees": {
+              "replay_safe": true
+            },
+            "trust_requirements": {
+              "min_trust_level": "CLASSICAL"
+            },
+            "evidence_guarantees": {
+              "hash_chained": true
+            },
+            "runtime_dependencies": [],
+            "version_compatibility": {
+              "compatible": [
+                "1.0.0"
+              ],
+              "deprecated": [],
+              "unsupported": []
+            },
+            "security_requirements": {
+              "authentication": "API_KEY"
+            },
+            "resource_requirements": {
+              "memory_mb": 128,
+              "cpu_cores": 1
+            },
+            "publication_timestamp": "2026-08-14T10:26:44.426591+00:00"
+          }
+        },
+        "vector_clock": {
+          "PROOF-NODE-1": 3,
+          "PROOF-NODE-2": 0,
+          "PROOF-NODE-3": 0
+        },
+        "timestamp": "2026-08-14T10:26:44.426591+00:00",
+        "nonce": "830b3041b3e2e77acbc01237c53822b0",
+        "event_hash": "0b47998c488ad6d8d23a4120666cdbea95fa45e6fd46373daf4681799faf4981",
+        "previous_event_hash": "d867f55fbae897e99892081906322ece6b8d13f5d11ec412f3752961c5d5531a"
+      },
+      {
+        "event_id": "a5906ba6-19d8-4cb8-83f2-dccec6e2ccb0",
+        "event_type": "SYNC_COMPLETED",
+        "source_node_id": "PROOF-NODE-2",
+        "target_node_id": "PROOF-NODE-1",
+        "payload": {
+          "merged": 0,
+          "conflicts_resolved": 3,
+          "skipped": 0,
+          "peer_service_count": 3,
+          "local_service_count": 3
+        },
+        "vector_clock": {
+          "PROOF-NODE-2": 1,
+          "PROOF-NODE-1": 3,
+          "PROOF-NODE-3": 0
+        },
+        "timestamp": "2026-08-14T10:26:44.428919+00:00",
+        "nonce": "f5a0a2c981959acb503f393364d4bd79",
+        "event_hash": "6135b5e88d785facfee9f3a4c82d607fb1172b14f8bc274984e2d745a647667c",
+        "previous_event_hash": "0b47998c488ad6d8d23a4120666cdbea95fa45e6fd46373daf4681799faf4981"
+      },
+      {
+        "event_id": "957bb6a8-62ac-45b6-9642-105c9968ca71",
+        "event_type": "SYNC_COMPLETED",
+        "source_node_id": "PROOF-NODE-2",
+        "target_node_id": "PROOF-NODE-3",
+        "payload": {
+          "merged": 0,
+          "conflicts_resolved": 3,
+          "skipped": 0,
+          "peer_service_count": 3,
+          "local_service_count": 3
+        },
+        "vector_clock": {
+          "PROOF-NODE-2": 2,
+          "PROOF-NODE-1": 3,
+          "PROOF-NODE-3": 0
+        },
+        "timestamp": "2026-08-14T10:26:44.429739+00:00",
+        "nonce": "557f8542f64ba60077cc7a177a5b1f14",
+        "event_hash": "79975a150cab5454d2c7be0f94f4ee20cb7ab59d61d7bc2e34b6ef908260b2de",
+        "previous_event_hash": "6135b5e88d785facfee9f3a4c82d607fb1172b14f8bc274984e2d745a647667c"
+      }
+    ]
+  },
+  "PROOF-NODE-3": {
+    "chain_valid": true,
+    "event_count": 5,
+    "head_hash": "87f2fc33fc30bfdaf3190d59e143a7fc82ad4b48225dd26176658151ca4fc092",
+    "events": [
+      {
+        "event_id": "65e1a252-ddc2-4c94-8d8b-45643fe428ac",
+        "event_type": "SERVICE_REGISTERED",
+        "source_node_id": "PROOF-NODE-1",
+        "target_node_id": "",
+        "payload": {
+          "record": {
+            "platform_service_id": "insightflow.runtime.intelligence.v1",
+            "capability_id": "insightflow-intelligence-cap",
+            "service_name": "InsightFlow Runtime Intelligence",
+            "version": "1.0.2",
+            "provider": "Insight Stack (Ganesh)",
+            "owner": {
+              "team": "Insight Stack",
+              "contact": "ganesh@bhiv.internal"
+            },
+            "runtime_type": "CONTAINER",
+            "service_classification": "DOMAIN_SERVICE",
+            "capability_category": "EXECUTION",
+            "status": "ACTIVE",
+            "registration_timestamp": "2026-08-14T10:26:44.424911+00:00",
+            "description": "InsightFlow live runtime participant - intelligence execution",
+            "tags": [
+              "insight",
+              "intelligence",
+              "live"
+            ],
+            "endpoints": {
+              "execution": "https://insight-constitutional-runtime.onrender.com/api/v1/execute",
+              "health": "https://insight-constitutional-runtime.onrender.com/api/v1/health/insightflow.runtime.intelligence.v1"
+            },
+            "dependencies": [
+              "PlatformCapabilitySDK",
+              "PlatformDiscovery",
+              "RuntimeCore"
+            ]
+          },
+          "manifest": {
+            "manifest_id": "insightflow-manifest-001",
+            "service_name": "InsightFlow Runtime Intelligence",
+            "version": "1.0.2",
+            "supported_operations": [
+              {
+                "operation_name": "execute",
+                "description": "Execute intelligence analysis via InsightFlow",
+                "input_contract": {
+                  "type": "object",
+                  "required": [
+                    "service_id",
+                    "operation",
+                    "payload"
+                  ],
+                  "properties": {
+                    "service_id": {
+                      "type": "string"
+                    },
+                    "operation": {
+                      "type": "string"
+                    },
+                    "version": {
+                      "type": "string"
+                    },
+                    "invocation_id": {
+                      "type": "string"
+                    },
+                    "payload": {
+                      "type": "object"
+                    }
+                  }
+                },
+                "output_contract": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string"
+                    },
+                    "response": {
+                      "type": "object"
+                    },
+                    "evidence": {
+                      "type": "object"
+                    }
+                  }
+                },
+                "execution_modes": [
+                  "SYNCHRONOUS"
+                ],
+                "idempotent": true
+              }
+            ],
+            "execution_modes": [
+              "SYNCHRONOUS"
+            ],
+            "determinism_guarantees": {
+              "deterministic_output": true,
+              "replay_safe": true
+            },
+            "replay_guarantees": {
+              "replay_safe": true,
+              "idempotent": true
+            },
+            "trust_requirements": {
+              "min_trust_level": "CLASSICAL"
+            },
+            "evidence_guarantees": {
+              "hash_chained": true,
+              "tamper_evident": true
+            },
+            "runtime_dependencies": [
+              {
+                "name": "PlatformSDK",
+                "version": "1.0.0"
+              }
+            ],
+            "version_compatibility": {
+              "compatible": [
+                "1.0.2",
+                "1.0.1"
+              ],
+              "deprecated": [
+                "1.0.0"
+              ],
+              "unsupported": [
+                "0.9.0"
+              ]
+            },
+            "security_requirements": {
+              "authentication": "mTLS",
+              "encryption": "TLS_1_3"
+            },
+            "resource_requirements": {
+              "memory_mb": 256,
+              "cpu_cores": 1
+            },
+            "publication_timestamp": "2026-08-14T10:26:44.424911+00:00"
+          }
+        },
+        "vector_clock": {
+          "PROOF-NODE-1": 1,
+          "PROOF-NODE-2": 0,
+          "PROOF-NODE-3": 0
+        },
+        "timestamp": "2026-08-14T10:26:44.425419+00:00",
+        "nonce": "fc92dc791eb4d1becb26fd2c54495e93",
+        "event_hash": "3f427939e242676b48f03ca70de70f82162d0b20612a46198e27db796c076db7",
+        "previous_event_hash": "000a3545d300d9ae3ce855aa1dfb0c47c882f3e438438e76f7c9943f6f71ea40"
+      },
+      {
+        "event_id": "1cbc2c28-d2f3-4b22-b9c5-8e9ae9bb3ba8",
+        "event_type": "SERVICE_REGISTERED",
+        "source_node_id": "PROOF-NODE-1",
+        "target_node_id": "",
+        "payload": {
+          "record": {
+            "platform_service_id": "qcg.verification.quantum.v1",
+            "capability_id": "qcg-quantum-verification-cap",
+            "service_name": "QCG Quantum Verification",
+            "version": "2.0.0",
+            "provider": "QCG Platform (Pritesh/Kanishk)",
+            "owner": {
+              "team": "QCG Platform Engineering",
+              "contact": "kanishk@bhiv.internal"
+            },
+            "runtime_type": "PROCESS",
+            "service_classification": "PLATFORM_SERVICE",
+            "capability_category": "VERIFICATION",
+            "status": "ACTIVE",
+            "registration_timestamp": "2026-08-14T10:26:44.425948+00:00",
+            "description": "QCG quantum/classical contract verification via local runtime",
+            "tags": [
+              "qcg",
+              "quantum",
+              "verification",
+              "live"
+            ],
+            "endpoints": {
+              "execution": "http://localhost:8080/verify",
+              "health": "http://localhost:8080/health"
+            },
+            "dependencies": [
+              "PlatformCapabilitySDK",
+              "PlatformDiscovery"
+            ]
+          },
+          "manifest": {
+            "manifest_id": "qcg-verification-manifest-001",
+            "service_name": "QCG Quantum Verification",
+            "version": "2.0.0",
+            "supported_operations": [
+              {
+                "operation_name": "verify",
+                "description": "Verify quantum/classical execution contracts",
+                "input_contract": {
+                  "type": "object",
+                  "required": [
+                    "contract",
+                    "producer_public_key"
+                  ],
+                  "properties": {
+                    "contract": {
+                      "type": "object"
+                    },
+                    "producer_public_key": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "output_contract": {
+                  "type": "object",
+                  "properties": {
+                    "trace_id": {
+                      "type": "string"
+                    },
+                    "flow_status": {
+                      "type": "string"
+                    },
+                    "stages": {
+                      "type": "object"
+                    }
+                  }
+                },
+                "execution_modes": [
+                  "SYNCHRONOUS"
+                ],
+                "idempotent": false
+              }
+            ],
+            "execution_modes": [
+              "SYNCHRONOUS"
+            ],
+            "determinism_guarantees": {
+              "deterministic_output": true,
+              "replay_safe": true
+            },
+            "replay_guarantees": {
+              "replay_safe": true,
+              "sequence_tracked": true
+            },
+            "trust_requirements": {
+              "min_trust_level": "CLASSICAL"
+            },
+            "evidence_guarantees": {
+              "hash_chained": true,
+              "merkle_proof": true
+            },
+            "runtime_dependencies": [],
+            "version_compatibility": {
+              "compatible": [
+                "2.0.0"
+              ],
+              "deprecated": [
+                "1.0.0"
+              ],
+              "unsupported": [
+                "0.5.0"
+              ]
+            },
+            "security_requirements": {
+              "authentication": "ECDSA",
+              "encryption": "TLS_1_3"
+            },
+            "resource_requirements": {
+              "memory_mb": 512,
+              "cpu_cores": 2
+            },
+            "publication_timestamp": "2026-08-14T10:26:44.425948+00:00"
+          }
+        },
+        "vector_clock": {
+          "PROOF-NODE-1": 2,
+          "PROOF-NODE-2": 0,
+          "PROOF-NODE-3": 0
+        },
+        "timestamp": "2026-08-14T10:26:44.425948+00:00",
+        "nonce": "25d0476cfbaeaf9a09e94a5591a493ca",
+        "event_hash": "d867f55fbae897e99892081906322ece6b8d13f5d11ec412f3752961c5d5531a",
+        "previous_event_hash": "3f427939e242676b48f03ca70de70f82162d0b20612a46198e27db796c076db7"
+      },
+      {
+        "event_id": "47f456b2-b5ad-4bdd-aa0a-bc6cd433cece",
+        "event_type": "SERVICE_REGISTERED",
+        "source_node_id": "PROOF-NODE-1",
+        "target_node_id": "",
+        "payload": {
+          "record": {
+            "platform_service_id": "keshav.analysis.identity.v1",
+            "capability_id": "keshav-analysis-cap",
+            "service_name": "KESHAV Identity & Analysis",
+            "version": "1.0.0",
+            "provider": "KESHAV Service (Live)",
+            "owner": {
+              "team": "KESHAV Engineering",
+              "contact": "keshav@bhiv.internal"
+            },
+            "runtime_type": "CONTAINER",
+            "service_classification": "DOMAIN_SERVICE",
+            "capability_category": "VERIFICATION",
+            "status": "ACTIVE",
+            "registration_timestamp": "2026-08-14T10:26:44.426591+00:00",
+            "description": "KESHAV live root-cause analysis and severity classification",
+            "tags": [
+              "keshav",
+              "analysis",
+              "identity",
+              "live"
+            ],
+            "endpoints": {
+              "execution": "https://keshav-cia7.onrender.com/analyze",
+              "health": "https://keshav-cia7.onrender.com/health",
+              "metrics": "https://keshav-cia7.onrender.com/metrics/json"
+            },
+            "dependencies": [
+              "PlatformCapabilitySDK"
+            ]
+          },
+          "manifest": {
+            "manifest_id": "keshav-analysis-manifest-001",
+            "service_name": "KESHAV Identity & Analysis",
+            "version": "1.0.0",
+            "supported_operations": [
+              {
+                "operation_name": "analyze",
+                "description": "Root-cause analysis and severity classification",
+                "input_contract": {
+                  "type": "object",
+                  "required": [
+                    "trace_id",
+                    "execution_id",
+                    "tasks"
+                  ],
+                  "properties": {
+                    "trace_id": {
+                      "type": "string"
+                    },
+                    "execution_id": {
+                      "type": "string"
+                    },
+                    "tasks": {
+                      "type": "array"
+                    },
+                    "constraint_results": {
+                      "type": "array"
+                    },
+                    "propagation_results": {
+                      "type": "array"
+                    }
+                  }
+                },
+                "output_contract": {
+                  "type": "object",
+                  "properties": {
+                    "trace_id": {
+                      "type": "string"
+                    },
+                    "root_cause": {},
+                    "severity": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "execution_modes": [
+                  "SYNCHRONOUS"
+                ],
+                "idempotent": true
+              }
+            ],
+            "execution_modes": [
+              "SYNCHRONOUS"
+            ],
+            "determinism_guarantees": {
+              "deterministic_output": true
+            },
+            "replay_guarantees": {
+              "replay_safe": true
+            },
+            "trust_requirements": {
+              "min_trust_level": "CLASSICAL"
+            },
+            "evidence_guarantees": {
+              "hash_chained": true
+            },
+            "runtime_dependencies": [],
+            "version_compatibility": {
+              "compatible": [
+                "1.0.0"
+              ],
+              "deprecated": [],
+              "unsupported": []
+            },
+            "security_requirements": {
+              "authentication": "API_KEY"
+            },
+            "resource_requirements": {
+              "memory_mb": 128,
+              "cpu_cores": 1
+            },
+            "publication_timestamp": "2026-08-14T10:26:44.426591+00:00"
+          }
+        },
+        "vector_clock": {
+          "PROOF-NODE-1": 3,
+          "PROOF-NODE-2": 0,
+          "PROOF-NODE-3": 0
+        },
+        "timestamp": "2026-08-14T10:26:44.426591+00:00",
+        "nonce": "830b3041b3e2e77acbc01237c53822b0",
+        "event_hash": "0b47998c488ad6d8d23a4120666cdbea95fa45e6fd46373daf4681799faf4981",
+        "previous_event_hash": "d867f55fbae897e99892081906322ece6b8d13f5d11ec412f3752961c5d5531a"
+      },
+      {
+        "event_id": "7122f943-967a-4e62-8330-524b47bafc20",
+        "event_type": "SYNC_COMPLETED",
+        "source_node_id": "PROOF-NODE-3",
+        "target_node_id": "PROOF-NODE-1",
+        "payload": {
+          "merged": 0,
+          "conflicts_resolved": 3,
+          "skipped": 0,
+          "peer_service_count": 3,
+          "local_service_count": 3
+        },
+        "vector_clock": {
+          "PROOF-NODE-3": 1,
+          "PROOF-NODE-1": 3,
+          "PROOF-NODE-2": 0
+        },
+        "timestamp": "2026-08-14T10:26:44.430828+00:00",
+        "nonce": "479d0a257ad778af0ac8c53a98e11991",
+        "event_hash": "90843fc39da969a1f4eae7c69e514be4ffc454e038724a80062bee25a1428d1f",
+        "previous_event_hash": "0b47998c488ad6d8d23a4120666cdbea95fa45e6fd46373daf4681799faf4981"
+      },
+      {
+        "event_id": "37ba9fc5-0c31-4802-899a-c36db3ec3131",
+        "event_type": "SYNC_COMPLETED",
+        "source_node_id": "PROOF-NODE-3",
+        "target_node_id": "PROOF-NODE-2",
+        "payload": {
+          "merged": 0,
+          "conflicts_resolved": 3,
+          "skipped": 0,
+          "peer_service_count": 3,
+          "local_service_count": 3
+        },
+        "vector_clock": {
+          "PROOF-NODE-3": 2,
+          "PROOF-NODE-1": 3,
+          "PROOF-NODE-2": 0
+        },
+        "timestamp": "2026-08-14T10:26:44.431867+00:00",
+        "nonce": "4cbe5cdb3d6c746446bccd6dbddc8e3c",
+        "event_hash": "87f2fc33fc30bfdaf3190d59e143a7fc82ad4b48225dd26176658151ca4fc092",
+        "previous_event_hash": "90843fc39da969a1f4eae7c69e514be4ffc454e038724a80062bee25a1428d1f"
+      }
+    ]
   }
 }

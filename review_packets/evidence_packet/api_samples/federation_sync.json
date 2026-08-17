@@ -1,0 +1,86 @@
+{
+  "status": "CONVERGED",
+  "service_counts": {
+    "PROOF-NODE-1": 3,
+    "PROOF-NODE-2": 3,
+    "PROOF-NODE-3": 3
+  },
+  "federation_converged": true,
+  "sync_details": [
+    {
+      "node_id": "PROOF-NODE-1",
+      "sync_results": [
+        {
+          "status": "SYNC_COMPLETED",
+          "peer_id": "PROOF-NODE-2",
+          "merged": 0,
+          "conflicts_resolved": 3,
+          "skipped": 0
+        },
+        {
+          "status": "SYNC_COMPLETED",
+          "peer_id": "PROOF-NODE-3",
+          "merged": 0,
+          "conflicts_resolved": 3,
+          "skipped": 0
+        }
+      ]
+    },
+    {
+      "node_id": "PROOF-NODE-2",
+      "sync_results": [
+        {
+          "status": "SYNC_COMPLETED",
+          "peer_id": "PROOF-NODE-1",
+          "merged": 0,
+          "conflicts_resolved": 3,
+          "skipped": 0
+        },
+        {
+          "status": "SYNC_COMPLETED",
+          "peer_id": "PROOF-NODE-3",
+          "merged": 0,
+          "conflicts_resolved": 3,
+          "skipped": 0
+        }
+      ]
+    },
+    {
+      "node_id": "PROOF-NODE-3",
+      "sync_results": [
+        {
+          "status": "SYNC_COMPLETED",
+          "peer_id": "PROOF-NODE-1",
+          "merged": 0,
+          "conflicts_resolved": 3,
+          "skipped": 0
+        },
+        {
+          "status": "SYNC_COMPLETED",
+          "peer_id": "PROOF-NODE-2",
+          "merged": 0,
+          "conflicts_resolved": 3,
+          "skipped": 0
+        }
+      ]
+    }
+  ],
+  "audit_chain_integrity": {
+    "PROOF-NODE-1": {
+      "chain_valid": true,
+      "event_count": 5,
+      "head_hash": "0572364ba41f2a0ce6c7e3ac89c581c5e60ab87ab291f2abbba298059d76f66a"
+    },
+    "PROOF-NODE-2": {
+      "chain_valid": true,
+      "event_count": 5,
+      "head_hash": "79975a150cab5454d2c7be0f94f4ee20cb7ab59d61d7bc2e34b6ef908260b2de"
+    },
+    "PROOF-NODE-3": {
+      "chain_valid": true,
+      "event_count": 5,
+      "head_hash": "87f2fc33fc30bfdaf3190d59e143a7fc82ad4b48225dd26176658151ca4fc092"
+    }
+  },
+  "timestamp": "2026-08-14T10:26:44.432408+00:00"
+}

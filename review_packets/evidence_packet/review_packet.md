@@ -1,7 +1,7 @@
 # QCG Final Review Packet — Ecosystem Convergence
 
 **Engineer:** Kanishk / Platform Architecture Team
-**Date:** 2026-08-08
+**Date:** 2026-08-14
 **Project:** TANTRA Platform (Platform Runtime Federation & Capability SDK Convergence)
 
 ---
@@ -20,8 +20,8 @@ The `/review_packets/evidence_packet/` directory contains complete execution pro
    - Contains `federated_validation_trace.log`, proving the full 9-step execution (discovery → authentication → negotiation → invocation → replay → evidence → audit).
    - Contains historical `server_telemetry.log`.
 2. **`api_samples/`**
-   - `validation_report.json`, `evidence_chain.json`, `federation_audit.json`, `determinism_proof.json`.
-   - Live Integration Traces: `keshav_live_integration.json`, `keshav_api_traces.json`, `bucket_evidence.json`, `pritesh_evidence.json`, guaranteeing integration with Insight Stack, Cloud Storage, and Quantum boundaries.
+   - `certification_report.json`, `evidence_chain.json`, `federation_audit.json`, `full_proof_report.json`.
+   - Live Integration Traces: `capability_invocation.json`, `discovery_result.json`, `failure_paths.json`, `version_negotiation.json`, guaranteeing integration with Insight Stack, Quantum boundaries, and Analysis APIs.
 3. **`code_packet/`**
    - A curated list of updated components showing the implementation of federation, SDK logic, registry, heartbeat lifecycle, and service identity.
 4. **`deployment_proof/`**
@@ -32,12 +32,10 @@ The `/review_packets/evidence_packet/` directory contains complete execution pro
 
 ## 3. Proof of Integration (Minimum 3 Participants)
 
-The live tests specifically registered, verified, and orchestrated three independent TANTRA capabilities natively, alongside external integrations:
-1. `TANTRA-PSR-USF-001` (Universal Solver Fabric / Optimization)
-2. `TANTRA-PSR-QCG-001` (QCG Trust Verification)
-3. `TANTRA-PSR-DISCO-001` (Secure Federated Discovery)
-4. `KESHAV` API (Insight Stack Live Participant)
-5. `BHIV BUCKET` API (Sovereign Data Storage Participant)
+The live tests specifically registered, verified, and orchestrated three independent live TANTRA capabilities over the network:
+1. `InsightFlow` (Insight Stack - Ganesh - Live Remote)
+2. `QCG Quantum Verification` (Quantum Platform - Pritesh - Live Local)
+3. `KESHAV` API (Analysis - Live Remote)
 
 All capabilities underwent mutual authentication via `TANTRA_SERVICE_IDENTITY`, negotiated versions (handling `COMPATIBLE`, `DEPRECATED`, and `UNSUPPORTED`), and produced verifiable evidence footprints.
 
