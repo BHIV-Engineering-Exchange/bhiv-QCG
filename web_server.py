@@ -59,11 +59,10 @@ async def get_capabilities():
     """Get capability manifest and API contracts."""
     return CapabilityDiscoveryInterface.discover_capabilities()
 
-<<<<<<< HEAD
-@app.post("/verify")
+@app.post("/verify", tags=["Integration"])
 async def verify_contract(payload: VerifyRequest):
     """
-    Synchronous end-to-end integration flow.
+    Synchronous end-to-end integration flow verification.
     Primary ingestion pipeline for BHIV contracts from Pravah/NICAI.
     """
     import uuid
@@ -104,13 +103,6 @@ async def verify_contract(payload: VerifyRequest):
         return result
     else:
         # If verification fails, return 422 Unprocessable Entity
-=======
-@app.post("/verify", tags=["Integration"])
-async def verify_contract(req: VerifyRequest):
-    """Synchronous end-to-end integration flow verification."""
-    success, result = harness.process_incoming_contract(req.contract, req.producer_public_key)
-    if not success:
->>>>>>> 86f51a31442616a0759a9b57244d9d361d16197f
         raise HTTPException(status_code=422, detail=result)
     return result
 
