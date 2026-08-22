@@ -1,0 +1,397 @@
+{
+  "identity": {
+    "runtime_id": "TANTRA-PSR-USF-001",
+    "capability_id": "bhiv.capabilities.solver_fabric",
+    "permanent_identity": "Optimization.SolverFabric.v1",
+    "constitutional_layer": "Platform Service Layer / Agnostic Execution Layer",
+    "fabric_version": "1.0.0",
+    "schema_version": "1.0.0",
+    "api_version": "v1"
+  },
+  "authority_owns": [
+    "Solver Capability Contract enforcement",
+    "Deterministic Solver Selection",
+    "Execution Adapter lifecycle",
+    "Solver health tracking",
+    "Evidence package generation",
+    "Attachment mode negotiation",
+    "Solver Registry management"
+  ],
+  "authority_does_not_own": [
+    "Problem formulation / modeling",
+    "Business logic execution",
+    "Orchestration of external workflows",
+    "Master Directive definitions",
+    "Budget / cost approval",
+    "Data storage / persistence",
+    "Replay detection (primary)",
+    "Governance policy enforcement",
+    "Service registration",
+    "Certificate authority",
+    "Federation protocol"
+  ],
+  "version_negotiation": {
+    "1.0.0": {
+      "status": "COMPATIBLE",
+      "negotiated": "1.0.0"
+    },
+    "1.1.0": {
+      "status": "DEPRECATED",
+      "negotiated": "1.0.0"
+    },
+    "0.9.0": {
+      "status": "UNSUPPORTED",
+      "negotiated": "1.0.0"
+    },
+    "2.0.0": {
+      "status": "UNSUPPORTED",
+      "negotiated": "1.0.0"
+    },
+    "invalid": {
+      "status": "UNSUPPORTED",
+      "negotiated": "1.0.0"
+    }
+  },
+  "attachment_negotiation": {
+    "LOCAL": "LOCAL",
+    "REMOTE": "REMOTE",
+    "HYBRID": "HYBRID",
+    "INVALID": "LOCAL"
+  },
+  "consumer_validation": {
+    "valid": true,
+    "errors": []
+  },
+  "api_contract": {
+    "base_url": "https://api.bhiv.internal/platform/v1/optimization/solver-fabric",
+    "api_version": "v1",
+    "endpoints": [
+      {
+        "path": "/capabilities",
+        "method": "GET",
+        "description": "Discover available solvers matching query criteria",
+        "input_contract": {
+          "query_params": [
+            "problem_type",
+            "solver_type",
+            "deterministic"
+          ]
+        },
+        "output_contract": {
+          "solvers": "List[SolverCapability]"
+        },
+        "error_codes": [
+          "400"
+        ]
+      },
+      {
+        "path": "/execute",
+        "method": "POST",
+        "description": "Submit optimization problem for deterministic execution",
+        "input_contract": {
+          "required": [
+            "problem_schema"
+          ],
+          "properties": {
+            "problem_schema": {
+              "problem_type": "string",
+              "required_constraints": "List[str]"
+            },
+            "payload": {
+              "variables": "List",
+              "constraints": "List",
+              "objective": "List"
+            },
+            "execution_constraints": {
+              "max_time_ms": "int",
+              "max_memory_mb": "int"
+            }
+          }
+        },
+        "output_contract": {
+          "execution_id": "string",
+          "selected_solver": "string",
+          "status": "string",
+          "solution": "dict",
+          "telemetry": "dict",
+          "replay_metadata": "dict",
+          "confidence_score": "float"
+        },
+        "error_codes": [
+          "400",
+          "422",
+          "429",
+          "500",
+          "504"
+        ]
+      },
+      {
+        "path": "/health",
+        "method": "GET",
+        "description": "Runtime health status",
+        "input_contract": {},
+        "output_contract": {
+          "status": "string",
+          "solvers_registered": "int",
+          "uptime_seconds": "float"
+        },
+        "error_codes": []
+      },
+      {
+        "path": "/solvers/{id}",
+        "method": "GET",
+        "description": "Retrieve specific solver metadata",
+        "input_contract": {},
+        "output_contract": {
+          "solver": "SolverCapability"
+        },
+        "error_codes": [
+          "404"
+        ]
+      },
+      {
+        "path": "/solvers/{id}/status",
+        "method": "GET",
+        "description": "Solver health status",
+        "input_contract": {},
+        "output_contract": {
+          "status": "string"
+        },
+        "error_codes": [
+          "404"
+        ]
+      }
+    ]
+  },
+  "manifest": {
+    "identity": {
+      "runtime_id": "TANTRA-PSR-USF-001",
+      "capability_id": "bhiv.capabilities.solver_fabric",
+      "permanent_identity": "Optimization.SolverFabric.v1",
+      "constitutional_layer": "Platform Service Layer / Agnostic Execution Layer",
+      "fabric_version": "1.0.0",
+      "schema_version": "1.0.0",
+      "api_version": "v1"
+    },
+    "authority_matrix": {
+      "owns": [
+        "Solver Capability Contract enforcement",
+        "Deterministic Solver Selection",
+        "Execution Adapter lifecycle",
+        "Solver health tracking",
+        "Evidence package generation",
+        "Attachment mode negotiation",
+        "Solver Registry management"
+      ],
+      "does_not_own": [
+        "Problem formulation / modeling",
+        "Business logic execution",
+        "Orchestration of external workflows",
+        "Master Directive definitions",
+        "Budget / cost approval",
+        "Data storage / persistence",
+        "Replay detection (primary)",
+        "Governance policy enforcement",
+        "Service registration",
+        "Certificate authority",
+        "Federation protocol"
+      ],
+      "delegates_to": {
+        "PlatformServiceRegistry": "Service registration and lifecycle",
+        "CanonicalReplayAuthority": "Replay detection and enforcement",
+        "GovernanceLayer": "Pre-execution governance policy",
+        "HeartbeatManager": "Lease-based liveness protocol",
+        "TraceStore": "Observability trace storage"
+      }
+    },
+    "runtime_contract": {
+      "runtime_id": "TANTRA-PSR-USF-001",
+      "capability_id": "bhiv.capabilities.solver_fabric",
+      "permanent_identity": "Optimization.SolverFabric.v1",
+      "constitutional_layer": "Platform Service Layer / Agnostic Execution Layer",
+      "fabric_version": "1.0.0",
+      "schema_version": "1.0.0",
+      "api_version": "v1",
+      "valid_states": [
+        "REGISTERED",
+        "DISCOVERED",
+        "EXECUTING",
+        "COMPLETED",
+        "FAILED",
+        "DISABLED",
+        "DEREGISTERED"
+      ],
+      "valid_transitions": {
+        "REGISTERED": [
+          "DISCOVERED",
+          "DISABLED",
+          "DEREGISTERED"
+        ],
+        "DISCOVERED": [
+          "EXECUTING",
+          "DISABLED"
+        ],
+        "EXECUTING": [
+          "COMPLETED",
+          "FAILED"
+        ],
+        "COMPLETED": [
+          "DISCOVERED",
+          "DISABLED"
+        ],
+        "FAILED": [
+          "DISCOVERED",
+          "DISABLED"
+        ],
+        "DISABLED": [
+          "REGISTERED"
+        ],
+        "DEREGISTERED": []
+      }
+    },
+    "api_contract": {
+      "base_url": "https://api.bhiv.internal/platform/v1/optimization/solver-fabric",
+      "api_version": "v1",
+      "endpoints": [
+        {
+          "path": "/capabilities",
+          "method": "GET",
+          "description": "Discover available solvers matching query criteria",
+          "input_contract": {
+            "query_params": [
+              "problem_type",
+              "solver_type",
+              "deterministic"
+            ]
+          },
+          "output_contract": {
+            "solvers": "List[SolverCapability]"
+          },
+          "error_codes": [
+            "400"
+          ]
+        },
+        {
+          "path": "/execute",
+          "method": "POST",
+          "description": "Submit optimization problem for deterministic execution",
+          "input_contract": {
+            "required": [
+              "problem_schema"
+            ],
+            "properties": {
+              "problem_schema": {
+                "problem_type": "string",
+                "required_constraints": "List[str]"
+              },
+              "payload": {
+                "variables": "List",
+                "constraints": "List",
+                "objective": "List"
+              },
+              "execution_constraints": {
+                "max_time_ms": "int",
+                "max_memory_mb": "int"
+              }
+            }
+          },
+          "output_contract": {
+            "execution_id": "string",
+            "selected_solver": "string",
+            "status": "string",
+            "solution": "dict",
+            "telemetry": "dict",
+            "replay_metadata": "dict",
+            "confidence_score": "float"
+          },
+          "error_codes": [
+            "400",
+            "422",
+            "429",
+            "500",
+            "504"
+          ]
+        },
+        {
+          "path": "/health",
+          "method": "GET",
+          "description": "Runtime health status",
+          "input_contract": {},
+          "output_contract": {
+            "status": "string",
+            "solvers_registered": "int",
+            "uptime_seconds": "float"
+          },
+          "error_codes": []
+        },
+        {
+          "path": "/solvers/{id}",
+          "method": "GET",
+          "description": "Retrieve specific solver metadata",
+          "input_contract": {},
+          "output_contract": {
+            "solver": "SolverCapability"
+          },
+          "error_codes": [
+            "404"
+          ]
+        },
+        {
+          "path": "/solvers/{id}/status",
+          "method": "GET",
+          "description": "Solver health status",
+          "input_contract": {},
+          "output_contract": {
+            "status": "string"
+          },
+          "error_codes": [
+            "404"
+          ]
+        }
+      ]
+    },
+    "attachment_contract": {
+      "supported_modes": [
+        "LOCAL",
+        "REMOTE",
+        "HYBRID"
+      ],
+      "default_mode": "LOCAL"
+    },
+    "event_contract": {
+      "valid_events": [
+        "solver_fabric.solver_registered",
+        "solver_fabric.solver_disabled",
+        "solver_fabric.solver_enabled",
+        "solver_fabric.execution_started",
+        "solver_fabric.execution_completed",
+        "solver_fabric.execution_failed",
+        "solver_fabric.registration_completed",
+        "solver_fabric.health_check"
+      ]
+    },
+    "version_negotiation": {
+      "current_version": "1.0.0",
+      "schema_version": "1.0.0",
+      "api_version": "v1"
+    },
+    "replay_guarantees": [
+      "Every execution produces a unique replay_id (UUID v4)",
+      "Every execution produces a unique trace_id (UUID v4)",
+      "Deterministic inputs are captured in the evidence package",
+      "Provenance metadata (timestamps, versions, solver info) is captured",
+      "Replay IDs are submitted to the platform Replay Registry",
+      "Cross-participant replay chains span Fabric \u2192 Gateway \u2192 Registry"
+    ],
+    "deterministic_guarantees": [
+      "Solver Selection Engine produces identical ordering for identical inputs",
+      "Evidence packages contain all state required for replay",
+      "Failure codes are deterministic and structured",
+      "State transitions follow the defined lifecycle FSM",
+      "Version negotiation is deterministic given the same inputs",
+      "Evidence chain hashes are deterministic and verifiable"
+    ],
+    "evidence_chain_head": "87b743b9ee9f17cbc706a992c703eb683ca531afb8769b6d0fece5355c90df11"
+  },
+  "status": "PASSED"
+}

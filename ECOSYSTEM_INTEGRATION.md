@@ -10,7 +10,7 @@ The QCG acts as a sovereign node that produces and verifies deterministic execut
 | Service Role | Owner | Interaction Description | Status |
 |---|---|---|---|
 | **Identity / Analysis** | KESHAV | Root-cause analysis, severity classification, trace continuity via live `/analyze` API. | **Validated (Live)** |
-| **Runtime** | Dhiraj | Validate live runtime execution through actual endpoints. | Implemented / Pending Live URL |
+| **Runtime** | External | Validate live runtime execution through actual endpoints. | Implemented / Pending Live URL |
 | **Quantum Capability** | Pritesh | Validate computation execution against live quantum interfaces. | **Validated (Live)** |
 | **Governance** | Raj | Verify governance approval and policy enforcement via APIs. | Implemented / Pending Live URL |
 | **Lineage** | Pravah | Verify trace continuity and provenance propagation. | Implemented / Pending Live URL |
@@ -140,7 +140,7 @@ The following services are not yet available for live integration. Evidence of u
 
 | Service | Status | Required Follow-up |
 |---------|--------|--------------------|
-| Dhiraj Runtime | No live URL provided | Dhiraj to provide runtime API URL |
+| External Runtime | No live URL provided | External to provide runtime API URL |
 | Raj Governance | No live URL provided | Raj to provide governance API URL |
 | Pravah Lineage | No live URL provided | Pravah team to provide lineage API URL |
 | InsightFlow | No live URL provided | InsightFlow team to provide telemetry endpoint |

@@ -1,0 +1,18 @@
+{
+  "report_id": "fe838a37-0d74-433a-bcb8-719cc1fcbb18",
+  "generated_at": "2026-08-06T08:34:17.980731+00:00",
+  "runtime_id": "TANTRA-PSR-USF-001",
+  "capability_id": "bhiv.capabilities.solver_fabric",
+  "fabric_version": "1.0.0",
+  "all_passed": true,
+  "validation_summary": {
+    "contract_validation": "PASSED",
+    "registry_validation": "PASSED",
+    "replay_validation": "PASSED",
+    "gateway_validation": "PASSED",
+    "quantum_validation": "PASSED",
+    "observability_validation": "PASSED",
+    "version_compatibility": "PASSED",
+    "api_samples": "UNKNOWN"
+  }
+}

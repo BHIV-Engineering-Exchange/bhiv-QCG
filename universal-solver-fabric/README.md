@@ -1,51 +1,85 @@
 # Universal Solver Fabric
 
-The Universal Solver Fabric is the foundational optimization infrastructure of the BHIV Sovereign Optimization Capability. It allows classical, quantum, heuristic, and evolutionary optimization engines to participate through unified contracts.
+The Universal Solver Fabric is the foundational optimization infrastructure of the BHIV Sovereign Optimization Capability, deployed as a **Constitutional Runtime Participant** (`Optimization.SolverFabric.v1`) within the TANTRA canonical ecosystem.
+
+## Constitutional Position
+
+| Field                | Value                                          |
+|----------------------|------------------------------------------------|
+| Runtime ID           | `TANTRA-PSR-USF-001`                           |
+| Capability ID        | `bhiv.capabilities.solver_fabric`              |
+| Permanent Identity   | `Optimization.SolverFabric.v1`                 |
+| Constitutional Layer | Platform Service Layer / Agnostic Execution    |
+| Version              | 1.0.0                                          |
 
 ## Components
 
-1. **Solver Capability Contract** (`solver_contract.schema.json`): A JSON Schema that strictly enforces what capabilities and limits a solver must declare.
-2. **Universal Solver Registry** (`solver_registry.py`): In-memory registry to validate, track, and lookup registered solvers.
-3. **Solver Selection Engine** (`solver_selection_engine.py`): A deterministic engine recommending an ordered list of compatible solvers based on a problem's characteristics.
-4. **Solver Interfaces** (`solver_interfaces/`): Attachment interfaces for bridging the gap between the Selection Engine and specific execution runtimes.
+### Core Solver Fabric
+1. **Solver Capability Contract** (`solver_contract.schema.json`): JSON Schema enforcing solver capability declarations.
+2. **Universal Solver Registry** (`solver_registry.py`): Validates, tracks, and discovers registered solvers.
+3. **Solver Selection Engine** (`solver_selection_engine.py`): Deterministic solver ranking and selection.
+4. **Execution Adapter** (`execution_adapter.py`): Replay-safe execution with evidence generation.
+5. **Solver Interfaces** (`solver_interfaces/`): Attachment points for classical, quantum, CP, MIP, evolutionary, and other engines.
+
+### Constitutional Integration
+6. **Constitutional Runtime Contract** (`constitutional_runtime_contract.py`): Authority matrix, runtime/API/event/attachment contracts, version negotiation, replay/evidence guarantees.
+7. **Gateway Bridge** (`fabric_gateway_bridge.py`): Integration with the Quantum Communication Gateway for trust validation and replay continuity.
+8. **Quantum Runtime** (`fabric_quantum_runtime.py`): Live quantum execution via Qiskit QuantumProducer with classical fallback.
+9. **Registry Participant** (`fabric_registry_participant.py`): Five-registry participation (Capability, Runtime, Replay, Build, Review).
+10. **Observability** (`fabric_observability.py`): Trace collection, metrics, consumer logs, failure evidence, cross-participant replay chains.
 
 ## Getting Started
 
 ### Prerequisites
-
-Ensure you have python >= 3.9 and install required packages:
 ```bash
 pip install jsonschema
+pip install qiskit qiskit-aer  # For quantum runtime
 ```
 
-### Registration Example
-
+### Quick Start — Registration & Selection
 ```python
 from solver_registry import SolverRegistry
-import json
+from solver_selection_engine import SolverSelectionEngine
 
 registry = SolverRegistry("solver_contract.schema.json")
+# Register solvers...
+engine = SolverSelectionEngine(registry)
+recommendations = engine.select_solvers({"problem_type": "MILP", "required_constraints": ["LINEAR"]})
+```
 
-# Load examples
-with open("solver_examples.json") as f:
-    examples = json.load(f)
+### Quick Start — Constitutional Integration
+```python
+from constitutional_runtime_contract import ConstitutionalRuntimeContract
+from fabric_registry_participant import SolverFabricRegistryParticipant
+from fabric_observability import SolverFabricObservability
 
-# Register a solver
-for solver in examples:
-    registry.register_solver(solver)
+# Initialize contract
+contract = ConstitutionalRuntimeContract()
 
-# Lookup capabilities
-compatible = registry.compatibility_lookup(required_problem_type="QUBO")
-print(compatible)
+# Register with all five registries
+participant = SolverFabricRegistryParticipant(contract=contract)
+result = participant.register_all()
+
+# Record execution observability
+obs = SolverFabricObservability(contract=contract)
+trace = obs.record_execution(trace_id="...", replay_id="...", ...)
+```
+
+## Testing
+```bash
+# Constitutional integration tests (68 tests)
+python -m pytest tests/test_constitutional_integration.py -v
+
+# Original fabric tests (7 tests)
+python -m pytest tests/test_fabric.py -v
+
+# Production readiness report
+python production_readiness_report.py
 ```
 
 ## Architecture & Integration
-
-Please refer to `UNIVERSAL_SOLVER_FABRIC.md` for complete architecture diagrams, lifecycles, and failure modes.
-
-### BCAB/BCAES Capability Integration
-
-The Universal Solver Fabric is formally registered as a **Platform Service** capability within the Sovereign Optimization domain.
-For canonical registry details, see `CAPABILITY_REGISTRY.md`.
-For the platform service specification, see `PLATFORM_SERVICE_SPEC.md`.
-For the runtime integration sequence, see `runtime_flow.md`.
+- `RUNTIME_IDENTITY_CARD.md` — Permanent constitutional identity (21 fields)
+- `ARCHITECTURE.md` — Architectural boundaries and component breakdown
+- `INTEGRATION.md` — Ecosystem integration mapping
+- `PLATFORM_SERVICE_SPEC.md` — Platform Service API specification
+- `runtime_flow.md` — Runtime execution sequence diagram

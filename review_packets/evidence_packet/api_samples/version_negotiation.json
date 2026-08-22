@@ -1,0 +1,72 @@
+{
+  "status": "COMPLETED",
+  "negotiations": [
+    {
+      "case": "COMPATIBLE",
+      "result": {
+        "service_id": "insightflow.runtime.intelligence.v1",
+        "status": "COMPATIBLE",
+        "requested_version": "1.0.2",
+        "negotiated_version": "1.0.2",
+        "suggested_versions": [],
+        "message": "Version 1.0.2 is fully supported.",
+        "timestamp": "2026-08-14T10:26:44.501569+00:00"
+      }
+    },
+    {
+      "case": "DEPRECATED",
+      "result": {
+        "service_id": "insightflow.runtime.intelligence.v1",
+        "status": "DEPRECATED",
+        "requested_version": "1.0.0",
+        "negotiated_version": "1.0.0",
+        "suggested_versions": [
+          "1.0.2",
+          "1.0.1"
+        ],
+        "message": "Version 1.0.0 is deprecated. Please migrate to 1.0.1.",
+        "timestamp": "2026-08-14T10:26:44.502834+00:00"
+      }
+    },
+    {
+      "case": "UNSUPPORTED",
+      "result": {
+        "service_id": "insightflow.runtime.intelligence.v1",
+        "status": "UNSUPPORTED",
+        "requested_version": "0.9.0",
+        "negotiated_version": null,
+        "suggested_versions": [
+          "1.0.2",
+          "1.0.1"
+        ],
+        "message": "Version 0.9.0 is no longer supported. Request rejected.",
+        "timestamp": "2026-08-14T10:26:44.504530+00:00"
+      }
+    },
+    {
+      "case": "QCG_COMPATIBLE",
+      "result": {
+        "service_id": "qcg.verification.quantum.v1",
+        "status": "COMPATIBLE",
+        "requested_version": "2.0.0",
+        "negotiated_version": "2.0.0",
+        "suggested_versions": [],
+        "message": "Version 2.0.0 is fully supported.",
+        "timestamp": "2026-08-14T10:26:44.505469+00:00"
+      }
+    },
+    {
+      "case": "KESHAV_COMPATIBLE",
+      "result": {
+        "service_id": "keshav.analysis.identity.v1",
+        "status": "COMPATIBLE",
+        "requested_version": "1.0.0",
+        "negotiated_version": "1.0.0",
+        "suggested_versions": [],
+        "message": "Version 1.0.0 is fully supported.",
+        "timestamp": "2026-08-14T10:26:44.507003+00:00"
+      }
+    }
+  ],
+  "timestamp": "2026-08-14T10:26:44.507532+00:00"
+}

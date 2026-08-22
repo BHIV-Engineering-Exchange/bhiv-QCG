@@ -43,9 +43,34 @@ FastAPIInstrumentor.instrument_app(app)
 # Global harness instance
 harness = TANTRAIntegrationHarness()
 
+import os
+import json
+
 class VerifyRequest(BaseModel):
-    contract: Dict[str, Any]
-    producer_public_key: str
+    contract: Dict[str, Any] = None
+    producer_public_key: str = None
+    
+    # SDK Envelope support
+    service_id: str = None
+    operation: str = None
+    version: str = None
+    invocation_id: str = None
+    payload: Dict[str, Any] = None
+
+# Persistent mapping for SDK invocation IDs to Trace IDs
+INVOCATION_MAP_FILE = "invocation_map.json"
+def load_invocation_map():
+    if os.path.exists(INVOCATION_MAP_FILE):
+        try:
+            with open(INVOCATION_MAP_FILE, "r") as f:
+                return json.load(f)
+        except Exception:
+            pass
+    return {}
+
+def save_invocation_map(mapping):
+    with open(INVOCATION_MAP_FILE, "w") as f:
+        json.dump(mapping, f)
 
 @app.get("/health", tags=["Health"])
 @app.get("/health/live", tags=["Health"])
@@ -68,8 +93,17 @@ async def verify_contract(payload: VerifyRequest):
     import uuid
     from datetime import datetime, timezone
 
+    # Unpack SDK wrapper if present
+    invocation_id = payload.invocation_id
+    if payload.payload is not None:
+        contract_raw = payload.payload.get("contract", {})
+        pub_key_raw = payload.payload.get("producer_public_key", "")
+    else:
+        contract_raw = payload.contract or {}
+        pub_key_raw = payload.producer_public_key or ""
+
     # Adapt raw Pritesh payload into QCG ComputationExecutionContract
-    if "producer_type" not in payload.contract:
+    if "producer_type" not in contract_raw:
         from execution_contract import ComputationExecutionContract
         from node_identity import NodeSigner
         from provenance import sign_contract
@@ -79,7 +113,7 @@ async def verify_contract(payload: VerifyRequest):
         c = ComputationExecutionContract(
             producer_type="QUANTUM",
             producer_id="PRITESH_QUANTUM",
-            payload=payload.contract,
+            payload=contract_raw,
             confidence=0.99,
             trace_id=str(uuid.uuid4()),
             contract_version="2.0.0",
@@ -94,15 +128,26 @@ async def verify_contract(payload: VerifyRequest):
         # Override the dummy "YOUR_KEY" with the actual generated public key for verification
         pub_key_to_use = proxy_signer.identity.public_key
     else:
-        contract_dict = payload.contract
-        pub_key_to_use = payload.producer_public_key
+        contract_dict = contract_raw
+        pub_key_to_use = pub_key_raw
+
+    if invocation_id:
+        actual_trace_id = contract_dict.get("trace_id")
+        if actual_trace_id:
+            mapping = load_invocation_map()
+            mapping[invocation_id] = actual_trace_id
+            save_invocation_map(mapping)
 
     success, result = harness.process_incoming_contract(contract_dict, pub_key_to_use)
     
+<<<<<<< HEAD
     if success:
         return result
     else:
         # If verification fails, return 422 Unprocessable Entity
+=======
+    if not success:
+>>>>>>> af2124ab642e4ee690af9ce626445e9ec1b6acde
         raise HTTPException(status_code=422, detail=result)
     return result
 
@@ -173,9 +218,15 @@ async def replay_lineage(trace_id: str):
     Replay authority integration API.
     Provides verifiable lineage paths for given execution artifacts.
     """
-    verdict = harness.replay_auth.lookup(trace_id)
+    # Resolve SDK invocation_id to canonical trace_id if mapped
+    mapping = load_invocation_map()
+    resolved_trace_id = mapping.get(trace_id, trace_id)
+
+    verdict = harness.replay_auth.lookup(resolved_trace_id)
     if verdict:
-        return {"message_id": trace_id, "verdict": verdict.to_dict()}
+        v_dict = verdict.to_dict()
+        v_dict["message_id"] = trace_id
+        return {"message_id": trace_id, "verdict": v_dict}
     raise HTTPException(status_code=404, detail="Trace ID not found in replay registry")
 
 

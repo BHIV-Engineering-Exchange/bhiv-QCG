@@ -4,9 +4,9 @@ This document contains annotations for the review-critical files modified or add
 
 ---
 
-### 1. `dhiraj_runtime_server.py`
-* **File Path**: `/dhiraj_runtime_server.py`
-* **Purpose**: Acts as a standalone API representing the Dhiraj execution runtime. It receives execution payloads, determines confidence thresholds, and returns deterministic runtime hashes.
+### 1. `external_runtime_server.py`
+* **File Path**: `/external_runtime_server.py`
+* **Purpose**: Acts as a standalone API representing the External execution runtime. It receives execution payloads, determines confidence thresholds, and returns deterministic runtime hashes.
 * **Why it changed**: Created as a net-new file to remove local simulated execution and enforce an external network boundary via HTTP, satisfying the "Live execution participant" requirement.
 * **Integration impact**: Forces `integration_interfaces.py` to route execution out-of-process, guaranteeing an authenticated runtime integration that behaves like a true microservice in the TANTRA ecosystem.
 
@@ -22,7 +22,7 @@ This document contains annotations for the review-critical files modified or add
 
 ### 3. `integration_harness.py`
 * **File Path**: `/integration_harness.py`
-* **Purpose**: Controls the core execution flow (Replay Validation -> GC Validation -> Dhiraj Runtime Execution -> Consensus Proof).
+* **Purpose**: Controls the core execution flow (Replay Validation -> GC Validation -> External Runtime Execution -> Consensus Proof).
 * **Why it changed**: Updated to instantiate the `EvidenceLedger` and to persist `ExecutionRecord`s into the ledger immediately after Byzantine Consensus is reached.
 * **Integration impact**: Bridges the gap between execution and provenance. By appending records to the ledger, it enables the creation of verifiable, cryptographic lineage (Merkle proofs) that the MDU can later extract.
 
@@ -32,7 +32,7 @@ This document contains annotations for the review-critical files modified or add
 * **File Path**: `/integration_interfaces.py`
 * **Purpose**: Provides standardized, deterministic boundaries for connecting the QCG logic to external systems.
 * **Why it changed**: The `ReplayVerifierInterface`, `TrustVerifierInterface`, and `ExecutionValidatorInterface` were rewritten to use `requests.post()` instead of invoking local object methods.
-* **Integration impact**: Transforms the QCG from a monolithic simulation into a true distributed participant. It correctly routes payloads to the live Dhiraj, Replay, and GC endpoints, seamlessly handling network failures and HTTP responses.
+* **Integration impact**: Transforms the QCG from a monolithic simulation into a true distributed participant. It correctly routes payloads to the live External, Replay, and GC endpoints, seamlessly handling network failures and HTTP responses.
 
 ---
 

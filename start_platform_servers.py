@@ -11,7 +11,7 @@ import sys
 import os
 import json
 
-from capability_registry import CapabilityRegistryServer, CapabilityRegistryClient
+from capability_registry import CapabilityRegistryClient
 from platform_service_registry import PlatformServiceRegistry, PlatformServiceRecord, CapabilityManifest, RegistrationEvidenceRecorder, OperationContract
 from platform_lifecycle_manager import LifecycleManager
 from platform_service_discovery import PlatformDiscoveryServer
@@ -55,10 +55,7 @@ def main():
     base_port = config.DISCOVERY_PORT_BASE
 
     # --- Legacy Capability Registry ---
-    print("Starting Capability Registry Server (Port 9000)...")
-    cap_server = CapabilityRegistryServer("127.0.0.1", config.REGISTRY_PORT)
-    cap_server.start()
-    time.sleep(0.5)
+    print("Legacy Capability Registry (Port 9000) should be started separately via uvicorn.")
 
     # --- Federated Discovery Nodes ---
     print(f"\nStarting {num_nodes} Federated Discovery Nodes...")
@@ -133,6 +130,12 @@ def main():
         count = len(node.registry.list_services())
         print(f"  {node.node_id}: {count} services")
 
+    # Start heartbeat reapers
+    print("\nStarting heartbeat reapers...")
+    for node in nodes:
+        node.heartbeat.start_reaper()
+    print(f"  Heartbeat reapers active on {num_nodes} nodes (TTL={config.HEARTBEAT_TTL_SECONDS}s)")
+
     # Print endpoints
     print("\n" + "=" * 60)
     print("  FEDERATED DISCOVERY FABRIC RUNNING")
@@ -155,9 +158,10 @@ def main():
             time.sleep(1)
     except KeyboardInterrupt:
         print("\nStopping servers...")
+        for node in nodes:
+            node.heartbeat.stop_reaper()
         for server in servers:
             server.stop()
-        cap_server.stop()
         print("Done.")
 
 if __name__ == "__main__":

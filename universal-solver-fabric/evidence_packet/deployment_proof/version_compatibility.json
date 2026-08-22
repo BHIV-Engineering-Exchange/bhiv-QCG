@@ -1,0 +1,48 @@
+{
+  "matrix": [
+    {
+      "requested": "0.8.0",
+      "status": "UNSUPPORTED",
+      "negotiated": "1.0.0"
+    },
+    {
+      "requested": "0.9.0",
+      "status": "UNSUPPORTED",
+      "negotiated": "1.0.0"
+    },
+    {
+      "requested": "1.0.0",
+      "status": "COMPATIBLE",
+      "negotiated": "1.0.0"
+    },
+    {
+      "requested": "1.0.1",
+      "status": "COMPATIBLE",
+      "negotiated": "1.0.0"
+    },
+    {
+      "requested": "1.1.0",
+      "status": "DEPRECATED",
+      "negotiated": "1.0.0"
+    },
+    {
+      "requested": "1.2.0",
+      "status": "DEPRECATED",
+      "negotiated": "1.0.0"
+    },
+    {
+      "requested": "2.0.0",
+      "status": "UNSUPPORTED",
+      "negotiated": "1.0.0"
+    },
+    {
+      "requested": "3.0.0",
+      "status": "UNSUPPORTED",
+      "negotiated": "1.0.0"
+    }
+  ],
+  "supported_versions": [
+    "1.0.0"
+  ],
+  "status": "PASSED"
+}

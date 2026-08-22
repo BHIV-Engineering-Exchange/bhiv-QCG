@@ -223,12 +223,12 @@ def document_unavailable_services():
         "documented_at": datetime.now(timezone.utc).isoformat(),
         "services": [
             {
-                "service": "Dhiraj Runtime",
+                "service": "External Runtime",
                 "role": "Runtime Execution",
                 "status": "UNAVAILABLE",
                 "reason": "No live API URL provided. Service endpoint not yet deployed or communicated.",
                 "evidence": "No URL available for HTTP connection attempt",
-                "required_followup": "Dhiraj to provide live runtime API URL",
+                "required_followup": "External to provide live runtime API URL",
                 "qcg_readiness": "Integration harness ready — ExecutionValidatorInterface implemented and tested locally",
             },
 

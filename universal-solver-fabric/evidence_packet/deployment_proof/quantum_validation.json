@@ -1,0 +1,73 @@
+{
+  "quantum_available": true,
+  "execution_result": {
+    "status": "INFEASIBLE",
+    "confidence": "UNBOUNDED",
+    "quantum_confidence": 0.874,
+    "solution": {
+      "decoded_result": "CORRUPTED",
+      "quantum_payload": {
+        "decoded_message": "CORRUPTED",
+        "transmission_status": "REJECTED",
+        "encoded_bits": "10",
+        "dominant_bits": "01"
+      },
+      "bitstring": "10"
+    },
+    "replay_metadata": {
+      "backend": "qiskit_aer_simulator",
+      "noise_model": 0.05,
+      "mode": "entangled",
+      "seed": 42,
+      "message_id": "ff521b61-0d9f-589f-9fac-383f676caefc",
+      "trace_reference": "ff521b61-0d9f-589f-9fac-383f676caefc"
+    },
+    "execution_metadata": {
+      "trace_id": "29472df8-7957-46c3-8029-77399e966ca9",
+      "execution_duration_ms": 17,
+      "quantum_runtime_used": true,
+      "runtime_id": "TANTRA-PSR-USF-001",
+      "fabric_version": "1.0.0"
+    }
+  },
+  "solver_metadata": {
+    "solver_id": "QISKIT_QAOA_LIVE_01",
+    "solver_name": "Qiskit QAOA Live Runtime",
+    "solver_type": "QUANTUM",
+    "version": "1.0.0",
+    "supported_problem_types": [
+      "QUBO"
+    ],
+    "supported_constraints": [
+      "QUADRATIC"
+    ],
+    "objective_support": [
+      "QUADRATIC"
+    ],
+    "optimization_direction": [
+      "MINIMIZE"
+    ],
+    "deterministic_capability": false,
+    "replay_capability": true,
+    "explainability_support": false,
+    "execution_requirements": {
+      "hardware": "QPU",
+      "distributed": false
+    },
+    "resource_requirements": {
+      "memory_mb_min": 2048,
+      "cores_min": 2
+    },
+    "estimated_cost": "MEDIUM",
+    "estimated_runtime": "SECONDS",
+    "confidence_model": "PROBABILISTIC",
+    "authority_limits": {
+      "max_variables": 100,
+      "max_constraints": 100
+    },
+    "attachment_mode": "REMOTE",
+    "schema_version": "1.0.0"
+  },
+  "health": "HEALTHY",
+  "status": "PASSED"
+}
