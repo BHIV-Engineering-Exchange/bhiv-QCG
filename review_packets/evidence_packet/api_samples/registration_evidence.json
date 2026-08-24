@@ -1,0 +1,107 @@
+[
+  {
+    "participant": "InsightFlow (Ganesh)",
+    "service_id": "insightflow.runtime.intelligence.v1",
+    "type": "REMOTE_LIVE",
+    "base_url": "https://insight-constitutional-runtime.onrender.com",
+    "result": {
+      "status": "REGISTERED",
+      "service_id": "insightflow.runtime.intelligence.v1",
+      "registration_hash": "92d9c836d5316b7b9dd73aa394e16494794e20930220e86b3e9c73afc814bc6e",
+      "evidence": {
+        "evidence_id": "3dbe7660-544e-4bd4-b980-43483d8c16c1",
+        "event_type": "SERVICE_REGISTERED",
+        "service_id": "insightflow.runtime.intelligence.v1",
+        "timestamp": "2026-08-14T10:26:44.424911+00:00",
+        "details": {
+          "service_name": "InsightFlow Runtime Intelligence",
+          "version": "1.0.2",
+          "capability_id": "insightflow-intelligence-cap",
+          "status": "ACTIVE",
+          "registration_hash": "92d9c836d5316b7b9dd73aa394e16494794e20930220e86b3e9c73afc814bc6e",
+          "has_manifest": true
+        },
+        "evidence_hash": "895db83a91dc4809038b0cabc56146d9ea1f172515ddd215f92d4f35db692261",
+        "previous_evidence_hash": "9a9b162a21fc3e957ea53d4d174eac82f527616cd7e5205671b92c9d1de4d6ab"
+      },
+      "authentication": {
+        "authenticated": true,
+        "service_id": "insightflow.runtime.intelligence.v1",
+        "reason": "Internal registration (no proof required)",
+        "trust_level": "CLASSICAL",
+        "certificate_serial": "",
+        "timestamp": "2026-08-14T10:26:44.424911+00:00"
+      }
+    }
+  },
+  {
+    "participant": "QCG Quantum Verification (Pritesh)",
+    "service_id": "qcg.verification.quantum.v1",
+    "type": "LOCAL_LIVE",
+    "base_url": "http://localhost:8080",
+    "result": {
+      "status": "REGISTERED",
+      "service_id": "qcg.verification.quantum.v1",
+      "registration_hash": "e3f68a36cc5bdc11ba20ae97a539787dbcdb66c4a6f3dd118fd43c1848f09c45",
+      "evidence": {
+        "evidence_id": "a7f9ce9e-55b0-4ed3-a213-3330c81c15b3",
+        "event_type": "SERVICE_REGISTERED",
+        "service_id": "qcg.verification.quantum.v1",
+        "timestamp": "2026-08-14T10:26:44.425948+00:00",
+        "details": {
+          "service_name": "QCG Quantum Verification",
+          "version": "2.0.0",
+          "capability_id": "qcg-quantum-verification-cap",
+          "status": "ACTIVE",
+          "registration_hash": "e3f68a36cc5bdc11ba20ae97a539787dbcdb66c4a6f3dd118fd43c1848f09c45",
+          "has_manifest": true
+        },
+        "evidence_hash": "c66e1f005c72767744ad33ce45994be7cf44220e97893ac7053a9f3bf29bd4e9",
+        "previous_evidence_hash": "68d21aac9440d72c7f111ce7968240bac5a12ae3e65ce1860fedc0b6bf7913f6"
+      },
+      "authentication": {
+        "authenticated": true,
+        "service_id": "qcg.verification.quantum.v1",
+        "reason": "Internal registration (no proof required)",
+        "trust_level": "CLASSICAL",
+        "certificate_serial": "",
+        "timestamp": "2026-08-14T10:26:44.425948+00:00"
+      }
+    }
+  },
+  {
+    "participant": "KESHAV Analysis",
+    "service_id": "keshav.analysis.identity.v1",
+    "type": "REMOTE_LIVE",
+    "base_url": "https://keshav-cia7.onrender.com",
+    "result": {
+      "status": "REGISTERED",
+      "service_id": "keshav.analysis.identity.v1",
+      "registration_hash": "752af002fe0b6048c284843020cec581a5ac6fda3be17e714a1fca49e60089dc",
+      "evidence": {
+        "evidence_id": "45a3769f-1c7a-4a16-961d-d905d1fd7492",
+        "event_type": "SERVICE_REGISTERED",
+        "service_id": "keshav.analysis.identity.v1",
+        "timestamp": "2026-08-14T10:26:44.426591+00:00",
+        "details": {
+          "service_name": "KESHAV Identity & Analysis",
+          "version": "1.0.0",
+          "capability_id": "keshav-analysis-cap",
+          "status": "ACTIVE",
+          "registration_hash": "752af002fe0b6048c284843020cec581a5ac6fda3be17e714a1fca49e60089dc",
+          "has_manifest": true
+        },
+        "evidence_hash": "25d10340180cb3273094fc6bf325ed7f900e50be32898dade579cfaac3e5e90a",
+        "previous_evidence_hash": "407d95df0e198b6768f1d837f9ce57b66557d9c749653ba3fc6cacf840b7a7a5"
+      },
+      "authentication": {
+        "authenticated": true,
+        "service_id": "keshav.analysis.identity.v1",
+        "reason": "Internal registration (no proof required)",
+        "trust_level": "CLASSICAL",
+        "certificate_serial": "",
+        "timestamp": "2026-08-14T10:26:44.426591+00:00"
+      }
+    }
+  }
+]

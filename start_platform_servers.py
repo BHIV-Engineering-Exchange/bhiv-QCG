@@ -130,6 +130,12 @@ def main():
         count = len(node.registry.list_services())
         print(f"  {node.node_id}: {count} services")
 
+    # Start heartbeat reapers
+    print("\nStarting heartbeat reapers...")
+    for node in nodes:
+        node.heartbeat.start_reaper()
+    print(f"  Heartbeat reapers active on {num_nodes} nodes (TTL={config.HEARTBEAT_TTL_SECONDS}s)")
+
     # Print endpoints
     print("\n" + "=" * 60)
     print("  FEDERATED DISCOVERY FABRIC RUNNING")
@@ -152,9 +158,10 @@ def main():
             time.sleep(1)
     except KeyboardInterrupt:
         print("\nStopping servers...")
+        for node in nodes:
+            node.heartbeat.stop_reaper()
         for server in servers:
             server.stop()
-        cap_server.stop()
         print("Done.")
 
 if __name__ == "__main__":

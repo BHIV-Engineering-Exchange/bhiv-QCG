@@ -1,0 +1,105 @@
+{
+  "status": "DISCOVERED",
+  "services_found": 3,
+  "services": [
+    {
+      "platform_service_id": "insightflow.runtime.intelligence.v1",
+      "capability_id": "insightflow-intelligence-cap",
+      "service_name": "InsightFlow Runtime Intelligence",
+      "version": "1.0.2",
+      "provider": "Insight Stack (Ganesh)",
+      "owner": {
+        "team": "Insight Stack",
+        "contact": "ganesh@bhiv.internal"
+      },
+      "runtime_type": "CONTAINER",
+      "service_classification": "DOMAIN_SERVICE",
+      "capability_category": "EXECUTION",
+      "status": "ACTIVE",
+      "registration_timestamp": "2026-08-14T10:26:44.424911+00:00",
+      "description": "InsightFlow live runtime participant - intelligence execution",
+      "tags": [
+        "insight",
+        "intelligence",
+        "live"
+      ],
+      "endpoints": {
+        "execution": "https://insight-constitutional-runtime.onrender.com/api/v1/execute",
+        "health": "https://insight-constitutional-runtime.onrender.com/api/v1/health/insightflow.runtime.intelligence.v1"
+      },
+      "dependencies": [
+        "PlatformCapabilitySDK",
+        "PlatformDiscovery",
+        "RuntimeCore"
+      ]
+    },
+    {
+      "platform_service_id": "qcg.verification.quantum.v1",
+      "capability_id": "qcg-quantum-verification-cap",
+      "service_name": "QCG Quantum Verification",
+      "version": "2.0.0",
+      "provider": "QCG Platform (Pritesh/Kanishk)",
+      "owner": {
+        "team": "QCG Platform Engineering",
+        "contact": "kanishk@bhiv.internal"
+      },
+      "runtime_type": "PROCESS",
+      "service_classification": "PLATFORM_SERVICE",
+      "capability_category": "VERIFICATION",
+      "status": "ACTIVE",
+      "registration_timestamp": "2026-08-14T10:26:44.425948+00:00",
+      "description": "QCG quantum/classical contract verification via local runtime",
+      "tags": [
+        "qcg",
+        "quantum",
+        "verification",
+        "live"
+      ],
+      "endpoints": {
+        "execution": "http://localhost:8080/verify",
+        "health": "http://localhost:8080/health"
+      },
+      "dependencies": [
+        "PlatformCapabilitySDK",
+        "PlatformDiscovery"
+      ]
+    },
+    {
+      "platform_service_id": "keshav.analysis.identity.v1",
+      "capability_id": "keshav-analysis-cap",
+      "service_name": "KESHAV Identity & Analysis",
+      "version": "1.0.0",
+      "provider": "KESHAV Service (Live)",
+      "owner": {
+        "team": "KESHAV Engineering",
+        "contact": "keshav@bhiv.internal"
+      },
+      "runtime_type": "CONTAINER",
+      "service_classification": "DOMAIN_SERVICE",
+      "capability_category": "VERIFICATION",
+      "status": "ACTIVE",
+      "registration_timestamp": "2026-08-14T10:26:44.426591+00:00",
+      "description": "KESHAV live root-cause analysis and severity classification",
+      "tags": [
+        "keshav",
+        "analysis",
+        "identity",
+        "live"
+      ],
+      "endpoints": {
+        "execution": "https://keshav-cia7.onrender.com/analyze",
+        "health": "https://keshav-cia7.onrender.com/health",
+        "metrics": "https://keshav-cia7.onrender.com/metrics/json"
+      },
+      "dependencies": [
+        "PlatformCapabilitySDK"
+      ]
+    }
+  ],
+  "discovery_urls": [
+    "http://127.0.0.1:9110",
+    "http://127.0.0.1:9111",
+    "http://127.0.0.1:9112"
+  ],
+  "timestamp": "2026-08-14T10:26:44.459122+00:00"
+}

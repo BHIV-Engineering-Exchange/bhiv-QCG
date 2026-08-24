@@ -1,0 +1,125 @@
+{
+  "status": "COMPLETED",
+  "invocations": [
+    {
+      "participant": "InsightFlow",
+      "type": "REMOTE_LIVE",
+      "result": {
+        "invocation_id": "5d36a451-8011-4eea-bea5-752e5617c0ef",
+        "service_id": "insightflow.runtime.intelligence.v1",
+        "operation": "execute",
+        "status": "SUCCESS",
+        "response": {
+          "invocation_id": "5d36a451-8011-4eea-bea5-752e5617c0ef",
+          "service_id": "insightflow.runtime.intelligence.v1",
+          "operation": "execute",
+          "status": "SUCCESS",
+          "response": {
+            "participant": "InsightFlow",
+            "runtime_identity": "insightflow.runtime.intelligence.v1",
+            "version": "1.0.2",
+            "status": "accepted",
+            "payload": {
+              "source": "platform-live-proof",
+              "timestamp": "2026-08-14T10:26:44.508567+00:00"
+            }
+          },
+          "duration_ms": 0.01694000093266368,
+          "trust_method": "CLASSICAL",
+          "evidence": {
+            "invocation_id": "5d36a451-8011-4eea-bea5-752e5617c0ef",
+            "service_id": "insightflow.runtime.intelligence.v1",
+            "operation": "execute",
+            "request_hash": "ae69f64f68c0776cf71a69278acc4768519b2d37803f56220013315b67e0f048",
+            "response_hash": "f52e3026bfd5d0d14199d0e6309ffd526c161e34762793506830b4377bf83274",
+            "trust_method": "CLASSICAL",
+            "duration_ms": 0.01694000093266368,
+            "status": "SUCCESS",
+            "timestamp": "2026-08-14T10:26:37.527227+00:00"
+          },
+          "error": null,
+          "retry_count": 0,
+          "timestamp": "2026-08-14T10:26:37.527227+00:00"
+        },
+        "duration_ms": 359.59887504577637,
+        "trust_method": "CLASSICAL",
+        "evidence": {
+          "invocation_id": "5d36a451-8011-4eea-bea5-752e5617c0ef",
+          "service_id": "insightflow.runtime.intelligence.v1",
+          "operation": "execute",
+          "request_hash": "aa99aca31535ee9689b939dc17d4cbad264c3eb07e5111a4bb94a6778e0d0bda",
+          "response_hash": "37a129545e69001ab9eae4288acd4bb94e23d4518f638dfbf6e1eb249cd2ca4c",
+          "trust_method": "CLASSICAL",
+          "duration_ms": 359.59887504577637,
+          "status": "SUCCESS",
+          "timestamp": "2026-08-14T10:26:44.868166+00:00",
+          "evidence_hash": "77611e942dbdd79f0a86ee84ea0de2fb5a17b5e44c73c41a241379f4a520306c",
+          "previous_evidence_hash": "af05c09e9a7be20a81cd07438950d152676e85344e19430907ef24e9da1bbcb4"
+        },
+        "error": null,
+        "retry_count": 0,
+        "timestamp": "2026-08-14T10:26:44.868166+00:00"
+      }
+    },
+    {
+      "participant": "KESHAV",
+      "type": "REMOTE_LIVE",
+      "result": {
+        "invocation_id": "1cace1f0-a84b-456b-b442-39ac7ecade5e",
+        "service_id": "keshav.analysis.identity.v1",
+        "operation": "analyze",
+        "status": "FAILED",
+        "response": {},
+        "duration_ms": 7739.117383956909,
+        "trust_method": "CLASSICAL",
+        "evidence": {
+          "invocation_id": "1cace1f0-a84b-456b-b442-39ac7ecade5e",
+          "service_id": "keshav.analysis.identity.v1",
+          "operation": "analyze",
+          "request_hash": "e9a504b62ed3878462f83ee5f51e1ca98eb6e2e1e54815cb4e30dcbf9c0a739b",
+          "response_hash": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+          "trust_method": "CLASSICAL",
+          "duration_ms": 7739.117383956909,
+          "status": "FAILED",
+          "timestamp": "2026-08-14T10:26:52.607283+00:00",
+          "evidence_hash": "9be31d8aa14cdde683e1e6936ee431574bdff574d851d84814c3def16e1bc700",
+          "previous_evidence_hash": "77611e942dbdd79f0a86ee84ea0de2fb5a17b5e44c73c41a241379f4a520306c"
+        },
+        "error": "HTTP Error 400: Bad Request",
+        "retry_count": 4,
+        "timestamp": "2026-08-14T10:26:52.607283+00:00"
+      }
+    },
+    {
+      "participant": "QCG Quantum Verification",
+      "type": "LOCAL_LIVE",
+      "result": {
+        "invocation_id": "07bcf5b7-d300-4a0f-b1ec-71676f828a0d",
+        "service_id": "qcg.verification.quantum.v1",
+        "operation": "verify",
+        "status": "FAILED",
+        "response": {},
+        "duration_ms": 20564.186334609985,
+        "trust_method": "CLASSICAL",
+        "evidence": {
+          "invocation_id": "07bcf5b7-d300-4a0f-b1ec-71676f828a0d",
+          "service_id": "qcg.verification.quantum.v1",
+          "operation": "verify",
+          "request_hash": "298f2ef2005ce01ddff1a24c05662670f4e8bd9ac14c4504d50ecb71706fcd01",
+          "response_hash": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+          "trust_method": "CLASSICAL",
+          "duration_ms": 20564.186334609985,
+          "status": "FAILED",
+          "timestamp": "2026-08-14T10:27:13.171470+00:00",
+          "evidence_hash": "f929860222f10b4b3f5796f509e9fa93a6775797c89b9253750d5c533915f71a",
+          "previous_evidence_hash": "9be31d8aa14cdde683e1e6936ee431574bdff574d851d84814c3def16e1bc700"
+        },
+        "error": "<urlopen error [WinError 10061] No connection could be made because the target machine actively refused it>",
+        "retry_count": 4,
+        "timestamp": "2026-08-14T10:27:13.171470+00:00"
+      }
+    }
+  ],
+  "total_invocations": 3,
+  "timestamp": "2026-08-14T10:27:13.171470+00:00"
+}

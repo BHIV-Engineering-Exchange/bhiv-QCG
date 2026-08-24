@@ -1,0 +1,26 @@
+{
+  "status": "CERTIFIED",
+  "proof_id": "78f2decd-6aad-4cd1-b988-3aa4a2ce678f",
+  "participants": [
+    "InsightFlow (Ganesh)",
+    "QCG Quantum Verification (Pritesh)",
+    "KESHAV Analysis"
+  ],
+  "participant_count": 3,
+  "minimum_participants_met": true,
+  "all_steps_passed": true,
+  "all_failure_tests_passed": true,
+  "step_summary": {
+    "federation_boot": "BOOTED",
+    "registration": "COMPLETED",
+    "federation_sync": "CONVERGED",
+    "discovery": "DISCOVERED",
+    "version_negotiation": "COMPLETED",
+    "capability_invocation": "COMPLETED",
+    "evidence_chain": "VERIFIED",
+    "replay_proof": "VERIFIED",
+    "observability": "COLLECTED",
+    "failure_paths": "COMPLETED"
+  },
+  "timestamp": "2026-08-14T10:27:15.830126+00:00"
+}

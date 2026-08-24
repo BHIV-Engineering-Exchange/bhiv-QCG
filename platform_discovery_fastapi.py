@@ -126,8 +126,9 @@ async def get_metrics():
 async def get_evidence():
     return {
         "chain_length": registry.evidence.get_chain_length(),
-        "tail_hash": registry.evidence.get_tail_hash(),
-        "entries": [e.to_dict() for e in registry.evidence.entries]
+        "head_hash": registry.evidence.get_head_hash(),
+        "chain_valid": registry.evidence.verify_chain(),
+        "entries": registry.evidence.get_all(),
     }
 
 # -- POST routes --

@@ -1,4 +1,4 @@
-"""
+-"""
 integration_harness.py — Phase 3: Runtime Participation Harness
 
 Executes one continuous flow representing a TANTRA ecosystem integration:
