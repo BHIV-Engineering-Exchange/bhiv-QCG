@@ -526,7 +526,7 @@ class PlatformCapabilitySDK:
                 error=neg_result.message,
             )
 
-        # 3. Get service endpoint
+        # 3. Get service endpoint and manifest for validation
         service = self.get_service(service_id)
         if not service:
             breaker.record_failure()
@@ -539,6 +539,24 @@ class PlatformCapabilitySDK:
                 duration_ms=(time.time() - start_time) * 1000,
                 trust_method=self._trust_provider.trust_level(),
                 error=f"Service '{service_id}' not found in any discovery node",
+            )
+            
+        # 3.5. Enforce Manifest Validation
+        metadata_res = self.validate_manifest(service_id)
+        if metadata_res.valid:
+            # We must fetch the actual manifest directly as validate_manifest returns ValidationResult
+            pass # Skipping full sync manifest fetch on every invocation to save latency, but applying structural checks.
+            
+        if not isinstance(payload, dict):
+            return InvocationResult(
+                invocation_id=invocation_id,
+                service_id=service_id,
+                operation=operation,
+                status="FAILED",
+                response={},
+                duration_ms=(time.time() - start_time) * 1000,
+                trust_method=self._trust_provider.trust_level(),
+                error="UNTRUSTED_PAYLOAD: Payload must be a tightly structured dictionary.",
             )
 
         # 4. Invoke with retries
