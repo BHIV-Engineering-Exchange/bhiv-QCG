@@ -1,0 +1,23 @@
+{
+  "trace_id": "f73c6add-59e5-4f00-a5b5-ca64c22efc57",
+  "replay_id": "db43d8fe-51d5-485b-8b5e-e1e0d39ded9a",
+  "status": "FAILED",
+  "provenance": {
+    "timestamp_start_ms": 1785134659493,
+    "timestamp_end_ms": 1785134659593,
+    "execution_duration_ms": 100,
+    "fabric_version": "1.0.0",
+    "solver_id": "ORTOOLS_CP_SAT_01",
+    "solver_version": "9.8.0",
+    "attachment_mode": "LOCAL"
+  },
+  "deterministic_inputs": {
+    "problem_type": "MILP",
+    "constraints_applied": [
+      "LINEAR"
+    ]
+  },
+  "result": {
+    "error": "Simulated solver failure for validation purposes."
+  }
+}

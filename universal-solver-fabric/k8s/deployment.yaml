@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: solver-fabric-deployment
+  labels:
+    app: solver-fabric
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: solver-fabric
+  template:
+    metadata:
+      labels:
+        app: solver-fabric
+    spec:
+      containers:
+      - name: solver-fabric
+        image: solver-fabric:latest
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 8000
+        resources:
+          requests:
+            memory: "512Mi"
+            cpu: "500m"
+          limits:
+            memory: "2Gi"
+            cpu: "2000m"
+        livenessProbe:
+          httpGet:
+            path: /health/liveness
+            port: 8000
+          initialDelaySeconds: 5
+          periodSeconds: 10
+        readinessProbe:
+          httpGet:
+            path: /health/readiness
+            port: 8000
+          initialDelaySeconds: 5
+          periodSeconds: 10
