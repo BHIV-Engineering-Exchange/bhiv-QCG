@@ -115,6 +115,9 @@ async def verify_contract(payload: VerifyRequest):
         import uuid
         from datetime import datetime, timezone
 
+        if not hasattr(app, "proxy_signer"):
+            app.proxy_signer = NodeSigner("PRITESH_QUANTUM", "QUANTUM")
+
         c = ComputationExecutionContract(
             producer_type="QUANTUM",
             producer_id="PRITESH_QUANTUM",
@@ -125,13 +128,12 @@ async def verify_contract(payload: VerifyRequest):
             timestamp=datetime.now(timezone.utc).isoformat()
         )
         
-        # Create a proxy identity for Pritesh to sign the contract
-        proxy_signer = NodeSigner("PRITESH_QUANTUM", "QUANTUM")
-        signed_c = sign_contract(c, proxy_signer)
+        # Create a proxy identity for Pritesh to sign the contract (use global proxy to prevent ECDSA mis-matches across requests)
+        signed_c = sign_contract(c, app.proxy_signer)
         contract_dict = signed_c.to_dict()
         
         # Override the dummy "YOUR_KEY" with the actual generated public key for verification
-        pub_key_to_use = proxy_signer.identity.public_key
+        pub_key_to_use = app.proxy_signer.identity.public_key
     else:
         contract_dict = contract_raw
         pub_key_to_use = pub_key_raw
