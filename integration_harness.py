@@ -45,8 +45,13 @@ class TANTRAIntegrationHarness:
     """
     def __init__(self):
         # 1. Initialize persistent stores
-        self.replay_registry = ReplayRegistry(path=Path(tempfile.mktemp(suffix="_tantra_registry.json")))
-        self.trust_registry = ProducerRegistry()
+        import os
+        base_dir = os.path.dirname(os.path.abspath(__file__))
+        replay_path = Path(os.path.join(base_dir, "replay_registry_persistent.json"))
+        trust_path = Path(os.path.join(base_dir, "trust_registry_persistent.json"))
+        
+        self.replay_registry = ReplayRegistry(path=replay_path)
+        self.trust_registry = ProducerRegistry(path=trust_path)
         from evidence_ledger import EvidenceLedger
         self.ledger = EvidenceLedger()
         

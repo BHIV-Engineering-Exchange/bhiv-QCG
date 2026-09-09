@@ -1,10 +1,10 @@
 {
-  "trace_id": "e0d6fa4c-eb21-437b-a1f4-7d092fc5ab1c",
-  "replay_id": "29902cb4-400c-4c01-91ec-1b423c967d3f",
+  "trace_id": "f73c6add-59e5-4f00-a5b5-ca64c22efc57",
+  "replay_id": "db43d8fe-51d5-485b-8b5e-e1e0d39ded9a",
   "status": "FAILED",
   "provenance": {
-    "timestamp_start_ms": 1784623898310,
-    "timestamp_end_ms": 1784623898410,
+    "timestamp_start_ms": 1785134659493,
+    "timestamp_end_ms": 1785134659593,
     "execution_duration_ms": 100,
     "fabric_version": "1.0.0",
     "solver_id": "ORTOOLS_CP_SAT_01",

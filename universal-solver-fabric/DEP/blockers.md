@@ -1,8 +1,5 @@
-# DEP — Blockers
+# BLOCKERS
 
-## Current Blockers
-None. All phases completed.
+Currently, there are **no blockers**.
 
-## Resolved Blockers
-- **Unicode encoding on Windows**: Resolved by setting `PYTHONIOENCODING=utf-8` for production readiness report output.
-- **Quantum runtime availability**: Resolved by implementing classical fallback in `fabric_quantum_runtime.py`. Quantum execution works when Qiskit is installed.
+The Universal Solver Fabric is compliant with the Phase 6 documentation handover state and is ready for downstream testing and external solver integration.

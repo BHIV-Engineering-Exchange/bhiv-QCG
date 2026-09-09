@@ -32,6 +32,9 @@ trace.get_tracer_provider().add_span_processor(
 from integration_harness import TANTRAIntegrationHarness
 from integration_interfaces import CapabilityDiscoveryInterface
 from provenance_api import execution_certificate, execution_history
+from datetime import datetime, timezone
+import logging
+log = logging.getLogger("qcg.web_server")
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
 
@@ -155,6 +158,8 @@ async def verify_contract(payload: VerifyRequest):
     else:
         contract_raw = payload.contract or {}
         pub_key_raw = payload.producer_public_key or ""
+        
+    log.info(f"Received verification payload for invocation {invocation_id}")
 
     # Adapt raw Pritesh payload into QCG ComputationExecutionContract
     if "producer_type" not in contract_raw:
@@ -163,6 +168,9 @@ async def verify_contract(payload: VerifyRequest):
         from provenance import sign_contract
         import uuid
         from datetime import datetime, timezone
+
+        if not hasattr(app, "proxy_signer"):
+            app.proxy_signer = NodeSigner("PRITESH_QUANTUM", "QUANTUM")
 
         c = ComputationExecutionContract(
             producer_type="QUANTUM",
@@ -174,13 +182,12 @@ async def verify_contract(payload: VerifyRequest):
             timestamp=datetime.now(timezone.utc).isoformat()
         )
         
-        # Create a proxy identity for Pritesh to sign the contract
-        proxy_signer = NodeSigner("PRITESH_QUANTUM", "QUANTUM")
-        signed_c = sign_contract(c, proxy_signer)
+        # Create a proxy identity for Pritesh to sign the contract (use global proxy to prevent ECDSA mis-matches across requests)
+        signed_c = sign_contract(c, app.proxy_signer)
         contract_dict = signed_c.to_dict()
         
         # Override the dummy "YOUR_KEY" with the actual generated public key for verification
-        pub_key_to_use = proxy_signer.identity.public_key
+        pub_key_to_use = app.proxy_signer.identity.public_key
     else:
         contract_dict = contract_raw
         pub_key_to_use = pub_key_raw
@@ -275,6 +282,41 @@ async def replay_lineage(trace_id: str):
         v_dict["message_id"] = trace_id
         return {"message_id": trace_id, "verdict": v_dict}
     raise HTTPException(status_code=404, detail="Trace ID not found in replay registry")
+
+@app.get("/telemetry/metrics", tags=["Observability"])
+async def get_telemetry_metrics():
+    """Enterprise telemetry integration point exporting detailed metric instrumentation."""
+    health_data = harness.health_iface.get_health()
+    return {
+        "status": "active",
+        "timestamp": datetime.now(timezone.utc).isoformat(),
+        "metrics": {
+            "contracts_processed": health_data.get("metrics", {}).get("processed", 0),
+            "contracts_successful": health_data.get("metrics", {}).get("successful", 0),
+            "contracts_failed": health_data.get("metrics", {}).get("failed", 0),
+            "uptime_seconds": health_data.get("uptime_seconds", 0)
+        }
+    }
+
+@app.get("/telemetry/traces/{trace_id}", tags=["Observability"])
+async def get_telemetry_trace(trace_id: str):
+    """Retrieve full trace lifecycle data compatible with OpenTelemetry."""
+    mapping = load_invocation_map()
+    resolved_trace_id = mapping.get(trace_id, trace_id)
+    # Extract execution span context from harness ledger
+    span_data = []
+    for r in harness.ledger._records:
+        if r.trace_id == resolved_trace_id:
+            span_data.append({
+                "trace_id": r.trace_id,
+                "execution_id": r.execution_id,
+                "status": r.execution_status,
+                "hash": r.execution_hash,
+                "timestamp": datetime.now(timezone.utc).isoformat()  # Mocked for OTEL format
+            })
+    if not span_data:
+        raise HTTPException(status_code=404, detail="No trace data available for the given reference.")
+    return {"spans": span_data}
 
 
 # ---------------------------------------------------------------------------

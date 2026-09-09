@@ -114,10 +114,38 @@ class TraceStore:
     This ensures deterministic replay ordering regardless of clock skew.
     """
 
-    def __init__(self):
+    def __init__(self, filepath: str = "trace_store_persistent.json"):
+        import os
+        base_dir = os.path.dirname(os.path.abspath(__file__))
+        self.filepath = os.path.join(base_dir, filepath)
         self._entries: deque[TraceEntry] = deque(maxlen=_MAX_TRACE_ENTRIES)
         self._lock = threading.Lock()
         self._sequence_counter: int = 0
+        self._load()
+
+    def _load(self) -> None:
+        import os, json
+        if os.path.exists(self.filepath):
+            try:
+                with open(self.filepath, "r") as f:
+                    data = json.load(f)
+                    for item in data.get("entries", []):
+                        self._entries.append(TraceEntry(**item))
+                    self._sequence_counter = data.get("sequence_counter", 0)
+            except Exception as e:
+                log.error(f"Failed to load TraceStore: {e}")
+
+    def _save(self) -> None:
+        import json
+        try:
+            data = {
+                "sequence_counter": self._sequence_counter,
+                "entries": [e.to_dict() for e in self._entries]
+            }
+            with open(self.filepath, "w") as f:
+                json.dump(data, f)
+        except Exception as e:
+            log.error(f"Failed to save TraceStore: {e}")
 
     # -- recording ----------------------------------------------------------
 
@@ -129,6 +157,7 @@ class TraceStore:
             if entry.sequence == 0:
                 object.__setattr__(entry, "sequence", self._sequence_counter)
             self._entries.append(entry)
+            self._save()
         log_event(log, logging.DEBUG, "trace_recorded", ctx={
             "trace_id":   entry.trace_id,
             "trace_type": entry.trace_type,
@@ -306,6 +335,8 @@ class TraceStore:
         """Clear all entries."""
         with self._lock:
             self._entries.clear()
+            self._sequence_counter = 0
+            self._save()
 
     # -- replay reconstruction ----------------------------------------------
 
