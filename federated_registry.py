@@ -53,6 +53,7 @@ from heartbeat_manager import HeartbeatManager
 from node_identity import NodeProof
 
 import config
+from metrics import get_metrics
 
 logger = logging.getLogger("tantra.platform.federation")
 
@@ -288,8 +289,11 @@ class FederatedRegistryNode:
         self._peers: Dict[str, FederatedRegistryNode] = {}
         self._vector_clock: Dict[str, int] = {node_id: 0}
         self._seen_nonces: set = set()  # replay prevention
+        self._nonce_order: list = []    # insertion order for LRU eviction
         self._audit_log = FederationAuditLog()
         self._lock = threading.Lock()
+        self._metrics = get_metrics()
+        self._metrics.set_component_health(f"federation_{node_id}", "UP")
 
         logger.info(f"FederatedRegistryNode '{node_id}' initialised on port {port}")
 
@@ -544,6 +548,7 @@ class FederatedRegistryNode:
                 peer.receive_federation_event(event)
             except Exception as e:
                 logger.error(f"[{self.node_id}] Failed to propagate to {peer.node_id}: {e}")
+                self._metrics.record_error(f"federation_propagation:{peer.node_id}")
 
     def receive_federation_event(self, event: FederationEvent):
         """
@@ -555,8 +560,16 @@ class FederatedRegistryNode:
             # Replay prevention
             if event.nonce in self._seen_nonces:
                 logger.debug(f"[{self.node_id}] Ignoring replayed event: {event.event_id}")
+                self._metrics.record_halt("federation_replay_rejected")
                 return
             self._seen_nonces.add(event.nonce)
+            self._nonce_order.append(event.nonce)
+            # Evict oldest nonces if exceeding the cap
+            if len(self._seen_nonces) > config.MAX_SEEN_NONCES:
+                evict_count = len(self._seen_nonces) - config.MAX_SEEN_NONCES
+                for _ in range(evict_count):
+                    old_nonce = self._nonce_order.pop(0)
+                    self._seen_nonces.discard(old_nonce)
 
             # Update vector clock
             for node_id, ts in event.vector_clock.items():

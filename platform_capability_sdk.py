@@ -62,6 +62,7 @@ from quantum_trust_provider import (
 )
 
 import config
+from metrics import get_metrics
 
 logger = logging.getLogger("tantra.platform.sdk")
 
@@ -114,8 +115,11 @@ class CircuitBreaker:
     def record_success(self):
         """Record a successful call."""
         with self._lock:
+            old_state = self._state
             self._failure_count = 0
             self._state = CircuitState.CLOSED
+            if old_state != CircuitState.CLOSED:
+                logger.info(f"Circuit breaker transitioned {old_state.value} → CLOSED")
 
     def record_failure(self):
         """Record a failed call."""
@@ -123,7 +127,13 @@ class CircuitBreaker:
             self._failure_count += 1
             self._last_failure_time = time.time()
             if self._failure_count >= self.failure_threshold:
+                old_state = self._state
                 self._state = CircuitState.OPEN
+                if old_state != CircuitState.OPEN:
+                    logger.warning(
+                        f"Circuit breaker transitioned {old_state.value} → OPEN "
+                        f"(failures={self._failure_count}/{self.failure_threshold})"
+                    )
 
     def get_status(self) -> Dict[str, Any]:
         state = self.state
@@ -256,6 +266,9 @@ class PlatformCapabilitySDK:
 
         # Evidence chain
         self.evidence = SDKEvidenceChain()
+
+        self._metrics = get_metrics()
+        self._metrics.set_component_health("platform_sdk", "UP")
 
         logger.info(
             f"PlatformCapabilitySDK initialised "
@@ -658,26 +671,42 @@ class PlatformCapabilitySDK:
 
     def _http_get(self, url: str) -> dict:
         """HTTP GET with timeout, returns parsed JSON."""
-        req = urllib.request.Request(url)
-        req.add_header("Content-Type", "application/json")
-        req.add_header("X-SDK-Version", "1.0.0")
-        req.add_header("X-Trust-Level", self._trust_provider.trust_level())
+        try:
+            req = urllib.request.Request(url)
+            req.add_header("Content-Type", "application/json")
+            req.add_header("X-SDK-Version", "1.0.0")
+            req.add_header("X-Trust-Level", self._trust_provider.trust_level())
 
-        with urllib.request.urlopen(req, timeout=self._request_timeout) as resp:
-            return json.loads(resp.read().decode("utf-8"))
+            start = time.time()
+            with urllib.request.urlopen(req, timeout=self._request_timeout) as resp:
+                result = json.loads(resp.read().decode("utf-8"))
+            self._metrics.record_request(url, "GET")
+            self._metrics.record_latency(url, (time.time() - start) * 1000)
+            return result
+        except Exception as e:
+            self._metrics.record_error(f"HTTP_GET:{type(e).__name__}")
+            raise
 
     def _http_post(self, url: str, data: dict) -> dict:
         """HTTP POST with timeout, returns parsed JSON."""
-        payload = json.dumps(data, default=str).encode("utf-8")
-        req = urllib.request.Request(url, data=payload, method="POST")
-        req.add_header("Content-Type", "application/json")
-        req.add_header("X-SDK-Version", "1.0.0")
-        req.add_header("X-Trust-Level", self._trust_provider.trust_level())
+        try:
+            payload = json.dumps(data, default=str).encode("utf-8")
+            req = urllib.request.Request(url, data=payload, method="POST")
+            req.add_header("Content-Type", "application/json")
+            req.add_header("X-SDK-Version", "1.0.0")
+            req.add_header("X-Trust-Level", self._trust_provider.trust_level())
 
-        # Add auth headers
-        auth_headers = self._authenticator.build_auth_headers(data)
-        for key, value in auth_headers.items():
-            req.add_header(key, value)
+            # Add auth headers
+            auth_headers = self._authenticator.build_auth_headers(data)
+            for key, value in auth_headers.items():
+                req.add_header(key, value)
 
-        with urllib.request.urlopen(req, timeout=self._request_timeout) as resp:
-            return json.loads(resp.read().decode("utf-8"))
+            start = time.time()
+            with urllib.request.urlopen(req, timeout=self._request_timeout) as resp:
+                result = json.loads(resp.read().decode("utf-8"))
+            self._metrics.record_request(url, "POST")
+            self._metrics.record_latency(url, (time.time() - start) * 1000)
+            return result
+        except Exception as e:
+            self._metrics.record_error(f"HTTP_POST:{type(e).__name__}")
+            raise

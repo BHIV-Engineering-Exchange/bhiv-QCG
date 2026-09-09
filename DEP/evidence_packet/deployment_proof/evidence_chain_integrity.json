@@ -1,0 +1,7 @@
+{
+  "chain_length": 5,
+  "chain_valid": true,
+  "merkle_root": "5e2fb346055eb73f8b88de41eda43a4e77d81f97c2d204cfaecebec85fa31cbd",
+  "chain_head": "9804a56a263fcfafd22bab2898c726f3e4c07a28f24275c6276c1ee1001a63ea",
+  "timestamp": "2026-09-01T08:44:54.313381+00:00"
+}

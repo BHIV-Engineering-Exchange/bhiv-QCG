@@ -240,8 +240,14 @@ def _execution_target(q_in, q_out):
     from runtime_core import RuntimeCore
     from execution_contract import ComputationExecutionContract
 
-    runtime = RuntimeCore()
-    msg = q_in.get(timeout=10)
+    from unittest.mock import patch
+    
+    with patch('runtime_core.PlatformCapabilitySDK') as mock_sdk:
+        mock_instance = mock_sdk.return_value
+        mock_instance.invoke_capability.return_value = type('MockResponse', (), {'status': 'SUCCESS', 'response': {'status': 'SUCCESS'}})()
+        
+        runtime = RuntimeCore()
+        msg = q_in.get(timeout=10)
     contract = ComputationExecutionContract(**msg["contract"])
     result = runtime.execute(contract)
     q_out.put({

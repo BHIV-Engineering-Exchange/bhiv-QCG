@@ -1,0 +1,25 @@
+﻿============================= test session starts =============================
+platform win32 -- Python 3.14.0, pytest-9.0.2, pluggy-1.6.0 -- C:\Python314\python.exe
+cachedir: .pytest_cache
+rootdir: C:\Users\kanishk\QCG_task1
+plugins: anyio-4.14.1, locust-2.44.4, cov-7.1.0
+collecting ... collected 16 items
+
+tests/test_hybrid_runtime.py::TestValidLocalQuantumExecution::test_local_quantum_execution PASSED [  6%]
+tests/test_hybrid_runtime.py::TestInvalidQuantumInputRejection::test_invalid_input_rejection PASSED [ 12%]
+tests/test_hybrid_runtime.py::TestClassicalFallback::test_classical_execution PASSED [ 18%]
+tests/test_hybrid_runtime.py::TestQuantumProviderUnavailable::test_provider_unavailable_fallback PASSED [ 25%]
+tests/test_hybrid_runtime.py::TestLiveProviderUnavailableReported::test_live_unavailable_reported PASSED [ 31%]
+tests/test_hybrid_runtime.py::TestReplayDuplicateExecution::test_duplicate_detection PASSED [ 37%]
+tests/test_hybrid_runtime.py::TestPersistentRestartContinuity::test_restart_continuity PASSED [ 43%]
+tests/test_hybrid_runtime.py::TestTrustAuthenticationFailure::test_classification_blocked PASSED [ 50%]
+tests/test_hybrid_runtime.py::TestCapabilityVersionIncompatibility::test_version_incompatibility PASSED [ 56%]
+tests/test_hybrid_runtime.py::TestQuantumNetworkRouteUnavailable::test_route_unavailable PASSED [ 62%]
+tests/test_hybrid_runtime.py::TestQuantumNetworkContractValidation::test_valid_route PASSED [ 68%]
+tests/test_hybrid_runtime.py::TestEndToEndHybridRuntime::test_full_pipeline PASSED [ 75%]
+tests/test_hybrid_runtime.py::TestClassificationLogic::test_classify_local_simulator PASSED [ 81%]
+tests/test_hybrid_runtime.py::TestClassificationLogic::test_classify_live_hardware PASSED [ 87%]
+tests/test_hybrid_runtime.py::TestClassificationLogic::test_classify_unavailable PASSED [ 93%]
+tests/test_hybrid_runtime.py::TestClassificationLogic::test_classify_hybrid PASSED [100%]
+
+============================= 16 passed in 0.86s ==============================

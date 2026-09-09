@@ -1,0 +1,56 @@
+{
+  "endpoint": "GET /providers",
+  "description": "List quantum providers and aggregate status",
+  "request": null,
+  "response": {
+    "providers": [
+      {
+        "provider_id": "qiskit-aer-local",
+        "provider_name": "Qiskit Aer Local Simulator",
+        "provider_type": "LOCAL_SIMULATOR",
+        "status": "AVAILABLE",
+        "capabilities": {
+          "simulation_methods": [
+            "statevector",
+            "density_matrix",
+            "stabilizer"
+          ],
+          "noise_support": true,
+          "max_shots": 100000
+        },
+        "health_endpoint": "",
+        "max_qubits": 30,
+        "supported_gates": [
+          "h",
+          "x",
+          "y",
+          "z",
+          "cx",
+          "cz",
+          "ccx",
+          "swap",
+          "rx",
+          "ry",
+          "rz"
+        ],
+        "noise_model": "configurable",
+        "backend_name": "aer_simulator",
+        "last_health_check": "",
+        "last_health_result": "",
+        "registered_at": "2026-09-01T08:44:54.176371+00:00"
+      }
+    ],
+    "aggregate": {
+      "total_providers": 1,
+      "available": 1,
+      "degraded": 0,
+      "unavailable": 0,
+      "unknown": 0,
+      "live_hardware_available": 0,
+      "quantum_execution_possible": true,
+      "live_quantum_possible": false,
+      "timestamp": "2026-09-01T08:44:54.231188+00:00"
+    }
+  },
+  "timestamp": "2026-09-01T08:44:54.231196+00:00"
+}

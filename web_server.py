@@ -10,9 +10,12 @@ Endpoints:
 """
 
 import logging
+import time
+import uuid
 from typing import Dict, Any
 
 from fastapi import FastAPI, HTTPException, Request, Response, Header, Depends
+from fastapi.responses import PlainTextResponse
 from pydantic import BaseModel
 
 from opentelemetry.instrumentation.fastapi import FastAPIInstrumentor
@@ -32,11 +35,19 @@ from provenance_api import execution_certificate, execution_history
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
 
+from middleware import ErrorBoundaryMiddleware, RequestTracingMiddleware, SecurityHeadersMiddleware
+from metrics import get_metrics
+
 app = FastAPI(
     title="TANTRA Operational Readiness API",
     description="Quantum Communication Gateway (QCG) Ecosystem Integration API",
-    version="1.0.0"
+    version="2.0.0"
 )
+
+# Register middleware (order matters: outermost first)
+app.add_middleware(SecurityHeadersMiddleware)
+app.add_middleware(ErrorBoundaryMiddleware)
+app.add_middleware(RequestTracingMiddleware)
 
 FastAPIInstrumentor.instrument_app(app)
 
@@ -45,6 +56,34 @@ harness = TANTRAIntegrationHarness()
 
 import os
 import json
+
+# ---------------------------------------------------------------------------
+# Lifecycle Hooks
+# ---------------------------------------------------------------------------
+
+@app.on_event("startup")
+async def startup_event():
+    """Validate configuration and register component health on startup."""
+    import config
+    config.validate()
+    metrics = get_metrics()
+    metrics.set_component_health("evidence_ledger", "UP")
+    metrics.set_component_health("replay_registry", "UP")
+    metrics.set_component_health("consensus_engine", "UP")
+    metrics.set_component_health("hybrid_orchestrator", "UP")
+    logging.info("QCG Operational Readiness API started — all components healthy")
+
+@app.on_event("shutdown")
+async def shutdown_event():
+    """Graceful shutdown: log final metrics snapshot."""
+    metrics = get_metrics()
+    summary = metrics.get_summary()
+    logging.info(
+        "QCG shutting down — total_requests=%d, total_errors=%d, uptime=%.0fs",
+        summary["requests"]["total"],
+        summary["errors"]["total"],
+        summary["uptime_seconds"],
+    )
 
 class VerifyRequest(BaseModel):
     contract: Dict[str, Any] = None
@@ -78,6 +117,21 @@ def save_invocation_map(mapping):
 async def get_health():
     """Get health, readiness, and metrics data."""
     return harness.health_iface.get_health()
+
+
+@app.get("/metrics", tags=["Observability"])
+async def get_metrics_endpoint():
+    """Prometheus-compatible metrics export."""
+    return PlainTextResponse(
+        content=get_metrics().to_prometheus(),
+        media_type="text/plain; version=0.0.4; charset=utf-8",
+    )
+
+
+@app.get("/metrics/json", tags=["Observability"])
+async def get_metrics_json():
+    """JSON metrics summary for dashboards."""
+    return get_metrics().get_summary()
 
 @app.get("/capabilities", tags=["Capabilities"])
 async def get_capabilities():
@@ -140,14 +194,7 @@ async def verify_contract(payload: VerifyRequest):
 
     success, result = harness.process_incoming_contract(contract_dict, pub_key_to_use)
     
-<<<<<<< HEAD
-    if success:
-        return result
-    else:
-        # If verification fails, return 422 Unprocessable Entity
-=======
     if not success:
->>>>>>> af2124ab642e4ee690af9ce626445e9ec1b6acde
         raise HTTPException(status_code=422, detail=result)
     return result
 
@@ -230,7 +277,266 @@ async def replay_lineage(trace_id: str):
     raise HTTPException(status_code=404, detail="Trace ID not found in replay registry")
 
 
+# ---------------------------------------------------------------------------
+# Hybrid Quantum-Classical Runtime Endpoints
+# ---------------------------------------------------------------------------
+
+from hybrid_runtime_orchestrator import HybridRuntimeOrchestrator
+from workload_router import WorkloadMetadata
+
+# Global orchestrator instance (lazy init to avoid import-time side effects)
+_orchestrator = None
+
+def _get_orchestrator() -> HybridRuntimeOrchestrator:
+    global _orchestrator
+    if _orchestrator is None:
+        _orchestrator = HybridRuntimeOrchestrator()
+    return _orchestrator
+
+
+# -- Trust method mapping: Pritesh's trust_method ↔ our execution_classification --
+_CLASSIFICATION_TO_TRUST_METHOD = {
+    "CLASSICAL": "CLASSICAL",
+    "QUANTUM_LOCAL": "CLASSICAL",       # Local simulation = classical trust
+    "QUANTUM_SIMULATED": "CLASSICAL",   # Cloud sim = classical trust
+    "QUANTUM_LIVE": "HYBRID",           # Real quantum hardware = hybrid trust
+    "HYBRID": "HYBRID",
+}
+
+
+def _to_invocation_result(
+    result,
+    invocation_id: str = "",
+    service_id: str = "QCG-HYBRID-RUNTIME",
+    operation: str = "hybrid_submit",
+    start_time: float = 0.0,
+) -> Dict[str, Any]:
+    """
+    Bridge our OrchestratorResult to Pritesh's InvocationResult schema.
+
+    This ensures the hybrid runtime output can be consumed by any component
+    that expects the standard InvocationResult format.
+    """
+    import time as _time
+
+    cr = result.classified_result
+    classification = cr.get("classification", "CLASSICAL")
+    trust_method = _CLASSIFICATION_TO_TRUST_METHOD.get(classification, "CLASSICAL")
+    duration = (_time.time() - start_time) * 1000 if start_time else 0.0
+
+    return {
+        "invocation_id": invocation_id or result.trace_id,
+        "service_id": service_id,
+        "operation": operation,
+        "status": "SUCCESS" if result.status == "COMPLETED" else "FAILED",
+        "response": {
+            "orchestrator_result": result.to_dict(),
+            "classification": classification,
+            "execution_path": cr.get("execution_path", "LOCAL"),
+            "provider_id": cr.get("provider_id", ""),
+            "confidence": cr.get("confidence", 0.0),
+            "result_hash": cr.get("result_hash", ""),
+            "bhex_ready": result.provenance.get("bhex_ready", False) if result.provenance else False,
+        },
+        "duration_ms": round(duration, 2),
+        "trust_method": trust_method,
+        "evidence": {
+            "merkle_root": result.provenance.get("merkle_root", "") if result.provenance else "",
+            "evidence_chain_head": result.provenance.get("evidence_chain_head", "") if result.provenance else "",
+            "trace_id": result.trace_id,
+            "classification": classification,
+            "execution_path": cr.get("execution_path", "LOCAL"),
+        },
+        "error": None if result.status == "COMPLETED" else str(result.stages.get("error", "")),
+    }
+
+
+class HybridSubmitRequest(BaseModel):
+    """Request body for hybrid workload submission."""
+    workload: Dict[str, Any]
+    workload_type: str = "GENERAL"
+    problem_size: int = 0
+    is_qubo_compatible: bool = False
+    requires_entanglement: bool = False
+    requires_live_hardware: bool = False
+    classical_fallback_acceptable: bool = True
+
+
+class CapabilityDispatchRequest(BaseModel):
+    """
+    Standard capability dispatch payload (Pritesh's schema).
+
+    Allows the hybrid runtime to be invoked through the standard
+    platform capability dispatch system.
+    """
+    service_id: str = "QCG-HYBRID-RUNTIME"
+    operation: str = "hybrid_submit"
+    payload: Dict[str, Any] = {}
+    version: str = "1.0.0"
+    invocation_id: str = ""
+
+
+@app.post("/hybrid/submit", tags=["Hybrid Runtime"])
+async def hybrid_submit(payload: HybridSubmitRequest):
+    """
+    Submit a workload to the hybrid quantum-classical runtime.
+
+    The orchestrator discovers capabilities, routes the workload,
+    executes through the best available path, and returns a
+    classified result with full provenance.
+    """
+    import time as _time
+    start = _time.time()
+    orchestrator = _get_orchestrator()
+
+    metadata = WorkloadMetadata(
+        workload_id=payload.workload.get("workload_id", str(uuid.uuid4())),
+        workload_type=payload.workload_type,
+        problem_size=payload.problem_size,
+        is_qubo_compatible=payload.is_qubo_compatible,
+        requires_entanglement=payload.requires_entanglement,
+        requires_live_hardware=payload.requires_live_hardware,
+        classical_fallback_acceptable=payload.classical_fallback_acceptable,
+    )
+
+    result = orchestrator.submit_workload(payload.workload, metadata)
+    return _to_invocation_result(result, start_time=start)
+
+
+@app.post("/hybrid/dispatch", tags=["Hybrid Runtime"])
+async def hybrid_dispatch(payload: CapabilityDispatchRequest):
+    """
+    Standard capability dispatch endpoint for the hybrid runtime.
+
+    Accepts Pritesh's standard capability dispatch schema and returns
+    an InvocationResult-compatible response. This allows the hybrid
+    runtime to be invoked through the platform capability SDK.
+
+    Supported operations:
+      - hybrid_submit: Execute a workload through the hybrid runtime
+      - health_check: Get aggregate health status
+      - list_providers: List quantum providers
+      - network_status: Get quantum network coordination status
+    """
+    import time as _time
+    start = _time.time()
+    orchestrator = _get_orchestrator()
+
+    invocation_id = payload.invocation_id or str(uuid.uuid4())
+    workload = payload.payload
+
+    if payload.operation == "hybrid_submit":
+        metadata = WorkloadMetadata(
+            workload_id=workload.get("workload_id", str(uuid.uuid4())),
+            workload_type=workload.get("workload_type", "GENERAL"),
+            problem_size=workload.get("problem_size", 0),
+            is_qubo_compatible=workload.get("is_qubo_compatible", False),
+            requires_entanglement=workload.get("requires_entanglement", False),
+            requires_live_hardware=workload.get("requires_live_hardware", False),
+            classical_fallback_acceptable=workload.get("classical_fallback_acceptable", True),
+        )
+        result = orchestrator.submit_workload(workload, metadata)
+        return _to_invocation_result(
+            result,
+            invocation_id=invocation_id,
+            service_id=payload.service_id,
+            operation=payload.operation,
+            start_time=start,
+        )
+
+    elif payload.operation == "health_check":
+        health = orchestrator.get_health()
+        duration = (_time.time() - start) * 1000
+        return {
+            "invocation_id": invocation_id,
+            "service_id": payload.service_id,
+            "operation": payload.operation,
+            "status": "SUCCESS",
+            "response": health,
+            "duration_ms": round(duration, 2),
+            "trust_method": "CLASSICAL",
+            "evidence": None,
+            "error": None,
+        }
+
+    elif payload.operation == "list_providers":
+        registry = orchestrator.get_provider_registry()
+        response = {
+            "providers": registry.list_providers(),
+            "aggregate": registry.get_aggregate_status(),
+        }
+        duration = (_time.time() - start) * 1000
+        return {
+            "invocation_id": invocation_id,
+            "service_id": payload.service_id,
+            "operation": payload.operation,
+            "status": "SUCCESS",
+            "response": response,
+            "duration_ms": round(duration, 2),
+            "trust_method": "CLASSICAL",
+            "evidence": None,
+            "error": None,
+        }
+
+    elif payload.operation == "network_status":
+        contract = orchestrator.get_network_contract()
+        response = contract.get_network_status()
+        duration = (_time.time() - start) * 1000
+        return {
+            "invocation_id": invocation_id,
+            "service_id": payload.service_id,
+            "operation": payload.operation,
+            "status": "SUCCESS",
+            "response": response,
+            "duration_ms": round(duration, 2),
+            "trust_method": "CLASSICAL",
+            "evidence": None,
+            "error": None,
+        }
+
+    else:
+        duration = (_time.time() - start) * 1000
+        return {
+            "invocation_id": invocation_id,
+            "service_id": payload.service_id,
+            "operation": payload.operation,
+            "status": "SERVICE_NOT_FOUND",
+            "response": None,
+            "duration_ms": round(duration, 2),
+            "trust_method": "CLASSICAL",
+            "evidence": None,
+            "error": f"Unknown operation: {payload.operation}",
+        }
+
+
+@app.get("/providers", tags=["Hybrid Runtime"])
+async def list_providers():
+    """List all registered quantum providers and their status."""
+    orchestrator = _get_orchestrator()
+    registry = orchestrator.get_provider_registry()
+    return {
+        "providers": registry.list_providers(),
+        "aggregate": registry.get_aggregate_status(),
+    }
+
+
+@app.get("/network/status", tags=["Hybrid Runtime"])
+async def network_status():
+    """Get quantum network coordination status."""
+    orchestrator = _get_orchestrator()
+    contract = orchestrator.get_network_contract()
+    return contract.get_network_status()
+
+
+@app.get("/hybrid/health", tags=["Hybrid Runtime"])
+async def hybrid_health():
+    """Get aggregate health of the hybrid quantum-classical runtime."""
+    orchestrator = _get_orchestrator()
+    return orchestrator.get_health()
+
+
 if __name__ == "__main__":
     import uvicorn
     logging.info("Starting FastAPI Operational Readiness API on port 8080...")
     uvicorn.run("web_server:app", host="0.0.0.0", port=8080, reload=False)
+

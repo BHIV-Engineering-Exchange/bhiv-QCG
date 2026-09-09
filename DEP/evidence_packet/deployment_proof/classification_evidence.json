@@ -1,0 +1,54 @@
+{
+  "tests": [
+    {
+      "description": "Local Simulator",
+      "inputs": {
+        "provider_id": "aer",
+        "provider_status": "AVAILABLE",
+        "is_local_simulator": true,
+        "is_remote_simulator": false,
+        "is_live_hardware": false
+      },
+      "classification": "QUANTUM_LOCAL",
+      "execution_path": "LOCAL"
+    },
+    {
+      "description": "Live Hardware",
+      "inputs": {
+        "provider_id": "ibm",
+        "provider_status": "AVAILABLE",
+        "is_local_simulator": false,
+        "is_remote_simulator": false,
+        "is_live_hardware": true
+      },
+      "classification": "QUANTUM_LIVE",
+      "execution_path": "LIVE"
+    },
+    {
+      "description": "Unavailable Provider",
+      "inputs": {
+        "provider_id": "dead",
+        "provider_status": "UNAVAILABLE",
+        "is_local_simulator": true,
+        "is_remote_simulator": false,
+        "is_live_hardware": false
+      },
+      "classification": "CLASSICAL",
+      "execution_path": "BLOCKED"
+    },
+    {
+      "description": "Hybrid Workload",
+      "inputs": {
+        "provider_id": "hybrid",
+        "provider_status": "AVAILABLE",
+        "is_local_simulator": true,
+        "is_remote_simulator": false,
+        "is_live_hardware": false,
+        "has_classical_component": true
+      },
+      "classification": "HYBRID",
+      "execution_path": "LOCAL"
+    }
+  ],
+  "timestamp": "2026-09-01T08:44:54.314312+00:00"
+}

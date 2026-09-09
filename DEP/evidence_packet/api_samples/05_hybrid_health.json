@@ -1,0 +1,43 @@
+{
+  "endpoint": "GET /hybrid/health",
+  "description": "Aggregate health of hybrid quantum-classical runtime",
+  "request": null,
+  "response": {
+    "orchestrator": "HEALTHY",
+    "providers": {
+      "total_providers": 1,
+      "available": 1,
+      "degraded": 0,
+      "unavailable": 0,
+      "unknown": 0,
+      "live_hardware_available": 0,
+      "quantum_execution_possible": true,
+      "live_quantum_possible": false,
+      "timestamp": "2026-09-01T08:44:54.232326+00:00"
+    },
+    "network": {
+      "status": "ACTIVE",
+      "total_nodes": 1,
+      "active_nodes": 1,
+      "total_routes": 1,
+      "active_routes": 1,
+      "protocols_available": [
+        "BB84",
+        "E91",
+        "ENTANGLEMENT_SWAPPING",
+        "CLASSICAL_CONTROL"
+      ],
+      "timestamp": "2026-09-01T08:44:54.232341+00:00"
+    },
+    "evidence_ledger": {
+      "chain_length": 5,
+      "chain_valid": true,
+      "merkle_root": "5e2fb346055eb73f8b88de41eda43a4e77d81f97c2d204cfaecebec85fa31cbd"
+    },
+    "trace_store": {
+      "entries": 2
+    },
+    "timestamp": "2026-09-01T08:44:54.232377+00:00"
+  },
+  "timestamp": "2026-09-01T08:44:54.232381+00:00"
+}

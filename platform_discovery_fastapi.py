@@ -3,28 +3,61 @@ platform_discovery_fastapi.py - FastAPI wrapper for Platform Service Discovery
 """
 
 import time
+import logging
+import re
 from typing import Dict, Any, Optional, List
 from fastapi import FastAPI, HTTPException, Request, Response
+from fastapi.responses import PlainTextResponse
 from pydantic import BaseModel
+import config
+from metrics import get_metrics
+from middleware import ErrorBoundaryMiddleware, RequestTracingMiddleware, SecurityHeadersMiddleware
 
 from platform_service_registry import PlatformServiceRegistry, RegistrationEvidenceRecorder, PLATFORM_REGISTRY_VERSION
 from platform_lifecycle_manager import LifecycleManager
 
 app = FastAPI(title="Platform Service Discovery API", version="2.0.0")
 
+# Register middleware (order matters)
+app.add_middleware(SecurityHeadersMiddleware)
+app.add_middleware(ErrorBoundaryMiddleware)
+app.add_middleware(RequestTracingMiddleware)
+
 # Global instances for the Monolith
 registry = PlatformServiceRegistry(evidence_recorder=RegistrationEvidenceRecorder())
 lifecycle = LifecycleManager()
 _start_time = time.time()
-_request_count = 0
 
-@app.middleware("http")
-async def count_requests(request: Request, call_next):
-    global _request_count
-    _request_count += 1
-    response = await call_next(request)
-    response.headers["X-Platform-Version"] = "2.0.0"
-    return response
+@app.on_event("startup")
+async def startup_event():
+    config.validate()
+    metrics = get_metrics()
+    metrics.set_component_health("platform_registry", "UP")
+    logging.info("Platform Service Discovery API started")
+
+@app.on_event("shutdown")
+async def shutdown_event():
+    logging.info("Platform Service Discovery API shutting down")
+
+def _validate_payload_bounds(data: dict):
+    def count_keys(d):
+        count = 0
+        if isinstance(d, dict):
+            for k, v in d.items():
+                count += 1 + count_keys(v)
+        elif isinstance(d, list):
+            for item in d:
+                count += count_keys(item)
+        return count
+    if count_keys(data) > config.INPUT_PAYLOAD_MAX_KEYS:
+        raise HTTPException(status_code=413, detail="Payload exceeds maximum keys limit")
+
+def _sanitize_id(id_str: str) -> str:
+    if not id_str:
+        return ""
+    id_str = str(id_str)[:config.INPUT_TRACE_ID_MAX_LENGTH]
+    id_str = re.sub(r'[\x00-\x1f\x7f]', '', id_str)
+    return id_str.strip()
 
 # -- GET routes --
 
@@ -89,11 +122,12 @@ async def get_compatibility(service_id: str):
 
 @app.get("/v1/health")
 async def server_health():
+    metrics = get_metrics()
     return {
         "status": "UP",
         "version": "2.0.0",
         "uptime_seconds": round(time.time() - _start_time, 2),
-        "total_requests": _request_count,
+        "total_requests": metrics.total_requests,
         "registry_version": PLATFORM_REGISTRY_VERSION,
     }
 
@@ -106,21 +140,17 @@ async def server_readiness():
     }
 
 @app.get("/v1/metrics")
-async def get_metrics():
+async def get_metrics_endpoint():
+    metrics = get_metrics()
     uptime = time.time() - _start_time
     service_count = len(registry.list_services())
-    metrics_text = (
-        f"# HELP tantra_platform_uptime_seconds Discovery server uptime\n"
-        f"# TYPE tantra_platform_uptime_seconds gauge\n"
-        f"tantra_platform_uptime_seconds {uptime:.2f}\n"
-        f"# HELP tantra_platform_requests_total Total requests to discovery server\n"
-        f"# TYPE tantra_platform_requests_total counter\n"
-        f"tantra_platform_requests_total {_request_count}\n"
+    registry_metrics = (
         f"# HELP tantra_platform_services_registered Number of registered services\n"
         f"# TYPE tantra_platform_services_registered gauge\n"
         f"tantra_platform_services_registered {service_count}\n"
     )
-    return Response(content=metrics_text, media_type="text/plain")
+    combined = metrics.to_prometheus() + "\n" + registry_metrics
+    return PlainTextResponse(content=combined, media_type="text/plain; version=0.0.4; charset=utf-8")
 
 @app.get("/v1/evidence")
 async def get_evidence():
@@ -136,12 +166,16 @@ async def get_evidence():
 @app.post("/v1/negotiate")
 async def negotiate_version(request: Request):
     """Version negotiation endpoint — delegates to registry.negotiate_version()."""
+    if int(request.headers.get("content-length", 0)) > config.MAX_REQUEST_BODY_SIZE:
+        raise HTTPException(status_code=413, detail="Request body too large")
     try:
         data = await request.json()
     except Exception:
         raise HTTPException(status_code=400, detail="Invalid JSON")
+    
+    _validate_payload_bounds(data)
 
-    service_id = data.get("service_id")
+    service_id = _sanitize_id(data.get("service_id"))
     requested_version = data.get("version") or data.get("requested_version")
     if not service_id or not requested_version:
         raise HTTPException(
@@ -165,13 +199,17 @@ async def negotiate_version(request: Request):
 
 @app.post("/v1/register")
 async def register(request: Request):
+    if int(request.headers.get("content-length", 0)) > config.MAX_REQUEST_BODY_SIZE:
+        raise HTTPException(status_code=413, detail="Request body too large")
     try:
         data = await request.json()
     except Exception:
         raise HTTPException(status_code=400, detail="Invalid JSON")
     
+    _validate_payload_bounds(data)
+    
     record_data = data.get("record", data)
-    service_id = record_data.get("platform_service_id") or record_data.get("service_id") or data.get("service_id")
+    service_id = _sanitize_id(record_data.get("platform_service_id") or record_data.get("service_id") or data.get("service_id"))
     if not service_id:
         raise HTTPException(status_code=400, detail="Missing service_id or platform_service_id")
 
@@ -211,34 +249,40 @@ async def register(request: Request):
 
 @app.post("/v1/heartbeat")
 async def heartbeat(request: Request):
+    if int(request.headers.get("content-length", 0)) > config.MAX_REQUEST_BODY_SIZE:
+        raise HTTPException(status_code=413, detail="Request body too large")
     try:
         data = await request.json()
     except Exception:
         raise HTTPException(status_code=400, detail="Invalid JSON")
-    service_id = data.get("service_id")
+    _validate_payload_bounds(data)
+    service_id = _sanitize_id(data.get("service_id"))
     status = data.get("status", "ACTIVE")
     if not service_id:
         raise HTTPException(status_code=400, detail="Missing service_id")
     
-    registry.update_heartbeat(service_id, status)
+    registry.set_status(service_id, status)
     return {"status": "ACK", "service_id": service_id}
 
 @app.post("/v1/revoke")
 async def revoke(request: Request):
+    if int(request.headers.get("content-length", 0)) > config.MAX_REQUEST_BODY_SIZE:
+        raise HTTPException(status_code=413, detail="Request body too large")
     try:
         data = await request.json()
     except Exception:
         raise HTTPException(status_code=400, detail="Invalid JSON")
-    service_id = data.get("service_id")
+    _validate_payload_bounds(data)
+    service_id = _sanitize_id(data.get("service_id"))
     reason = data.get("reason", "Revoked by request")
     if not service_id:
         raise HTTPException(status_code=400, detail="Missing service_id")
     
-    success, msg = registry.revoke_service(service_id, reason)
-    if success:
+    result = registry.remove_service(service_id, reason)
+    if result.get("status") == "REMOVED":
         return {"status": "REVOKED", "service_id": service_id}
     else:
-        raise HTTPException(status_code=404, detail=msg)
+        raise HTTPException(status_code=404, detail="Service not found")
 
 @app.post("/v1/services/{service_id}")
 async def mock_execute(service_id: str):

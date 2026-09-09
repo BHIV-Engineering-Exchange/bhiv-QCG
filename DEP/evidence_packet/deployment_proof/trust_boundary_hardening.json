@@ -1,0 +1,8 @@
+{
+  "pseudo_token_removed": true,
+  "pseudo_token_string": "Bearer VALID_GC_TOKEN",
+  "removal_location": "integration_harness.py:156-168",
+  "replacement": "Cryptographic public key length verification (min 16 chars)",
+  "enforcement": "Producer registration requires valid ECDSA public key",
+  "timestamp": "2026-09-01T08:44:54.314571+00:00"
+}

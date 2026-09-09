@@ -19,9 +19,12 @@ from __future__ import annotations
 
 import hashlib
 import json
+import logging
 from typing import Any, Dict, Optional
 
 from quantum_trust_provider import TrustProvider, ClassicalTrustProvider, KeyPairResult
+
+logger = logging.getLogger("tantra.platform.sdk.auth")
 
 
 class SDKAuthenticator:
@@ -66,6 +69,10 @@ class SDKAuthenticator:
         - X-Service-PublicKey: hex-encoded public key
         - X-Trust-Level: current trust level
         """
+        if not request_payload or not isinstance(request_payload, dict):
+            logger.warning("build_auth_headers called with empty or non-dict payload")
+            request_payload = {}
+
         if not self._keypair:
             self.initialise()
 
@@ -92,11 +99,15 @@ class SDKAuthenticator:
         body is valid for the given public key.
         """
         try:
+            if not signature_hex or not server_public_key_hex:
+                logger.warning("verify_response_signature called with empty signature or public key")
+                return False
             response_bytes = json.dumps(response_body, sort_keys=True, default=str).encode()
             signature = bytes.fromhex(signature_hex)
             server_pub = bytes.fromhex(server_public_key_hex)
             return self._provider.verify(response_bytes, signature, server_pub)
-        except Exception:
+        except Exception as e:
+            logger.warning(f"Response signature verification failed: {type(e).__name__}: {e}")
             return False
 
     def sign_payload(self, payload: dict) -> str:

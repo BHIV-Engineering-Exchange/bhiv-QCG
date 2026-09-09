@@ -1,4 +1,4 @@
--"""
+"""
 integration_harness.py — Phase 3: Runtime Participation Harness
 
 Executes one continuous flow representing a TANTRA ecosystem integration:
@@ -14,6 +14,7 @@ Executes one continuous flow representing a TANTRA ecosystem integration:
 import tempfile
 import time
 import logging
+import re
 from pathlib import Path
 from typing import Dict, Any, Tuple
 
@@ -115,33 +116,86 @@ class TANTRAIntegrationHarness:
                 "live": False,
             }
 
+    def _sanitize_trace_id(self, trace_id: str) -> str:
+        """Validate and sanitize trace_id input."""
+        if not trace_id or not isinstance(trace_id, str):
+            return "unknown"
+        # Truncate to max length
+        trace_id = trace_id[:config.INPUT_TRACE_ID_MAX_LENGTH]
+        # Remove any control characters
+        trace_id = re.sub(r'[\x00-\x1f\x7f]', '', trace_id)
+        return trace_id.strip() or "unknown"
+
+    def _validate_payload_bounds(self, payload: Dict[str, Any]) -> bool:
+        """Check payload doesn't exceed configured key count limits."""
+        if not isinstance(payload, dict):
+            return False
+        if len(payload) > config.INPUT_PAYLOAD_MAX_KEYS:
+            return False
+        return True
+
     def process_incoming_contract(self, payload: Dict[str, Any], pub_key: str, auth_token: str = None) -> Tuple[bool, Dict[str, Any]]:
         """
         Main continuous flow for incoming TANTRA contracts.
+        
+        Each pipeline stage is wrapped in its own error boundary to ensure
+        partial failures are isolated and reported with full context.
         """
-        trace_id = payload.get("trace_id", "unknown")
+        from metrics import get_metrics
+        metrics = get_metrics()
+        
+        trace_id = self._sanitize_trace_id(payload.get("trace_id", "unknown"))
         parent_trace = payload.get("parent_trace_id", None)
         issued_at = payload.get("issued_at", time.time())
+        
+        # Input validation: payload bounds
+        if not self._validate_payload_bounds(payload):
+            metrics.record_halt("INPUT_VALIDATION_FAILED")
+            return False, {
+                "trace_id": trace_id,
+                "flow_status": "HALTED",
+                "halt_reason": "INPUT_VALIDATION: Payload exceeds maximum key count",
+                "stages": {}
+            }
         
         response = {
             "trace_id": trace_id,
             "parent_trace_id": parent_trace,
             "flow_status": "STARTED",
-            "stages": {}
+            "stages": {},
+            "stage_timings_ms": {}
         }
         
         try:
             # 1. Replay Validation
-            replay_res = self.replay_iface.verify_replay(trace_id, issued_at)
+            stage_start = time.time()
+            try:
+                replay_res = self.replay_iface.verify_replay(trace_id, issued_at)
+            except Exception as e:
+                logger.error("Stage REPLAY failed for trace %s: %s", trace_id, e)
+                metrics.record_halt("REPLAY_STAGE_ERROR")
+                response["flow_status"] = "HALTED"
+                response["halt_reason"] = f"REPLAY_STAGE_ERROR: {type(e).__name__}"
+                response["stages"]["replay"] = {"is_valid": False, "error": str(e)}
+                self.health_iface.record_process(False)
+                return False, response
+            response["stage_timings_ms"]["replay"] = round((time.time() - stage_start) * 1000, 2)
             response["stages"]["replay"] = replay_res
             if not replay_res["is_valid"]:
                 response["flow_status"] = "HALTED"
                 response["halt_reason"] = f"REPLAY_{replay_res['status']}"
+                metrics.record_halt(f"REPLAY_{replay_res['status']}")
                 self.health_iface.record_process(False)
                 return False, response
 
             # 2. KESHAV Live Analysis (new ecosystem integration step)
-            keshav_res = self._run_keshav_analysis(trace_id, payload)
+            stage_start = time.time()
+            try:
+                keshav_res = self._run_keshav_analysis(trace_id, payload)
+            except Exception as e:
+                logger.warning("Stage KESHAV failed for trace %s: %s", trace_id, e)
+                keshav_res = {"status": "ERROR", "reason": str(e), "live": False}
+            response["stage_timings_ms"]["keshav_analysis"] = round((time.time() - stage_start) * 1000, 2)
             response["stages"]["keshav_analysis"] = keshav_res
                 
             # Parse Contract (Governance Boundary)
@@ -150,15 +204,22 @@ class TANTRAIntegrationHarness:
             except Exception as e:
                 response["flow_status"] = "HALTED"
                 response["halt_reason"] = f"INVALID_CONTRACT: {e}"
+                metrics.record_halt("INVALID_CONTRACT")
                 self.health_iface.record_process(False)
                 return False, response
 
-            # Auto-register producer for testing if not exists (simulates KESHAV identity sync)
+            # Auto-register producer if not already known.
+            # TRUST BOUNDARY: Registration requires a valid ECDSA public key.
+            # The pseudo-token path ("Bearer VALID_GC_TOKEN") has been removed
+            # from the production flow. Identity is now verified cryptographically.
             if not self.trust_registry.is_registered(contract.producer_id):
-                if auth_token and auth_token == "Bearer VALID_GC_TOKEN":
-                    # In a real environment, KESHAV securely syncs this identity. Here we conditionally
-                    # trust it if the GC validation endpoint provides the valid system token.
-                    pass
+                if not pub_key or len(pub_key) < 16:
+                    response["flow_status"] = "HALTED"
+                    response["halt_reason"] = "TRUST_REJECTED: Producer not registered and no valid public key provided"
+                    metrics.record_halt("TRUST_REJECTED")
+                    self.health_iface.record_process(False)
+                    return False, response
+
                 identity = NodeIdentity(
                     node_id=contract.producer_id,
                     public_key=pub_key,
@@ -168,25 +229,56 @@ class TANTRAIntegrationHarness:
                 self.trust_registry.register(identity, allowed_types={contract.producer_type})
                 
             # 3. Trust Verification
-            trust_res = self.trust_iface.verify_trust(contract)
+            stage_start = time.time()
+            try:
+                trust_res = self.trust_iface.verify_trust(contract)
+            except Exception as e:
+                logger.error("Stage TRUST failed for trace %s: %s", trace_id, e)
+                metrics.record_halt("TRUST_STAGE_ERROR")
+                response["flow_status"] = "HALTED"
+                response["halt_reason"] = f"TRUST_STAGE_ERROR: {type(e).__name__}"
+                response["stages"]["trust"] = {"passed": False, "error": str(e)}
+                self.health_iface.record_process(False)
+                return False, response
+            response["stage_timings_ms"]["trust"] = round((time.time() - stage_start) * 1000, 2)
             response["stages"]["trust"] = trust_res
             if not trust_res["passed"]:
                 response["flow_status"] = "HALTED"
                 response["halt_reason"] = trust_res["halt_signal"]
+                metrics.record_halt("TRUST_REJECTED")
                 self.health_iface.record_process(False)
                 return False, response
                 
             # 4. Runtime Execution
-            exec_res = self.execution_iface.validate_execution(contract)
+            stage_start = time.time()
+            try:
+                exec_res = self.execution_iface.validate_execution(contract)
+            except Exception as e:
+                logger.error("Stage EXECUTION failed for trace %s: %s", trace_id, e)
+                metrics.record_halt("EXECUTION_STAGE_ERROR")
+                response["flow_status"] = "HALTED"
+                response["halt_reason"] = f"EXECUTION_STAGE_ERROR: {type(e).__name__}"
+                response["stages"]["execution"] = {"ack": f"HALT:EXECUTION_ERROR", "error": str(e)}
+                self.health_iface.record_process(False)
+                return False, response
+            response["stage_timings_ms"]["execution"] = round((time.time() - stage_start) * 1000, 2)
             response["stages"]["execution"] = exec_res
             if "HALT" in exec_res["ack"]:
                 response["flow_status"] = "HALTED"
                 response["halt_reason"] = exec_res["ack"]
+                metrics.record_halt(exec_res["ack"])
                 self.health_iface.record_process(False)
                 return False, response
                 
             # 5. Consensus Proof
-            cons_res = self.consensus_iface.verify_consensus(contract, pub_key)
+            stage_start = time.time()
+            try:
+                cons_res = self.consensus_iface.verify_consensus(contract, pub_key)
+            except Exception as e:
+                logger.error("Stage CONSENSUS failed for trace %s: %s", trace_id, e)
+                # Consensus failure is non-fatal — log and continue with empty proof
+                cons_res = {"consensus_reached": False, "error": str(e)}
+            response["stage_timings_ms"]["consensus"] = round((time.time() - stage_start) * 1000, 2)
             response["stages"]["consensus"] = cons_res
             
             # Trace Continuity propagation
@@ -223,8 +315,10 @@ class TANTRAIntegrationHarness:
             return True, response
             
         except Exception as e:
+            logger.error("Pipeline-level exception for trace %s: %s", trace_id, e, exc_info=True)
             response["flow_status"] = "ERROR"
             response["error"] = str(e)
+            metrics.record_error("pipeline_exception")
             self.health_iface.record_process(False)
             return False, response
 

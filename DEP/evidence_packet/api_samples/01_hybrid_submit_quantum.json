@@ -1,0 +1,299 @@
+{
+  "endpoint": "POST /hybrid/submit",
+  "description": "Submit quantum workload through hybrid runtime",
+  "request": {
+    "workload": {
+      "workload_id": "evidence-quantum-001",
+      "message": "QUANTUM_EVIDENCE_TEST",
+      "noise": 0.05,
+      "shots": 1024,
+      "seed": 42,
+      "workload_type": "SIMULATION",
+      "problem_size": 5
+    },
+    "workload_type": "SIMULATION",
+    "problem_size": 5,
+    "is_qubo_compatible": true,
+    "classical_fallback_acceptable": true
+  },
+  "response": {
+    "workload_id": "evidence-quantum-001",
+    "trace_id": "c0f0af19-710c-4651-b4a4-44f113885e6a",
+    "classified_result": {
+      "trace_id": "c0f0af19-710c-4651-b4a4-44f113885e6a",
+      "classification": "QUANTUM_LOCAL",
+      "execution_path": "LOCAL",
+      "provider_id": "qiskit-aer-local",
+      "result_payload": {
+        "status": "EXECUTED",
+        "execution_type": "QUANTUM_LOCAL",
+        "provider": "qiskit-aer-local",
+        "encoded_bits": "10",
+        "counts": {
+          "01": 895,
+          "10": 38,
+          "11": 17,
+          "00": 74
+        },
+        "shots": 1024,
+        "seed": 42,
+        "noise_factor": 0.05,
+        "confidence": 0.874,
+        "uncertainty_class": "HIGH_CONFIDENCE",
+        "translation_valid": true,
+        "recommended_posture": "PROCEED"
+      },
+      "confidence": 0.874,
+      "result_hash": "5a96b0688c3be9410336fc2c7dd0e59cbe255d8279bfe36019d976140122218a",
+      "fallback_reason": "",
+      "blocked_reason": "",
+      "original_classification": "",
+      "timestamp": "2026-09-01T08:44:54.194784+00:00"
+    },
+    "routing_decision": {
+      "workload_id": "evidence-quantum-001",
+      "suitability": "QUANTUM_PREFERRED",
+      "recommended_provider_id": "qiskit-aer-local",
+      "recommended_classification": "QUANTUM_LOCAL",
+      "recommended_path": "LOCAL",
+      "fallback_available": true,
+      "fallback_provider_id": "CLASSICAL_RUNTIME",
+      "fallback_classification": "CLASSICAL",
+      "reason": "Quantum preferred; routed to Qiskit Aer Local Simulator (LOCAL_SIMULATOR)",
+      "assessed_at": "2026-09-01T08:44:54.176517+00:00"
+    },
+    "stages": {
+      "discovery": {
+        "providers": [
+          {
+            "provider_id": "qiskit-aer-local",
+            "provider_name": "Qiskit Aer Local Simulator",
+            "provider_type": "LOCAL_SIMULATOR",
+            "status": "AVAILABLE",
+            "capabilities": {
+              "simulation_methods": [
+                "statevector",
+                "density_matrix",
+                "stabilizer"
+              ],
+              "noise_support": true,
+              "max_shots": 100000
+            },
+            "health_endpoint": "",
+            "max_qubits": 30,
+            "supported_gates": [
+              "h",
+              "x",
+              "y",
+              "z",
+              "cx",
+              "cz",
+              "ccx",
+              "swap",
+              "rx",
+              "ry",
+              "rz"
+            ],
+            "noise_model": "configurable",
+            "backend_name": "aer_simulator",
+            "last_health_check": "",
+            "last_health_result": "",
+            "registered_at": "2026-09-01T08:44:54.176371+00:00"
+          }
+        ],
+        "aggregate": {
+          "total_providers": 1,
+          "available": 1,
+          "degraded": 0,
+          "unavailable": 0,
+          "unknown": 0,
+          "live_hardware_available": 0,
+          "quantum_execution_possible": true,
+          "live_quantum_possible": false,
+          "timestamp": "2026-09-01T08:44:54.176487+00:00"
+        },
+        "quantum_available": true,
+        "live_quantum_available": false,
+        "timestamp": "2026-09-01T08:44:54.176490+00:00"
+      },
+      "routing": {
+        "workload_id": "evidence-quantum-001",
+        "suitability": "QUANTUM_PREFERRED",
+        "recommended_provider_id": "qiskit-aer-local",
+        "recommended_classification": "QUANTUM_LOCAL",
+        "recommended_path": "LOCAL",
+        "fallback_available": true,
+        "fallback_provider_id": "CLASSICAL_RUNTIME",
+        "fallback_classification": "CLASSICAL",
+        "reason": "Quantum preferred; routed to Qiskit Aer Local Simulator (LOCAL_SIMULATOR)",
+        "assessed_at": "2026-09-01T08:44:54.176517+00:00"
+      },
+      "execution": {
+        "trace_id": "c0f0af19-710c-4651-b4a4-44f113885e6a",
+        "classification": "QUANTUM_LOCAL",
+        "execution_path": "LOCAL",
+        "provider_id": "qiskit-aer-local",
+        "result_payload": {
+          "status": "EXECUTED",
+          "execution_type": "QUANTUM_LOCAL",
+          "provider": "qiskit-aer-local",
+          "encoded_bits": "10",
+          "counts": {
+            "01": 895,
+            "10": 38,
+            "11": 17,
+            "00": 74
+          },
+          "shots": 1024,
+          "seed": 42,
+          "noise_factor": 0.05,
+          "confidence": 0.874,
+          "uncertainty_class": "HIGH_CONFIDENCE",
+          "translation_valid": true,
+          "recommended_posture": "PROCEED"
+        },
+        "confidence": 0.874,
+        "result_hash": "5a96b0688c3be9410336fc2c7dd0e59cbe255d8279bfe36019d976140122218a",
+        "fallback_reason": "",
+        "blocked_reason": "",
+        "original_classification": "",
+        "timestamp": "2026-09-01T08:44:54.194784+00:00"
+      },
+      "trust_replay": {
+        "replay_check": {
+          "is_valid": true,
+          "status": "VALID",
+          "sequence_number": 105
+        },
+        "trust_boundary": "QCG_VALIDATED",
+        "classification_verified": "QUANTUM_LOCAL",
+        "path_verified": "LOCAL"
+      },
+      "evidence": {
+        "evidence_recorded": true,
+        "ledger_snapshot": {
+          "sequence_length": 4,
+          "merkle_root": "b15ecf96322d13bfa116873c57117b27dec5fb2ac7256400ae2c33d2d623de2f",
+          "latest_hash": "79e9d09952fb07fa30e931d8fd940cf7b05439318fea5df8a161660c1bcf96c7"
+        },
+        "trace_count": 1
+      },
+      "network": {
+        "route_status": "LOCAL",
+        "route": {
+          "route_id": "62a9f24f-01d9-406f-a045-ece2f6387a68",
+          "source_node_id": "QCG_LOCAL_NODE",
+          "destination_node_id": "QCG_LOCAL_NODE",
+          "protocol": "BB84",
+          "status": "LOCAL",
+          "classical_fallback_available": true,
+          "entanglement_fidelity": 0.05,
+          "estimated_latency_ms": 0.0,
+          "route_hash": "6c29598af10a277d4942dd8d9efa4e8922f1822eee0fe67dc53d175141f8b16d",
+          "established_at": "2026-09-01T08:44:54.215394+00:00"
+        },
+        "control_plane": {
+          "status": "ACTIVE",
+          "total_nodes": 1,
+          "active_nodes": 1,
+          "total_routes": 1,
+          "active_routes": 1,
+          "protocols_available": [
+            "BB84",
+            "E91",
+            "ENTANGLEMENT_SWAPPING",
+            "CLASSICAL_CONTROL"
+          ],
+          "timestamp": "2026-09-01T08:44:54.215464+00:00"
+        },
+        "coordination_for_trace": "c0f0af19-710c-4651-b4a4-44f113885e6a"
+      }
+    },
+    "provenance": {
+      "trace_id": "c0f0af19-710c-4651-b4a4-44f113885e6a",
+      "classification": "QUANTUM_LOCAL",
+      "execution_path": "LOCAL",
+      "provider_id": "qiskit-aer-local",
+      "result_hash": "5a96b0688c3be9410336fc2c7dd0e59cbe255d8279bfe36019d976140122218a",
+      "confidence": 0.874,
+      "is_fallback": false,
+      "is_blocked": false,
+      "routing_suitability": "QUANTUM_PREFERRED",
+      "evidence_chain_head": "79e9d09952fb07fa30e931d8fd940cf7b05439318fea5df8a161660c1bcf96c7",
+      "merkle_root": "b15ecf96322d13bfa116873c57117b27dec5fb2ac7256400ae2c33d2d623de2f",
+      "network_enabled": true,
+      "provenance_timestamp": "2026-09-01T08:44:54.215482+00:00",
+      "bhex_ready": true
+    },
+    "network_coordination": {
+      "route_status": "LOCAL",
+      "route": {
+        "route_id": "62a9f24f-01d9-406f-a045-ece2f6387a68",
+        "source_node_id": "QCG_LOCAL_NODE",
+        "destination_node_id": "QCG_LOCAL_NODE",
+        "protocol": "BB84",
+        "status": "LOCAL",
+        "classical_fallback_available": true,
+        "entanglement_fidelity": 0.05,
+        "estimated_latency_ms": 0.0,
+        "route_hash": "6c29598af10a277d4942dd8d9efa4e8922f1822eee0fe67dc53d175141f8b16d",
+        "established_at": "2026-09-01T08:44:54.215394+00:00"
+      },
+      "control_plane": {
+        "status": "ACTIVE",
+        "total_nodes": 1,
+        "active_nodes": 1,
+        "total_routes": 1,
+        "active_routes": 1,
+        "protocols_available": [
+          "BB84",
+          "E91",
+          "ENTANGLEMENT_SWAPPING",
+          "CLASSICAL_CONTROL"
+        ],
+        "timestamp": "2026-09-01T08:44:54.215464+00:00"
+      },
+      "coordination_for_trace": "c0f0af19-710c-4651-b4a4-44f113885e6a"
+    },
+    "health": {
+      "orchestrator": "HEALTHY",
+      "providers": {
+        "total_providers": 1,
+        "available": 1,
+        "degraded": 0,
+        "unavailable": 0,
+        "unknown": 0,
+        "live_hardware_available": 0,
+        "quantum_execution_possible": true,
+        "live_quantum_possible": false,
+        "timestamp": "2026-09-01T08:44:54.215504+00:00"
+      },
+      "network": {
+        "status": "ACTIVE",
+        "total_nodes": 1,
+        "active_nodes": 1,
+        "total_routes": 1,
+        "active_routes": 1,
+        "protocols_available": [
+          "BB84",
+          "E91",
+          "ENTANGLEMENT_SWAPPING",
+          "CLASSICAL_CONTROL"
+        ],
+        "timestamp": "2026-09-01T08:44:54.215515+00:00"
+      },
+      "evidence_ledger": {
+        "chain_length": 4,
+        "chain_valid": true,
+        "merkle_root": "b15ecf96322d13bfa116873c57117b27dec5fb2ac7256400ae2c33d2d623de2f"
+      },
+      "trace_store": {
+        "entries": 1
+      },
+      "timestamp": "2026-09-01T08:44:54.215540+00:00"
+    },
+    "status": "COMPLETED",
+    "timestamp": "2026-09-01T08:44:54.176452+00:00"
+  },
+  "timestamp": "2026-09-01T08:44:54.215654+00:00"
+}

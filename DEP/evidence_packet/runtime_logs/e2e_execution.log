@@ -1,0 +1,45 @@
+=== End-to-End Hybrid Runtime Execution Log ===
+Timestamp: 2026-09-01T08:44:54.861403+00:00
+Python: 3.14.0 (tags/v3.14.0:ebf955d, Oct  7 2025, 10:15:03) [MSC v.1944 64 bit (AMD64)]
+
+--- Execution 1: Quantum LOCAL execution ---
+  Workload ID:     e2e-001
+  Trace ID:        87d0d6f5-e42d-4442-b697-bac0183f2bf4
+  Status:          COMPLETED
+  Classification:  QUANTUM_LOCAL
+  Execution Path:  LOCAL
+  Provider:        qiskit-aer-local
+  Confidence:      0.8457
+  Result Hash:     15247eafa517dccfa8b29ff8eb3a5832...
+  Routing:         QUANTUM_PREFERRED
+  Fallback:        False
+  BHEX Ready:      True
+  Merkle Root:     1bf128bddbfa6eac5e8abce2e6a27150...
+
+--- Execution 2: Classical execution ---
+  Workload ID:     e2e-002
+  Trace ID:        82b1f5ad-e340-4eb3-87f0-580b1df9a634
+  Status:          COMPLETED
+  Classification:  CLASSICAL
+  Execution Path:  LOCAL
+  Provider:        CLASSICAL_RUNTIME
+  Confidence:      1.0
+  Result Hash:     294ec557efd4ed2ed315b70efd533b8c...
+  Routing:         CLASSICAL_PREFERRED
+  Fallback:        False
+  BHEX Ready:      True
+  Merkle Root:     e5ce9a05988481a3f3dca0dcefcdccea...
+
+--- Execution 3: Quantum with entanglement ---
+  Workload ID:     e2e-003
+  Trace ID:        f158687b-d342-484e-bf15-444e962dc0d8
+  Status:          COMPLETED
+  Classification:  QUANTUM_LOCAL
+  Execution Path:  LOCAL
+  Provider:        qiskit-aer-local
+  Confidence:      0.7744
+  Result Hash:     6255b341e8575f6b4a64398dd0e97d0f...
+  Routing:         QUANTUM_REQUIRED
+  Fallback:        False
+  BHEX Ready:      True
+  Merkle Root:     0b8ca694488963c5931956694cf40e59...

@@ -1,0 +1,20 @@
+{
+  "modules": {
+    "execution_classification": "IMPORTED_OK",
+    "quantum_provider_registry": "IMPORTED_OK",
+    "workload_router": "IMPORTED_OK",
+    "quantum_network_contract": "IMPORTED_OK",
+    "hybrid_runtime_orchestrator": "IMPORTED_OK",
+    "evidence_ledger": "IMPORTED_OK",
+    "execution_contract": "IMPORTED_OK",
+    "observability": "IMPORTED_OK",
+    "canonical_replay_authority": "IMPORTED_OK",
+    "runtime_core": "IMPORTED_OK",
+    "quantum_producer": "IMPORTED_OK",
+    "quantum_trust_provider": "IMPORTED_OK",
+    "trust_chain": "IMPORTED_OK",
+    "integration_harness": "IMPORT_FAILED: bad operand type for unary -: 'str'"
+  },
+  "python_version": "3.14.0 (tags/v3.14.0:ebf955d, Oct  7 2025, 10:15:03) [MSC v.1944 64 bit (AMD64)]",
+  "timestamp": "2026-09-01T08:44:54.312867+00:00"
+}

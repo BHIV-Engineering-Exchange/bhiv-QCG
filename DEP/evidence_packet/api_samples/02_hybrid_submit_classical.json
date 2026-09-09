@@ -1,0 +1,214 @@
+{
+  "endpoint": "POST /hybrid/submit",
+  "description": "Submit classical workload (routed to classical execution)",
+  "request": {
+    "workload": {
+      "workload_id": "evidence-classical-001",
+      "workload_type": "GENERAL",
+      "payload": {
+        "task": "classical_computation"
+      }
+    },
+    "workload_type": "GENERAL",
+    "problem_size": 1
+  },
+  "response": {
+    "workload_id": "evidence-classical-001",
+    "trace_id": "f3c3a90f-7c58-40e0-a6fd-ecd8714376ed",
+    "classified_result": {
+      "trace_id": "f3c3a90f-7c58-40e0-a6fd-ecd8714376ed",
+      "classification": "CLASSICAL",
+      "execution_path": "LOCAL",
+      "provider_id": "CLASSICAL_RUNTIME",
+      "result_payload": {
+        "status": "EXECUTED",
+        "execution_type": "CLASSICAL",
+        "workload_type": "GENERAL",
+        "result": {
+          "task": "classical_computation"
+        }
+      },
+      "confidence": 1.0,
+      "result_hash": "d8f325d0b7bb0d8c3453b238a1dd11b18c9a22e061c5f1392ba0eaab1e46c41f",
+      "fallback_reason": "",
+      "blocked_reason": "",
+      "original_classification": "",
+      "timestamp": "2026-09-01T08:44:54.217232+00:00"
+    },
+    "routing_decision": {
+      "workload_id": "evidence-classical-001",
+      "suitability": "CLASSICAL_PREFERRED",
+      "recommended_provider_id": "CLASSICAL_RUNTIME",
+      "recommended_classification": "CLASSICAL",
+      "recommended_path": "LOCAL",
+      "fallback_available": false,
+      "fallback_provider_id": "",
+      "fallback_classification": "",
+      "reason": "Workload assessed as classical-preferred",
+      "assessed_at": "2026-09-01T08:44:54.217195+00:00"
+    },
+    "stages": {
+      "discovery": {
+        "providers": [
+          {
+            "provider_id": "qiskit-aer-local",
+            "provider_name": "Qiskit Aer Local Simulator",
+            "provider_type": "LOCAL_SIMULATOR",
+            "status": "AVAILABLE",
+            "capabilities": {
+              "simulation_methods": [
+                "statevector",
+                "density_matrix",
+                "stabilizer"
+              ],
+              "noise_support": true,
+              "max_shots": 100000
+            },
+            "health_endpoint": "",
+            "max_qubits": 30,
+            "supported_gates": [
+              "h",
+              "x",
+              "y",
+              "z",
+              "cx",
+              "cz",
+              "ccx",
+              "swap",
+              "rx",
+              "ry",
+              "rz"
+            ],
+            "noise_model": "configurable",
+            "backend_name": "aer_simulator",
+            "last_health_check": "",
+            "last_health_result": "",
+            "registered_at": "2026-09-01T08:44:54.176371+00:00"
+          }
+        ],
+        "aggregate": {
+          "total_providers": 1,
+          "available": 1,
+          "degraded": 0,
+          "unavailable": 0,
+          "unknown": 0,
+          "live_hardware_available": 0,
+          "quantum_execution_possible": true,
+          "live_quantum_possible": false,
+          "timestamp": "2026-09-01T08:44:54.217158+00:00"
+        },
+        "quantum_available": true,
+        "live_quantum_available": false,
+        "timestamp": "2026-09-01T08:44:54.217162+00:00"
+      },
+      "routing": {
+        "workload_id": "evidence-classical-001",
+        "suitability": "CLASSICAL_PREFERRED",
+        "recommended_provider_id": "CLASSICAL_RUNTIME",
+        "recommended_classification": "CLASSICAL",
+        "recommended_path": "LOCAL",
+        "fallback_available": false,
+        "fallback_provider_id": "",
+        "fallback_classification": "",
+        "reason": "Workload assessed as classical-preferred",
+        "assessed_at": "2026-09-01T08:44:54.217195+00:00"
+      },
+      "execution": {
+        "trace_id": "f3c3a90f-7c58-40e0-a6fd-ecd8714376ed",
+        "classification": "CLASSICAL",
+        "execution_path": "LOCAL",
+        "provider_id": "CLASSICAL_RUNTIME",
+        "result_payload": {
+          "status": "EXECUTED",
+          "execution_type": "CLASSICAL",
+          "workload_type": "GENERAL",
+          "result": {
+            "task": "classical_computation"
+          }
+        },
+        "confidence": 1.0,
+        "result_hash": "d8f325d0b7bb0d8c3453b238a1dd11b18c9a22e061c5f1392ba0eaab1e46c41f",
+        "fallback_reason": "",
+        "blocked_reason": "",
+        "original_classification": "",
+        "timestamp": "2026-09-01T08:44:54.217232+00:00"
+      },
+      "trust_replay": {
+        "replay_check": {
+          "is_valid": true,
+          "status": "VALID",
+          "sequence_number": 106
+        },
+        "trust_boundary": "QCG_VALIDATED",
+        "classification_verified": "CLASSICAL",
+        "path_verified": "LOCAL"
+      },
+      "evidence": {
+        "evidence_recorded": true,
+        "ledger_snapshot": {
+          "sequence_length": 5,
+          "merkle_root": "5e2fb346055eb73f8b88de41eda43a4e77d81f97c2d204cfaecebec85fa31cbd",
+          "latest_hash": "9804a56a263fcfafd22bab2898c726f3e4c07a28f24275c6276c1ee1001a63ea"
+        },
+        "trace_count": 2
+      }
+    },
+    "provenance": {
+      "trace_id": "f3c3a90f-7c58-40e0-a6fd-ecd8714376ed",
+      "classification": "CLASSICAL",
+      "execution_path": "LOCAL",
+      "provider_id": "CLASSICAL_RUNTIME",
+      "result_hash": "d8f325d0b7bb0d8c3453b238a1dd11b18c9a22e061c5f1392ba0eaab1e46c41f",
+      "confidence": 1.0,
+      "is_fallback": false,
+      "is_blocked": false,
+      "routing_suitability": "CLASSICAL_PREFERRED",
+      "evidence_chain_head": "9804a56a263fcfafd22bab2898c726f3e4c07a28f24275c6276c1ee1001a63ea",
+      "merkle_root": "5e2fb346055eb73f8b88de41eda43a4e77d81f97c2d204cfaecebec85fa31cbd",
+      "network_enabled": true,
+      "provenance_timestamp": "2026-09-01T08:44:54.229769+00:00",
+      "bhex_ready": true
+    },
+    "network_coordination": {},
+    "health": {
+      "orchestrator": "HEALTHY",
+      "providers": {
+        "total_providers": 1,
+        "available": 1,
+        "degraded": 0,
+        "unavailable": 0,
+        "unknown": 0,
+        "live_hardware_available": 0,
+        "quantum_execution_possible": true,
+        "live_quantum_possible": false,
+        "timestamp": "2026-09-01T08:44:54.229782+00:00"
+      },
+      "network": {
+        "status": "ACTIVE",
+        "total_nodes": 1,
+        "active_nodes": 1,
+        "total_routes": 1,
+        "active_routes": 1,
+        "protocols_available": [
+          "BB84",
+          "E91",
+          "ENTANGLEMENT_SWAPPING",
+          "CLASSICAL_CONTROL"
+        ],
+        "timestamp": "2026-09-01T08:44:54.229796+00:00"
+      },
+      "evidence_ledger": {
+        "chain_length": 5,
+        "chain_valid": true,
+        "merkle_root": "5e2fb346055eb73f8b88de41eda43a4e77d81f97c2d204cfaecebec85fa31cbd"
+      },
+      "trace_store": {
+        "entries": 2
+      },
+      "timestamp": "2026-09-01T08:44:54.229825+00:00"
+    },
+    "status": "COMPLETED",
+    "timestamp": "2026-09-01T08:44:54.217121+00:00"
+  },
+  "timestamp": "2026-09-01T08:44:54.229900+00:00"
+}

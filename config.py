@@ -103,6 +103,22 @@ SDK_REQUEST_TIMEOUT: int            = _int("QCG_SDK_REQUEST_TIMEOUT", 10)
 # -- Quantum Trust ------------------------------------------------------------
 QUANTUM_TRUST_LEVEL: str            = _str("QCG_QUANTUM_TRUST_LEVEL", "CLASSICAL")  # CLASSICAL | POST_QUANTUM | HYBRID
 
+# -- Hybrid Quantum-Classical Runtime ----------------------------------------
+EVIDENCE_LEDGER_PATH: str           = _str("QCG_EVIDENCE_LEDGER_PATH", "evidence_ledger.json")
+QUANTUM_NETWORK_ENABLED: bool       = _str("QCG_QUANTUM_NETWORK_ENABLED", "true").lower() == "true"
+DEFAULT_EXECUTION_CLASSIFICATION: str = _str("QCG_DEFAULT_EXEC_CLASSIFICATION", "CLASSICAL")
+QUANTUM_PROVIDER_PREFER_LIVE: bool  = _str("QCG_PREFER_LIVE_QUANTUM", "true").lower() == "true"
+CLASSICAL_FALLBACK_ENABLED: bool    = _str("QCG_CLASSICAL_FALLBACK", "true").lower() == "true"
+
+# -- Security Hardening (Phase 2) -------------------------------------------
+MAX_REQUEST_BODY_SIZE: int          = _int("QCG_MAX_REQUEST_BODY_SIZE", 1048576)  # 1 MB
+RATE_LIMIT_ENABLED: bool            = _str("QCG_RATE_LIMIT_ENABLED", "true").lower() == "true"
+INPUT_TRACE_ID_MAX_LENGTH: int      = _int("QCG_TRACE_ID_MAX_LENGTH", 256)
+INPUT_PAYLOAD_MAX_KEYS: int         = _int("QCG_PAYLOAD_MAX_KEYS", 100)
+
+# -- Federation Safety (Phase 2) -------------------------------------------
+MAX_SEEN_NONCES: int                = _int("QCG_MAX_SEEN_NONCES", 50000)
+
 
 def validate():
     """Validate config at startup. Raises ValueError on bad values."""
@@ -133,6 +149,13 @@ def validate():
         raise ValueError(f"QCG_CONSENSUS_QUORUM_THRESHOLD must be in (0.5, 1.0], got {CONSENSUS_QUORUM_THRESHOLD}")
     if TRANSPORT_TYPE not in ("tcp", "uds", "http", "grpc", "nats", "zeromq"):
         raise ValueError(f"QCG_TRANSPORT_TYPE must be one of tcp, uds, http, grpc, nats, zeromq, got {TRANSPORT_TYPE}")
+    # Phase 2: Security config validation
+    if MAX_REQUEST_BODY_SIZE <= 0:
+        raise ValueError(f"QCG_MAX_REQUEST_BODY_SIZE must be positive, got {MAX_REQUEST_BODY_SIZE}")
+    if INPUT_TRACE_ID_MAX_LENGTH <= 0:
+        raise ValueError(f"QCG_TRACE_ID_MAX_LENGTH must be positive, got {INPUT_TRACE_ID_MAX_LENGTH}")
+    if INPUT_PAYLOAD_MAX_KEYS <= 0:
+        raise ValueError(f"QCG_PAYLOAD_MAX_KEYS must be positive, got {INPUT_PAYLOAD_MAX_KEYS}")
 
 
 validate()
