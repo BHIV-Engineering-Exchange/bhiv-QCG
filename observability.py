@@ -103,61 +103,96 @@ class ReplayProof:
 
 class TraceStore:
     """
-    Thread-safe in-memory trace store.
+    Thread-safe SQLite-backed trace store.
 
     Every trace entry is a frozen dataclass with a timestamp, sequence
     number, and hash.  The store supports recording, querying, and replay
     reconstruction.
 
     Ordering: entries are ordered by a monotonically-increasing sequence
-    counter assigned at record time, NOT by wall-clock timestamps.
+    counter assigned at record time (using SQLite AUTOINCREMENT), NOT by wall-clock timestamps.
     This ensures deterministic replay ordering regardless of clock skew.
     """
 
-    def __init__(self, filepath: str = "trace_store_persistent.json"):
+    def __init__(self, filepath: str = "trace_store_persistent.db"):
         import os
+        import sqlite3
         base_dir = os.path.dirname(os.path.abspath(__file__))
-        self.filepath = os.path.join(base_dir, filepath)
-        self._entries: deque[TraceEntry] = deque(maxlen=_MAX_TRACE_ENTRIES)
+        
+        # Determine the full path to the db file.
+        if filepath == ":memory:":
+            self.filepath = filepath
+        else:
+            self.filepath = os.path.join(base_dir, filepath)
+
         self._lock = threading.Lock()
-        self._sequence_counter: int = 0
-        self._load()
+        
+        # Connect to SQLite. check_same_thread=False allows access across threads (guarded by lock).
+        self._conn = sqlite3.connect(self.filepath, check_same_thread=False)
+        self._conn.row_factory = sqlite3.Row
+        
+        # Enable WAL mode for better concurrency performance if not in memory
+        if filepath != ":memory:":
+            self._conn.execute("PRAGMA journal_mode=WAL;")
+            
+        self._init_db()
 
-    def _load(self) -> None:
-        import os, json
-        if os.path.exists(self.filepath):
-            try:
-                with open(self.filepath, "r") as f:
-                    data = json.load(f)
-                    for item in data.get("entries", []):
-                        self._entries.append(TraceEntry(**item))
-                    self._sequence_counter = data.get("sequence_counter", 0)
-            except Exception as e:
-                log.error(f"Failed to load TraceStore: {e}")
-
-    def _save(self) -> None:
-        import json
-        try:
-            data = {
-                "sequence_counter": self._sequence_counter,
-                "entries": [e.to_dict() for e in self._entries]
-            }
-            with open(self.filepath, "w") as f:
-                json.dump(data, f)
-        except Exception as e:
-            log.error(f"Failed to save TraceStore: {e}")
+    def _init_db(self) -> None:
+        """Initialize the SQLite schema."""
+        with self._lock:
+            self._conn.execute('''
+                CREATE TABLE IF NOT EXISTS traces (
+                    sequence INTEGER PRIMARY KEY AUTOINCREMENT,
+                    trace_id TEXT NOT NULL,
+                    trace_type TEXT NOT NULL,
+                    data TEXT NOT NULL,
+                    entry_hash TEXT NOT NULL,
+                    timestamp TEXT NOT NULL
+                )
+            ''')
+            self._conn.execute('CREATE INDEX IF NOT EXISTS idx_trace_id ON traces(trace_id)')
+            self._conn.execute('CREATE INDEX IF NOT EXISTS idx_trace_type ON traces(trace_type)')
+            self._conn.commit()
 
     # -- recording ----------------------------------------------------------
 
     def record(self, entry: TraceEntry) -> None:
         """Append a trace entry to the store, assigning a sequence number."""
         with self._lock:
-            self._sequence_counter += 1
-            # Assign sequence number if not already set
-            if entry.sequence == 0:
-                object.__setattr__(entry, "sequence", self._sequence_counter)
-            self._entries.append(entry)
-            self._save()
+            cursor = self._conn.cursor()
+            try:
+                # If sequence is already set, insert it directly.
+                if entry.sequence != 0:
+                    cursor.execute('''
+                        INSERT INTO traces (sequence, trace_id, trace_type, data, entry_hash, timestamp)
+                        VALUES (?, ?, ?, ?, ?, ?)
+                    ''', (
+                        entry.sequence,
+                        entry.trace_id,
+                        entry.trace_type,
+                        json.dumps(entry.data),
+                        entry.entry_hash,
+                        entry.timestamp
+                    ))
+                else:
+                    cursor.execute('''
+                        INSERT INTO traces (trace_id, trace_type, data, entry_hash, timestamp)
+                        VALUES (?, ?, ?, ?, ?)
+                    ''', (
+                        entry.trace_id,
+                        entry.trace_type,
+                        json.dumps(entry.data),
+                        entry.entry_hash,
+                        entry.timestamp
+                    ))
+                    # Assign the generated sequence number
+                    object.__setattr__(entry, "sequence", cursor.lastrowid)
+                self._conn.commit()
+            except Exception as e:
+                self._conn.rollback()
+                log.error(f"Failed to record trace: {e}")
+                raise
+
         log_event(log, logging.DEBUG, "trace_recorded", ctx={
             "trace_id":   entry.trace_id,
             "trace_type": entry.trace_type,
@@ -302,6 +337,17 @@ class TraceStore:
         return entry
 
     # -- querying -----------------------------------------------------------
+    
+    def _row_to_entry(self, row) -> TraceEntry:
+        """Convert a SQLite row to a TraceEntry dataclass."""
+        return TraceEntry(
+            trace_id=row['trace_id'],
+            trace_type=row['trace_type'],
+            data=json.loads(row['data']),
+            sequence=row['sequence'],
+            entry_hash=row['entry_hash'],
+            timestamp=row['timestamp'],
+        )
 
     def query(
         self,
@@ -312,31 +358,47 @@ class TraceStore:
         Query trace entries, optionally filtering by trace_id and/or
         trace_type.
         """
-        with self._lock:
-            entries = list(self._entries)
-
+        query = "SELECT * FROM traces"
+        params = []
+        conditions = []
+        
         if trace_id:
-            entries = [e for e in entries if e.trace_id == trace_id]
+            conditions.append("trace_id = ?")
+            params.append(trace_id)
         if trace_type:
-            entries = [e for e in entries if e.trace_type == trace_type]
-
-        return entries
+            conditions.append("trace_type = ?")
+            params.append(trace_type)
+            
+        if conditions:
+            query += " WHERE " + " AND ".join(conditions)
+            
+        query += " ORDER BY sequence ASC"
+        
+        with self._lock:
+            cursor = self._conn.execute(query, params)
+            rows = cursor.fetchall()
+            
+        return [self._row_to_entry(row) for row in rows]
 
     def all_entries(self) -> list[TraceEntry]:
         """Return a snapshot of all entries."""
         with self._lock:
-            return list(self._entries)
+            cursor = self._conn.execute("SELECT * FROM traces ORDER BY sequence ASC")
+            rows = cursor.fetchall()
+        return [self._row_to_entry(row) for row in rows]
 
     def __len__(self) -> int:
         with self._lock:
-            return len(self._entries)
+            cursor = self._conn.execute("SELECT COUNT(*) FROM traces")
+            return cursor.fetchone()[0]
 
     def clear(self) -> None:
         """Clear all entries."""
         with self._lock:
-            self._entries.clear()
-            self._sequence_counter = 0
-            self._save()
+            self._conn.execute("DELETE FROM traces")
+            # Also reset the auto-increment counter
+            self._conn.execute("DELETE FROM sqlite_sequence WHERE name='traces'")
+            self._conn.commit()
 
     # -- replay reconstruction ----------------------------------------------
 
@@ -450,4 +512,5 @@ class TraceStore:
             }
             spans.append(span)
         return spans
+
 

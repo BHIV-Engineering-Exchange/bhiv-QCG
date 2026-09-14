@@ -1,11 +1,1 @@
-<<<<<<< HEAD
-{"process_id": 18112, "role": "CONSENSUS", "event": "started", "message_id": "", "sequence_number": 0, "status": "", "timestamp": "2026-09-09T08:06:34Z"}
-{"process_id": 18112, "role": "CONSENSUS", "event": "consensus_complete", "message_id": "proc-trace-001", "sequence_number": 0, "status": "REACHED", "timestamp": "2026-09-09T08:06:50Z", "agreement": "100%"}
-{"process_id": 18112, "role": "CONSENSUS", "event": "received DONE, shutting down", "message_id": "", "sequence_number": 0, "status": "", "timestamp": "2026-09-09T08:06:50Z"}
-{"process_id": 18112, "role": "CONSENSUS", "event": "finished", "message_id": "", "sequence_number": 0, "status": "", "timestamp": "2026-09-09T08:06:50Z"}
-=======
-{"process_id": 15956, "role": "CONSENSUS", "event": "started", "message_id": "", "sequence_number": 0, "status": "", "timestamp": "2026-09-01T12:29:16Z"}
-{"process_id": 15956, "role": "CONSENSUS", "event": "skipping halted result", "message_id": "", "sequence_number": 0, "status": "", "timestamp": "2026-09-01T12:29:22Z", "ack": "HALT:SDK_INVOCATION_FAILURE:Service 'dhiraj-runtime' not found in any discovery node"}
-{"process_id": 15956, "role": "CONSENSUS", "event": "received DONE, shutting down", "message_id": "", "sequence_number": 0, "status": "", "timestamp": "2026-09-01T12:29:22Z"}
-{"process_id": 15956, "role": "CONSENSUS", "event": "finished", "message_id": "", "sequence_number": 0, "status": "", "timestamp": "2026-09-01T12:29:22Z"}
->>>>>>> 9c671f33101edea77548c48678bf12b7b89a6ce4
+{"process_id": 13192, "role": "CONSENSUS", "event": "started", "message_id": "", "sequence_number": 0, "status": "", "timestamp": "2026-09-14T10:33:00Z"}
