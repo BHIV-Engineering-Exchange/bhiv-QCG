@@ -1,7 +1,18 @@
+import logging
 from typing import Dict, Any, List
 from solver_registry import SolverRegistry
 
+logger = logging.getLogger("usf.solver_selection")
+
+
 class SolverSelectionEngine:
+    """
+    Recommends an ordered list of compatible solvers for a given problem.
+
+    Ranking is deterministic: (Cost, Runtime, Confidence, Solver ID).
+    Error boundaries ensure a single malformed solver never crashes the selection loop.
+    """
+
     def __init__(self, registry: SolverRegistry):
         self.registry = registry
 
@@ -60,32 +71,46 @@ class SolverSelectionEngine:
         runtime = self.runtime_rank.get(solver.get("estimated_runtime", "DAYS"), 99)
         confidence = self.confidence_rank.get(solver.get("confidence_model", "UNBOUNDED"), 99)
         solver_id = solver.get("solver_id", "")
-        
+
         return (cost, runtime, confidence, solver_id)
 
     def select_solvers(self, problem: Dict[str, Any]) -> List[Dict[str, Any]]:
         """
         Recommends an ordered list of compatible solvers.
+        Error boundary ensures malformed solver entries are skipped, not crashed on.
         """
         compatible_solvers = []
-        
+
         # Retrieve all active solvers
         all_solvers = self.registry.search_capabilities()
-        
+
         for solver in all_solvers:
-            if self._is_compatible(problem, solver):
-                compatible_solvers.append(solver)
-                
+            try:
+                if self._is_compatible(problem, solver):
+                    compatible_solvers.append(solver)
+            except Exception as e:
+                # Error boundary: skip malformed solvers, log the issue
+                logger.warning(
+                    f"Skipping solver {solver.get('solver_id', 'UNKNOWN')} "
+                    f"during compatibility check: {type(e).__name__}: {e}"
+                )
+
         # Sort deterministically based on scoring criteria
         compatible_solvers.sort(key=self._score_solver)
-        
+
+        logger.info(
+            f"Solver selection complete: {len(compatible_solvers)}/{len(all_solvers)} compatible "
+            f"for problem_type={problem.get('problem_type', 'UNKNOWN')}"
+        )
+
         return compatible_solvers
+
 
 if __name__ == "__main__":
     # Selection Report Example
     import json
     registry = SolverRegistry("solver_contract.schema.json")
-    
+
     try:
         with open("solver_examples.json") as f:
             examples = json.load(f)
@@ -93,9 +118,9 @@ if __name__ == "__main__":
                 registry.register_solver(ex)
     except FileNotFoundError:
         print("Example data not found for local testing.")
-        
+
     engine = SolverSelectionEngine(registry)
-    
+
     problem = {
         "problem_type": "MILP",
         "required_constraints": ["LINEAR"],
@@ -105,7 +130,7 @@ if __name__ == "__main__":
         "max_variables": 500,
         "max_constraints": 1000
     }
-    
+
     print(f"Problem: {problem}")
     recommendations = engine.select_solvers(problem)
     print(f"Recommended Solvers:")

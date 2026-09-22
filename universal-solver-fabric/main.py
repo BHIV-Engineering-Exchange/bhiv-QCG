@@ -1,15 +1,18 @@
-from fastapi import FastAPI, HTTPException, status
+from fastapi import FastAPI, HTTPException, Request, Response, status
+from fastapi.responses import JSONResponse
 from pydantic import BaseModel
 from typing import Dict, Any, List, Optional
 import json
 import uuid
 import os
+import time
+import logging
 
 from solver_registry import SolverRegistry
 from solver_selection_engine import SolverSelectionEngine
 from execution_adapter import ExecutionAdapter
 from runtime_validation import ValidatingSolverAdapter
-from telemetry import EvidencePublisher, logger
+from telemetry import EvidencePublisher, get_usf_metrics, logger
 
 app = FastAPI(
     title="Optimization.SolverFabric.v1",
@@ -17,7 +20,38 @@ app = FastAPI(
     version="1.0.0"
 )
 
+log = logging.getLogger("usf.api")
+
+# ---------------------------------------------------------------------------
+# Error boundary middleware
+# ---------------------------------------------------------------------------
+
+@app.middleware("http")
+async def error_boundary_middleware(request: Request, call_next):
+    """Catch unhandled exceptions and return structured 500 JSON."""
+    request_id = request.headers.get("X-Request-ID", str(uuid.uuid4()))
+    start = time.time()
+    try:
+        response = await call_next(request)
+        response.headers["X-Request-ID"] = request_id
+        return response
+    except Exception as e:
+        log.error(f"Unhandled exception on {request.method} {request.url.path}: {type(e).__name__}: {e}")
+        return JSONResponse(
+            status_code=500,
+            content={
+                "error": "InternalServerError",
+                "detail": str(e),
+                "request_id": request_id,
+            },
+            headers={"X-Request-ID": request_id},
+        )
+
+
+# ---------------------------------------------------------------------------
 # Initialize registry and engine
+# ---------------------------------------------------------------------------
+
 registry = SolverRegistry("solver_contract.schema.json")
 try:
     with open("solver_examples.json") as f:
@@ -29,6 +63,11 @@ except Exception as e:
 
 engine = SolverSelectionEngine(registry)
 publisher = EvidencePublisher()
+
+
+# ---------------------------------------------------------------------------
+# Request models
+# ---------------------------------------------------------------------------
 
 class ProblemSchema(BaseModel):
     problem_type: str
@@ -44,6 +83,11 @@ class ExecuteRequest(BaseModel):
     payload: Dict[str, Any]
     execution_constraints: ExecutionConstraints
 
+
+# ---------------------------------------------------------------------------
+# Health endpoints
+# ---------------------------------------------------------------------------
+
 @app.get("/health/liveness")
 def liveness():
     return {"status": "alive"}
@@ -52,7 +96,22 @@ def liveness():
 def readiness():
     if len(registry.search_capabilities()) == 0:
         raise HTTPException(status_code=503, detail="No solvers registered")
-    return {"status": "ready"}
+    return {"status": "ready", "solver_count": registry.solver_count}
+
+
+# ---------------------------------------------------------------------------
+# Metrics endpoint
+# ---------------------------------------------------------------------------
+
+@app.get("/metrics")
+def metrics():
+    """Expose USF execution metrics."""
+    return get_usf_metrics().summary
+
+
+# ---------------------------------------------------------------------------
+# Capabilities
+# ---------------------------------------------------------------------------
 
 @app.get("/capabilities")
 def get_capabilities():
@@ -66,6 +125,11 @@ def get_capabilities():
             "deterministic_capability": s.get("deterministic_capability", False)
         })
     return {"solvers": simplified_solvers}
+
+
+# ---------------------------------------------------------------------------
+# Execute
+# ---------------------------------------------------------------------------
 
 @app.post("/execute")
 def execute_problem(req: ExecuteRequest):
@@ -84,7 +148,7 @@ def execute_problem(req: ExecuteRequest):
         )
 
     selected_solver_meta = recommendations[0]
-    
+
     # We use the ValidatingSolverAdapter as the mock solver for this integration
     solver = ValidatingSolverAdapter(simulate_failure=False)
     adapter = ExecutionAdapter(solver, selected_solver_meta)
@@ -116,7 +180,7 @@ def execute_problem(req: ExecuteRequest):
         "solution": evidence["result"],
         "telemetry": {
             "execution_time_ms": evidence["provenance"]["execution_duration_ms"],
-            "peak_memory_mb": 256 # Mock telemetry
+            "peak_memory_mb": 256  # Mock telemetry
         },
         "replay_metadata": {
             "deterministic_seed": 42,
@@ -125,5 +189,6 @@ def execute_problem(req: ExecuteRequest):
             "trace_id": evidence["trace_id"],
             "replay_id": evidence["replay_id"]
         },
-        "confidence_score": 0.99
+        "confidence_score": 0.99,
+        "evidence_hash": evidence.get("evidence_hash", ""),
     }
