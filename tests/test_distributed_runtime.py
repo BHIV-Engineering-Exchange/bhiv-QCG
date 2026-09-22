@@ -64,7 +64,7 @@ class TestDistributedTransport(unittest.TestCase):
 
 class TestOpenTelemetryObservability(unittest.TestCase):
     def test_otel_span_export(self):
-        store = TraceStore()
+        store = TraceStore(":memory:")
         trace_id = "test-otel-trace-123"
         store.record_execution_trace(
             trace_id=trace_id,

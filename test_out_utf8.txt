@@ -1,0 +1,104 @@
+﻿============================= test session starts =============================
+platform win32 -- Python 3.11.3, pytest-9.1.1, pluggy-1.6.0
+rootdir: C:\Users\PRITESH\Desktop\QCG\QCG_task1
+plugins: anyio-3.7.1, locust-2.45.0, cov-7.1.0
+collected 693 items / 5 errors
+
+=================================== ERRORS ====================================
+__________ ERROR collecting code_packets/tests/test_adapter_layer.py __________
+import file mismatch:
+imported module 'tests.test_adapter_layer' has this __file__ attribute:
+  C:\Users\PRITESH\Desktop\QCG\QCG_task1\tests\test_adapter_layer.py
+which is not the same as the test file we want to collect:
+  C:\Users\PRITESH\Desktop\QCG\QCG_task1\code_packets\tests\test_adapter_layer.py
+HINT: remove __pycache__ / .pyc files and/or use a unique basename for your test file modules
+_______________ ERROR collecting code_packets/tests/test_all.py _______________
+import file mismatch:
+imported module 'tests.test_all' has this __file__ attribute:
+  C:\Users\PRITESH\Desktop\QCG\QCG_task1\tests\test_all.py
+which is not the same as the test file we want to collect:
+  C:\Users\PRITESH\Desktop\QCG\QCG_task1\code_packets\tests\test_all.py
+HINT: remove __pycache__ / .pyc files and/or use a unique basename for your test file modules
+_______ ERROR collecting code_packets/tests/test_communication_layer.py _______
+import file mismatch:
+imported module 'tests.test_communication_layer' has this __file__ attribute:
+  C:\Users\PRITESH\Desktop\QCG\QCG_task1\tests\test_communication_layer.py
+which is not the same as the test file we want to collect:
+  C:\Users\PRITESH\Desktop\QCG\QCG_task1\code_packets\tests\test_communication_layer.py
+HINT: remove __pycache__ / .pyc files and/or use a unique basename for your test file modules
+_______ ERROR collecting code_packets/tests/test_distributed_runtime.py _______
+import file mismatch:
+imported module 'tests.test_distributed_runtime' has this __file__ attribute:
+  C:\Users\PRITESH\Desktop\QCG\QCG_task1\tests\test_distributed_runtime.py
+which is not the same as the test file we want to collect:
+  C:\Users\PRITESH\Desktop\QCG\QCG_task1\code_packets\tests\test_distributed_runtime.py
+HINT: remove __pycache__ / .pyc files and/or use a unique basename for your test file modules
+_____________ ERROR collecting code_packets/tests/test_phase5.py ______________
+import file mismatch:
+imported module 'tests.test_phase5' has this __file__ attribute:
+  C:\Users\PRITESH\Desktop\QCG\QCG_task1\tests\test_phase5.py
+which is not the same as the test file we want to collect:
+  C:\Users\PRITESH\Desktop\QCG\QCG_task1\code_packets\tests\test_phase5.py
+HINT: remove __pycache__ / .pyc files and/or use a unique basename for your test file modules
+============================== warnings summary ===============================
+..\..\..\AppData\Local\Programs\Python\Python311\Lib\site-packages\qiskit_aer\__init__.py:89
+  C:\Users\PRITESH\AppData\Local\Programs\Python\Python311\Lib\site-packages\qiskit_aer\__init__.py:89: DeprecationWarning: The class ``qiskit.providers.provider.Provider`` is deprecated as of qiskit 1.1. It will be removed no earlier than 3 months after the release date. The abstract Provider and ProviderV1 classes are deprecated and will be removed in 2.0. You can just remove it as the parent class and a `get_backend` method that returns the backends from `self.backend`.
+    Aer = AerProvider()  # pylint: disable=invalid-name
+
+web_server.py:67
+  C:\Users\PRITESH\Desktop\QCG\QCG_task1\web_server.py:67: DeprecationWarning: 
+          on_event is deprecated, use lifespan event handlers instead.
+  
+          Read more about it in the
+          [FastAPI docs for Lifespan Events](https://fastapi.tiangolo.com/advanced/events/).
+          
+    @app.on_event("startup")
+
+..\..\..\AppData\Local\Programs\Python\Python311\Lib\site-packages\fastapi\applications.py:4599
+..\..\..\AppData\Local\Programs\Python\Python311\Lib\site-packages\fastapi\applications.py:4599
+..\..\..\AppData\Local\Programs\Python\Python311\Lib\site-packages\fastapi\applications.py:4599
+..\..\..\AppData\Local\Programs\Python\Python311\Lib\site-packages\fastapi\applications.py:4599
+  C:\Users\PRITESH\AppData\Local\Programs\Python\Python311\Lib\site-packages\fastapi\applications.py:4599: DeprecationWarning: 
+          on_event is deprecated, use lifespan event handlers instead.
+  
+          Read more about it in the
+          [FastAPI docs for Lifespan Events](https://fastapi.tiangolo.com/advanced/events/).
+          
+    return self.router.on_event(event_type)
+
+web_server.py:79
+  C:\Users\PRITESH\Desktop\QCG\QCG_task1\web_server.py:79: DeprecationWarning: 
+          on_event is deprecated, use lifespan event handlers instead.
+  
+          Read more about it in the
+          [FastAPI docs for Lifespan Events](https://fastapi.tiangolo.com/advanced/events/).
+          
+    @app.on_event("shutdown")
+
+platform_discovery_fastapi.py:31
+  C:\Users\PRITESH\Desktop\QCG\QCG_task1\platform_discovery_fastapi.py:31: DeprecationWarning: 
+          on_event is deprecated, use lifespan event handlers instead.
+  
+          Read more about it in the
+          [FastAPI docs for Lifespan Events](https://fastapi.tiangolo.com/advanced/events/).
+          
+    @app.on_event("startup")
+
+platform_discovery_fastapi.py:38
+  C:\Users\PRITESH\Desktop\QCG\QCG_task1\platform_discovery_fastapi.py:38: DeprecationWarning: 
+          on_event is deprecated, use lifespan event handlers instead.
+  
+          Read more about it in the
+          [FastAPI docs for Lifespan Events](https://fastapi.tiangolo.com/advanced/events/).
+          
+    @app.on_event("shutdown")
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ===========================
+ERROR code_packets/tests/test_adapter_layer.py
+ERROR code_packets/tests/test_all.py
+ERROR code_packets/tests/test_communication_layer.py
+ERROR code_packets/tests/test_distributed_runtime.py
+ERROR code_packets/tests/test_phase5.py
+!!!!!!!!!!!!!!!!!!! Interrupted: 5 errors during collection !!!!!!!!!!!!!!!!!!!
+======================== 9 warnings, 5 errors in 4.39s ========================

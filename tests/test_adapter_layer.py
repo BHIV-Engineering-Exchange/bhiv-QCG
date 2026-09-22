@@ -511,7 +511,7 @@ class TestGovernanceLayer:
 class TestTraceStore:
 
     def test_record_and_query(self):
-        store = TraceStore()
+        store = TraceStore(":memory:")
         entry = TraceEntry(
             trace_id="obs-001", trace_type="execution",
             data={"ack": "ACK:OK"},
@@ -522,7 +522,7 @@ class TestTraceStore:
         assert results[0].trace_type == "execution"
 
     def test_query_by_type(self):
-        store = TraceStore()
+        store = TraceStore(":memory:")
         store.record(TraceEntry(trace_id="t1", trace_type="execution", data={"a": 1}))
         store.record(TraceEntry(trace_id="t2", trace_type="adapter", data={"b": 2}))
         store.record(TraceEntry(trace_id="t3", trace_type="execution", data={"c": 3}))
@@ -531,7 +531,7 @@ class TestTraceStore:
         assert len(execs) == 2
 
     def test_record_execution_trace(self):
-        store = TraceStore()
+        store = TraceStore(":memory:")
         entry = store.record_execution_trace(
             trace_id="ex-001", contract_hash="abc", ack="ACK:OK",
             runtime_hash="def", confidence=0.95,
@@ -540,7 +540,7 @@ class TestTraceStore:
         assert entry.data["ack"] == "ACK:OK"
 
     def test_record_adapter_trace(self):
-        store = TraceStore()
+        store = TraceStore(":memory:")
         entry = store.record_adapter_trace(
             trace_id="ad-001", adapter_type="QuantumAdapter",
             producer_type="QUANTUM", input_hash="in", output_hash="out",
@@ -548,7 +548,7 @@ class TestTraceStore:
         assert entry.trace_type == "adapter"
 
     def test_record_producer_lineage(self):
-        store = TraceStore()
+        store = TraceStore(":memory:")
         entry = store.record_producer_lineage(
             trace_id="pl-001", producer_type="QUANTUM",
             raw_input_hash="raw", adapter_output_hash="adapted",
@@ -557,7 +557,7 @@ class TestTraceStore:
         assert entry.trace_type == "producer_lineage"
 
     def test_record_contract_lineage(self):
-        store = TraceStore()
+        store = TraceStore(":memory:")
         entry = store.record_contract_lineage(
             trace_id="cl-001", contract_version="2.0.0",
             producer_type="QUANTUM",
@@ -581,7 +581,7 @@ class TestTraceStore:
         assert entry.entry_hash == expected
 
     def test_clear(self):
-        store = TraceStore()
+        store = TraceStore(":memory:")
         store.record(TraceEntry(trace_id="c", trace_type="x", data={}))
         store.clear()
         assert len(store.all_entries()) == 0
@@ -590,7 +590,7 @@ class TestTraceStore:
 class TestReplayReconstruction:
 
     def _store_with_traces(self):
-        store = TraceStore()
+        store = TraceStore(":memory:")
         tid = "replay-test-001"
         store.record_producer_lineage(
             trace_id=tid, producer_type="QUANTUM",
@@ -620,7 +620,7 @@ class TestReplayReconstruction:
         assert proof.mismatches == []
 
     def test_replay_proof_no_entries(self):
-        store = TraceStore()
+        store = TraceStore(":memory:")
         proof = store.reconstruct_replay("nonexistent")
         assert proof.is_valid is False
         assert "No trace entries" in proof.mismatches[0]
@@ -728,7 +728,7 @@ class TestCrossPhaseIntegration:
         assert result.ack.startswith("ACK:")
 
         # Trace
-        store = TraceStore()
+        store = TraceStore(":memory:")
         store.record_adapter_trace(
             trace_id=contract.trace_id,
             adapter_type=adapter_trace.adapter_type,
