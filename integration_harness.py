@@ -84,6 +84,15 @@ class TANTRAIntegrationHarness:
             except Exception as e:
                 logger.warning("KESHAV client initialization failed: %s", e)
 
+        self.prana_client = None
+        if getattr(config, "PRANA_ENABLED", True):
+            try:
+                from prana_client import PranaClient
+                self.prana_client = PranaClient()
+                logger.info("PRANA live client initialized: %s", getattr(config, 'PRANA_API_URL', 'http://163.128.209.18:8103'))
+            except Exception as e:
+                logger.warning("PRANA client initialization failed: %s", e)
+
     def _run_keshav_analysis(self, trace_id: str, payload: Dict[str, Any]) -> Dict[str, Any]:
         """
         Call KESHAV live /analyze endpoint for root-cause analysis.
@@ -115,6 +124,51 @@ class TANTRAIntegrationHarness:
             }
         except Exception as e:
             logger.warning("KESHAV analysis failed for trace %s: %s", trace_id, e)
+            return {
+                "status": "FALLBACK",
+                "reason": str(e),
+                "live": False,
+            }
+
+    def _forward_to_prana(self, trace_id: str, contract: ComputationExecutionContract, exec_res: Dict[str, Any], cons_res: Dict[str, Any]) -> Dict[str, Any]:
+        """
+        Forward TANTRA execution & truth classification event to PRANA live service.
+        """
+        if self.prana_client is None:
+            return {
+                "status": "SKIPPED",
+                "reason": "PRANA client not enabled",
+                "live": False,
+            }
+        try:
+            event_payload = {
+                "contract_trace_id": trace_id,
+                "producer_id": contract.producer_id,
+                "producer_type": contract.producer_type,
+                "confidence": contract.confidence,
+                "contract_version": contract.contract_version,
+                "runtime_hash": exec_res.get("runtime_hash"),
+                "consensus_reached": cons_res.get("consensus_reached", False),
+                "final_hash": cons_res.get("final_hash"),
+                "timestamp": contract.timestamp,
+            }
+            resp = self.prana_client.ingest_event(
+                payload=event_payload,
+                trace_id=trace_id,
+                event_type="truth_classification",
+                source_system="bhiv-qcg",
+                certification_status="CERTIFIED" if cons_res.get("consensus_reached") else "CONDITIONAL"
+            )
+            return {
+                "status": resp.status,
+                "live": True,
+                "event_id": resp.event_id,
+                "http_status": resp.http_status,
+                "total_elapsed_ms": resp.total_elapsed_ms,
+                "error": resp.error,
+            }
+        except Exception as e:
+            logger.warning("PRANA ingestion failed for trace %s: %s", trace_id, e)
             return {
                 "status": "FALLBACK",
                 "reason": str(e),
@@ -285,6 +339,16 @@ class TANTRAIntegrationHarness:
                 cons_res = {"consensus_reached": False, "error": str(e)}
             response["stage_timings_ms"]["consensus"] = round((time.time() - stage_start) * 1000, 2)
             response["stages"]["consensus"] = cons_res
+
+            # 6. PRANA Live Ingestion
+            stage_start = time.time()
+            try:
+                prana_res = self._forward_to_prana(trace_id, contract, exec_res, cons_res)
+            except Exception as e:
+                logger.warning("Stage PRANA failed for trace %s: %s", trace_id, e)
+                prana_res = {"status": "ERROR", "reason": str(e), "live": False}
+            response["stage_timings_ms"]["prana_ingest"] = round((time.time() - stage_start) * 1000, 2)
+            response["stages"]["prana_ingest"] = prana_res
             
             # Trace Continuity propagation
             response["trace_continuity"] = {
@@ -292,6 +356,8 @@ class TANTRAIntegrationHarness:
                 "runtime_hash": exec_res["runtime_hash"],
                 "final_hash": cons_res.get("final_hash"),
                 "keshav_severity": keshav_res.get("severity"),
+                "prana_event_id": prana_res.get("event_id"),
+                "prana_status": prana_res.get("status"),
             }
             
             # Record Evidence
@@ -331,5 +397,11 @@ class TANTRAIntegrationHarness:
         """Return KESHAV integration evidence log as JSON."""
         if self.keshav_client:
             return self.keshav_client.get_evidence_log()
+        return "[]"
+
+    def get_prana_evidence(self) -> str:
+        """Return PRANA integration evidence log as JSON."""
+        if self.prana_client:
+            return self.prana_client.get_evidence_log()
         return "[]"
 
