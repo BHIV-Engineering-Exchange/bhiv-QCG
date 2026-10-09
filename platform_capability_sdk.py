@@ -728,3 +728,104 @@ class PlatformCapabilitySDK:
         except Exception as e:
             self._metrics.record_error(f"HTTP_POST:{type(e).__name__}")
             raise
+
+    # -- Distributed Quantum Networking (Phase 4) ---------------------------
+
+    def get_network_contract(self):
+        """Get or lazily initialise the QuantumNetworkContract instance."""
+        if not hasattr(self, "_network_contract") or self._network_contract is None:
+            from quantum_network_contract import QuantumNetworkContract
+            self._network_contract = QuantumNetworkContract()
+        return self._network_contract
+
+    def set_network_contract(self, network_contract) -> None:
+        """Explicitly set the QuantumNetworkContract instance."""
+        self._network_contract = network_contract
+
+    def request_quantum_network_route(
+        self,
+        source_node_id: str,
+        destination_node_id: str,
+        preferred_protocol: str = "BB84",
+        require_entanglement: bool = False,
+        min_fidelity: float = 0.70,
+        classical_fallback_acceptable: bool = True,
+    ) -> Dict[str, Any]:
+        """
+        Request a quantum communication route via the network coordination contract.
+        Records every routing decision into the SDK tamper-evident evidence chain.
+        """
+        from quantum_network_contract import RouteRequest
+        net = self.get_network_contract()
+        req = RouteRequest(
+            request_id=f"sdk-route-{uuid.uuid4().hex[:8]}",
+            source_node_id=source_node_id,
+            destination_node_id=destination_node_id,
+            preferred_protocol=preferred_protocol,
+            require_entanglement=require_entanglement,
+            min_fidelity=min_fidelity,
+            classical_fallback_acceptable=classical_fallback_acceptable,
+        )
+        resp = net.request_route(req)
+        # Record into evidence chain
+        payload_hash = hashlib.sha256(json.dumps(req.to_dict(), sort_keys=True).encode()).hexdigest()
+        result_hash = hashlib.sha256(json.dumps(resp.to_dict(), sort_keys=True).encode()).hexdigest()
+        self.evidence.record(InvocationEvidence(
+            invocation_id=req.request_id,
+            service_id="QUANTUM_NETWORK_COORDINATION",
+            operation="request_route",
+            request_hash=payload_hash,
+            response_hash=result_hash,
+            trust_method="HYBRID",
+            duration_ms=1.0,
+            status=resp.status,
+        ))
+        return resp.to_dict()
+
+    def coordinate_distributed_quantum_workload(
+        self,
+        workload_id: str,
+        participating_nodes: List[str],
+        sub_tasks: Dict[str, Dict[str, Any]] = None,
+        protocol: str = "ENTANGLEMENT_SWAPPING",
+        min_fidelity: float = 0.70,
+        max_latency_ms: float = 100.0,
+        classical_fallback_acceptable: bool = True,
+    ) -> Dict[str, Any]:
+        """
+        Coordinate a multi-node distributed quantum workload with evidence chaining.
+        """
+        from quantum_network_contract import DistributedQuantumWorkload
+        net = self.get_network_contract()
+        spec = DistributedQuantumWorkload(
+            workload_id=workload_id,
+            participating_nodes=participating_nodes,
+            protocol=protocol,
+            sub_tasks=sub_tasks or {},
+            min_fidelity=min_fidelity,
+            max_latency_ms=max_latency_ms,
+            classical_fallback_acceptable=classical_fallback_acceptable,
+        )
+        result = net.coordinate_distributed_workload(spec)
+        payload_hash = hashlib.sha256(json.dumps(spec.to_dict(), sort_keys=True).encode()).hexdigest()
+        self.evidence.record(InvocationEvidence(
+            invocation_id=result.get("trace_id", workload_id),
+            service_id="QUANTUM_NETWORK_COORDINATION",
+            operation="coordinate_distributed_workload",
+            request_hash=payload_hash,
+            response_hash=result.get("coordination_hash", ""),
+            trust_method="HYBRID",
+            duration_ms=result.get("total_latency_ms", 1.0),
+            status=result.get("status", "UNKNOWN"),
+        ))
+        return result
+
+    def get_quantum_network_status(self) -> Dict[str, Any]:
+        """
+        Query quantum network status including nodes, routes, and entanglement pool.
+        """
+        net = self.get_network_contract()
+        status = net.get_network_status()
+        status["entanglement_pool"] = net.get_entanglement_status()
+        return status
+

@@ -499,6 +499,138 @@
           "federation_nodes_min": 3
         }
       }
+    },
+    {
+      "platform_service_id": "TANTRA-PSR-QNET-001",
+      "capability_id": "f1d4e5f6-a7b8-7901-cdef-012345678901",
+      "service_name": "QUANTUM_NETWORK_COORDINATION",
+      "version": "1.0.0",
+      "provider": "TANTRA Platform Engineering",
+      "owner": {
+        "team": "TANTRA Sovereign Core",
+        "contact": "quantum-network@tantra.internal"
+      },
+      "runtime_type": "PROCESS",
+      "service_classification": "PLATFORM_SERVICE",
+      "capability_category": "EXECUTION",
+      "status": "ACTIVE",
+      "description": "Quantum Network Coordination — Distributed multi-node quantum routing, entanglement pair management, latency and decoherence tracking, and distributed measurement aggregation.",
+      "tags": ["quantum-network", "entanglement", "routing", "distributed", "coordination"],
+      "endpoints": {
+        "execution": "http://127.0.0.1:9010/platform/v1/services/TANTRA-PSR-QNET-001",
+        "health": "http://127.0.0.1:9010/platform/v1/services/TANTRA-PSR-QNET-001/health",
+        "readiness": "http://127.0.0.1:9010/platform/v1/readiness",
+        "metrics": "http://127.0.0.1:9010/platform/v1/metrics",
+        "evidence": "http://127.0.0.1:9010/platform/v1/evidence"
+      },
+      "manifest": {
+        "manifest_id": "QNET-MANIFEST-001",
+        "supported_operations": [
+          {
+            "operation_name": "request_route",
+            "description": "Negotiate and validate a quantum communication route between two network nodes.",
+            "input_contract": {
+              "type": "object",
+              "required": ["source_node_id", "destination_node_id"],
+              "properties": {
+                "source_node_id": {"type": "string"},
+                "destination_node_id": {"type": "string"},
+                "preferred_protocol": {"type": "string"},
+                "require_entanglement": {"type": "boolean"},
+                "min_fidelity": {"type": "number"}
+              }
+            },
+            "output_contract": {
+              "type": "object",
+              "properties": {
+                "request_id": {"type": "string"},
+                "status": {"type": "string"},
+                "route": {"type": "object"}
+              }
+            },
+            "execution_modes": ["SYNCHRONOUS"],
+            "idempotent": true
+          },
+          {
+            "operation_name": "coordinate_distributed_workload",
+            "description": "Coordinate a multi-node distributed quantum workload with entanglement allocation and measurement aggregation.",
+            "input_contract": {
+              "type": "object",
+              "required": ["workload_id", "participating_nodes"],
+              "properties": {
+                "workload_id": {"type": "string"},
+                "participating_nodes": {"type": "array"},
+                "protocol": {"type": "string"},
+                "min_fidelity": {"type": "number"}
+              }
+            },
+            "output_contract": {
+              "type": "object",
+              "properties": {
+                "trace_id": {"type": "string"},
+                "status": {"type": "string"},
+                "coordination_hash": {"type": "string"},
+                "aggregated_results": {"type": "object"}
+              }
+            },
+            "execution_modes": ["SYNCHRONOUS"],
+            "idempotent": false
+          },
+          {
+            "operation_name": "get_network_status",
+            "description": "Retrieve comprehensive status of quantum nodes, routes, and entanglement resource pools.",
+            "input_contract": {
+              "type": "object"
+            },
+            "output_contract": {
+              "type": "object",
+              "properties": {
+                "control_plane": {"type": "object"},
+                "nodes": {"type": "array"},
+                "routes": {"type": "array"},
+                "entanglement_pool": {"type": "object"}
+              }
+            },
+            "execution_modes": ["SYNCHRONOUS"],
+            "idempotent": true
+          }
+        ],
+        "execution_modes": ["SYNCHRONOUS"],
+        "determinism_guarantees": {
+          "deterministic_execution": true,
+          "deterministic_coordination_hash": true
+        },
+        "replay_guarantees": {
+          "replay_safe": true,
+          "lineage_tracked": true
+        },
+        "trust_requirements": {
+          "authentication": "TANTRA_SERVICE_IDENTITY",
+          "quantum_trust_level": "HYBRID"
+        },
+        "evidence_guarantees": {
+          "evidence_per_coordination": true,
+          "hash_chained": true
+        },
+        "runtime_dependencies": [
+          {"name": "quantum_network_contract", "version": "1.0.0", "type": "INTERNAL"}
+        ],
+        "version_compatibility": {
+          "compatible": ["1.0.0"],
+          "deprecated": [],
+          "unsupported": []
+        },
+        "security_requirements": {
+          "network_policy": "INTERNAL_ONLY",
+          "quantum_safe": true
+        },
+        "resource_requirements": {
+          "memory_mb_min": 256,
+          "cpu_cores_min": 1,
+          "disk_mb_min": 50,
+          "network": "INTERNAL_TCP"
+        }
+      }
     }
   ]
 }

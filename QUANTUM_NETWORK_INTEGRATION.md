@@ -90,6 +90,40 @@ The existing `QuantumTrustProviderInterface` in `quantum_trust_provider.py` prov
 1. Two nodes declare with `BB84` protocol support
 2. Route is negotiated via `request_route()`
 3. Once route is established, QKD key exchange can occur via the trust provider
-4. All operations flow through the classical control plane
-
 **Current status**: All routes are classified as `LOCAL` since no live quantum network hardware exists. This is stated honestly — no simulation masquerades as live quantum networking.
+
+---
+
+## 7. Entanglement Resource Management (Phase 4)
+
+The network coordination contract manages Bell state pairs (`EntanglementPair`) between network nodes via `EntanglementPoolManager`:
+
+- **Decoherence Decay Modeling**: Fidelity decays exponentially over time according to qubit coherence time:
+  $$F(t) = 0.5 + (F_0 - 0.5) \cdot e^{-\Delta t / \tau}$$
+- **Consumption Tracking**: Pairs can only be consumed once (`is_consumed`). Expired or consumed pairs are pruned via `purge_expired()`.
+- **Reservation Policy**: Routes select the highest remaining fidelity pair meeting the workload's minimum fidelity threshold (`min_fidelity`).
+
+---
+
+## 8. Multi-Node Workload Coordination (Phase 4)
+
+Ganesh's domain applications invoke multi-node workloads via `coordinate_distributed_workload()`:
+
+1. **Validation**: All participating nodes are checked for active network status.
+2. **Hop Route Establishment**: Pairwise links are verified between consecutive hops.
+3. **Latency & Resource Verification**: Cumulative network latency is bounded by `max_latency_ms`.
+4. **Entanglement Reservation**: Reserved Bell pairs are allocated from the pool (with classical fallback if pool is empty and fallback is permitted).
+5. **Distributed Measurement Aggregation**: Node histograms are aggregated into joint probability distributions with Shannon entropy calculation.
+6. **Provenance Hash**: Deterministic coordination hash is minted and returned.
+
+---
+
+## 9. Platform Capability SDK Integration
+
+The `PlatformCapabilitySDK` provides unified client methods that external consumers invoke:
+- `sdk.request_quantum_network_route(source, dest, protocol, ...)`
+- `sdk.coordinate_distributed_quantum_workload(workload_id, nodes, ...)`
+- `sdk.get_quantum_network_status()`
+
+Every network coordination invocation is automatically recorded into the tamper-evident `SDKEvidenceChain`.
+
