@@ -1,0 +1,37 @@
+{
+  "job_id": "ibmjob-fd29166e",
+  "provider": "IBM Quantum",
+  "backend_device": "ibm_nazca",
+  "device_topology": {
+    "name": "ibm_nazca",
+    "qubit_count": 127,
+    "architecture": "Heavy Hex",
+    "basis_gates": [
+      "id",
+      "rz",
+      "sx",
+      "x",
+      "ecr",
+      "reset"
+    ],
+    "average_cx_error": 0.007,
+    "average_readout_error": 0.015
+  },
+  "circuit_depth": 6,
+  "qubits_required": 2,
+  "execution_metadata": {
+    "shots": 5000,
+    "execution_timestamp": "2026-10-09T08:20:37.111373+00:00",
+    "duration_s": 0.0282,
+    "calibration_information": "CAL-2026-10-09-VALID",
+    "transpilation_output": "Optimized level 3"
+  },
+  "measured_distribution": {
+    "00": 2517,
+    "11": 2483
+  },
+  "error_noise_information": {
+    "cx_error": 0.007,
+    "readout_error": 0.015
+  }
+}

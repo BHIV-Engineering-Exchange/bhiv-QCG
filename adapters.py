@@ -315,3 +315,94 @@ class HybridAdapter:
         })
 
         return contract, adapter_trace
+
+
+# ═══════════════════════════════════════════════════════════════════════════
+# HardwareAdapter (Pritesh - Integration Layer)
+# ═══════════════════════════════════════════════════════════════════════════
+
+class HardwareAdapter:
+    """
+    Maps a physical hardware provider envelope (e.g., from IBMQ) into a
+    ComputationExecutionContract with producer_type = QUANTUM.
+    
+    Expected input schema (Hardware Envelope):
+    {
+        "job_id": str,
+        "provider": str,
+        "backend_device": str,
+        "device_topology": dict,
+        "circuit_depth": int,
+        "qubits_required": int,
+        "execution_metadata": dict,
+        "measured_distribution": dict,
+        "error_noise_information": dict
+    }
+    """
+
+    def adapt(
+        self,
+        hardware_envelope: dict,
+    ) -> tuple[ComputationExecutionContract, AdapterTrace]:
+        """
+        Adapt a live hardware execution envelope into a canonical contract.
+        """
+        if "measured_distribution" not in hardware_envelope:
+            raise ValueError("hardware_envelope must contain 'measured_distribution'.")
+
+        payload = {
+            "result_distribution": hardware_envelope["measured_distribution"],
+            "backend": hardware_envelope.get("backend_device", "unknown"),
+            "provider": hardware_envelope.get("provider", "unknown_provider"),
+            "job_id": hardware_envelope.get("job_id", ""),
+            "topology": hardware_envelope.get("device_topology", {}),
+            "error_noise": hardware_envelope.get("error_noise_information", {})
+        }
+
+        # Calculate a pseudo-confidence based on noise/readout error if provided
+        confidence = 0.95
+        if "error_noise_information" in hardware_envelope:
+            err = hardware_envelope["error_noise_information"]
+            readout = err.get("readout_error", 0.0)
+            confidence = max(0.1, 1.0 - (readout * 2))
+
+        constraints = {
+            "qubits_required": hardware_envelope.get("qubits_required", 0),
+            "circuit_depth": hardware_envelope.get("circuit_depth", 0),
+            "execution_metadata": hardware_envelope.get("execution_metadata", {}),
+            "execution_path": "QUANTUM_LIVE",
+            "hardware_arrival_provenance": True
+        }
+
+        trace_id = _deterministic_trace_id(
+            "hardware",
+            hardware_envelope.get("job_id", str(uuid.uuid4())),
+            str(confidence)
+        )
+
+        contract = ComputationExecutionContract(
+            producer_type=ProducerType.QUANTUM.value,
+            payload=payload,
+            confidence=confidence,
+            trace_id=trace_id,
+            contract_version=config.EXECUTION_CONTRACT_VERSION,
+            execution_constraints=constraints,
+        )
+
+        in_hash = _input_hash(hardware_envelope)
+        adapter_trace = AdapterTrace(
+            adapter_type="HardwareAdapter",
+            producer_type=ProducerType.QUANTUM.value,
+            input_type="HardwareEnvelope",
+            input_hash=in_hash,
+            output_trace_id=trace_id,
+            output_hash=contract.payload_hash,
+        )
+
+        log_event(log, logging.INFO, "hardware_adapter_complete", ctx={
+            "trace_id": trace_id,
+            "provider": payload["provider"],
+            "confidence": contract.confidence,
+        })
+
+        return contract, adapter_trace
