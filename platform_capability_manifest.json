@@ -631,6 +631,160 @@
           "network": "INTERNAL_TCP"
         }
       }
+    },
+    {
+      "platform_service_id": "TANTRA-PSR-QAPP-001",
+      "capability_id": "a7d3e2b1-c5f4-4321-9abc-qapp00000001",
+      "service_name": "BHIV_QUANTUM_APPLICATION_LAYER",
+      "version": "0.1.0",
+      "provider": "BHQuantum Application Team (Ganesh)",
+      "owner": {
+        "team": "BHQuantum Applications",
+        "contact": "ganesh@bhiv.internal"
+      },
+      "runtime_type": "HTTP_SERVICE",
+      "service_classification": "EXTERNAL_FEDERATED",
+      "capability_category": "EXECUTION",
+      "status": "ACTIVE",
+      "description": "BHIV Quantum Application Layer — Domain algorithm workload registration, domain formulation (VANA, MARINE, UCCIS, AIAIC), and quantum execution on aer_simulator and physical backends.",
+      "tags": ["quantum", "workload", "domain-algorithms", "aer-simulator", "application-layer"],
+      "endpoints": {
+        "execution": "https://bhiv-quantum-application-layer.onrender.com/api/v1/workloads",
+        "health": "https://bhiv-quantum-application-layer.onrender.com/health",
+        "capabilities": "https://bhiv-quantum-application-layer.onrender.com/api/v1/capabilities",
+        "workloads": "https://bhiv-quantum-application-layer.onrender.com/api/v1/workloads",
+        "executions": "https://bhiv-quantum-application-layer.onrender.com/api/v1/executions"
+      },
+      "manifest": {
+        "manifest_id": "QAPP-MANIFEST-001",
+        "supported_operations": [
+          {
+            "operation_name": "get_capabilities",
+            "description": "Discover supported domain models, problems, and quantum backends.",
+            "input_contract": {
+              "type": "object"
+            },
+            "output_contract": {
+              "type": "object",
+              "properties": {
+                "domains": {"type": "object"},
+                "backends": {"type": "object"}
+              }
+            },
+            "execution_modes": ["SYNCHRONOUS"],
+            "idempotent": true
+          },
+          {
+            "operation_name": "register_workload",
+            "description": "Register a new quantum domain workload for execution.",
+            "input_contract": {
+              "type": "object",
+              "required": ["domain", "problem_id", "algorithm", "qubits_required"],
+              "properties": {
+                "domain": {"type": "string"},
+                "problem_id": {"type": "string"},
+                "algorithm": {"type": "string"},
+                "qubits_required": {"type": "integer"},
+                "shots": {"type": "integer"},
+                "execution_mode": {"type": "string"},
+                "formulation": {"type": "object"},
+                "parameters": {"type": "object"}
+              }
+            },
+            "output_contract": {
+              "type": "object",
+              "properties": {
+                "workload_id": {"type": "string"},
+                "domain": {"type": "string"},
+                "status": {"type": "string"}
+              }
+            },
+            "execution_modes": ["SYNCHRONOUS"],
+            "idempotent": false
+          },
+          {
+            "operation_name": "execute_workload",
+            "description": "Execute a registered workload on target quantum backend (e.g., aer_simulator).",
+            "input_contract": {
+              "type": "object",
+              "required": ["workload_id"],
+              "properties": {
+                "workload_id": {"type": "string"},
+                "backend_target": {"type": "string"},
+                "shots": {"type": "integer"},
+                "evaluate_governance": {"type": "boolean"}
+              }
+            },
+            "output_contract": {
+              "type": "object",
+              "properties": {
+                "execution_id": {"type": "string"},
+                "status": {"type": "string"},
+                "counts": {"type": "object"},
+                "probabilities": {"type": "object"}
+              }
+            },
+            "execution_modes": ["SYNCHRONOUS", "ASYNCHRONOUS"],
+            "idempotent": false
+          },
+          {
+            "operation_name": "get_execution",
+            "description": "Retrieve results and measurements for a completed execution.",
+            "input_contract": {
+              "type": "object",
+              "required": ["execution_id"],
+              "properties": {
+                "execution_id": {"type": "string"}
+              }
+            },
+            "output_contract": {
+              "type": "object",
+              "properties": {
+                "execution_id": {"type": "string"},
+                "status": {"type": "string"},
+                "results": {"type": "object"}
+              }
+            },
+            "execution_modes": ["SYNCHRONOUS"],
+            "idempotent": true
+          }
+        ],
+        "execution_modes": ["SYNCHRONOUS", "ASYNCHRONOUS"],
+        "determinism_guarantees": {
+          "deterministic_execution": false,
+          "deterministic_coordination_hash": true
+        },
+        "replay_guarantees": {
+          "replay_safe": true,
+          "lineage_tracked": true
+        },
+        "trust_requirements": {
+          "authentication": "NONE_FOR_SIMULATOR",
+          "quantum_trust_level": "SIMULATED"
+        },
+        "evidence_guarantees": {
+          "evidence_per_coordination": true,
+          "hash_chained": true
+        },
+        "runtime_dependencies": [
+          {"name": "aer_simulator", "version": "0.1.0", "type": "QUANTUM_SIMULATOR"}
+        ],
+        "version_compatibility": {
+          "compatible": ["0.1.0"],
+          "deprecated": [],
+          "unsupported": []
+        },
+        "security_requirements": {
+          "network_policy": "HTTPS_PUBLIC",
+          "quantum_safe": false
+        },
+        "resource_requirements": {
+          "memory_mb_min": 512,
+          "cpu_cores_min": 1,
+          "disk_mb_min": 100,
+          "network": "HTTPS"
+        }
+      }
     }
   ]
 }

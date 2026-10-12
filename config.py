@@ -84,6 +84,11 @@ PRANA_API_URL: str              = _str("QCG_PRANA_API_URL", "http://163.128.209.
 PRANA_TIMEOUT_SECONDS: int      = _int("QCG_PRANA_TIMEOUT_SECONDS", 10)
 PRANA_ENABLED: bool             = _str("QCG_PRANA_ENABLED", "true").lower() == "true"
 
+GANESH_API_URL: str             = _str("QCG_GANESH_API_URL", "https://bhiv-quantum-application-layer.onrender.com")
+GANESH_TIMEOUT_SECONDS: int     = _int("QCG_GANESH_TIMEOUT_SECONDS", 30)
+GANESH_ENABLED: bool            = _str("QCG_GANESH_ENABLED", "true").lower() == "true"
+
+
 
 # -- Federated Discovery Platform -------------------------------------------
 FEDERATION_NODE_COUNT: int          = _int("QCG_FEDERATION_NODE_COUNT", 3)
@@ -123,6 +128,11 @@ INPUT_PAYLOAD_MAX_KEYS: int         = _int("QCG_PAYLOAD_MAX_KEYS", 100)
 
 # -- Federation Safety (Phase 2) -------------------------------------------
 MAX_SEEN_NONCES: int                = _int("QCG_MAX_SEEN_NONCES", 50000)
+
+# -- Ganesh Quantum Application Layer ----------------------------------------
+GANESH_API_URL: str                 = _str("QCG_GANESH_API_URL", "https://bhiv-quantum-application-layer.onrender.com")
+GANESH_TIMEOUT: int                 = _int("QCG_GANESH_TIMEOUT_SECONDS", 60)
+GANESH_ENABLED: bool                = os.environ.get("QCG_GANESH_ENABLED", "true").lower() in ("true", "1", "yes")
 
 
 def validate():

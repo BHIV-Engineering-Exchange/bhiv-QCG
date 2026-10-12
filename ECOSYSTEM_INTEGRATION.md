@@ -10,6 +10,7 @@ The QCG acts as a sovereign node that produces and verifies deterministic execut
 | Service Role | Owner | Interaction Description | Status |
 |---|---|---|---|
 | **Identity / Analysis** | KESHAV | Root-cause analysis, severity classification, trace continuity via live `/analyze` API. | **Validated (Live)** |
+| **Quantum Application Layer** | Ganesh | Domain optimization workload registration, formulation (VANA, MARINE, UCCIS, AIAIC), and execution on aer_simulator via live API. | **Validated (Live)** |
 | **Runtime** | External | Validate live runtime execution through actual endpoints. | Implemented / Pending Live URL |
 | **Quantum Capability** | Pritesh | Validate computation execution against live quantum interfaces. | **Validated (Live)** |
 | **Governance** | Raj | Verify governance approval and policy enforcement via APIs. | Implemented / Pending Live URL |
@@ -108,16 +109,56 @@ The QCG acts as a sovereign node that produces and verifies deterministic execut
 - **Adapter**: `web_server.py` — Adapts the raw external quantum capability payload into a strict `ComputationExecutionContract`, signing it with a dynamic NodeSigner, before executing the standard TANTRA harness.
 - **Evidence**: `review_packets/evidence/pritesh_evidence.json`
 
-## 5. Interaction Mechanics
+## 5. Ganesh Quantum Application Layer Live Integration (Validated)
+
+**Live API**: `https://bhiv-quantum-application-layer.onrender.com`
+**Service ID**: `TANTRA-PSR-QAPP-001`
+**Version**: `0.1.0`
+
+### Endpoints Used
+| Method | Endpoint | Purpose |
+|--------|----------|---------|
+| `GET`  | `/health` | Liveness & subsystem status (API, aer_simulator, insight_adapter, marine_runtime) |
+| `GET`  | `/api/v1/capabilities` | Discover supported domain models (VANA, MARINE, UCCIS, AIAIC) & backends |
+| `POST` | `/api/v1/workloads` | Register domain algorithm optimization workload |
+| `POST` | `/api/v1/workloads/{id}/execute` | Execute workload on quantum target backend (`aer_simulator`) |
+| `GET`  | `/api/v1/executions` | Retrieve execution registry & statevector/measurement counts |
+
+### Validated Domain Models & Execution
+| Domain | Problem Focus | Qubits | Algorithm | Backend | Best Candidate | Status |
+|--------|---------------|--------|-----------|---------|----------------|--------|
+| **VANA** | Eco-Grid Zone Governance | 6 | QAOA | `aer_simulator` | `110101` | **Validated (Live)** |
+| **MARINE** | NW-53 Maritime Logistics | 8 | QAOA | `aer_simulator` | `01010000` | **Validated (Live)** |
+| **UCCIS** | Urban Emergency Dispatch | 9 | QAOA | `aer_simulator` | `100010000` | **Validated (Live)** |
+| **AIAIC** | Agmarknet Mandi Allocation | 16 | QAOA | `aer_simulator` | `0010100100100110` | **Validated (Live)** |
+
+### Downstream Physical Hardware Blocker
+- `bhiv_runtime`: Identified and reported as `BLOCKED`. Ganesh's runtime adapter reports missing credentials (`BHIV_RUNTIME_AUTH_TOKEN`) and downstream defect `MQR-01` (Marine Quantum Runtime lacks `generic_quantum_execution` interface).
+- **Graceful Isolation**: QCG identifies downstream blocking without crashing, maintaining sovereign integrity.
+
+### Sovereign Bridging Mechanics
+1. **Contract Ingestion**: Measurement distributions (`counts`, `probabilities`, `best_candidate`) wrapped into `ComputationExecutionContract` (`QUANTUM`, `QUANTUM_SIMULATED`, `SIMULATED`).
+2. **Cryptographic Signing**: Sealed with `NodeSigner` using ECDSA P-256 (`secp256r1`).
+3. **Canonical Replay Authority**: Sequence counter assignment, duplicate suppression, and lineage tracking.
+4. **Evidence Ledger**: Immutable append to deterministic hash chain and generation of Merkle root inclusion snapshot.
+
+### Integration Artifacts
+- **Client**: `ganesh_live_client.py`
+- **Manifest Entry**: `TANTRA-PSR-QAPP-001` in `platform_capability_manifest.json`
+- **Integration Tests**: `tests/test_ganesh_live_integration.py` (6/6 passing)
+- **Live Evidence**: `review_packets/evidence_packet/api_samples/ganesh_live_evidence.json`
+
+## 6. Interaction Mechanics
 
 All integrations are facilitated by `integration_harness.py`, which implements standard TANTRA network interfaces:
 - **Capability Discovery:** Emits JSON metadata matching `capability_registry_schema.json`.
 - **Identity Trust:** Utilizes `NodeSigner` and PKI to authenticate outbound and inbound requests.
 - **KESHAV Analysis:** Live HTTP calls to KESHAV `/analyze` for root-cause and severity classification.
+- **Quantum Application Layer:** Live REST execution to Ganesh's service with sovereign QCG contract bridging.
 - **Lineage Tracing:** Attaches a deterministic `trace_id` (UUIDv5) to all payloads, propagating it downstream.
 - **Governance Halts:** Governance policy enforcement in strict mode halts execution on any violation.
 
-## 5. Configuration
+## 7. Configuration
 
 Set the following environment variables (or in `.env`):
 ```env
@@ -125,6 +166,11 @@ Set the following environment variables (or in `.env`):
 QCG_KESHAV_API_URL=https://keshav-cia7.onrender.com
 QCG_KESHAV_TIMEOUT_SECONDS=15
 QCG_KESHAV_ENABLED=true
+
+# Ganesh Quantum Application Layer (Live — Validated)
+QCG_GANESH_API_URL=https://bhiv-quantum-application-layer.onrender.com
+QCG_GANESH_TIMEOUT_SECONDS=60
+QCG_GANESH_ENABLED=true
 
 # Other services (Pending Live URLs)
 # QCG_RUNTIME_URL=https://api.runtime.tantra.local
