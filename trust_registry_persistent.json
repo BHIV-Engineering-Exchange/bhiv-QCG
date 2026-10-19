@@ -263,6 +263,18 @@
       "allowed_types": [
         "QUANTUM"
       ]
+    },
+    "PRITESH_HARDWARE_fb09d2ea": {
+      "identity": {
+        "node_id": "PRITESH_HARDWARE_fb09d2ea",
+        "public_key": "3059301306072a8648ce3d020106082a8648ce3d030107034200048f4dce23c47d3e74251c72f2e76eea05759f1f0a009eb5f3930a6c015f95431c726858cc6f4bd2a4a177157e5677976b74955f7855f38440cb8d8fb7c646bace",
+        "node_role": "PRODUCER",
+        "version": "1.0.0",
+        "created_at": "2026-10-19T09:36:49.982421+00:00"
+      },
+      "allowed_types": [
+        "QUANTUM"
+      ]
     }
   },
   "revoked_keys": []

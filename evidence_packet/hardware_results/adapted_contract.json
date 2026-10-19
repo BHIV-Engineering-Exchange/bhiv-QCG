@@ -2,12 +2,12 @@
   "producer_type": "QUANTUM",
   "payload": {
     "result_distribution": {
-      "00": 2524,
-      "11": 2476
+      "00": 2466,
+      "11": 2534
     },
     "backend": "ibm_nazca",
     "provider": "IBM Quantum",
-    "job_id": "ibmjob-0c35600c",
+    "job_id": "ibmjob-35407e94",
     "topology": {
       "name": "ibm_nazca",
       "qubit_count": 127,
@@ -29,26 +29,26 @@
     }
   },
   "confidence": 0.97,
-  "trace_id": "f19401d0-83f4-5741-8ac6-b63ac6f31a57",
+  "trace_id": "42492c83-f41d-5574-918a-5e3d5fb9899f",
   "contract_version": "2.0.0",
   "execution_constraints": {
     "qubits_required": 2,
     "circuit_depth": 6,
     "execution_metadata": {
       "shots": 5000,
-      "execution_timestamp": "2026-10-19T08:58:42.207192+00:00",
-      "duration_s": 0.0139,
+      "execution_timestamp": "2026-10-19T09:36:45.636685+00:00",
+      "duration_s": 0.0156,
       "calibration_information": "CAL-2026-10-09-VALID",
       "transpilation_output": "Optimized level 3"
     },
     "execution_path": "QUANTUM_LIVE",
     "hardware_arrival_provenance": true
   },
-  "payload_hash": "908380893ff965d98b58d2ae23999b34e670030ccd910f3a741ed5342f7aec08",
+  "payload_hash": "027b9242a99aee7ddf9b295e17f088b7cfe8d87193842e9076833540cbbdc937",
   "execution_classification": "CLASSICAL",
   "execution_path": "LOCAL",
   "producer_id": "",
   "producer_signature": "",
   "contract_signature": "",
-  "timestamp": "2026-10-19T08:58:42.208239+00:00"
+  "timestamp": "2026-10-19T09:36:45.637762+00:00"
 }
