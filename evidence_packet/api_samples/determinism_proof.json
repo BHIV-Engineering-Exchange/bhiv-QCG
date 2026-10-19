@@ -1,0 +1,5 @@
+{
+  "conflict_resolution_deterministic": true,
+  "evidence_hash_deterministic": true,
+  "winner_service": "TestB"
+}

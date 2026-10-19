@@ -1,0 +1,97 @@
+{
+  "trace_id": "f19401d0-83f4-5741-8ac6-b63ac6f31a57",
+  "parent_trace_id": null,
+  "flow_status": "COMPLETED",
+  "stages": {
+    "replay": {
+      "is_valid": true,
+      "status": "VALID",
+      "sequence_number": 28,
+      "verification_hash": "78b0e4022b4f8168f11821979c72382f66518021e51324bf44022f1dcb164e3a"
+    },
+    "keshav_analysis": {
+      "status": "COMPLETED",
+      "live": true,
+      "trace_id": "f19401d0-83f4-5741-8ac6-b63ac6f31a57",
+      "root_cause": null,
+      "resolution_signal": null,
+      "impact_score": 0,
+      "severity": "LOW",
+      "timestamp": "2026-10-19T08:58:45Z"
+    },
+    "trust": {
+      "passed": true,
+      "halt_signal": "",
+      "reason": ""
+    },
+    "execution": {
+      "contract_trace_id": "f19401d0-83f4-5741-8ac6-b63ac6f31a57",
+      "producer_type": "QUANTUM",
+      "ack": "ACK:OK",
+      "confidence": 0.97,
+      "runtime_hash": "8152983c11c31b8ac1a07b0335275d012822593b62734703dc200ee5601eb4d0",
+      "execution_timestamp": "2026-10-19T08:58:50.040591+00:00"
+    },
+    "consensus": {
+      "participating_nodes": [
+        "TANTRA_NODE_1",
+        "TANTRA_NODE_2",
+        "TANTRA_NODE_3"
+      ],
+      "final_hash": "8152983c11c31b8ac1a07b0335275d012822593b62734703dc200ee5601eb4d0",
+      "agreement_percentage": 1.0,
+      "consensus_reached": true,
+      "disagreements": {},
+      "consensus_round": 1,
+      "quorum_size": 2,
+      "node_attestations": {
+        "TANTRA_NODE_1": {
+          "node_id": "TANTRA_NODE_1",
+          "agreement_hash": "8152983c11c31b8ac1a07b0335275d012822593b62734703dc200ee5601eb4d0",
+          "status": "OK",
+          "signature": "304402201e79de074a4d823c825fa62767fe141b98475b89867f0c0a0443e775c24a92b902201a8d4d99025be8b90c4fbfc240e958c68d399bdb451f64c4857733812e4c74e7",
+          "public_key": "3059301306072a8648ce3d020106082a8648ce3d03010703420004de95ce34674e1cb757a103a66bbc5cbfda1120f46a2d9aaf64dab61907043542c0bbb68a142f86771e7460bb3d73c452ca0e103f5339035f2cd8c78a9774dfff"
+        },
+        "TANTRA_NODE_2": {
+          "node_id": "TANTRA_NODE_2",
+          "agreement_hash": "8152983c11c31b8ac1a07b0335275d012822593b62734703dc200ee5601eb4d0",
+          "status": "OK",
+          "signature": "3044022016e90bd28bdf33b482182cbdd0066e0f8fa383678530410d987c754363286d29022056a80f2df4d63025ab2b779fe6af2688b539c5eeba9feeadf4ffb9103b570133",
+          "public_key": "3059301306072a8648ce3d020106082a8648ce3d030107034200049e9bedba8157c57c18d9feec0fba326a2079f95aa7c96aa155c069eb83a0dd5cbcd613a8d6df38689db3f667e57791abfb64d9b8b992df30179f7cff3b9e6cb5"
+        },
+        "TANTRA_NODE_3": {
+          "node_id": "TANTRA_NODE_3",
+          "agreement_hash": "8152983c11c31b8ac1a07b0335275d012822593b62734703dc200ee5601eb4d0",
+          "status": "OK",
+          "signature": "3044022003ee166c408b605b95d60c58bc4de390ad18aa5bc0a29ecae7bab56d02b086700220748425f83aeb3fb238d228d104a2c3bf714da4cc0721d98dcaae8f5d7193da48",
+          "public_key": "3059301306072a8648ce3d020106082a8648ce3d03010703420004b9e55d4b6193633958db67a79d3f3a967fc90d56424eba34603069cadd483ada79ed2eda26ec9c5aac3eab38925525d7d72b454d1bdd0c9f295e00f606d7ebe3"
+        }
+      },
+      "consensus_timestamp": "2026-10-19T08:58:50.042435+00:00"
+    },
+    "prana_ingest": {
+      "status": "forwarded",
+      "live": true,
+      "event_id": "874bbbdf-2646-4794-8291-7ba0521e19d1",
+      "http_status": 200,
+      "total_elapsed_ms": 1190,
+      "error": null
+    }
+  },
+  "stage_timings_ms": {
+    "replay": 2115.19,
+    "keshav_analysis": 1634.35,
+    "trust": 2025.05,
+    "execution": 2034.76,
+    "consensus": 1.82,
+    "prana_ingest": 1383.52
+  },
+  "trace_continuity": {
+    "sequence_number": 28,
+    "runtime_hash": "8152983c11c31b8ac1a07b0335275d012822593b62734703dc200ee5601eb4d0",
+    "final_hash": "8152983c11c31b8ac1a07b0335275d012822593b62734703dc200ee5601eb4d0",
+    "keshav_severity": "LOW",
+    "prana_event_id": "874bbbdf-2646-4794-8291-7ba0521e19d1",
+    "prana_status": "forwarded"
+  }
+}

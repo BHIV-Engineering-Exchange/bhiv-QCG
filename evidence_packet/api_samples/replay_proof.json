@@ -1,0 +1,48 @@
+{
+  "status": "VERIFIED",
+  "replay_authority": {
+    "first_submission": {
+      "message_id": "replay-proof-b6401247-7644-4f0f-9ab8-9f318007b8e5",
+      "sequence_number": 1,
+      "status": "VALID",
+      "reason": "",
+      "lineage_record": {
+        "replay_id": "0e8492e1-8c9c-582a-b78b-8356dcd434c2",
+        "message_id": "replay-proof-b6401247-7644-4f0f-9ab8-9f318007b8e5",
+        "sequence_number": 1,
+        "decision": "VALID",
+        "decision_timestamp": "2026-08-14T10:27:13.188631+00:00",
+        "origin_component": "CanonicalReplayAuthority",
+        "schema_version": "1.0.0",
+        "trace_reference": "replay-proof-b6401247-7644-4f0f-9ab8-9f318007b8e5",
+        "parent_reference": "",
+        "verification_hash": "f53215a89f3a834562fb946a57730e793715b91ad7d46d2876c5856a5b84f7e5"
+      }
+    },
+    "replay_attempt": {
+      "message_id": "replay-proof-b6401247-7644-4f0f-9ab8-9f318007b8e5",
+      "sequence_number": 1,
+      "status": "DUPLICATE",
+      "reason": "already processed as sequence 1",
+      "lineage_record": {
+        "replay_id": "419797c8-b671-5ea6-939c-c5ae557eba42",
+        "message_id": "replay-proof-b6401247-7644-4f0f-9ab8-9f318007b8e5",
+        "sequence_number": 1,
+        "decision": "DUPLICATE",
+        "decision_timestamp": "2026-08-14T10:27:13.188631+00:00",
+        "origin_component": "CanonicalReplayAuthority",
+        "schema_version": "1.0.0",
+        "trace_reference": "replay-proof-b6401247-7644-4f0f-9ab8-9f318007b8e5",
+        "parent_reference": "",
+        "verification_hash": "478ad5932e02a8428f2a8e875e8e605f0150d48b48090df2b0e1449d0e0f4756"
+      }
+    },
+    "duplicate_rejected": false
+  },
+  "federation_nonce": {
+    "nonce_replay_blocked": true,
+    "audit_count_before": 6,
+    "audit_count_after": 6
+  },
+  "timestamp": "2026-08-14T10:27:13.188631+00:00"
+}

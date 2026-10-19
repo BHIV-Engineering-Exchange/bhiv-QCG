@@ -1,5 +1,5 @@
 {
-  "sequence_counter": 153,
+  "sequence_counter": 154,
   "entries": {
     "reset-001": {
       "message_id": "reset-001",
@@ -765,6 +765,11 @@
       "message_id": "d32394eadf977a28aa7f2c5e97b59ec351a7403fe3c7f89f52776c7dcfb548dc",
       "sequence_number": 153,
       "issued_at": 1791796778.794286
+    },
+    "65faafbefc3eb41b5fb20be1cd07548d6c6d6361f92d8a5bf88652a57127c5c5": {
+      "message_id": "65faafbefc3eb41b5fb20be1cd07548d6c6d6361f92d8a5bf88652a57127c5c5",
+      "sequence_number": 154,
+      "issued_at": 1792398802.979293
     }
   }
 }

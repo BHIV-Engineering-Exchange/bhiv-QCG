@@ -1,0 +1,78 @@
+{
+  "incompatible_version": {
+    "test": "Request unsupported version 0.5.0",
+    "expected": "UNSUPPORTED",
+    "actual": "UNSUPPORTED",
+    "passed": true,
+    "detail": {
+      "service_id": "qcg.verification.quantum.v1",
+      "status": "UNSUPPORTED",
+      "requested_version": "0.5.0",
+      "negotiated_version": null,
+      "suggested_versions": [
+        "2.0.0"
+      ],
+      "message": "Version 0.5.0 is no longer supported. Request rejected.",
+      "timestamp": "2026-08-14T10:27:14.288736+00:00"
+    }
+  },
+  "duplicate_registration": {
+    "test": "Re-register InsightFlow (same version)",
+    "expected": "ALREADY_REGISTERED",
+    "actual": "ALREADY_REGISTERED",
+    "passed": true,
+    "detail": {
+      "status": "ALREADY_REGISTERED",
+      "service_id": "insightflow.runtime.intelligence.v1",
+      "evidence": {
+        "evidence_id": "f3ffab34-2756-4c9f-bee9-bb6a54519284",
+        "event_type": "REGISTRATION_IDEMPOTENT",
+        "service_id": "insightflow.runtime.intelligence.v1",
+        "timestamp": "2026-08-14T10:27:14.288736+00:00",
+        "details": {
+          "message": "Service already registered with same version."
+        },
+        "evidence_hash": "1376b656196f3a4bd11ce425247c80433d61a81d2929136dd11689556f90c9e1",
+        "previous_evidence_hash": "c4cb32268e74453582d3fa74b874e2aaf420225ce1374c37d7a204d5839853a0"
+      },
+      "authentication": {
+        "authenticated": true,
+        "service_id": "insightflow.runtime.intelligence.v1",
+        "reason": "Internal registration (no proof required)",
+        "trust_level": "CLASSICAL",
+        "certificate_serial": "",
+        "timestamp": "2026-08-14T10:27:14.288736+00:00"
+      }
+    }
+  },
+  "unknown_service": {
+    "test": "Discover non-existent service",
+    "expected": "None",
+    "actual": "None",
+    "passed": true
+  },
+  "circuit_breaker": {
+    "test": "Trip circuit breaker after 3 failures",
+    "expected": "OPEN",
+    "actual": "OPEN",
+    "passed": true
+  },
+  "conflict_resolution": {
+    "test": "Resolve conflict: v1.0.0 vs v2.0.0 (10 runs)",
+    "winner": "2.0.0",
+    "deterministic_across_10_runs": true,
+    "passed": true
+  },
+  "certificate_revocation": {
+    "test": "Issue cert -> verify -> revoke -> verify",
+    "valid_before_revocation": true,
+    "valid_after_revocation": false,
+    "passed": true
+  },
+  "lease_expiry": {
+    "test": "Grant 1s lease -> wait 1.5s -> check expired",
+    "active_before": true,
+    "active_after": false,
+    "passed": true
+  }
+}

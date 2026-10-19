@@ -1,0 +1,241 @@
+{
+  "generated_at": "2026-08-04T13:12:02.822917+00:00",
+  "health_validation": {
+    "status": "HEALTHY",
+    "raw_response": {
+      "message": "docs available"
+    }
+  },
+  "published_execution_evidence": {
+    "artifact_id": "b715a416-c5fa-434b-8e40-92c6f756f44c",
+    "trace_id": "8575e7ce-1f2c-433b-a374-926931b900b9",
+    "success": true,
+    "response": {
+      "success": true,
+      "artifact_id": "b715a416-c5fa-434b-8e40-92c6f756f44c",
+      "hash": "b6d372eeca4ca8c21b9b58851b2ed0cb1ab155080b86fb573da6463172ee7c11",
+      "parent_hash": "b8d31d8f94f3b6c4432cfd9c5c7c4ecb08ed44720d3a790ca1b505ccee2f9bc4",
+      "timestamp": "2026-08-04T13:12:03.123052+00:00",
+      "storage_type": "append_only",
+      "message": "Artifact stored successfully in append-only log"
+    }
+  },
+  "retrieved_execution_evidence": {
+    "artifact": {
+      "artifact_id": "b715a416-c5fa-434b-8e40-92c6f756f44c",
+      "trace_id": "8575e7ce-1f2c-433b-a374-926931b900b9",
+      "timestamp_utc": "2026-08-04T13:12:03.123052+00:00",
+      "schema_version": "1.0.0",
+      "source_module_id": "usf_evidence_generator",
+      "artifact_type": "execution_certificate",
+      "parent_hash": "b8d31d8f94f3b6c4432cfd9c5c7c4ecb08ed44720d3a790ca1b505ccee2f9bc4",
+      "payload": {
+        "computation_result": "deterministic_success",
+        "provenance_metadata": {
+          "producer_id": "QCG_PRODUCER_01",
+          "signature": "valid_ecdsa_signature"
+        },
+        "replay_metadata": {
+          "sequence_number": 42,
+          "ttl": 300
+        }
+      }
+    },
+    "storage_type": "append_only",
+    "chain_verified": true
+  },
+  "trace_continuity_proof": null,
+  "failure_recovery_evidence": {
+    "error": "The read operation timed out"
+  },
+  "bucket_connection_logs": [
+    {
+      "timestamp": "2026-08-04T13:12:03.390012+00:00",
+      "method": "GET",
+      "endpoint": "/bucket/latest-hash",
+      "url": "https://bhiv-bucket-i1l6.onrender.com/bucket/latest-hash",
+      "request_body": null,
+      "status_code": 200,
+      "response_body": {
+        "last_hash": "b8d31d8f94f3b6c4432cfd9c5c7c4ecb08ed44720d3a790ca1b505ccee2f9bc4",
+        "artifact_count": 11670
+      },
+      "latency_ms": 266.73,
+      "error": null,
+      "success": true
+    },
+    {
+      "timestamp": "2026-08-04T13:12:03.656475+00:00",
+      "method": "POST",
+      "endpoint": "/bucket/artifact",
+      "url": "https://bhiv-bucket-i1l6.onrender.com/bucket/artifact",
+      "request_body": {
+        "artifact_id": "b715a416-c5fa-434b-8e40-92c6f756f44c",
+        "trace_id": "8575e7ce-1f2c-433b-a374-926931b900b9",
+        "timestamp_utc": "2026-08-04T13:12:03.123052+00:00",
+        "schema_version": "1.0.0",
+        "source_module_id": "usf_evidence_generator",
+        "artifact_type": "execution_certificate",
+        "parent_hash": "b8d31d8f94f3b6c4432cfd9c5c7c4ecb08ed44720d3a790ca1b505ccee2f9bc4",
+        "payload": {
+          "computation_result": "deterministic_success",
+          "provenance_metadata": {
+            "producer_id": "QCG_PRODUCER_01",
+            "signature": "valid_ecdsa_signature"
+          },
+          "replay_metadata": {
+            "sequence_number": 42,
+            "ttl": 300
+          }
+        }
+      },
+      "status_code": 400,
+      "response_body": {
+        "detail": {
+          "error": "ValidationError",
+          "message": "Artifact validation failed: Invalid parent_hash. Expected: b8d31d8f94f3b6c4432cfd9c5c7c4ecb08ed44720d3a790ca1b505ccee2f9bc4, Got: ",
+          "artifact_id": "b715a416-c5fa-434b-8e40-92c6f756f44c"
+        }
+      },
+      "latency_ms": 266.18,
+      "error": "HTTP Error 400: Bad Request",
+      "success": false
+    },
+    {
+      "timestamp": "2026-08-04T13:12:04.187787+00:00",
+      "method": "POST",
+      "endpoint": "/bucket/artifact",
+      "url": "https://bhiv-bucket-i1l6.onrender.com/bucket/artifact",
+      "request_body": {
+        "artifact_id": "b715a416-c5fa-434b-8e40-92c6f756f44c",
+        "trace_id": "8575e7ce-1f2c-433b-a374-926931b900b9",
+        "timestamp_utc": "2026-08-04T13:12:03.123052+00:00",
+        "schema_version": "1.0.0",
+        "source_module_id": "usf_evidence_generator",
+        "artifact_type": "execution_certificate",
+        "parent_hash": "b8d31d8f94f3b6c4432cfd9c5c7c4ecb08ed44720d3a790ca1b505ccee2f9bc4",
+        "payload": {
+          "computation_result": "deterministic_success",
+          "provenance_metadata": {
+            "producer_id": "QCG_PRODUCER_01",
+            "signature": "valid_ecdsa_signature"
+          },
+          "replay_metadata": {
+            "sequence_number": 42,
+            "ttl": 300
+          }
+        }
+      },
+      "status_code": 200,
+      "response_body": {
+        "success": true,
+        "artifact_id": "b715a416-c5fa-434b-8e40-92c6f756f44c",
+        "hash": "b6d372eeca4ca8c21b9b58851b2ed0cb1ab155080b86fb573da6463172ee7c11",
+        "parent_hash": "b8d31d8f94f3b6c4432cfd9c5c7c4ecb08ed44720d3a790ca1b505ccee2f9bc4",
+        "timestamp": "2026-08-04T13:12:03.123052+00:00",
+        "storage_type": "append_only",
+        "message": "Artifact stored successfully in append-only log"
+      },
+      "latency_ms": 530.91,
+      "error": null,
+      "success": true
+    },
+    {
+      "timestamp": "2026-08-04T13:12:06.465100+00:00",
+      "method": "GET",
+      "endpoint": "/bucket/artifact/b715a416-c5fa-434b-8e40-92c6f756f44c",
+      "url": "https://bhiv-bucket-i1l6.onrender.com/bucket/artifact/b715a416-c5fa-434b-8e40-92c6f756f44c",
+      "request_body": null,
+      "status_code": 200,
+      "response_body": {
+        "artifact": {
+          "artifact_id": "b715a416-c5fa-434b-8e40-92c6f756f44c",
+          "trace_id": "8575e7ce-1f2c-433b-a374-926931b900b9",
+          "timestamp_utc": "2026-08-04T13:12:03.123052+00:00",
+          "schema_version": "1.0.0",
+          "source_module_id": "usf_evidence_generator",
+          "artifact_type": "execution_certificate",
+          "parent_hash": "b8d31d8f94f3b6c4432cfd9c5c7c4ecb08ed44720d3a790ca1b505ccee2f9bc4",
+          "payload": {
+            "computation_result": "deterministic_success",
+            "provenance_metadata": {
+              "producer_id": "QCG_PRODUCER_01",
+              "signature": "valid_ecdsa_signature"
+            },
+            "replay_metadata": {
+              "sequence_number": 42,
+              "ttl": 300
+            }
+          }
+        },
+        "storage_type": "append_only",
+        "chain_verified": true
+      },
+      "latency_ms": 276.79,
+      "error": null,
+      "success": true
+    },
+    {
+      "timestamp": "2026-08-04T13:12:06.833867+00:00",
+      "method": "GET",
+      "endpoint": "/bucket/validate-chain/b715a416-c5fa-434b-8e40-92c6f756f44c",
+      "url": "https://bhiv-bucket-i1l6.onrender.com/bucket/validate-chain/b715a416-c5fa-434b-8e40-92c6f756f44c",
+      "request_body": null,
+      "status_code": 405,
+      "response_body": {
+        "detail": "Method Not Allowed"
+      },
+      "latency_ms": 368.48,
+      "error": "HTTP Error 405: Method Not Allowed",
+      "success": false
+    },
+    {
+      "timestamp": "2026-08-04T13:12:06.863810+00:00",
+      "method": "GET",
+      "endpoint": "/bucket/artifact/b715a416-c5fa-434b-8e40-92c6f756f44c",
+      "url": "https://bhiv-bucket-i1l6.onrender.com/bucket/artifact/b715a416-c5fa-434b-8e40-92c6f756f44c",
+      "request_body": null,
+      "status_code": 0,
+      "response_body": null,
+      "latency_ms": 29.75,
+      "error": "The read operation timed out",
+      "success": false
+    },
+    {
+      "timestamp": "2026-08-04T13:12:07.904148+00:00",
+      "method": "GET",
+      "endpoint": "/bucket/artifact/b715a416-c5fa-434b-8e40-92c6f756f44c",
+      "url": "https://bhiv-bucket-i1l6.onrender.com/bucket/artifact/b715a416-c5fa-434b-8e40-92c6f756f44c",
+      "request_body": null,
+      "status_code": 0,
+      "response_body": null,
+      "latency_ms": 39.85,
+      "error": "The read operation timed out",
+      "success": false
+    },
+    {
+      "timestamp": "2026-08-04T13:12:09.943379+00:00",
+      "method": "GET",
+      "endpoint": "/bucket/artifact/b715a416-c5fa-434b-8e40-92c6f756f44c",
+      "url": "https://bhiv-bucket-i1l6.onrender.com/bucket/artifact/b715a416-c5fa-434b-8e40-92c6f756f44c",
+      "request_body": null,
+      "status_code": 0,
+      "response_body": null,
+      "latency_ms": 38.86,
+      "error": "The read operation timed out",
+      "success": false
+    },
+    {
+      "timestamp": "2026-08-04T13:12:13.961942+00:00",
+      "method": "GET",
+      "endpoint": "/bucket/artifact/b715a416-c5fa-434b-8e40-92c6f756f44c",
+      "url": "https://bhiv-bucket-i1l6.onrender.com/bucket/artifact/b715a416-c5fa-434b-8e40-92c6f756f44c",
+      "request_body": null,
+      "status_code": 0,
+      "response_body": null,
+      "latency_ms": 18.43,
+      "error": "The read operation timed out",
+      "success": false
+    }
+  ]
+}

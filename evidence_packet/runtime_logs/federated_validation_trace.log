@@ -1,0 +1,14 @@
+======================================================================
+  SECURE FEDERATED CAPABILITY FABRIC — VALIDATION SUITE
+======================================================================
+
+Traceback (most recent call last):
+  File "C:\Users\kanishk\QCG_task1\federated_validation_suite.py", line 643, in <module>
+    report = run_validation_suite()
+  File "C:\Users\kanishk\QCG_task1\federated_validation_suite.py", line 225, in run_validation_suite
+    print("\u25b6 SETUP: Creating 3 federated registry nodes...")
+    ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Python314\Lib\encodings\cp1252.py", line 19, in encode
+    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
+           ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeEncodeError: 'charmap' codec can't encode character '\u25b6' in position 0: character maps to <undefined>

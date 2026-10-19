@@ -1,0 +1,178 @@
+{
+  "status": "COLLECTED",
+  "live_health": {
+    "insightflow": {
+      "service_id": "insightflow.runtime.intelligence.v1",
+      "status": "UP",
+      "version": "1.0.2",
+      "state": "ACTIVE",
+      "timestamp": "2026-08-14T10:27:06.360809+00:00"
+    },
+    "keshav": {
+      "status": "OK",
+      "service": "KESHAV"
+    }
+  },
+  "federation_status": [
+    {
+      "node_id": "PROOF-NODE-1",
+      "port": 9110,
+      "peers": [
+        "PROOF-NODE-2",
+        "PROOF-NODE-3"
+      ],
+      "vector_clock": {
+        "PROOF-NODE-1": 5,
+        "PROOF-NODE-2": 0,
+        "PROOF-NODE-3": 0,
+        "TEST-NODE": 1
+      },
+      "service_count": 3,
+      "active_leases": 3,
+      "audit_log_length": 6,
+      "audit_chain_valid": true
+    },
+    {
+      "node_id": "PROOF-NODE-2",
+      "port": 9111,
+      "peers": [
+        "PROOF-NODE-1",
+        "PROOF-NODE-3"
+      ],
+      "vector_clock": {
+        "PROOF-NODE-2": 2,
+        "PROOF-NODE-1": 3,
+        "PROOF-NODE-3": 0
+      },
+      "service_count": 3,
+      "active_leases": 3,
+      "audit_log_length": 5,
+      "audit_chain_valid": true
+    },
+    {
+      "node_id": "PROOF-NODE-3",
+      "port": 9112,
+      "peers": [
+        "PROOF-NODE-1",
+        "PROOF-NODE-2"
+      ],
+      "vector_clock": {
+        "PROOF-NODE-3": 2,
+        "PROOF-NODE-1": 3,
+        "PROOF-NODE-2": 0
+      },
+      "service_count": 3,
+      "active_leases": 3,
+      "audit_log_length": 5,
+      "audit_chain_valid": true
+    }
+  ],
+  "lease_status": {
+    "PROOF-NODE-1": {
+      "active_leases": 3,
+      "lease_details": [
+        {
+          "service_id": "insightflow.runtime.intelligence.v1",
+          "lease_id": "a1dd1502-e0a5-41e0-bbe6-093f21871e33",
+          "granted_at": "2026-08-14T10:26:44.424911+00:00",
+          "expires_at": "2026-08-14T10:27:14.424911+00:00",
+          "ttl_seconds": 30,
+          "last_heartbeat": "2026-08-14T10:26:44.424911+00:00",
+          "renewal_count": 0,
+          "status": "ACTIVE"
+        },
+        {
+          "service_id": "qcg.verification.quantum.v1",
+          "lease_id": "1d73c6dd-8961-464d-b54c-7ec3c81c061c",
+          "granted_at": "2026-08-14T10:26:44.425948+00:00",
+          "expires_at": "2026-08-14T10:27:14.425948+00:00",
+          "ttl_seconds": 30,
+          "last_heartbeat": "2026-08-14T10:26:44.425948+00:00",
+          "renewal_count": 0,
+          "status": "ACTIVE"
+        },
+        {
+          "service_id": "keshav.analysis.identity.v1",
+          "lease_id": "6d49e0ac-b912-4cec-9fea-6fb13bf8e5f8",
+          "granted_at": "2026-08-14T10:26:44.426591+00:00",
+          "expires_at": "2026-08-14T10:27:14.426591+00:00",
+          "ttl_seconds": 30,
+          "last_heartbeat": "2026-08-14T10:26:44.426591+00:00",
+          "renewal_count": 0,
+          "status": "ACTIVE"
+        }
+      ]
+    },
+    "PROOF-NODE-2": {
+      "active_leases": 3,
+      "lease_details": [
+        {
+          "service_id": "insightflow.runtime.intelligence.v1",
+          "lease_id": "40fc91d4-cace-4a8c-a743-8938c8083089",
+          "granted_at": "2026-08-14T10:26:44.425419+00:00",
+          "expires_at": "2026-08-14T10:27:14.425419+00:00",
+          "ttl_seconds": 30,
+          "last_heartbeat": "2026-08-14T10:26:44.425419+00:00",
+          "renewal_count": 0,
+          "status": "ACTIVE"
+        },
+        {
+          "service_id": "qcg.verification.quantum.v1",
+          "lease_id": "653e5580-933e-44be-9bff-f675164d7b5d",
+          "granted_at": "2026-08-14T10:26:44.425948+00:00",
+          "expires_at": "2026-08-14T10:27:14.425948+00:00",
+          "ttl_seconds": 30,
+          "last_heartbeat": "2026-08-14T10:26:44.425948+00:00",
+          "renewal_count": 0,
+          "status": "ACTIVE"
+        },
+        {
+          "service_id": "keshav.analysis.identity.v1",
+          "lease_id": "fabeafb7-d1e6-482f-bbc0-fa7da94b3fa5",
+          "granted_at": "2026-08-14T10:26:44.426591+00:00",
+          "expires_at": "2026-08-14T10:27:14.426591+00:00",
+          "ttl_seconds": 30,
+          "last_heartbeat": "2026-08-14T10:26:44.426591+00:00",
+          "renewal_count": 0,
+          "status": "ACTIVE"
+        }
+      ]
+    },
+    "PROOF-NODE-3": {
+      "active_leases": 3,
+      "lease_details": [
+        {
+          "service_id": "insightflow.runtime.intelligence.v1",
+          "lease_id": "d8b6c9cd-3fc5-402c-bd74-bf57e3448bd1",
+          "granted_at": "2026-08-14T10:26:44.425419+00:00",
+          "expires_at": "2026-08-14T10:27:14.425419+00:00",
+          "ttl_seconds": 30,
+          "last_heartbeat": "2026-08-14T10:26:44.425419+00:00",
+          "renewal_count": 0,
+          "status": "ACTIVE"
+        },
+        {
+          "service_id": "qcg.verification.quantum.v1",
+          "lease_id": "083db72b-bbb5-4027-8880-3654ccf81e45",
+          "granted_at": "2026-08-14T10:26:44.425948+00:00",
+          "expires_at": "2026-08-14T10:27:14.425948+00:00",
+          "ttl_seconds": 30,
+          "last_heartbeat": "2026-08-14T10:26:44.425948+00:00",
+          "renewal_count": 0,
+          "status": "ACTIVE"
+        },
+        {
+          "service_id": "keshav.analysis.identity.v1",
+          "lease_id": "501a1217-b53f-456a-914c-e2da34537aca",
+          "granted_at": "2026-08-14T10:26:44.426591+00:00",
+          "expires_at": "2026-08-14T10:27:14.426591+00:00",
+          "ttl_seconds": 30,
+          "last_heartbeat": "2026-08-14T10:26:44.426591+00:00",
+          "renewal_count": 0,
+          "status": "ACTIVE"
+        }
+      ]
+    }
+  },
+  "timestamp": "2026-08-14T10:27:14.269341+00:00"
+}

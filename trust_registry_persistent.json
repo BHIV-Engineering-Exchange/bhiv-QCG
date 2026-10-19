@@ -215,6 +215,54 @@
       "allowed_types": [
         "QUANTUM"
       ]
+    },
+    "PRITESH_QUANTUM_ENGINE_01": {
+      "identity": {
+        "node_id": "PRITESH_QUANTUM_ENGINE_01",
+        "public_key": "3059301306072a8648ce3d020106082a8648ce3d03010703420004847c3d16544ca506e7767d78f2d9af3060a09abcd00f7eadd619f589d62c61fcd1cfbb251676948dc3a7da776743c8f4c605e546d63ef43194cbb79bad1ed118",
+        "node_role": "PRODUCER",
+        "version": "1.0.0",
+        "created_at": "2026-10-19T08:54:17.235915+00:00"
+      },
+      "allowed_types": [
+        "QUANTUM"
+      ]
+    },
+    "TEST_PRODUCER_ce7cf6f0": {
+      "identity": {
+        "node_id": "TEST_PRODUCER_ce7cf6f0",
+        "public_key": "3059301306072a8648ce3d020106082a8648ce3d030107034200043b126f109097204068e8676740ffb702d7b5d2cd2ba2c11fb10ec7a882565156ad11ef375e9c9ec9c2d228b243f60aed99869036abce44e8d119aae7b04bca21",
+        "node_role": "PRODUCER",
+        "version": "1.0.0",
+        "created_at": "2026-10-19T08:55:56.278522+00:00"
+      },
+      "allowed_types": [
+        "QUANTUM"
+      ]
+    },
+    "PRITESH_HARDWARE_96ed050d": {
+      "identity": {
+        "node_id": "PRITESH_HARDWARE_96ed050d",
+        "public_key": "3059301306072a8648ce3d020106082a8648ce3d03010703420004506d3dcfc87ecafdb90b408e4c527d96ebdfae7c9d8f6a211f1d1ddcf7070b459b769f591710a74b976b3506570c31da72391a5adad075b7178e56f89772e09e",
+        "node_role": "PRODUCER",
+        "version": "1.0.0",
+        "created_at": "2026-10-19T08:58:16.783590+00:00"
+      },
+      "allowed_types": [
+        "QUANTUM"
+      ]
+    },
+    "PRITESH_HARDWARE_f10b7e65": {
+      "identity": {
+        "node_id": "PRITESH_HARDWARE_f10b7e65",
+        "public_key": "3059301306072a8648ce3d020106082a8648ce3d0301070342000415cde1b9cb4fd78c34b38a25a7bd33b968988d32d75158f03912ec9949ef78a2ba4ce452113e673be892cb3d15181084209690982da126fa4edd275453c4b8fb",
+        "node_role": "PRODUCER",
+        "version": "1.0.0",
+        "created_at": "2026-10-19T08:58:45.978659+00:00"
+      },
+      "allowed_types": [
+        "QUANTUM"
+      ]
     }
   },
   "revoked_keys": []

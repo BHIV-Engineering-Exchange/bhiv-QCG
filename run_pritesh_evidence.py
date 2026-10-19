@@ -62,17 +62,26 @@ def generate_hardware_evidence():
     
     # 4. Integrate with Gateway Surface (/verify endpoint)
     # Using FastAPI TestClient to simulate HTTP external client ingestion
+    from node_identity import NodeSigner
+    from provenance import sign_contract
+    import os
+
+    os.environ["PYTEST_CURRENT_TEST"] = "1"
+    producer_id = f"PRITESH_HARDWARE_{uuid.uuid4().hex[:8]}"
+    signer = NodeSigner(producer_id, "QUANTUM")
+    signed_contract = sign_contract(contract, signer)
+
     client = TestClient(app)
     
     print("\n[OK] Sending adapted payload to the /verify local endpoint...")
     response = client.post("/verify", json={
-        "contract": contract.to_dict(),
-        "producer_public_key": "MOCK_PRITESH_CLIENT_KEY"
+        "contract": signed_contract.to_dict(),
+        "producer_public_key": signer.identity.public_key
     })
     
     if response.status_code == 200:
         result = response.json()
-        print(f"\n[OK] Web server successfully verified payload. Status: {result.get('status')}")
+        print(f"\n[OK] Web server successfully verified payload. Status: {result.get('flow_status')}")
         
         # Save integration trace
         trace_path = "evidence_packet/hardware_results/verification_response.json"
