@@ -1,23 +1,23 @@
 {
-  "trace_id": "42492c83-f41d-5574-918a-5e3d5fb9899f",
+  "trace_id": "2f77575a-9cdf-56df-b32d-e90a4a9eeff4",
   "parent_trace_id": null,
   "flow_status": "COMPLETED",
   "stages": {
     "replay": {
       "is_valid": true,
       "status": "VALID",
-      "sequence_number": 29,
-      "verification_hash": "aa869a0b581eae1e83a3c80dff9482b15d372984d16b197ec68ef8d0c9e3fd57"
+      "sequence_number": 31,
+      "verification_hash": "23dd9540908160eb092dd545cc3fe5d63eb91f80966c82b55cde0f1b7a34d517"
     },
     "keshav_analysis": {
       "status": "COMPLETED",
       "live": true,
-      "trace_id": "42492c83-f41d-5574-918a-5e3d5fb9899f",
+      "trace_id": "2f77575a-9cdf-56df-b32d-e90a4a9eeff4",
       "root_cause": null,
       "resolution_signal": null,
       "impact_score": 0,
       "severity": "LOW",
-      "timestamp": "2026-10-19T09:36:50Z"
+      "timestamp": "2026-10-21T07:57:02Z"
     },
     "trust": {
       "passed": true,
@@ -25,12 +25,12 @@
       "reason": ""
     },
     "execution": {
-      "contract_trace_id": "42492c83-f41d-5574-918a-5e3d5fb9899f",
+      "contract_trace_id": "2f77575a-9cdf-56df-b32d-e90a4a9eeff4",
       "producer_type": "QUANTUM",
       "ack": "ACK:OK",
       "confidence": 0.97,
-      "runtime_hash": "e0be0cf7a846987ebe42ac27e4ca3b03011c76bf572c0b8ea28f512184072213",
-      "execution_timestamp": "2026-10-19T09:36:54.158697+00:00"
+      "runtime_hash": "b147a226a5b891f97cb0f4d9f70bc6576e999933802de1fddf6af57776147f3c",
+      "execution_timestamp": "2026-10-21T07:58:55.811363+00:00"
     },
     "consensus": {
       "participating_nodes": [
@@ -38,7 +38,7 @@
         "TANTRA_NODE_2",
         "TANTRA_NODE_3"
       ],
-      "final_hash": "e0be0cf7a846987ebe42ac27e4ca3b03011c76bf572c0b8ea28f512184072213",
+      "final_hash": "b147a226a5b891f97cb0f4d9f70bc6576e999933802de1fddf6af57776147f3c",
       "agreement_percentage": 1.0,
       "consensus_reached": true,
       "disagreements": {},
@@ -47,51 +47,51 @@
       "node_attestations": {
         "TANTRA_NODE_1": {
           "node_id": "TANTRA_NODE_1",
-          "agreement_hash": "e0be0cf7a846987ebe42ac27e4ca3b03011c76bf572c0b8ea28f512184072213",
+          "agreement_hash": "b147a226a5b891f97cb0f4d9f70bc6576e999933802de1fddf6af57776147f3c",
           "status": "OK",
-          "signature": "3045022100bb7d24ee9edea4f5eb145c23f9d786863306d773848448b78564fc7217135bfa02207254639578baef7fcd6472fd87e952b673bb5fe7907e1c9008fd7b0a99b91b5d",
-          "public_key": "3059301306072a8648ce3d020106082a8648ce3d03010703420004e4f4b4b5f04c507b0ea10fc5ecc99a091fdc6921eea3599dcae5c3ba346f1a88ef5d539b1e3057007242e07e9eeeedb8921cd3a45756bd5250e01d4ace8debe1"
+          "signature": "3044022002ca9380558c98cfd6e18cdf0913ffad48cb152e0e996de74158f880322ebda102203e0a469e25b681e2239e605a72554fa7a4b64f4ea47ff0102a89b66d434eead7",
+          "public_key": "3059301306072a8648ce3d020106082a8648ce3d03010703420004b9c63e51638a809ba6967700149227c96b2e007a638be2e43247378c163a370a185943d88dba4dc7ffd6246ce37ef05219fc45cfffddca5723c9a7db3e6a9ba2"
         },
         "TANTRA_NODE_2": {
           "node_id": "TANTRA_NODE_2",
-          "agreement_hash": "e0be0cf7a846987ebe42ac27e4ca3b03011c76bf572c0b8ea28f512184072213",
+          "agreement_hash": "b147a226a5b891f97cb0f4d9f70bc6576e999933802de1fddf6af57776147f3c",
           "status": "OK",
-          "signature": "3045022100e62a9990e4d972713890bcee1c7faea4952a7603b063b33404f7cd5ebadaea440220501aa95c606fbe3b3f8a7e7d172743cf499012995cbeb61518f238444c909555",
-          "public_key": "3059301306072a8648ce3d020106082a8648ce3d030107034200044dece91735ff9aae4e8b880be46fab07e3c38ec527975a80fe5751d0e8a454b08d40540a8ea40f78a055d5bf541aabbce32163c12f4a31f727bb78eb1261b0fd"
+          "signature": "30450221008bb5d0f4f9612b6a56f30ca1132276883f34574472d8aafd649478827f63975302202be89c5314402529291ccbed09fc0fb317400fec4540c0dc24aaf14423f4f0c7",
+          "public_key": "3059301306072a8648ce3d020106082a8648ce3d03010703420004054e4f8e7c77f1714a2aeb4ba3fe5ee31fdfeebe92b9a2726e781a3a5ff1e6e5dfde21f9418451e32600f1f2c29e0af5fe7603b221639d9a23ab59af42e3bba1"
         },
         "TANTRA_NODE_3": {
           "node_id": "TANTRA_NODE_3",
-          "agreement_hash": "e0be0cf7a846987ebe42ac27e4ca3b03011c76bf572c0b8ea28f512184072213",
+          "agreement_hash": "b147a226a5b891f97cb0f4d9f70bc6576e999933802de1fddf6af57776147f3c",
           "status": "OK",
-          "signature": "30440220488bbbb1f67e4c64cdd13f0c9ab6e027ce594eb2a0349c7ea9de5218ea0977cf022046451cfc7d70b6eaeb8eeeb540be1788348883b941cf183a3dcda623d444d3b4",
-          "public_key": "3059301306072a8648ce3d020106082a8648ce3d03010703420004b850975b26a77cf62fb803b2fc7fc59be31987759c033e42c795d6ebe1cd66e10b4261553d1d404455b4bcae96207466ea7e0e0125200e5348c309565031d605"
+          "signature": "3046022100c62c059075ddb1d973ede02a6eb7ca1fe02bab1160739705ac741ad37a23e9a2022100e83a904c3669200097e554c1257e8720a7376657f68b22cc9b6cb13ce8605579",
+          "public_key": "3059301306072a8648ce3d020106082a8648ce3d03010703420004c2e0840e3620154ecf21002c7227b2a9e8ede89a2c0848d960d57425b90ff0a74e440c77bfbbde6b95cec26d1470c621ea7feb40b23fff95e63855961036c5cd"
         }
       },
-      "consensus_timestamp": "2026-10-19T09:36:54.160664+00:00"
+      "consensus_timestamp": "2026-10-21T07:58:55.813452+00:00"
     },
     "prana_ingest": {
       "status": "forwarded",
       "live": true,
-      "event_id": "31827d35-13a4-4f75-ac33-536053b0327e",
+      "event_id": "88a1059a-2c6b-42ee-a2dc-5eac7e7ce1d0",
       "http_status": 200,
-      "total_elapsed_ms": 1349,
+      "total_elapsed_ms": 1322,
       "error": null
     }
   },
   "stage_timings_ms": {
-    "replay": 2272.2,
-    "keshav_analysis": 1969.24,
-    "trust": 2137.7,
-    "execution": 2036.69,
-    "consensus": 1.96,
-    "prana_ingest": 1683.89
+    "replay": 2192.94,
+    "keshav_analysis": 2034.24,
+    "trust": 2032.01,
+    "execution": 2020.51,
+    "consensus": 2.08,
+    "prana_ingest": 1544.55
   },
   "trace_continuity": {
-    "sequence_number": 29,
-    "runtime_hash": "e0be0cf7a846987ebe42ac27e4ca3b03011c76bf572c0b8ea28f512184072213",
-    "final_hash": "e0be0cf7a846987ebe42ac27e4ca3b03011c76bf572c0b8ea28f512184072213",
+    "sequence_number": 31,
+    "runtime_hash": "b147a226a5b891f97cb0f4d9f70bc6576e999933802de1fddf6af57776147f3c",
+    "final_hash": "b147a226a5b891f97cb0f4d9f70bc6576e999933802de1fddf6af57776147f3c",
     "keshav_severity": "LOW",
-    "prana_event_id": "31827d35-13a4-4f75-ac33-536053b0327e",
+    "prana_event_id": "88a1059a-2c6b-42ee-a2dc-5eac7e7ce1d0",
     "prana_status": "forwarded"
   }
 }
