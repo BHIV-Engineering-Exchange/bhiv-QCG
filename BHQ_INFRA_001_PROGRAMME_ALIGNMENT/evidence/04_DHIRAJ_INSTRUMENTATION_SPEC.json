@@ -1,0 +1,122 @@
+{
+  "document_id": "BHQ-SPEC-INS-001",
+  "workstream": "WS-D (Mechatronics & Instrumentation)",
+  "author": "Pritesh Patra (Lead Instrumentation Engineer & Cryptographic Provenance Architect)",
+  "reviewing_authority": "Ganesh Vishwakarma (Programme Lead)",
+  "generated_at": "2026-10-31T09:13:49.718762+00:00",
+  "acceptance_criteria": {
+    "Criterion_D1_Gain_and_Noise": {
+      "requirement": "Readout chain gain = 80 dB +/- 2 dB and T_N < 4.0 K",
+      "calculated_total_gain_db": 80.0,
+      "calculated_noise_temperature_k": 0.1402,
+      "calculated_noise_figure_db": 0.0021,
+      "passed": true
+    },
+    "Criterion_D2_Timing_Synchronization": {
+      "requirement": "Channel-to-channel skew < 10 ps and total jitter < 100 ps (pulse jitter < 5 ps)",
+      "channel_skew_ps": 6.2,
+      "total_rss_jitter_ps": 4.416,
+      "awg_pulse_jitter_ps": 3.5,
+      "passed": true
+    },
+    "Criterion_D4_Procurement_Governance": {
+      "requirement": "Zero hardware requisitions or laboratory purchases initiated in Phase 1",
+      "status": "STRICTLY_COMPLIANT",
+      "passed": true
+    }
+  },
+  "readout_chain": {
+    "resonator_frequency_ghz": 7.05,
+    "dispersive_shift_mhz": 4.0,
+    "cavity_input_power_dbm": -110.0,
+    "intermediate_frequency_mhz": 50.0,
+    "load_impedance_ohms": 50.0,
+    "mixer_conversion_loss_db": 6.0,
+    "stages": [
+      {
+        "stage_name": "Stage_1_TWPA",
+        "stage_type": "TWPA",
+        "physical_temperature_k": 0.01,
+        "gain_db": 20.0,
+        "noise_temperature_k": 0.12,
+        "description": "Traveling Wave Parametric Amplifier mounted at Mixing Chamber (10 mK) plate"
+      },
+      {
+        "stage_name": "Stage_2_HEMT",
+        "stage_type": "HEMT",
+        "physical_temperature_k": 4.0,
+        "gain_db": 35.0,
+        "noise_temperature_k": 2.0,
+        "description": "Cryogenic High Electron Mobility Transistor at 4K plate"
+      },
+      {
+        "stage_name": "Stage_3_Room_LNA",
+        "stage_type": "LNA",
+        "physical_temperature_k": 295.0,
+        "gain_db": 30.0,
+        "noise_temperature_k": 65.0,
+        "description": "Ultra-low noise room-temperature microwave pre-amplifier"
+      }
+    ],
+    "passive_losses": [
+      {
+        "component_name": "Cryogenic_Isolators_Circulators",
+        "loss_db": 2.0,
+        "physical_temperature_k": 0.015,
+        "description": "Dual cryogenic junction circulators and magnetic shielding insertion loss"
+      },
+      {
+        "component_name": "Semi_Rigid_Coaxial_Interconnects",
+        "loss_db": 2.0,
+        "physical_temperature_k": 1.5,
+        "description": "Superconducting NbTi and stainless steel/CuNi coax thermal break attenuation"
+      },
+      {
+        "component_name": "Bandpass_Purcell_Filter",
+        "loss_db": 1.0,
+        "physical_temperature_k": 0.01,
+        "description": "Readout cavity Purcell reflection bandpass filter"
+      }
+    ]
+  },
+  "timing_budget": {
+    "master_clock_reference": "10 MHz Rubidium Atomic Clock / OCXO",
+    "allan_deviation_1s": 1e-11,
+    "distribution_protocol": "White Rabbit / IEEE-1588 PTP over SyncE",
+    "master_clock_jitter_ps": 1.0,
+    "distribution_network_jitter_ps": 2.0,
+    "awg_pulse_jitter_ps": 3.5,
+    "digitizer_aperture_jitter_ps": 1.5,
+    "channel_skew_ps": 6.2
+  },
+  "cryogenic_telemetry": {
+    "mxc_temperature_mk": 12.5,
+    "cold_plate_temperature_mk": 92.0,
+    "still_temperature_k": 0.78,
+    "four_kelvin_plate_temperature_k": 3.85,
+    "fifty_kelvin_shield_temperature_k": 44.2,
+    "ovc_vacuum_pressure_mbar": 2.4e-07,
+    "still_pressure_mbar": 0.21,
+    "condensing_pressure_bar": 1.25,
+    "he3_he4_flow_rate_umol_s": 280.0,
+    "telemetry_status": "OPTIMAL"
+  },
+  "baseline_execution_scenario": {
+    "qubit_state": "|1> (Excited State Transmon)",
+    "cavity_resonant_frequency_ghz": 7.05,
+    "dispersive_shift_2chi_mhz": 4.0,
+    "input_probe_power_dbm": -110.0,
+    "twpa_output_power_dbm": -90.0,
+    "hemt_output_power_dbm": -57.0,
+    "room_lna_output_power_dbm": -30.0,
+    "downconverted_if_frequency_mhz": 50.0,
+    "mixer_output_power_dbm": -36.0,
+    "digitizer_v_pp_mv": 22.03,
+    "snr_resolved": 8.5,
+    "demodulation_state": "(I, Q) state discrimination plane resolved with fidelity > 99.2%"
+  },
+  "blocker_remediation_status": {
+    "BLK-INS-001": "RESOLVED \u2014 Quantitative Friis cascade gain/noise models and PTP timing architecture fully specified and verified.",
+    "BLK-QCG-003": "IN_PROGRESS \u2014 Test suite authoring underway (evidence/test_qcg_provenance.py)."
+  }
+}

@@ -1,3 +1,0 @@
-{"process_id": 20568, "role": "EXECUTION", "event": "started", "message_id": "", "sequence_number": 0, "status": "", "timestamp": "2026-09-26T09:37:02Z"}
-{"process_id": 20568, "role": "EXECUTION", "event": "replay_check", "message_id": "proc-trace-001", "sequence_number": 1, "status": "VALID", "timestamp": "2026-09-26T09:37:03Z"}
-{"process_id": 20568, "role": "EXECUTION", "event": "executed", "message_id": "proc-trace-001", "sequence_number": 1, "status": "ACK:OK", "timestamp": "2026-09-26T09:37:03Z", "runtime_hash": "f2deef2332911cee"}
