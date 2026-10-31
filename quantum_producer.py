@@ -1,6 +1,7 @@
 """
 Layer 1 - Quantum Producer
 Simulates superdense coding to encode a classical message into a quantum channel.
+Remediated for BLK-QCG-001: Correct little-endian bitstring mapping in Qiskit.
 """
 
 import hashlib
@@ -18,8 +19,8 @@ log = get_logger("qcg.producer")
 
 _SUPERDENSE_ENCODING: dict[str, list[str]] = {
     "00": [],
-    "01": ["x"],
-    "10": ["z"],
+    "01": ["z"],
+    "10": ["x"],
     "11": ["x", "z"],
 }
 

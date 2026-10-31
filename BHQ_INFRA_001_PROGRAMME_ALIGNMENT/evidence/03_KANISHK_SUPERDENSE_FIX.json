@@ -1,0 +1,63 @@
+{
+  "protocol": "Superdense Coding (Remediated BLK-QCG-001)",
+  "all_vectors_passed": true,
+  "shots_per_vector": 1000,
+  "vector_results": {
+    "00": {
+      "input_message": "00",
+      "encoded_gates_on_q0": [],
+      "shots_requested": 1000,
+      "counts": {
+        "00": 1000
+      },
+      "decoded_dominant": "00",
+      "fidelity": 1.0,
+      "verified": true
+    },
+    "01": {
+      "input_message": "01",
+      "encoded_gates_on_q0": [
+        "z"
+      ],
+      "shots_requested": 1000,
+      "counts": {
+        "01": 1000
+      },
+      "decoded_dominant": "01",
+      "fidelity": 1.0,
+      "verified": true
+    },
+    "10": {
+      "input_message": "10",
+      "encoded_gates_on_q0": [
+        "x"
+      ],
+      "shots_requested": 1000,
+      "counts": {
+        "10": 1000
+      },
+      "decoded_dominant": "10",
+      "fidelity": 1.0,
+      "verified": true
+    },
+    "11": {
+      "input_message": "11",
+      "encoded_gates_on_q0": [
+        "x",
+        "z"
+      ],
+      "shots_requested": 1000,
+      "counts": {
+        "11": 1000
+      },
+      "decoded_dominant": "11",
+      "fidelity": 1.0,
+      "verified": true
+    }
+  },
+  "timestamp_utc": "2026-10-31T10:24:46.456232+00:00",
+  "blocker_id": "BLK-QCG-001",
+  "remediation_status": "PASSED_100_PERCENT_FIDELITY",
+  "engineer": "Kanishk Singh",
+  "role": "Lead Quantum Photonic Systems Engineer & Quantum Communications Protocol Architect"
+}
