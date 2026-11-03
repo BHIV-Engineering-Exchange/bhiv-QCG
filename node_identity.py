@@ -91,6 +91,23 @@ class NodeSigner:
             version=version,
         )
 
+    @property
+    def node_id(self) -> str:
+        """Direct property access to the node ID."""
+        return self.identity.node_id
+
+    @property
+    def public_key_hex(self) -> str:
+        """Export the public key in hexadecimal DER encoding."""
+        return self._public_key_hex
+
+    def get_public_key_pem(self) -> str:
+        """Export the public key in standard PEM format."""
+        return self._private_key.public_key().public_bytes(
+            encoding=serialization.Encoding.PEM,
+            format=serialization.PublicFormat.SubjectPublicKeyInfo,
+        ).decode("utf-8")
+
     def sign_payload(self, payload: dict | str) -> NodeProof:
         """Sign a payload and return a cryptographic proof."""
         payload_str = (
@@ -98,7 +115,7 @@ class NodeSigner:
             if isinstance(payload, dict)
             else str(payload)
         )
-        payload_bytes = payload_str.encode()
+        payload_bytes = payload_str.encode("utf-8")
         payload_hash = hashlib.sha256(payload_bytes).hexdigest()
 
         # ECDSA sign over the payload bytes with SHA-256
@@ -110,6 +127,13 @@ class NodeSigner:
             node_id=self.identity.node_id,
             signature=sig_bytes.hex(),
             signed_hash=payload_hash,
+        )
+
+    def sign_digest(self, digest: bytes) -> bytes:
+        """Sign a precomputed raw 32-byte digest directly."""
+        return self._private_key.sign(
+            digest,
+            ec.ECDSA(hashes.SHA256()),
         )
 
 
@@ -159,6 +183,14 @@ def verify_node_proof(
         return True
     except (InvalidSignature, ValueError, Exception):
         return False
+
+
+__all__ = [
+    "NodeIdentity",
+    "NodeProof",
+    "NodeSigner",
+    "verify_node_proof",
+]
 
 
 # ---------------------------------------------------------------------------

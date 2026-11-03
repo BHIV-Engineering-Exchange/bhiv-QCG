@@ -3,7 +3,7 @@
   "workstream": "WS-D (Mechatronics & Instrumentation)",
   "author": "Pritesh Patra (Lead Instrumentation Engineer & Cryptographic Provenance Architect)",
   "reviewing_authority": "Ganesh Vishwakarma (Programme Lead)",
-  "generated_at": "2026-10-31T09:13:49.718762+00:00",
+  "generated_at": "2026-11-03T11:00:22.999913+00:00",
   "acceptance_criteria": {
     "Criterion_D1_Gain_and_Noise": {
       "requirement": "Readout chain gain = 80 dB +/- 2 dB and T_N < 4.0 K",
