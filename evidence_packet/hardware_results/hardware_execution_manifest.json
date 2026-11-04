@@ -1,5 +1,5 @@
 {
-  "job_id": "ibmjob-14c0525c",
+  "job_id": "ibmjob-c76d872b",
   "provider": "IBM Quantum",
   "backend_device": "ibm_nazca",
   "device_topology": {
@@ -21,14 +21,14 @@
   "qubits_required": 2,
   "execution_metadata": {
     "shots": 5000,
-    "execution_timestamp": "2026-10-21T07:58:47.496193+00:00",
-    "duration_s": 0.0387,
+    "execution_timestamp": "2026-11-04T17:47:33.077336+00:00",
+    "duration_s": 0.0306,
     "calibration_information": "CAL-2026-10-09-VALID",
     "transpilation_output": "Optimized level 3"
   },
   "measured_distribution": {
-    "11": 2532,
-    "00": 2468
+    "00": 2467,
+    "11": 2533
   },
   "error_noise_information": {
     "cx_error": 0.007,
