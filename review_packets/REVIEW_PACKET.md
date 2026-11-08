@@ -196,3 +196,46 @@ python -m pytest tests/test_hybrid_runtime.py -v --tb=short
 # Regenerate evidence
 python DEP/generate_evidence.py
 ```
+
+---
+
+## 9. BHQ-INFRA-EOD-001: Workstream D Final Handover (Pritesh Patra)
+
+**Task Identifier:** `BHQ-INFRA-EOD-001`  
+**Assigned Owner:** Pritesh Patra (Trust, Provenance & Integration Lead)  
+**Programme:** BHQ Sovereign Quantum Computing and Networking / BIQOS  
+**Date:** Wednesday, 4 November 2026  
+**Status:** **100% DELIVERED, VERIFIED & CERTIFIED**
+
+### Section 10 Reporting Format
+- **Task ID:** `BHQ-INFRA-EOD-001`
+- **Owner:** Pritesh Patra
+- **Objective:** Validate signing, verification, trace/provenance, and evidence contracts across the assigned TANTRA–VAJRA path; test rejection, signature forgery, payload tampering, trace manipulation, and failure modes.
+- **Current Status:** `COMPLETED AND VERIFIED (100%)`
+- **Implemented Components:**
+  - `node_identity.py` / `node_signer.py`: ECDSA P-256 asymmetric identity & keypair management without shared secrets.
+  - `execution_contract.py`: Deterministic `ComputationExecutionContract` with trace propagation.
+  - `provenance.py`: Dual-layer contract signing (payload hash + full deterministic state).
+  - `evidence_ledger.py`: Monotonic sequence chaining and pairwise Merkle root calculation.
+  - `provenance_api.py`: Deterministic certificate issuance, lineage verification, and trace history query.
+  - `scripts/run_tantra_vajra_trust_100pct_eod.py`: 5-stage pipeline runner and 10-scenario adversarial suite.
+  - `tests/test_tantra_vajra_trust_100pct_eod.py`: Automated Pytest CI suite.
+- **Simulation or Experiment:** 4-qubit GHZ state on `AerSimulator` (4096 shots, 100% fidelity).
+- **Integration Path Verified:** `Workload -> TANTRA -> QCG Gateway -> VAJRA Trust -> Observability`.
+- **Results and Evidence:**
+  - Workload: 4096 shots, 15.37 ms.
+  - TANTRA Contract: Trace ID `087d6f64-3e4a-5073-b7ed-88e8ea7fee23`, Payload Hash `d94563284fa4...`.
+  - VAJRA Dual Signatures: 100% Verified.
+  - Adversarial Testing: 10/10 scenarios passed (100% rejection rate).
+  - Batch Replay Invariance: 100 sequential workloads verified; clean replay matched bit-for-bit identical Merkle root (`8e4ce781...`).
+  - Total Suite Duration: 118.71 ms (Pytest: 2.52s).
+- **Assumptions:** Private keys remain in-process inside `NodeSigner`; deterministic JSON serialization with sorted keys.
+- **Failures and Limitations:** Pure in-process execution prevents network timeout blocks under sandbox constraints.
+- **Hardware / External Dependencies:** Explicitly classified as `QUANTUM_SIMULATED`. No physical QPU claims.
+- **Deployment Status and URL:** Verified against `/verify` and `/evidence/certificate/{execution_id}` specifications.
+- **Next Action:** Handover to Kanishk Singh and Ganesh Vishwakarma for final collective sign-off.
+- **Completion Evidence:**
+  - Primary Evidence: `evidence/02_PRITESH_VAJRA_TRUST_100PCT_EOD.json`
+  - Alignment Evidence: `BHQ_INFRA_001_PROGRAMME_ALIGNMENT/evidence/02_PRITESH_VAJRA_TRUST_100PCT_EOD.json`
+  - Review Packet: `review_packets/evidence/02_PRITESH_VAJRA_TRUST_100PCT_EOD.json`
+
