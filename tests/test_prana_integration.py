@@ -107,11 +107,12 @@ def test_prana_mongodb_replay_persistence(prana_client):
 def test_tantra_harness_e2e_prana_flow(harness):
     """Verify full TANTRA integration harness processes contract and forwards to PRANA."""
     trace_id = f"tantra-harness-{uuid.uuid4().hex}"
-    signer = NodeSigner(node_id="NODE_PRANA_E2E", node_role="CLASSICAL")
+    node_id = f"NODE_PRANA_E2E_{uuid.uuid4().hex[:8]}"
+    signer = NodeSigner(node_id=node_id, node_role="CLASSICAL")
 
     contract = ComputationExecutionContract(
         producer_type="CLASSICAL",
-        producer_id="NODE_PRANA_E2E",
+        producer_id=node_id,
         payload={"task": "prana_production_verification", "value": 42},
         confidence=0.98,
         trace_id=trace_id,

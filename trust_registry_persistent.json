@@ -431,6 +431,162 @@
       "allowed_types": [
         "CLASSICAL"
       ]
+    },
+    "E2E_PROD_ef4a56": {
+      "identity": {
+        "node_id": "E2E_PROD_ef4a56",
+        "public_key": "3059301306072a8648ce3d020106082a8648ce3d030107034200043d95b9b2648bd02c3a2353e87f8d016c8188a782da9f30dc3c68cc76e63a4f9be1497c0bbc64a2230673db18d56ff9def0f5d22b0a347b0e20e3c0fe09228e4e",
+        "node_role": "PRODUCER",
+        "version": "1.0.0",
+        "created_at": "2026-11-11T08:34:05.709270+00:00"
+      },
+      "allowed_types": [
+        "QUANTUM"
+      ]
+    },
+    "E2E_PROD_30218a": {
+      "identity": {
+        "node_id": "E2E_PROD_30218a",
+        "public_key": "3059301306072a8648ce3d020106082a8648ce3d03010703420004c924fa2e8971816c351c7693e0c6a523ba84457e8e3dc5bdb0ce74adf426be0ee577e2e0ac167e86fe3be2619e7cfa9e037f7010b9b374914205bc6d1d50aa15",
+        "node_role": "PRODUCER",
+        "version": "1.0.0",
+        "created_at": "2026-11-11T08:34:33.333995+00:00"
+      },
+      "allowed_types": [
+        "QUANTUM"
+      ]
+    },
+    "E2E_PROD_6aaf78": {
+      "identity": {
+        "node_id": "E2E_PROD_6aaf78",
+        "public_key": "3059301306072a8648ce3d020106082a8648ce3d03010703420004c9c1a14f6d02bcf8cac89201f5e6986f470788dd0d1bbe6d6aa8bf29a94b4979e63f8c697d74c1ddb4b44243f14c5753312ca2f7e8a10c9370741b44d872484c",
+        "node_role": "PRODUCER",
+        "version": "1.0.0",
+        "created_at": "2026-11-11T08:34:50.849466+00:00"
+      },
+      "allowed_types": [
+        "QUANTUM"
+      ]
+    },
+    "E2E_PROD_c74f04": {
+      "identity": {
+        "node_id": "E2E_PROD_c74f04",
+        "public_key": "3059301306072a8648ce3d020106082a8648ce3d0301070342000443b3fe4f2479886f202a2cddc3654e52044e745e8111cb599c7c6d790be7c6f7ebd1d2b4d7557d6bd8d1191fe9f60239ebdb5c88294ea7a88393f67de88cab39",
+        "node_role": "PRODUCER",
+        "version": "1.0.0",
+        "created_at": "2026-11-11T08:35:08.328177+00:00"
+      },
+      "allowed_types": [
+        "QUANTUM"
+      ]
+    },
+    "E2E_PROD_685f56": {
+      "identity": {
+        "node_id": "E2E_PROD_685f56",
+        "public_key": "3059301306072a8648ce3d020106082a8648ce3d03010703420004278b2ceaff022b59cdb5ff75d9feb6d42e33b8825d9e615770153e8089d5bf05041db6e9b3c4d1c34904e2824ac035132f9e0fee6a55c5e24d1af6dc9007fd82",
+        "node_role": "PRODUCER",
+        "version": "1.0.0",
+        "created_at": "2026-11-11T08:35:31.391517+00:00"
+      },
+      "allowed_types": [
+        "QUANTUM"
+      ]
+    },
+    "E2E_PROD_04d409": {
+      "identity": {
+        "node_id": "E2E_PROD_04d409",
+        "public_key": "3059301306072a8648ce3d020106082a8648ce3d03010703420004863dfd56f83f10c3383462592ed7de03b06a32a61a6af41e468d1de2c142d91be609089beb5306515630bafc073ddfc64bf41d33df49c98a841200d23a7b858f",
+        "node_role": "PRODUCER",
+        "version": "1.0.0",
+        "created_at": "2026-11-11T08:35:49.117382+00:00"
+      },
+      "allowed_types": [
+        "QUANTUM"
+      ]
+    },
+    "E2E_PROD_c4300f": {
+      "identity": {
+        "node_id": "E2E_PROD_c4300f",
+        "public_key": "3059301306072a8648ce3d020106082a8648ce3d03010703420004688fd7e4c6ba1227352f1cefd9a78edcf7ccc7403be8089f84e561c1033aeb0facc65b23eeb9a8e96f734587ec5300ceada6fd5a735cc673074d72adc3219118",
+        "node_role": "PRODUCER",
+        "version": "1.0.0",
+        "created_at": "2026-11-11T08:36:06.625052+00:00"
+      },
+      "allowed_types": [
+        "QUANTUM"
+      ]
+    },
+    "E2E_PROD_71f853": {
+      "identity": {
+        "node_id": "E2E_PROD_71f853",
+        "public_key": "3059301306072a8648ce3d020106082a8648ce3d0301070342000496efe81a46499c727cde9b449ec3a75e46c4d78d7bb9b5c414a32991f81d0e32c60031f3474e1cfaa5106c10e254366d1b60776d48144b491815ec178062e351",
+        "node_role": "PRODUCER",
+        "version": "1.0.0",
+        "created_at": "2026-11-11T08:36:24.134697+00:00"
+      },
+      "allowed_types": [
+        "QUANTUM"
+      ]
+    },
+    "E2E_PROD_be7ebd": {
+      "identity": {
+        "node_id": "E2E_PROD_be7ebd",
+        "public_key": "3059301306072a8648ce3d020106082a8648ce3d03010703420004f9fd2c9fad9d551e08114b518ae4dc829904631129e9001ba07a403fc8f944089f331e08f688d7a8a6a83994eeddaefa08763b64baf998ec5eb2f039345f514b",
+        "node_role": "PRODUCER",
+        "version": "1.0.0",
+        "created_at": "2026-11-11T08:36:41.529009+00:00"
+      },
+      "allowed_types": [
+        "QUANTUM"
+      ]
+    },
+    "TEST_PRODUCER_ee481f9e": {
+      "identity": {
+        "node_id": "TEST_PRODUCER_ee481f9e",
+        "public_key": "3059301306072a8648ce3d020106082a8648ce3d03010703420004ccc7d66f0664580b8429f4897eb94be57232fe2b27e8f3610fd25f47128fc4f3212ec2aa362e5fa567a27570f5c957a9112384f0ccbf69dd46b644fa2d19002d",
+        "node_role": "PRODUCER",
+        "version": "1.0.0",
+        "created_at": "2026-11-11T08:40:49.283503+00:00"
+      },
+      "allowed_types": [
+        "QUANTUM"
+      ]
+    },
+    "TEST_PRODUCER_8fcbeec4": {
+      "identity": {
+        "node_id": "TEST_PRODUCER_8fcbeec4",
+        "public_key": "3059301306072a8648ce3d020106082a8648ce3d03010703420004a737e38f6c5f6b413fae2de635f8ef767e1608c2b6eeb030797d59f63ef75340c047376015f510793286ec4b543a27c0baea537b650d46b397465d9f4bf41efd",
+        "node_role": "PRODUCER",
+        "version": "1.0.0",
+        "created_at": "2026-11-11T08:41:06.876375+00:00"
+      },
+      "allowed_types": [
+        "QUANTUM"
+      ]
+    },
+    "TEST_PRODUCER_52c7743f": {
+      "identity": {
+        "node_id": "TEST_PRODUCER_52c7743f",
+        "public_key": "3059301306072a8648ce3d020106082a8648ce3d03010703420004eff1f0e7c574f96687b734b9cf554dec65ca1ec265df4135055455ee3c904f9c8c11c202f072de094d54a2f71f5dfc5144eb11cde41ffc5b32cf5e88d78ed593",
+        "node_role": "PRODUCER",
+        "version": "1.0.0",
+        "created_at": "2026-11-11T08:41:27.578283+00:00"
+      },
+      "allowed_types": [
+        "QUANTUM"
+      ]
+    },
+    "NODE_PRANA_E2E_41186954": {
+      "identity": {
+        "node_id": "NODE_PRANA_E2E_41186954",
+        "public_key": "3059301306072a8648ce3d020106082a8648ce3d0301070342000424135c1cbeca22a4d8eeaa015bfa64ac27e1051b3931bea7bdcb91df8dc9e1173cb5f63cfa534a632dbd1f5e97b03de7c4d2233ba2c17cd4c05e703b2c987f8e",
+        "node_role": "PRODUCER",
+        "version": "1.0.0",
+        "created_at": "2026-11-11T09:43:45.187209+00:00"
+      },
+      "allowed_types": [
+        "CLASSICAL"
+      ]
     }
   },
   "revoked_keys": []

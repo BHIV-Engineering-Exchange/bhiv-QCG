@@ -81,7 +81,7 @@ BUCKET_TIMEOUT_SECONDS: int     = _int("QCG_BUCKET_TIMEOUT_SECONDS", 10)
 BUCKET_ENABLED: bool            = _str("QCG_BUCKET_ENABLED", "true").lower() == "true"
 
 PRANA_API_URL: str              = _str("QCG_PRANA_API_URL", "http://163.128.209.18:8103")
-PRANA_TIMEOUT_SECONDS: int      = _int("QCG_PRANA_TIMEOUT_SECONDS", 10)
+PRANA_TIMEOUT_SECONDS: int      = _int("QCG_PRANA_TIMEOUT_SECONDS", 40)
 PRANA_ENABLED: bool             = _str("QCG_PRANA_ENABLED", "true").lower() == "true"
 
 GANESH_API_URL: str             = _str("QCG_GANESH_API_URL", "https://bhiv-quantum-application-layer.onrender.com")
