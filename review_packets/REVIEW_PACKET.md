@@ -239,3 +239,9 @@ python DEP/generate_evidence.py
   - Alignment Evidence: `BHQ_INFRA_001_PROGRAMME_ALIGNMENT/evidence/02_PRITESH_VAJRA_TRUST_100PCT_EOD.json`
   - Review Packet: `review_packets/evidence/02_PRITESH_VAJRA_TRUST_100PCT_EOD.json`
 
+---
+
+## 10. BHQ-INFRA-EOD-001: Collective Platform & VAJRA Integration Closure
+
+- **Collective Review Packet:** [`review_packets/BHQ_INFRA_EOD_001_REVIEW_PACKET.md`](BHQ_INFRA_EOD_001_REVIEW_PACKET.md) (TANTRA–VAJRA–BIQOS integration, live VAJRA `https://vajra.blackholeinfiverse.com` health/chain-integrity/`401` checks, `758/758` pytest results, E2E trace `eod-001-6684baa5ca41`, rollback procedure, and Section 11/12/13 closure).
+

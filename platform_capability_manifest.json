@@ -785,6 +785,119 @@
           "network": "HTTPS"
         }
       }
+    },
+    {
+      "platform_service_id": "TANTRA-PSR-VAJRA-001",
+      "capability_id": "b8e4f3c2-d6a5-4432-8bcd-vajra0000001",
+      "service_name": "BHIV_VAJRA_TRUST_SUBSTRATE",
+      "version": "1.0.0",
+      "provider": "VAJRA Trust & Provenance Team (Pritesh Patra)",
+      "owner": {
+        "team": "VAJRA Trust Substrate",
+        "contact": "pritesh@bhiv.internal"
+      },
+      "runtime_type": "HTTP_SERVICE",
+      "service_classification": "EXTERNAL_FEDERATED",
+      "capability_category": "VERIFICATION",
+      "status": "ACTIVE",
+      "description": "External VAJRA Trust Substrate & TruthStore — node health, TANTRA chain-integrity verification, governed provenance retrieval, replay equality gate, and blockchain relay.",
+      "tags": ["vajra", "trust", "provenance", "chain-integrity", "truth-store"],
+      "endpoints": {
+        "health": "https://vajra.blackholeinfiverse.com/api/health",
+        "chain_integrity": "https://vajra.blackholeinfiverse.com/api/tantra/chain-integrity",
+        "provenance_retrieval": "https://vajra.blackholeinfiverse.com/api/vajra/provenance/retrieval",
+        "replay_equality": "https://vajra.blackholeinfiverse.com/api/replay/equality",
+        "relay_submit": "https://vajra.blackholeinfiverse.com/api/relay/submit"
+      },
+      "manifest": {
+        "manifest_id": "VAJRA-MANIFEST-001",
+        "supported_operations": [
+          {
+            "operation_name": "get_health",
+            "description": "Check VAJRA node health, block height, and pending transaction count.",
+            "input_contract": {"type": "object"},
+            "output_contract": {
+              "type": "object",
+              "properties": {
+                "status": {"type": "string"},
+                "success": {"type": "boolean"},
+                "data": {"type": "object"}
+              }
+            },
+            "execution_modes": ["SYNCHRONOUS"],
+            "idempotent": true
+          },
+          {
+            "operation_name": "verify_chain_integrity",
+            "description": "Verify SHA-256 hash chaining continuity across the TANTRA truth store.",
+            "input_contract": {"type": "object"},
+            "output_contract": {
+              "type": "object",
+              "properties": {
+                "intact": {"type": "boolean"},
+                "success": {"type": "boolean"},
+                "message": {"type": "string"}
+              }
+            },
+            "execution_modes": ["SYNCHRONOUS"],
+            "idempotent": true
+          },
+          {
+            "operation_name": "record_provenance",
+            "description": "Append a governed provenance record to VAJRA TruthStore (requires Bearer VAJRA_TANTRA_SECRET).",
+            "input_contract": {
+              "type": "object",
+              "required": ["trace_id", "execution_id"],
+              "properties": {
+                "trace_id": {"type": "string"},
+                "execution_id": {"type": "string"},
+                "merkle_root": {"type": "string"}
+              }
+            },
+            "output_contract": {
+              "type": "object",
+              "properties": {
+                "success": {"type": "boolean"}
+              }
+            },
+            "execution_modes": ["SYNCHRONOUS"],
+            "idempotent": false
+          }
+        ],
+        "execution_modes": ["SYNCHRONOUS"],
+        "determinism_guarantees": {
+          "deterministic_execution": true,
+          "deterministic_coordination_hash": true
+        },
+        "replay_guarantees": {
+          "replay_safe": true,
+          "lineage_tracked": true
+        },
+        "trust_requirements": {
+          "authentication": "BEARER_VAJRA_TANTRA_SECRET",
+          "quantum_trust_level": "CLASSICAL"
+        },
+        "evidence_guarantees": {
+          "evidence_per_coordination": true,
+          "hash_chained": true
+        },
+        "runtime_dependencies": [],
+        "version_compatibility": {
+          "compatible": ["1.0.0"],
+          "deprecated": [],
+          "unsupported": []
+        },
+        "security_requirements": {
+          "network_policy": "HTTPS_PUBLIC",
+          "quantum_safe": false
+        },
+        "resource_requirements": {
+          "memory_mb_min": 256,
+          "cpu_cores_min": 1,
+          "disk_mb_min": 50,
+          "network": "HTTPS"
+        }
+      }
     }
   ]
 }

@@ -93,6 +93,15 @@ class TANTRAIntegrationHarness:
             except Exception as e:
                 logger.warning("PRANA client initialization failed: %s", e)
 
+        self.vajra_client = None
+        if getattr(config, "VAJRA_ENABLED", True):
+            try:
+                from vajra_client import VajraClient
+                self.vajra_client = VajraClient()
+                logger.info("VAJRA live client initialized: %s", getattr(config, 'VAJRA_API_URL', 'https://vajra.blackholeinfiverse.com'))
+            except Exception as e:
+                logger.warning("VAJRA client initialization failed: %s", e)
+
     def _run_keshav_analysis(self, trace_id: str, payload: Dict[str, Any]) -> Dict[str, Any]:
         """
         Call KESHAV live /analyze endpoint for root-cause analysis.
@@ -169,6 +178,55 @@ class TANTRAIntegrationHarness:
             }
         except Exception as e:
             logger.warning("PRANA ingestion failed for trace %s: %s", trace_id, e)
+            return {
+                "status": "FALLBACK",
+                "reason": str(e),
+                "live": False,
+            }
+
+    def _anchor_to_vajra(
+        self,
+        trace_id: str,
+        contract: ComputationExecutionContract,
+        exec_res: Dict[str, Any],
+        cons_res: Dict[str, Any],
+        record: Any,
+    ) -> Dict[str, Any]:
+        """
+        Verify external VAJRA TruthStore chain integrity and anchor provenance
+        when VAJRA_TANTRA_SECRET is configured.
+        """
+        if self.vajra_client is None or not getattr(config, "VAJRA_ENABLED", True):
+            return {
+                "status": "SKIPPED",
+                "reason": "VAJRA client not enabled",
+                "live": False,
+            }
+        try:
+            integrity = self.vajra_client.chain_integrity()
+            provenance_payload = {
+                "trace_id": trace_id,
+                "execution_id": record.execution_id,
+                "producer_id": contract.producer_id,
+                "producer_type": contract.producer_type,
+                "runtime_hash": exec_res.get("runtime_hash"),
+                "execution_hash": record.execution_hash,
+                "merkle_root": record.execution_root_hash,
+                "consensus_final_hash": cons_res.get("final_hash"),
+                "timestamp": contract.timestamp,
+            }
+            prov = self.vajra_client.record_provenance(provenance_payload)
+            return {
+                "status": prov.status if integrity.success else "FALLBACK",
+                "live": integrity.success,
+                "chain_intact": integrity.intact,
+                "chain_message": integrity.message,
+                "provenance_authenticated": prov.authenticated,
+                "provenance_http_status": prov.http_status,
+                "provenance_error": prov.error,
+            }
+        except Exception as e:
+            logger.warning("VAJRA anchor failed for trace %s: %s", trace_id, e)
             return {
                 "status": "FALLBACK",
                 "reason": str(e),
@@ -380,6 +438,18 @@ class TANTRAIntegrationHarness:
                 schema_version="1.0.0"
             )
             self.ledger.append(record)
+
+            # 7. VAJRA External Trust Substrate Anchor
+            stage_start = time.time()
+            try:
+                vajra_res = self._anchor_to_vajra(trace_id, contract, exec_res, cons_res, record)
+            except Exception as e:
+                logger.warning("Stage VAJRA failed for trace %s: %s", trace_id, e)
+                vajra_res = {"status": "ERROR", "reason": str(e), "live": False}
+            response["stage_timings_ms"]["vajra_anchor"] = round((time.time() - stage_start) * 1000, 2)
+            response["stages"]["vajra_anchor"] = vajra_res
+            response["trace_continuity"]["vajra_chain_intact"] = vajra_res.get("chain_intact")
+            response["trace_continuity"]["vajra_status"] = vajra_res.get("status")
             
             response["flow_status"] = "COMPLETED"
             self.health_iface.record_process(True)
@@ -403,5 +473,11 @@ class TANTRAIntegrationHarness:
         """Return PRANA integration evidence log as JSON."""
         if self.prana_client:
             return self.prana_client.get_evidence_log()
+        return "[]"
+
+    def get_vajra_evidence(self) -> str:
+        """Return VAJRA integration evidence log as JSON."""
+        if self.vajra_client:
+            return self.vajra_client.get_evidence_log()
         return "[]"
 
