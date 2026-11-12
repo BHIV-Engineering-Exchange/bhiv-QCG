@@ -1,0 +1,183 @@
+{
+  "metadata": {
+    "task_id": "BHQ-INFRA-EOD-001",
+    "owner": "Pritesh Patra",
+    "role": "Trust, Provenance & Integration Lead",
+    "programme": "BHQ Sovereign Quantum Computing and Networking / BIQOS",
+    "date": "2026-11-12",
+    "timestamp": "2026-11-12T18:07:46.390555+00:00",
+    "target_endpoints": [
+      "POST /verify",
+      "POST /gc/validate",
+      "GET /evidence/certificate/{execution_id}",
+      "GET /replay/lineage/{trace_id}"
+    ],
+    "integrated_subsystems": [
+      "NodeSigner (ECDSA P-256)",
+      "CanonicalReplayAuthority",
+      "EvidenceLedger (Pairwise Merkle Root)",
+      "TANTRA Governance & Boundary",
+      "VAJRA Cryptographic Provenance"
+    ],
+    "truth_classification": "IMPLEMENTED AND TESTED",
+    "application_security_proof_doctrine": "Ledger and blockchain presence alone is not application security proof. Every commitment is backed by mathematical application-level verification: ECDSA P-256 public key verification, canonical payload hashing, and Merkle inclusion proofs."
+  },
+  "positive_tests": [
+    {
+      "test_id": "POS-01",
+      "name": "Valid Signed Contract Acceptance via Ingestion Pipeline (/verify)",
+      "passed": true,
+      "trace_id": "b26e71ec-6fa9-4209-9073-ecb269956aad",
+      "flow_status": "COMPLETED",
+      "trace_continuity": {
+        "sequence_number": 69,
+        "runtime_hash": "162f75fa0234506b7ddf05e0099cf01ef3efb4e11367c2666dc3c3a79c41c042",
+        "final_hash": "162f75fa0234506b7ddf05e0099cf01ef3efb4e11367c2666dc3c3a79c41c042",
+        "keshav_severity": "ERROR",
+        "prana_event_id": "",
+        "prana_status": "FAILED"
+      },
+      "stage_timings_ms": {
+        "replay": 731.51,
+        "keshav_analysis": 104.69,
+        "trust": 21.1,
+        "execution": 41.54,
+        "consensus": 5.54,
+        "prana_ingest": 14.57
+      },
+      "duration_ms": 924.96
+    },
+    {
+      "test_id": "POS-02",
+      "name": "MDU Execution Certificate with Merkle Proof (/evidence/certificate/{id})",
+      "passed": true,
+      "execution_id": "7232fe95-fe5e-4900-81d0-5c8320ddb064",
+      "certificate": {
+        "execution_record": {
+          "execution_id": "7232fe95-fe5e-4900-81d0-5c8320ddb064",
+          "trace_id": "b26e71ec-6fa9-4209-9073-ecb269956aad",
+          "replay_reference": 69,
+          "execution_sequence": 1,
+          "producer_identity": "VAJRA_PROV_f4dba8a0",
+          "runtime_identity": "EXTERNAL_RUNTIME_v1",
+          "governance_identity": "TANTRA_GOVERNANCE",
+          "execution_status": "STARTED",
+          "runtime_hash": "162f75fa0234506b7ddf05e0099cf01ef3efb4e11367c2666dc3c3a79c41c042",
+          "execution_hash": "f5871dd1565dec269c94dd4033b12b94d6dc3de923b1ae240b45b341e3913992",
+          "previous_execution_hash": "901131d838b17aac0f7885b81e03cbdc9f5157a00343d30ab22083685ed1416a",
+          "execution_root_hash": "13c5f3000bee8e4f6dca00b8c16fb69684f37e8e14f93d6b944caf69aa0dcb4e",
+          "schema_version": "1.0.0"
+        },
+        "certificate_type": "DeterministicExecutionCertificate",
+        "chain_hash": "299f0400ae1a8a9ca146ab47b3c53244f946edb0205f16d099d77ec0af557b0b",
+        "merkle_root": "299f0400ae1a8a9ca146ab47b3c53244f946edb0205f16d099d77ec0af557b0b",
+        "ledger_sequence": 1,
+        "schema_version": "1.0.0"
+      }
+    },
+    {
+      "test_id": "POS-03",
+      "name": "Canonical Replay Authority Lineage Query (/replay/lineage/{trace_id})",
+      "passed": true,
+      "verdict": {
+        "message_id": "b26e71ec-6fa9-4209-9073-ecb269956aad",
+        "sequence_number": 69,
+        "status": "VALID",
+        "reason": "",
+        "lineage_record": {
+          "replay_id": "21d948f9-333d-5376-956d-00c29b8569fa",
+          "message_id": "b26e71ec-6fa9-4209-9073-ecb269956aad",
+          "sequence_number": 69,
+          "decision": "VALID",
+          "decision_timestamp": "2026-11-12T18:07:49.408291+00:00",
+          "origin_component": "CanonicalReplayAuthority",
+          "schema_version": "1.0.0",
+          "trace_reference": "b26e71ec-6fa9-4209-9073-ecb269956aad",
+          "parent_reference": "68",
+          "verification_hash": "98bb60faf497fd1c2548c3bd6ace5fec3f0a8c85e3d67e3cb7ccb881b198f82b"
+        }
+      }
+    },
+    {
+      "test_id": "POS-04",
+      "name": "Constitutional Governance Validation Flow (/gc/validate)",
+      "passed": true,
+      "auth_header": "Bearer [REDACTED]",
+      "flow_status": "COMPLETED"
+    }
+  ],
+  "negative_tests": [
+    {
+      "test_id": "NEG-01",
+      "name": "Duplicate / Replay Trace ID Rejection (CanonicalReplayAuthority)",
+      "passed": true,
+      "injected_fault": "Resubmission of existing trace_id",
+      "flow_status": "HALTED",
+      "halt_reason": "REPLAY_DUPLICATE"
+    },
+    {
+      "test_id": "NEG-02",
+      "name": "In-Flight Payload Bit Tampering (shots: 1024 -> 1025)",
+      "passed": true,
+      "injected_fault": "Mutated payload shots from 1024 to 1025 after signing",
+      "flow_status": "HALTED",
+      "halt_reason": "HALT:INVALID_SIGNATURE:ECDSA signature verification failed \u2014 contract may be tampered"
+    },
+    {
+      "test_id": "NEG-03",
+      "name": "Forged / Corrupted ECDSA DER Signature Rejection",
+      "passed": true,
+      "injected_fault": "Injected invalid signature bytes",
+      "flow_status": "HALTED",
+      "halt_reason": "HALT:INVALID_SIGNATURE:ECDSA signature verification failed \u2014 contract may be tampered"
+    },
+    {
+      "test_id": "NEG-04",
+      "name": "Missing Public Key on Unregistered Producer",
+      "passed": true,
+      "injected_fault": "Passed empty string as public key",
+      "flow_status": "HALTED",
+      "halt_reason": "TRUST_REJECTED: Producer not registered and no valid public key provided"
+    },
+    {
+      "test_id": "NEG-05",
+      "name": "Missing Authorization Header on /gc/validate",
+      "passed": true,
+      "injected_fault": "Submitted request without Bearer authorization header",
+      "expected_http_status": 401,
+      "outcome": "HTTPException(401, Missing or invalid Authorization header)"
+    },
+    {
+      "test_id": "NEG-06",
+      "name": "Non-Existent Certificate Retrieval (/evidence/certificate/{id})",
+      "passed": true,
+      "injected_fault": "Queried non-existent execution_id: non-existent-exec-uuid-99999",
+      "expected_http_status": 404,
+      "outcome": "HTTPException(404, Execution record not found in ledger)"
+    }
+  ],
+  "acceptance_criteria": {
+    "Criterion_1_Valid_Contract_Acceptance": {
+      "requirement": "Authentic signed contract executes through /verify to COMPLETED with matching trace_id",
+      "passed": true
+    },
+    "Criterion_2_Replay_Protection": {
+      "requirement": "Duplicate trace_id submission rejected by CanonicalReplayAuthority with REPLAY_DUPLICATE_REJECTED",
+      "passed": true
+    },
+    "Criterion_3_Tamper_and_Forgery_Rejection": {
+      "requirement": "Single-bit payload mutation and forged DER signatures rejected with HALTED",
+      "passed": true
+    },
+    "Criterion_4_Evidence_and_Merkle_Proof": {
+      "requirement": "MDU execution certificate issued with Merkle root and verified lineage",
+      "passed": true
+    },
+    "Criterion_5_Governance_and_Auth_Enforcement": {
+      "requirement": "Constitutional /gc/validate flow enforces Bearer header; missing key halts with TRUST_REJECTED",
+      "passed": true
+    },
+    "Overall_VAJRA_Trust_Boundary_Status": "PASSED"
+  },
+  "total_duration_ms": 3700.68
+}

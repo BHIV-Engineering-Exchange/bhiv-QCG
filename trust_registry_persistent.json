@@ -431,6 +431,102 @@
       "allowed_types": [
         "CLASSICAL"
       ]
+    },
+    "P_LINE_1": {
+      "identity": {
+        "node_id": "P_LINE_1",
+        "public_key": "3059301306072a8648ce3d020106082a8648ce3d03010703420004d526f0b6a275da93364bfc21773484aece830fe63edf80a99267ab8a65347bdf5c8e24b0a9f5d00306c884d8e7afa3eb3a46dfa5ca0a3ee4c190740fcabd3d0c",
+        "node_role": "PRODUCER",
+        "version": "1.0.0",
+        "created_at": "2026-11-12T17:59:29.006447+00:00"
+      },
+      "allowed_types": [
+        "CLASSICAL"
+      ]
+    },
+    "P_SUCCESS_1": {
+      "identity": {
+        "node_id": "P_SUCCESS_1",
+        "public_key": "3059301306072a8648ce3d020106082a8648ce3d030107034200043b5ef052d034451b4e1a9ec73207a84e1f9b66fc6079edbc557557cd100bede12b2ecf73a0bac4cfc74ee82ac148fb0108cb0a1fa034155d8b99ef3a947527da",
+        "node_role": "PRODUCER",
+        "version": "1.0.0",
+        "created_at": "2026-11-12T18:00:09.691972+00:00"
+      },
+      "allowed_types": [
+        "QUANTUM"
+      ]
+    },
+    "VAJRA-PROV-NODE-001": {
+      "identity": {
+        "node_id": "VAJRA-PROV-NODE-001",
+        "public_key": "3059301306072a8648ce3d020106082a8648ce3d030107034200049352a37bdaed2c7ec4eb5eb98b77d08eb199ec4c8d39848c1819de4271af4b6fb413775153ef8bce34aabd91af0dcd9078120c071887037ba17b963cd7d151ee",
+        "node_role": "PRODUCER",
+        "version": "1.0.0",
+        "created_at": "2026-11-12T18:01:29.070541+00:00"
+      },
+      "allowed_types": [
+        "QUANTUM"
+      ]
+    },
+    "VAJRA_PROV_04856f66": {
+      "identity": {
+        "node_id": "VAJRA_PROV_04856f66",
+        "public_key": "3059301306072a8648ce3d020106082a8648ce3d030107034200045210178a7089c6b5c7643dee75c604dad3e2365b80fea8f5eb4be4272d4d81eb88e7c6a8d23353530f09455d294bfbc90688d0a36ba7895eea17ec2a9e470231",
+        "node_role": "PRODUCER",
+        "version": "1.0.0",
+        "created_at": "2026-11-12T18:03:47.585425+00:00"
+      },
+      "allowed_types": [
+        "QUANTUM"
+      ]
+    },
+    "VAJRA_PROV_4bbb86ed": {
+      "identity": {
+        "node_id": "VAJRA_PROV_4bbb86ed",
+        "public_key": "3059301306072a8648ce3d020106082a8648ce3d030107034200049961ce83fda9ea48f6d087db6ccbc8236b9de7304ca6336711d61794fbdcb2ead60dff3feea4eadce39144903292b24ce7b05b56b59d33473dc59ce34c14aeb9",
+        "node_role": "PRODUCER",
+        "version": "1.0.0",
+        "created_at": "2026-11-12T18:04:20.401915+00:00"
+      },
+      "allowed_types": [
+        "QUANTUM"
+      ]
+    },
+    "VAJRA_PROV_b3b583ef": {
+      "identity": {
+        "node_id": "VAJRA_PROV_b3b583ef",
+        "public_key": "3059301306072a8648ce3d020106082a8648ce3d030107034200044a4b8abf4a197908ea08993f780a09fa0092e0f830ce8f6f0d00516e517bd349bf900a6e08133256c69477235ad661a04570d972fb80a54bf2ee309efcd75df6",
+        "node_role": "PRODUCER",
+        "version": "1.0.0",
+        "created_at": "2026-11-12T18:05:15.720157+00:00"
+      },
+      "allowed_types": [
+        "QUANTUM"
+      ]
+    },
+    "VAJRA_PROV_cc742ace": {
+      "identity": {
+        "node_id": "VAJRA_PROV_cc742ace",
+        "public_key": "3059301306072a8648ce3d020106082a8648ce3d030107034200045f02c3ac372ec6f7f821806b8756bca1e71cb6cad1bd0161ecf40573f74094c29954c92ac7a7957cf25083e1271c6a5518215642dec2dc3823a78f4b2042ee8f",
+        "node_role": "PRODUCER",
+        "version": "1.0.0",
+        "created_at": "2026-11-12T18:05:56.747270+00:00"
+      },
+      "allowed_types": [
+        "QUANTUM"
+      ]
+    },
+    "VAJRA_PROV_f4dba8a0": {
+      "identity": {
+        "node_id": "VAJRA_PROV_f4dba8a0",
+        "public_key": "3059301306072a8648ce3d020106082a8648ce3d03010703420004b909dec5185907b52dbfc171ca062efbebafcc30c4791a8cef67d8f2e62ce8c855a4c77450af41e2d715c74a4d2aa9687975ef998187138644062da953658165",
+        "node_role": "PRODUCER",
+        "version": "1.0.0",
+        "created_at": "2026-11-12T18:07:49.512981+00:00"
+      },
+      "allowed_types": [
+        "QUANTUM"
+      ]
     }
   },
   "revoked_keys": []
