@@ -23,6 +23,7 @@ def isolated_harness(monkeypatch, tmp_path):
     """Create a harness using isolated temp stores and disabled remote calls."""
     monkeypatch.setattr(config, "KESHAV_ENABLED", False)
     monkeypatch.setattr(config, "PRANA_ENABLED", False)
+    monkeypatch.setattr(config, "VAJRA_ENABLED", False)
 
     harness = TANTRAIntegrationHarness()
     # Isolate replay, trust, and ledger stores to tmp_path so tests never mutate repo state
