@@ -1,0 +1,33 @@
+{
+  "simulation_name": "BHQ_BioQuantum_Mycelium_Network_Transport",
+  "version": "1.0.0",
+  "seed": 42,
+  "node_count": 12,
+  "space_dimensions": {
+    "x_max_mm": 100.0,
+    "y_max_mm": 100.0
+  },
+  "transport_dynamics": {
+    "iterations": 120,
+    "dt": 0.1,
+    "decay_rate": 0.35,
+    "feedback_exponent": 1.2,
+    "min_conductivity_threshold": 0.05
+  },
+  "signaling_dynamics": {
+    "resting_potential_mv": -70.0,
+    "spike_peak_mv": 30.0,
+    "conduction_velocity_mm_per_s": 2.5,
+    "refractory_period_ms": 150.0,
+    "fitzhugh_nagumo": {
+      "a": 0.7,
+      "b": 0.8,
+      "c": 3.0,
+      "stimulus_current": 0.65
+    }
+  },
+  "fault_tolerance_test": {
+    "severance_fraction": 0.20,
+    "monte_carlo_runs": 20
+  }
+}

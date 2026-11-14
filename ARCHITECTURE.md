@@ -1,105 +1,151 @@
-# ARCHITECTURE.md
+# SOVEREIGN INFRASTRUCTURE ARCHITECTURE
+## BHQ Sovereign Quantum Computing, Photonic Systems & BioQuantum Research
+### Task ID: BHQ-INFRA-001 | Programme Baseline Specification
 
-> Phase 8 Trust Layer — TANTRA Ecosystem Production Integration
+**Programme Lead:** Ganesh Vishwakarma  
+**Platform Integration Lead:** Kanishk Singh  
+**Trust & Instrumentation Lead:** Pritesh Patra  
+**Runtime & Biological Simulation Lead:** Dhiraj & Candidate on Test Task  
+**Architecture Status:** CONCEPTUAL DESIGN AND SIMULATION  
+**Revision:** 2.0 (BHQ-INFRA-001 Sovereign Baseline)  
+**Date:** 2026-11-14  
 
 ---
 
-## 1. System Topology
+## 1. Executive Architectural Blueprint
 
-The Hybrid Quantum Communication Gateway (QCG) bridges probabilistic quantum output to deterministic classical execution contracts. It has been transformed from an isolated reference architecture into a **production-ready TANTRA ecosystem participant**.
-
-### 1.1 Web Server Integration Layer (`web_server.py`)
-QCG now exposes a lightweight, standard HTTP API serving as the primary attachment surface.
-- **`GET /health`** (and `/health/live`): Provides readiness status and operational metrics for InsightFlow.
-- **`GET /capabilities`**: Serves the deterministic Capability Manifest for ecosystem discovery.
-- **`POST /verify`**: The primary ingestion pipeline for BHIV contracts from Pravah/NICAI.
-
-### 1.2 Execution Pipeline (Integration Harness)
+The **BHQ Sovereign Quantum Computing and Networking Infrastructure** unites five foundational domains under the sovereign **BIQOS** operating philosophy:
+1. **DHARMA:** Sovereign purpose, constitutional governance, and scientific boundaries (Rule 1–10).
+2. **MANTRA:** High-level user applications, combinatorial optimization, and bio-inspired search workloads.
+3. **TANTRA:** Execution orchestration, deterministic contracts, permissions, and cryptographic replay verification.
+4. **YANTRA:** Physical simulation, photonic links, cryogenic instrumentation, and hardware abstraction.
+5. **VAJRA:** Cryptographic provenance, asymmetric identity (`NodeSigner`), tamper-evident ledgers (`EvidenceLedger`), and truth anchors.
 
 ```
-[External TANTRA Node]
-      |  (HTTP POST /verify with JSON contract)
-      v
-[web_server.py]
-      |
-      v
-[integration_harness.py]
-      |  (Continuous verification chain)
-      |
-      |-- 1. ReplayVerifierInterface (Duplicate/Stale Check)
-      |-- 2. TrustVerifierInterface (ECDSA Validation via KESHAV sync)
-      |-- 3. ExecutionValidatorInterface (Blind deterministic execution)
-      |-- 4. ConsensusVerifierInterface (3-node Byzantine quorum)
-      |
-      v
-[Structured Output]
-      |  (Trace Continuity and complete JSON verification proof)
-      v
-[External TANTRA Node]
++=============================================================================================================+
+|                                        BHQ SOVEREIGN SYSTEM TOPOLOGY                                        |
++=============================================================================================================+
+|                                                                                                             |
+|  [MANTRA: APPLICATION & COMPILATION]                                                                        |
+|  +-------------------------------------+   +------------------------------------+                           |
+|  | WS-A: Quantum Workload (QAOA/VQE)   |   | WS-B: Mycelial Transport Network   |                           |
+|  | - Qiskit Problem Compilation        |   | - Adaptive Conductance Flux Engine |                           |
+|  | - QUBO Matrix Ingestion             |   | - FitzHugh-Nagumo Action Potential |                           |
+|  +-------------------------------------+   +------------------------------------+                           |
+|                   |                                          |                                              |
+|                   v                                          v                                              |
+|  [TANTRA: ORCHESTRATION & REPLAY GOVERNANCE]                                                                |
+|  +-------------------------------------------------------------------------------------------------------+  |
+|  | `workload_router.py` (Workload Suitability Assessment & Fallback Chains)                              |  |
+|  | `execution_contract.py` (`ComputationExecutionContract` with `trace_id` and `payload_hash`)            |  |
+|  | `canonical_replay_authority.py` (Monotonic Sequence Numbers & Replay Interception)                     |  |
+|  +-------------------------------------------------------------------------------------------------------+  |
+|                   |                                          |                                              |
+|                   v                                          v                                              |
+|  [YANTRA: PHYSICAL SIMULATION & INSTRUMENTATION]                                                            |
+|  +-------------------------------------+   +------------------------------------+                           |
+|  | WS-C: Photonic & RF Transceiver     |   | WS-D: Mechatronics & Cryo-Readout  |                           |
+|  | - Superdense Coding (Qiskit Bell)   |   | - Transmon Dispersive Cavity Model |                           |
+|  | - SMF-28 Optical Fiber Link Budget  |   | - Friis Noise Cascade (T_sys=0.14K)|                           |
+|  | - Cryo-RF Attenuation (300K -> 10mK)|   | - Sub-100 ps White Rabbit Sync     |                           |
+|  +-------------------------------------+   +------------------------------------+                           |
+|                   |                                          |                                              |
+|                   +--------------------+---------------------+                                              |
+|                                        |                                                                    |
+|                                        v                                                                    |
+|  [VAJRA: CRYPTOGRAPHIC PROVENANCE & LEDGER]                                                                 |
+|  +-------------------------------------------------------------------------------------------------------+  |
+|  | `node_signer.py` (ECDSA NIST P-256 Asymmetric Keypair & Signatures)                                   |  |
+|  | `evidence_ledger.py` (Chained Block Ledger with Pairwise Merkle Inclusion Proofs)                     |  |
+|  | `web_server.py` (`POST /verify`, `POST /gc/validate`, `GET /evidence/certificate/{execution_id}`)       |  |
+|  +-------------------------------------------------------------------------------------------------------+  |
+|                                                                                                             |
++=============================================================================================================+
 ```
 
 ---
 
-## 2. Standardized Integration Interfaces
+## 2. Workstream Architectural Boundaries & Component Status
 
-To decouple business logic from ecosystem participation, all QCG capabilities are mapped behind versioned interfaces (see `integration_interfaces.py`):
-1. `CapabilityDiscoveryInterface`
-2. `HealthStatusInterface`
-3. `ReplayVerifierInterface`
-4. `TrustVerifierInterface`
-5. `ExecutionValidatorInterface`
-6. `ConsensusVerifierInterface`
+In compliance with Section 6 of the assignment, all architecture components are explicitly categorized:
 
----
-
-## 3. Component Responsibilities
-
-| Component | Owns | Does NOT Own |
-|-----------|------|--------------|
-| `CanonicalReplayAuthority` | Replay registration, duplicate/stale detection, lineage, persistence | Contract validation, execution logic |
-| `RuntimeCore` | Blind execution, ACK, runtime_hash | Producer type routing, governance policy, Replay state |
-| `ConsensusEngine` | Attestation verification, quorum math | Contract authorship, execution |
-| `TrustChain` | Chain-of-custody handoff signatures | Identity issuance |
-| `MerkleAuditTrail` | Tamper-evident append-only log, inclusion proofs | Log rotation, persistence |
-| `Operational Readiness API` | Exposing metrics, endpoints, payload validation | Internal state tracking |
-
----
-
-## 4. Ecosystem Attachment Surfaces
-
-The QCG integrates cleanly into the BHIV ecosystem without any product modification.
-
-| System | Attachment Point | Integration Protocol |
-|--------|-----------------|----------|
-| **NICAI** | `POST /verify` | HTTP REST (JSON) |
-| **InsightFlow** | `GET /health` / `GET /metrics` | HTTP REST (JSON) |
-| **Pravah** | `/verify` Response (`trace_continuity`) | Stream ingestion |
-| **KESHAV** | `ProducerVerificationLayer` | ECDSA Signature Verification |
-| **BHIV Core** | `GET /capabilities` | Capability Discovery |
-| **Evidence Ledger / MDU** | `GET /evidence/{hash}` | REST Merkle Exposer |
-| **Replay Authority** | `GET /replay/lineage/{trace_id}` | REST Lineage Resolver |
+| Component Identifier | Responsible Workstream | Architecture Role | Lifecycle Status | Backing Evidence / Test |
+|:---|:---:|:---|:---:|:---|
+| **`WS-A-RT-01`** | WS-A (Ganesh) | `AerSimulator` Local Circuit Execution | `SIMULATED AND TESTED` | `tests/test_hybrid_runtime.py` |
+| **`WS-A-RT-02`** | WS-A (Ganesh) | Workload Router & Result Normalization | `IMPLEMENTED AND TESTED` | `workload_router.py` (16/16 pass) |
+| **`WS-A-HW-01`** | WS-A (Ganesh) | Physical Superconducting QPU Access | `BLOCKED` (Defect `MQR-01`) | `ibmq_hardware_adapter.py` / MQR 401 |
+| **`WS-B-BIO-01`** | WS-B (Dhiraj/Cand.) | Adaptive Mycelium Transport Network | `SIMULATED AND TESTED` | `SIMULATION/mycelium_network_model.py` |
+| **`WS-B-BIO-02`** | WS-B (Dhiraj/Cand.) | Bio-Electrical Action Potential Model | `SIMULATED AND TESTED` | `tests/test_bioquantum_simulation.py` |
+| **`WS-B-LAB-01`** | WS-B (Dhiraj/Cand.) | In Vitro Fungal Microelectrode Array | `REQUIRES EXPERIMENTAL VALIDATION` | Wet-lab Faraday cage required |
+| **`WS-C-PHO-01`** | WS-C (Kanishk) | Remediated Superdense Coding Circuit | `SIMULATED AND TESTED` | `tests/test_photonics_rf_systems.py` |
+| **`WS-C-PHO-02`** | WS-C (Kanishk) | SMF-28 Optical Fiber Link Budget | `SIMULATED AND TESTED` | `evidence/03_KANISHK_OPTICAL_LINK_BUDGET.csv` |
+| **`WS-C-RF-01`** | WS-C (Kanishk) | Cryogenic 5-Stage Attenuation Ladder | `SIMULATED AND TESTED` | `evidence/03_KANISHK_CRYOGENIC_RF_PROFILE.json` |
+| **`WS-C-HAR-01`** | WS-C (Kanishk) | Ambient RF Energy Harvester | `REQUIRES EXPERIMENTAL VALIDATION` | Field power density $< -20\,\text{dBm}$ |
+| **`WS-D-INS-01`** | WS-D (Pritesh) | Cryogenic Dispersive Readout Chain | `SIMULATED AND TESTED` | `evidence/04_DHIRAJ_INSTRUMENTATION_SPEC.json` |
+| **`WS-D-INS-02`** | WS-D (Pritesh) | Sub-100 ps Precision Timing Model | `SIMULATED AND TESTED` | `evidence/validate_instrumentation.py` |
+| **`WS-D-CRY-01`** | WS-D (Pritesh) | Physical Dilution Refrigerator (10 mK) | `PROPOSED BUT UNIMPLEMENTED` | Hardware Procurement NOT Authorised |
+| **`WS-D-PRV-01`** | WS-D (Pritesh) | ECDSA P-256 Asymmetric NodeSigner | `IMPLEMENTED AND TESTED` | `tests/test_qcg_provenance.py` (100% pass) |
+| **`WS-D-PRV-02`** | WS-D (Pritesh) | Canonical Replay Authority | `IMPLEMENTED AND TESTED` | `canonical_replay_authority.py` |
+| **`WS-D-PRV-03`** | WS-D (Pritesh) | Evidence Ledger & Merkle Proofs | `IMPLEMENTED AND TESTED` | `evidence/02_PRITESH_PROVENANCE_TEST.json` |
+| **`WS-EXT-VAJRA`** | Cross-Cutting | VAJRA Truth Substrate (`/api/health`) | `IMPLEMENTED AND TESTED` / `EXT_ACCESS` | `tests/test_vajra_integration.py` |
 
 ---
 
-## 5. Integration Boundaries & Remaining Known Unknowns
+## 3. Subsystem Interface Contracts
 
-As part of the shift to a live Ecosystem Participant, QCG now operates with clear trust boundaries. However, prior to a final staging launch, the following items must be resolved:
+### 3.1 Workstream A <-> TANTRA Contract
+Workloads entering TANTRA must conform to the canonical JSON execution contract schema:
+```json
+{
+  "contract_version": "2.0.0",
+  "trace_id": "4fe8692c-15a0-569e-8c01-7fa29df34211",
+  "producer_type": "QUANTUM",
+  "producer_id": "WS_A_ALGORITHM_ENGINE",
+  "payload": {
+    "algorithm": "QAOA",
+    "qubits": 6,
+    "shots": 2048,
+    "hamiltonian": "..."
+  },
+  "payload_hash": "SHA-256(canonical_payload_json)",
+  "execution_classification": "QUANTUM_SIMULATED",
+  "execution_path": "SIMULATOR"
+}
+```
 
-1. **Dhiraj Runtime Network Address:** The executable adapter `DhirajRuntimeClient` currently points to `http://dhiraj-runtime.bhiv.local/api/v1/execute`. The exact production FQDN must be supplied via Env Vars.
-2. **KESHAV Provider Auth Key:** To support authenticated routing (e.g., GC paths validating tokens), the `VALID_GC_TOKEN` is used as a bypass. In production, real RSA/ECDSA public keys must be synced.
-3. **Persistent Ledger Path:** The `EvidenceLedger` is transient per-process memory right now. Block store / LevelDB binding must be verified.
-4. **Adversarial Resiliency (Consensus):** Byzantine consensus is still simulated because there are no adjacent real-world TANTRA nodes yet deployed around QCG to test live quorum.
+### 3.2 Workstream C <-> TANTRA Optical Coordination Contract
+Classical control and quantum state distribution across photonic channels declare:
+```json
+{
+  "protocol": "SUPERDENSE_CODING",
+  "quantum_channel": "SMF_28_OPTICAL_FIBER",
+  "distance_km": 50.0,
+  "optical_attenuation_db": 10.0,
+  "qber_estimated": 0.000006,
+  "shots": 256,
+  "message_vector": "11"
+}
+```
+
+### 3.3 Workstream D <-> VAJRA Provenance & Evidence Contract
+Every physical measurement or simulation output is signed asymmetrically:
+```json
+{
+  "execution_id": "8c249f3d-596e-433f-af2c-77de1e4a385c",
+  "leaf_hash": "d94563284fa4b045e05459f491c...",
+  "merkle_root": "5dada300b656d330ccf1c41362adf34bab19f8cab7d12a0c6e74c0fa67f518e0",
+  "node_public_key": "3059301306072a8648ce3d020106082a8648ce3d03010703420004...",
+  "node_signature": "3045022100e4785b88...",
+  "chain_sequence_number": 42
+}
+```
 
 ---
 
-## 5. Trace Continuity & Provenance
+## 4. Hardware Independence & Authority Constraints
 
-When an artifact is passed to QCG, it undergoes a fully traceable lifecycle:
-1. `sequence_number` is generated by Replay Registry.
-2. `runtime_hash` is created from execution parameters.
-3. `final_hash` is reached via Byzantine consensus.
-These elements are propagated end-to-end and returned collectively to the caller, guaranteeing true execution lineage.
-
-
-## Network Transport & Resilience
-QCG relies on an agnostic transport mechanism (TCP/UDS) enforced by 	ransport.py, integrating Circuit Breakers and Exponential Backoff. Service discovery dynamically routes runtime components through the Capability Registry, and all health and telemetry are propagated natively.
+In strict enforcement of the **Authority Boundaries**:
+1. **No Hardware Procurement:** Hardware procurement is **NOT AUTHORISED**. All models operate in verified numerical and behavioral simulation until engineering requirements justify physical procurement.
+2. **Replay Proves History, Not Legitimacy:** A recorded trace in `CanonicalReplayAuthority` proves that an operation occurred deterministically; it does not authorize state changes without `NodeSigner` signature verification and policy validation.
+3. **Application Security Proof Doctrine:** Blockchain or ledger presence alone is not application security proof. Every commitment is backed by application-level mathematical and cryptographic verification.
+4. **Simulator Separation:** `AerSimulator` runs are strictly classified as `QUANTUM_SIMULATED`. No claims of physical quantum execution are permitted without authenticated physical QPU evidence.

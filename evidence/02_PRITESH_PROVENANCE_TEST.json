@@ -3,13 +3,13 @@
   "subsystem": "bhiv-QCG Cryptographic Provenance Engine",
   "owner": "Pritesh Patra (Lead Instrumentation Engineer & Cryptographic Provenance Architect)",
   "remediates_blocker": "BLK-QCG-003",
-  "executed_at": "2026-11-04T17:48:24.233041+00:00",
+  "executed_at": "2026-11-14T12:36:22.130636+00:00",
   "total_jobs_tested": 100,
   "tamper_test_index": 42,
   "node_identity": {
     "node_id": "BHQ_QPU_INSTRUMENTATION_NODE_01",
-    "public_key_hex": "3059301306072a8648ce3d020106082a8648ce3d03010703420004b0360f1bf8c2a268d2694413e57ee6588bd9b8e37a78ba72cc9272017b210f24bf383ade99f4b4f40037efafbfdf5565ca5dfc9cd902ba5729b6bf313cc76ce0",
-    "public_key_pem": "-----BEGIN PUBLIC KEY-----\nMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEsDYPG/jComjSaUQT5X7mWIvZuON6\neLpyzJJyAXshDyS/ODremfS09AA376+/31Vlyl38nNkCulcptr8xPMds4A==\n-----END PUBLIC KEY-----\n",
+    "public_key_hex": "3059301306072a8648ce3d020106082a8648ce3d03010703420004c3cd07101ed7713fbf2d6c63c4d0f7e61f89fbd2a0053d37b16f9e043dde2357c64ea4edf9a3f7e6e865510f58f456a65111c9295432ed578f56a0123018be93",
+    "public_key_pem": "-----BEGIN PUBLIC KEY-----\nMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEw80HEB7XcT+/LWxjxND35h+J+9Kg\nBT03sW+eBD3eI1fGTqTt+aP35uhlUQ9Y9FamURHJKVQy7VePVqASMBi+kw==\n-----END PUBLIC KEY-----\n",
     "curve": "secp256r1 (ECDSA P-256)"
   },
   "batch_signing_summary": {
@@ -54,7 +54,7 @@
       "job_id": "BHQ-JOB-2026-QPU-0001",
       "trace_id": "8e992d74-4ce2-558d-ac7c-ae0ce4140edc",
       "signed_hash": "1cf96085410a334b27310249e7491f3f5e58b55a2624e2e57cb8d8b311f09701",
-      "signature_der_hex": "3046022100b6931cd1bac82d837caa1c20ba2737d9808c416a9bbb0c8a0606f261072c558f0221009250ab4ed9cab7025b7dd5ce58397fc3f9dd3a2a4247be9832fea5499545f27f",
+      "signature_der_hex": "3045022100ad15f59d7b65dcdb5034763484f17a1e192ed91c0a7f652427429d5a6fd32a08022051fc06140baeb2e1354b55d0b0db46f34ccee300f92943402edfad05d92fcb68",
       "verified": true,
       "chain_head": "85917573308f8c04e8573829608942712a702c4dd2e44ee7d8a684cc6bae07ce",
       "payload": {
@@ -76,7 +76,7 @@
       "job_id": "BHQ-JOB-2026-QPU-0002",
       "trace_id": "07318cdc-11e3-53b2-a925-e5b2a5068457",
       "signed_hash": "b02c0ec86c4a7d8c0baa94b4a919faeb53251ca73129c55c07bdd420e566110c",
-      "signature_der_hex": "3044022024695bf0fb9d22044099976cf39f74d5af69dcd1f883fa5dac647f49a3b448920220110a48a0c1e2d8596621d139f941bcfa5466bba94e459e0c1acd42cb16d0873d",
+      "signature_der_hex": "304402207e4a2b38e7e0e74c6a116f93a6aa99f779919e3c99f680e194792a8a15416a0402201a31cc793614829f5c4fe7ab39169385320433d9bf6ffbbf4db1e62ed6a37dd9",
       "verified": true,
       "chain_head": "f5374bc372cf5926fd3c94eee18f2e3ffd6d3a8d99e457c7604b2f7f50632e57",
       "payload": {
@@ -98,7 +98,7 @@
       "job_id": "BHQ-JOB-2026-QPU-0003",
       "trace_id": "cd86e075-5061-55bd-8a70-04c7ba933130",
       "signed_hash": "6d2970c5dbe21cd6b5acfe722ffb18ebd73525edef8572a6b1c1539b12625a1a",
-      "signature_der_hex": "304402204f882e370c27cd261734953b81f4278d5621761c3af98c577683aeab1062ddf302204367c18aff0caae5c5e48a773c2badb5985dd77506e7f0b4233598d6c6515281",
+      "signature_der_hex": "304502203ebcca97c1590552e60427615c042c65df28b02369928d0fcd1251ab09758321022100cf7977bbe890feaac8ecf1b99e2521f56d57cca7a85fe2ac3ae66f591673a469",
       "verified": true,
       "chain_head": "b5619ebd670b5d4ae7b7413541f6545126ecd5e31a42aaccc403641e469b09f3",
       "payload": {
@@ -120,7 +120,7 @@
       "job_id": "BHQ-JOB-2026-QPU-0004",
       "trace_id": "781e5462-a962-5697-acc8-b560f6225d65",
       "signed_hash": "50bb88cbc91d08e0ca2fe6511706065e708be5927da7cfd0f68c1214a44ffcdb",
-      "signature_der_hex": "3046022100ae585848b294c65a00abef561c8201a6d5dcadc0191203bb02faa5e76930cdfb022100c65fd8d08598c2fbae75ca74ef44f0ec79bfb6984de248db12bfc9a89568c64f",
+      "signature_der_hex": "30450221008a72b2e929f92fd443b5e6570317575e6b472a5ed1903a3e35f166817b2a97e102203c2b603daf13f6c76d9d96845484bda237981c5a05eceb17a316c75a9bf051f9",
       "verified": true,
       "chain_head": "35c0a6ffb9108b3e6e2aeabfb98c282cf2eb14f5a25b1c4169f81fafd3ed0c70",
       "payload": {
@@ -142,7 +142,7 @@
       "job_id": "BHQ-JOB-2026-QPU-0005",
       "trace_id": "9b7cb40a-0be1-5d20-80cb-3e258fcc8c6e",
       "signed_hash": "16fc00f4af7a29754cef1d55955a3a8cfa0a8e644ee2edda2083fe1f384b1d5b",
-      "signature_der_hex": "304402203ecbca85d932814a0dbfede0cb51ef384958de3b823d71a68e76a69ccf56962802207b3b802a11823825e7756e5a2eac654bde5dd47bd0aa923e05992a0a3ad6a87e",
+      "signature_der_hex": "304502202fbc44136acc92425c4dd14f02fa3902b8bd979a505ffe3bd9e9a2c988d36ad2022100a21d969e05d92157e61e8d6317338db72dbb04677b163052592f8531c7177378",
       "verified": true,
       "chain_head": "213a4302bcdba94e046654f3ea82cde8ea767646243b211c7084a3fe03189cb0",
       "payload": {
@@ -164,7 +164,7 @@
       "job_id": "BHQ-JOB-2026-QPU-0006",
       "trace_id": "3ae51c29-ae16-589f-ada1-27add7402644",
       "signed_hash": "88d59c11944acd23256bd3fca91582fd884291c34e790f5b91a9866f50f0628c",
-      "signature_der_hex": "3045022100d3a6dea4a7676334f72d3a4570b402dda1081d648635e83eaae283c72f7b7d66022011842353b8aed31fc6faad7fb1ef208a30cbc87a8ae5e3640e70c20dbaa6ff37",
+      "signature_der_hex": "3046022100d8d068b4f76b20e5867c6d1c810d046ee88a08554973cfc9a91f6108aac1396c022100dc92626ad6468735fc787b45a97f6c7e54063035b3fde1a960a622071285c6c0",
       "verified": true,
       "chain_head": "c05880a203f04a3dac41a21c18aaaf6e4026f1133ce27c133b93675f97cf1f1f",
       "payload": {
@@ -186,7 +186,7 @@
       "job_id": "BHQ-JOB-2026-QPU-0007",
       "trace_id": "900077da-207f-54e9-9653-f2c977266829",
       "signed_hash": "dbfe899e25ea6211550d1b8ccd0beccb5f478f0b8a2300f7d103fa15ec0946a7",
-      "signature_der_hex": "3045022100af0c0992d7ed20761603173d982d2e1015ee974ecce48d9b51f189ba7e8d17a80220442fbe2e01e2314ae31409ee4417e5b20cd2766e01e650063c244b2175c7a309",
+      "signature_der_hex": "3045022100d12bd426f85e2bb73b8b644f19c0547276c593c8ddc34b1c25b513f17630ea6102202e3e9f98a5fb82271d822b101025cd684d855cad40173421570ebe0f30c58761",
       "verified": true,
       "chain_head": "35377469dd6076dff9452d91259b82636da2255115236ad81ad98fd871220fd0",
       "payload": {
@@ -208,7 +208,7 @@
       "job_id": "BHQ-JOB-2026-QPU-0008",
       "trace_id": "92aa7195-f916-5c59-b647-040046721a82",
       "signed_hash": "4119a1ce3f886f20c4ef0478e7562a21d3306f751baa0370442b368dc710e267",
-      "signature_der_hex": "304402204693b9edc7511678e4b6f4fc6a7d9357fab313650a69fcb9d1c167fb6be16275022011b20a5a216ff5d74108ec7af6d99fa78878a9a1a8c129554c497fece3d13fe6",
+      "signature_der_hex": "30440220113b4232f39cede6d4f8a31a8f86b727209410ad37aa1e713558b0a5f7a254dc0220456d89d6240993f3fe086808dd553b576ef898d507920148ba773fddebdf5f41",
       "verified": true,
       "chain_head": "a9e91c591ba84a2a8ec865c61f51ec704da97761609758da1363b5f402b5ba49",
       "payload": {
@@ -230,7 +230,7 @@
       "job_id": "BHQ-JOB-2026-QPU-0009",
       "trace_id": "fb4b45a9-88d6-5f5b-b5b3-5b79ae6438be",
       "signed_hash": "d6a8dc1be12fa5ad7e9b974f07a53baea8decc6af54f58716b15d1d89688e800",
-      "signature_der_hex": "3045022100fb8fa9b6789df808ed2c46bcc6c89f82e54e443bede21a2020362f74d1dd4a2b0220183223922140f122c1e3678792bf975b11e15dd37df055fea931952ff75bc8ab",
+      "signature_der_hex": "3045022100cb78aacd2490d60414643173339f7e33fcdad6568497ff4843216a204572fc1002200cf36da8bc1da7a5c3343893978d511d65a54bfadc92c6659ea3726824dba832",
       "verified": true,
       "chain_head": "18b69d0a74ce33e081efb91db13aaa37434ed87c281fd10d1e8d5b2cc325c651",
       "payload": {
@@ -252,7 +252,7 @@
       "job_id": "BHQ-JOB-2026-QPU-0010",
       "trace_id": "c75ac008-3ef9-515b-8dc2-97712c138817",
       "signed_hash": "c0a069d93b6aab1c58a7d66e94601238d092472249ebed2b05de4f926ed40f1c",
-      "signature_der_hex": "3044022042b640b701bf9dc42807ea42907b01e9ddba6b33e4c1275064562944931a32bf02200b2a655d608a16da05328689a38096e98a1509e90e416238684d89a1e3e5f5e9",
+      "signature_der_hex": "3045022100a941146ec7a05247cf938a5095bf5633f9f8450bd5f3c4dd603a7d0f0d3fa03b022066365e245f30c4d77a943ef43ab0662893ceeb19a51f9b053cb0d33f4d906f4d",
       "verified": true,
       "chain_head": "cd2ca73d2eac11bddaad36f30344ccab17efd1e17d43e240d2ee529e90090c96",
       "payload": {
@@ -274,7 +274,7 @@
       "job_id": "BHQ-JOB-2026-QPU-0011",
       "trace_id": "1ac542d0-2bd2-5fed-aed0-a104a1fad4e8",
       "signed_hash": "67cdcf74b7bf7a601edd80f90f2585c6b93a3d9d2eae93d2410231e82e2cc9ee",
-      "signature_der_hex": "30440220329e4aeb2ffb62ee06e40f2759e4a7dd6d1ea846de7aff73bbf17aefac4fb6f402206f753d36bd2f57619ea706c64de05fc3fbfd19a39a2ac6249cda6a805ac59422",
+      "signature_der_hex": "3046022100d811dbcf6b8b5da7a60369c3e6fb3cfcedee5ede7f4beb37d4dce3c960be0fe2022100cbc405f6df790ba2b7c7d68de0885867b4de0319e6b888991cd0ac567f4be590",
       "verified": true,
       "chain_head": "297698075fea08878f4e7965945e3f8f476664c88902dc15a11b56d96d806a5f",
       "payload": {
@@ -296,7 +296,7 @@
       "job_id": "BHQ-JOB-2026-QPU-0012",
       "trace_id": "4bb83da0-1340-56de-a4d3-0e5ec155d02e",
       "signed_hash": "a737a69bebee029d76b0fbff1036cb3831a5db4489ae05e13579d630e96ff7c6",
-      "signature_der_hex": "304402201ea0f5b2b7a6107bab44a53e501f4789365e23c9943d7490878e075c444ab1e102201e5ee1379ed3caae6aa44345b2d0c8551f7dc32dd603af806fd581fb1987142d",
+      "signature_der_hex": "3045022100b392c2a27642a73a5b866e827cca7dddfc2eb6d3280ba585681e6fb5d693fb2f0220418e3a948a2844a39dcb065c2aee96fd64e4d006537c978aefd988fcb467d3c8",
       "verified": true,
       "chain_head": "b9ca5c0d6985705bc78d43860ac8a89b9aadc46b581a3dfe50583fc633403023",
       "payload": {
@@ -318,7 +318,7 @@
       "job_id": "BHQ-JOB-2026-QPU-0013",
       "trace_id": "3138e4c3-64a2-5d98-a33f-18b0ee988aed",
       "signed_hash": "f74a738bd8fa25be44b003b26ab393d25604f72dd71120ea0b4efab57b566c94",
-      "signature_der_hex": "304502210087b75560eaf7623f18089a782e0b4419c9a8161604567ac7f2c2d2eedfbed2160220638bd28fbd94a3e817bd01edc1bd47abc83174cd852ef53d3df0ba534db8b356",
+      "signature_der_hex": "3045022100ec214c269bfdbfd8a01e011db919ef64db8bb2d72b71b2f70ec91e6ff8780be002200c261138a36442f0914375b60a7495386b7e277bc38b4ddf4dfc6249d20efdf7",
       "verified": true,
       "chain_head": "2924b3093f386dd0a408d1e08db54b9d40d754140f28b9978301e5d324d54c32",
       "payload": {
@@ -340,7 +340,7 @@
       "job_id": "BHQ-JOB-2026-QPU-0014",
       "trace_id": "9c29f178-df8f-5d10-8264-8eea12269d32",
       "signed_hash": "f8ff04aaa2788e6dec5d619a2e9f71db61d7b06de1cbe10f53ee88e24ffb0a0e",
-      "signature_der_hex": "304502210093416de1756ab668ac10bcfd086f8a54d9eb8ceec89f852b72d6b8b1f252c8390220222a3a0d034d9654e787c6296d2b8297107e89f91294d87e52ca32cad13fd5bb",
+      "signature_der_hex": "304502210093e74c2a52eb1aa0970e6cc61c1a50e022751259be65aa9ee29595eb9b391d4402206201c14b317fa3354904c41297b62c61931a86cf5ea75eb7a11048253a900f40",
       "verified": true,
       "chain_head": "3e616416981489708b35e88f99c913521a739c7def98f9b4bea12e1670c59885",
       "payload": {
@@ -362,7 +362,7 @@
       "job_id": "BHQ-JOB-2026-QPU-0015",
       "trace_id": "6a1fb5fd-3169-502f-862b-8a583312afdf",
       "signed_hash": "82daaa38bd24bb5ed216bd0ea89441b9d80d81dbd0ac8edaba5a3596b3caba66",
-      "signature_der_hex": "304502210088855d65d0c5404a36e3d11bd6202cda7cc15621c5d529d0969e207ed5cd515902207653976020c9f66adf2452f62d5e78eec2bf7cf58695e32d44857f11065038b4",
+      "signature_der_hex": "304402206e0e2ab1808a759380d86f61558fcae48d66f0b27478e302dc91f66ff4cab60e02202acc2bcb33fb3c3d605b701e8b2f35e1e2eb0214a82ba8dea5d7314b282f868d",
       "verified": true,
       "chain_head": "293b8a4a997a14d8a8ed8578daade20044c33d19b8989414a60789808aee3955",
       "payload": {
@@ -384,7 +384,7 @@
       "job_id": "BHQ-JOB-2026-QPU-0016",
       "trace_id": "70f043ad-0176-55ff-b079-a4438c9083bd",
       "signed_hash": "d919684be00c7df49903f00e8f885e59a38c22e395c6369884fa70b3aebdd59f",
-      "signature_der_hex": "304502201a517f9d20f9548d25184ff3088db495abd5e052fbad2bbbc8101a1549067ddc0221008cad6e5f1b42304e8fddd33ec72e6d15d861004b1169c6ce43e7c8d7f9a589c8",
+      "signature_der_hex": "304402204cc2415783d2e4cce6868fa381e67411fdc8d5237fd15de117d354436dfa07ee02203a203b69ed884e320ae966e1f4e75ac9b2435cd63f2c740c57a2388f59bdcbbe",
       "verified": true,
       "chain_head": "55d4f7803cbf215de2624ec655fed262daf33809af70592b8645bc928329b459",
       "payload": {
@@ -406,7 +406,7 @@
       "job_id": "BHQ-JOB-2026-QPU-0017",
       "trace_id": "0f568e5f-81f0-5774-98ec-7e41a5bd45cf",
       "signed_hash": "0da316bc3f258205dc7896aabc5f12a9a7a0baf5064079ca7d2cd57922348fc6",
-      "signature_der_hex": "3046022100ee89b0872a727e74b614e21683f8286c6ca8f4106cfa96bc99ba52c239fadfd3022100db34a6d2772e15e55e9a570bc58f2a9f6f41c7d8f2b194600f2a1cd0ec3a5803",
+      "signature_der_hex": "3046022100edc8d4ff823b61c771d66648ef418dea07d13c212f2f19ff019ca065adbe211a022100ec60b0c1beb86067394809ad07e2096745c5554d6a4a1af63a13332138463362",
       "verified": true,
       "chain_head": "1780c2bfca1469332474f7cdf201845c9dadbf3dc0ec2e52476bc6d81d6e3f6a",
       "payload": {
@@ -428,7 +428,7 @@
       "job_id": "BHQ-JOB-2026-QPU-0018",
       "trace_id": "df553191-871f-53c0-a1fa-e07125a5a23c",
       "signed_hash": "b6bcf1ce543067125b1b1b7a13c5087d80a1f903c53622638dc313cc9ec67142",
-      "signature_der_hex": "3046022100fe4a7224ff28110a61b791961cb29f2ad3fa67510242312b29a2e3a0ef70de34022100f31e6f185b4908ea2c6adc3574fd89ab84b8a61db87ef517f2b38ec2d7d70184",
+      "signature_der_hex": "3046022100fb8754a706342477c97bcfa8fc814118669cc4594bde5b8c2689c9c0e0241134022100ac9c9639b11856e49eba2ffa632394924dd79c7719e94010712ce09a82b4c990",
       "verified": true,
       "chain_head": "a2c55bfc1d43fb57473277cc1729dc07e1db4b7b7c7e572d4b98c9256c2fa93b",
       "payload": {
@@ -450,7 +450,7 @@
       "job_id": "BHQ-JOB-2026-QPU-0019",
       "trace_id": "636b3319-6b11-5589-a455-215a89583956",
       "signed_hash": "86424e658f5fcfe45df6c7f223b4d34020fadae67d15e389e5136417625734e6",
-      "signature_der_hex": "30450221009b1fa1ee25150e9d86b37d487fefcafc44a2b46cb7f09350cbd70a85d2aa580e022039664222086274dcd44a13d80f0074ff088cef1c8e63f4e6ef9aed07e1c0191d",
+      "signature_der_hex": "30450220420124cd259abea7b93a511d81267a79936921fe1123c5395b11af3fa1c9db88022100a6d98aebff2c48a9bf43f5e5c84ac71ca62efb32f797b1c2d01246bdba4e43fb",
       "verified": true,
       "chain_head": "43f0f7140cd3869b8154ae14e43836082913fb174195d9b97a94c6adaa6e4b6f",
       "payload": {
@@ -472,7 +472,7 @@
       "job_id": "BHQ-JOB-2026-QPU-0020",
       "trace_id": "7f424e54-a0a1-5c59-b713-42b0dc5b4551",
       "signed_hash": "56be750da1710110b8548173f93ffe865c40fcc8f6330afdf3349148de8c4007",
-      "signature_der_hex": "3046022100a41c39b858a751339b0523a4012301c14e51ed34e1c0934b693b5c5aa40df89e022100f8a78022f6eef87de0d1cbfa7097a325f4cb298f2ce66ca0a99e102424a4d682",
+      "signature_der_hex": "3045022100b341a008085da0201a3577549b65b1cf19c5cffe72821cdc01b9eb995958fd2c022066f5660f9421c8eea2bacdba6562d767b6cb98be1a22b4911ca8a0213c4827d0",
       "verified": true,
       "chain_head": "de4bf7e9c914eeecb4acb7759d531c06e7e32b7528f9ddf3626ffca6ee3d9d9e",
       "payload": {
@@ -494,7 +494,7 @@
       "job_id": "BHQ-JOB-2026-QPU-0021",
       "trace_id": "124064c8-6e1b-54ea-ae58-82e91100e49e",
       "signed_hash": "2ad7487ffb066b897a4da05a09a277a35f2156cadb79de82bd03263f0c613151",
-      "signature_der_hex": "3045022100b9b5f193e21732ae1ba1ba67b511fe860813423eb8ef7841c513d191b73900310220081107942a4f02012fccb282666d25c335fe0319cee8074faa22887d64408c7e",
+      "signature_der_hex": "304502201b2e38afcade3f787dfc40fa10e32f9a23d07c193b14bf78045e58e7aad69e2e022100f1474b35e13bfb04bdf88aec092b05dc7d9c9a4d0944ea6a046b3361b6b0cc1a",
       "verified": true,
       "chain_head": "b56c96a4b95884ce74374c6e994b86dfcd1dd2144765e540e2876cf8bf31782e",
       "payload": {
@@ -516,7 +516,7 @@
       "job_id": "BHQ-JOB-2026-QPU-0022",
       "trace_id": "d391f54a-86aa-51d9-b992-ee57194b3ca7",
       "signed_hash": "b6f56280b23ecb5af3ce8f36930e6ad0e838ce6e86d6a9fb1e148ce2dfe1e03d",
-      "signature_der_hex": "3045022100ddc5b6bab32947d8c73ca012c7c9b41ee218bf8a7e67e3eba5738e60a65fca8b02206a125fe756b7a6970cbbc7a2d860cd49515eed9d4e2563a688124ac541c19dbb",
+      "signature_der_hex": "3046022100f03a57b0d102c34c66bc51d53a1378041149fa6b9a0682295bdfee257fc64996022100885b9a870ee7febc726d253de03a069456a6f69ba2f4d4649404622976784dd6",
       "verified": true,
       "chain_head": "01e981a39e0a82dd65446ccd30afc2ae7963f122fd5336f61589d15707b01bdf",
       "payload": {
@@ -538,7 +538,7 @@
       "job_id": "BHQ-JOB-2026-QPU-0023",
       "trace_id": "1b2668f8-604c-54b9-9363-9cfcf58428bb",
       "signed_hash": "9aa24e2ce9ea729eeaeb537283048eabd9def7dbdfe8c790fe79a15062ece620",
-      "signature_der_hex": "30440220611b0c98293d12f37bc8a7e61d09282d7549da2dc6c05ed16f573656cb9cbdb8022063f15becf3e72e76b4cada4f62957b6371850653573c394b9453f1abb0d20140",
+      "signature_der_hex": "3045022100cdf2e8e73b0332af4c8c1b7735ae0d45334e8d8639bd230de64b4a0fce325adb02206aa12e257a31590ebe67e438f53babcacd4556e0f47020d901b03c71da43c480",
       "verified": true,
       "chain_head": "faabfee33b3a6c2ed6bdcc4cf549e2181e2918a24b92216a259eb437d6adfac9",
       "payload": {
@@ -560,7 +560,7 @@
       "job_id": "BHQ-JOB-2026-QPU-0024",
       "trace_id": "8bfa1fbe-9e2c-5eb7-8681-6fffc5ce072f",
       "signed_hash": "8d3c2fe3cb9329f2ee5ebb5c39d390b66393923b703861948706203276377d07",
-      "signature_der_hex": "304502204c59c8c1b738861945d115cf21a3e05ac303d566033a1855b08d21f649c5b7d8022100e59e55d73eb0f1dc5f87375ba512311b2c2c44456c4a5bf84f5f2116d5911905",
+      "signature_der_hex": "304402206b7550fb6cec8f4b232d0940224a9359c00fd0ec9eeb25b5231a25617a4a20b002205885da0fac07c7ec353c04d2ddcfd2854c3e944304b259cd290a1ef0be7d939e",
       "verified": true,
       "chain_head": "56977fe4d41545f4672ac7c917d096b640554e969917828b644a59ccb12a8db6",
       "payload": {
@@ -582,7 +582,7 @@
       "job_id": "BHQ-JOB-2026-QPU-0025",
       "trace_id": "05b8b524-b6f5-534f-af2c-9f8cb56a96d8",
       "signed_hash": "6405bcd746c3b8e88aca1aa379694567cd9c5ad2b319584de372496876e14ba5",
-      "signature_der_hex": "3045022100c7ab0188443cae591eea440ea1c31f247b68d4cac7fb1bd458f2630e738b459a0220432f5e2ab4cafee2df6c0c2f8df5068d72f58b1d5f11a2182b1da8015cb2e2ec",
+      "signature_der_hex": "304602210091db7457cb57f340d21cea023ab3949dc4f59d6e4159d58ee898728810186506022100d17b03e3ef0ca97f46b62d93dd7052100cf614cc9d5fecc5cb80c82e1d8abaaf",
       "verified": true,
       "chain_head": "9efc472270f20002fc8feae33a8e064dbb90d1d2e2a7e6873b93d4635c732d53",
       "payload": {
@@ -604,7 +604,7 @@
       "job_id": "BHQ-JOB-2026-QPU-0026",
       "trace_id": "7bd5fd7e-b459-5f41-8bde-31796cb72677",
       "signed_hash": "cb39888a4c0546b32a48508d6a9f93c5cefa469f45eb957c76e94bc7c2d066f0",
-      "signature_der_hex": "3045022100e3e92a4936435cc8b3c1cd18e06e2f48ddc8bd935bbfd30c3e7edb5e6d50ae4402202affad99cff835f320b320b6d5fc8c4d1b7f1362328f7564ac2777eac2e4ed7d",
+      "signature_der_hex": "3045022100a73a0cee329436c676b213823cbb18036dc202df8df634623a2787702a6632bc02203d03ae27c0c6a50bc63300cba3073e3abda2039dc75724ad48f983840de13745",
       "verified": true,
       "chain_head": "e0a63f3cadf29fead94df2da27767b15933186122bde0bf9dbd3f288e3416c58",
       "payload": {
@@ -626,7 +626,7 @@
       "job_id": "BHQ-JOB-2026-QPU-0027",
       "trace_id": "b8f6e0ef-a392-55f1-8a9e-bbb96695b310",
       "signed_hash": "6199e473f9adf57a4dbcb3f64284d3c397750c89565d580532465054604c0c92",
-      "signature_der_hex": "3045022100984d5772ecaa064aad05cc229a9097bd38ff437532f7e5b044b2cd794d200aaa0220639898592e5d2f130f9b6e032f4cdfed839073ace01fa32400b9308f979deef8",
+      "signature_der_hex": "3045022100a59a431d562ffa37ce4b5f0d6dc08ed15ffc308dcb19055064df604dee27be290220265fa927ee4fe81ab5325f1f114598c36480853ee5d12f250897dcb4cfd52a81",
       "verified": true,
       "chain_head": "ac858cbb8003338afb6813f67a22934b741ae4abe9b08c440940f679535651c2",
       "payload": {
@@ -648,7 +648,7 @@
       "job_id": "BHQ-JOB-2026-QPU-0028",
       "trace_id": "fb0ab83a-2d15-558a-ba1c-ca0f75823a90",
       "signed_hash": "887f6bb7c1a0a6d78d9f6c5c5922100645693d21f061649e433f89855186f832",
-      "signature_der_hex": "3046022100f14e4ab8a4095a6efe3b84c6effe48160c93074c5f6dee31604085cb098c8a3a02210084c5edc735c0b0befac50690908a15844d9ba79c6fa0bf70abc45ea8a4c4499c",
+      "signature_der_hex": "3044022069723990db79bef967a49e27072d2b849af5f880f0b90d75c50fc30e5ff8038c02200846941db82d5b65bf23f53903ab9e14f09fd0efefa798688eb71545b9024ba7",
       "verified": true,
       "chain_head": "c3eeb3e8b5a881875f417eb1bf4f4c0ed0bb23f86e25202a77549056f4bada2a",
       "payload": {
@@ -670,7 +670,7 @@
       "job_id": "BHQ-JOB-2026-QPU-0029",
       "trace_id": "c4f9e2f6-e32d-5045-95c7-3f793362db07",
       "signed_hash": "bc36b0a446e3f8e8e87abce92ce3df098d37a10f84f8b3569ad5132a3f43ed39",
-      "signature_der_hex": "3046022100d97770dddb9ba43202a53b95c6935297f860298b97fc5e2dabdc543cdb251d7d022100f6ad22b665ff1309fc9b4be81f29f264e668e725dd1721fade9d49d188435064",
+      "signature_der_hex": "304402205cda40e7f0ed0d8d3fbaedb09355a9280743112d668c8319503fa6d558b7dc0c0220695244d432b91828eea2d3666ea855eaf1cc523aa2d42a0711a1712c2a9da37b",
       "verified": true,
       "chain_head": "924e05b11afb585974ba97f32c3747a93fc7c0ccf1738436eafa1b2528c3e768",
       "payload": {
@@ -692,7 +692,7 @@
       "job_id": "BHQ-JOB-2026-QPU-0030",
       "trace_id": "a815cb8a-90a2-5d82-ad79-c78855011150",
       "signed_hash": "54d1f799b2584a01d7d5bb47f2a23166bf8b2523e6d982aeb6f1b20bb7f2e1e4",
-      "signature_der_hex": "3045022100d5d7f0dffe69b3fb32391ab418e66e03125569c2926955ef8721a061cb6aa05b022033163703ea24f84fccb28eabeb4b53672470b9b4bff2d97d65500890bd4a5a38",
+      "signature_der_hex": "304402200efd8285c00f91a3e2ce792f5f1ace73e1b11ef3a9ff42b94b00eed166bf3ffe022039931468832ce65eb6692e9317df7507f52e35e7aa88046d634c94488cb76164",
       "verified": true,
       "chain_head": "0c9ebfabfb871aa0becad765fb1bfb32ebc2b43278bd86e30364188c1e6fbddb",
       "payload": {
@@ -714,7 +714,7 @@
       "job_id": "BHQ-JOB-2026-QPU-0031",
       "trace_id": "338c0be7-d158-57f8-bcd9-78dcca2fd0db",
       "signed_hash": "8d8ad8417239ab60219587b107f16f3e9dfebbe49bac18232e6f4040211a2b43",
-      "signature_der_hex": "3046022100e775e96cfd33e87e716ab32b6402700a02e63844c09afd039b92d95bb53a1af0022100c01f56cb3b3674a9096ce72b6f1ebca21d449544e8fcc0164ada6e4e591e9199",
+      "signature_der_hex": "3045022100fa0dff657976c8796205c034bdfdcbef94ea6ebbc1843e9c3c17e70eecdde37302200a49729562a9b5f0e82fbe7c36ee1f45a20c55764b7208ca54e506eff2df5d8e",
       "verified": true,
       "chain_head": "3f835ec0c84b42a93e68724b94221e19110517ae9f23e7debae8e4aef452219b",
       "payload": {
@@ -736,7 +736,7 @@
       "job_id": "BHQ-JOB-2026-QPU-0032",
       "trace_id": "854cd5da-3ec5-5f0a-826f-8b6ee630e9d9",
       "signed_hash": "678a55b1f7b7fbcb62702c1038aa0aa13824700f665c77c7329aa129cde80b17",
-      "signature_der_hex": "3044022033341c1a51fe5fe43f7b938e2e4ce05c3b159fe1d07f7a4a53b8d4a8d0f49c720220597ae369b9b757804fc24ad62a641bebdbe92c821543f5d66426b04687ff9fb3",
+      "signature_der_hex": "3044022024cedbd08426b70f2fa34e9e6a87614105128ad449ffbe42934614578e5718ba022060f2dbf0a3da8da0f6a2e80e22c6ac3d1f5f53fb2e167d0d0bfe1858a9ce3fb5",
       "verified": true,
       "chain_head": "2f054cff2571290cab69afd49f02d506f2bc24579ea9f3c8c3b59fddbb6a1b14",
       "payload": {
@@ -758,7 +758,7 @@
       "job_id": "BHQ-JOB-2026-QPU-0033",
       "trace_id": "0f2326e4-9a6b-56ee-9b98-716216d59766",
       "signed_hash": "816a40f033cdf9f781b1278805d7a0f7d8c88ac75b7cf91d57987c52a38a5a98",
-      "signature_der_hex": "3046022100c1816bfbd9f1ce9bf37ba087b1db15d6a3b38c43907a96474e55f3af4d34ba2402210086b6de134589519d5d29f1d6388ef5a8905de4e0dac7333b2a92e2cdf8186ea2",
+      "signature_der_hex": "304502203d0c1239e4eabaf1832e40876b707f3029c33af283656ed64ab982188ab5062b022100ee2f4602fbde99b767d5df087a4967c87313f56d28fb9606c0255cbfdcff21ce",
       "verified": true,
       "chain_head": "051548eb3ab2c9ff938a1d3822712a52c0be9ead4972ef0fa0f06334828e15de",
       "payload": {
@@ -780,7 +780,7 @@
       "job_id": "BHQ-JOB-2026-QPU-0034",
       "trace_id": "024234ed-0ce0-5c0d-a62d-78e341d79b69",
       "signed_hash": "0338dcafed18ef59ddafbae637bed6780af6a26ed7e5812fa3675228283569f9",
-      "signature_der_hex": "304402207e4ec87b1389d48981e1d21d3656dcd8c67a5ce36e9a3b291e1d47831cc199e902204b5fdefc650b3cf798a8964994480ea362c5f87dabf6bf887550c1bb4a7561cf",
+      "signature_der_hex": "30450220117e56add15787e4fa8438f353446e4fd447ae83f55f9e95d19bebbeae0e6940022100b96144783586924de192acbd671ce63b68037ff2313ddca97ee68bed7d4fb021",
       "verified": true,
       "chain_head": "806f8263ad9e386bf0f9cc27a1a56992dd84b30555797064be8b559e066c703c",
       "payload": {
@@ -802,7 +802,7 @@
       "job_id": "BHQ-JOB-2026-QPU-0035",
       "trace_id": "84426702-4d38-5867-bbef-4114fe519694",
       "signed_hash": "f79565b87e4b218ba12b03ea75c905dd47f5f6c9f13fed41ce9f2950e50e5dcd",
-      "signature_der_hex": "3044022057667fa31f931963170a5b433b2602d34ac97d571ccd2f6d15d0f8145d0d458102204253848a84d439270cfcfc7a987a271882c7e549c80cc68ea36609f83ead99e8",
+      "signature_der_hex": "3046022100a149df51c6f7ce97bc700eaf23c0c7251e56d8fc77acc294d64b26c4df13d46f022100a3cfde70af295b7ddcc3ec6b728c63b0de8482641000f2f2c227875c1982670c",
       "verified": true,
       "chain_head": "2dd96ef8c31636a305878ed8b57da221c90675e955085e816ce856a3b057d20f",
       "payload": {
@@ -824,7 +824,7 @@
       "job_id": "BHQ-JOB-2026-QPU-0036",
       "trace_id": "6258d82f-cae5-5579-b459-f521b9fa249f",
       "signed_hash": "fd2c2660af714b55b0aa972f5ee05fbecd4f469be0273eb6ab9635e6461f5890",
-      "signature_der_hex": "3045022100c06f81baacd64b7ecb9221e162f702ab57b2d968d688d3a04e104a96eabbf4880220689a781f1b08d15cbc1e609dfe668ff4bbaeb6ed35b9d09b24dc85e8d01dc271",
+      "signature_der_hex": "3046022100aa36ad768d557365a4d2f930068e7e9872173211346e73aca5346f4084108594022100af0d484460ab5d7cae6beba8324eb192f383beb93f8e8722ab1d8c1473c78721",
       "verified": true,
       "chain_head": "ab2ef0a8949796fa2a935707b5a12ba207f5f790b9600c112469d31b5262e3e6",
       "payload": {
@@ -846,7 +846,7 @@
       "job_id": "BHQ-JOB-2026-QPU-0037",
       "trace_id": "3c6c65ad-c615-5641-8a32-4c3d11bdba5b",
       "signed_hash": "ad2893aa47945a8328b42dad39a5b3262d886578786e323854542e65718eb633",
-      "signature_der_hex": "304502206e03de5dfcd299d0d20f1642e2fd6cb2f9120fb4d2af34681c3169577da2199d022100fbc6a2b492250ba5b17ee1fbf304ad21af474b0bc386bec4de95f03972e82434",
+      "signature_der_hex": "3046022100cac7d08c04e31a845ca805b2fa282288e6e32dbcd32bc6fd342b23455c522884022100e580ee440a92873ebb01f7214154e367ac321ca06152d865958c387f1b031735",
       "verified": true,
       "chain_head": "0a33b312e0fb38cc38497f1962bcb8592a2d5a4bbec9ed067503dbd8fc890ebb",
       "payload": {
@@ -868,7 +868,7 @@
       "job_id": "BHQ-JOB-2026-QPU-0038",
       "trace_id": "8d48da05-76e5-586c-a517-d96cac08f4d8",
       "signed_hash": "6c3619322eb3dc64d80ba751ecd59c1508642e958c26880cf18b1483506beed9",
-      "signature_der_hex": "3046022100fb9e88b85c3334e3382c8f4aee910b8d2559c32abda346f47c1270a20a6a1aea022100ac4cfdf3588149b17aecde6103406e670646d5db07900baca0b24bf667bdc6d6",
+      "signature_der_hex": "3044022055dee4279c86c74ec95b788028839d65c59a99fdc33376e59f16c7ac79961f1e022071aa4e8d6863cd416d2db36bb4ab9a78ae16e9a2ff5e48bdca7f97b41ad79b96",
       "verified": true,
       "chain_head": "0622ba36d89225a5db79e6d90f6b62c1c7c6d2ca43ad2e5b3850c94c0efdb97c",
       "payload": {
@@ -890,7 +890,7 @@
       "job_id": "BHQ-JOB-2026-QPU-0039",
       "trace_id": "17638a60-3045-5ae2-8b80-6cf16de2bdd6",
       "signed_hash": "d7d45dc62fe6544ff617ac5a079be2690f472f9a4148622bb6d6c840d6be98c9",
-      "signature_der_hex": "30440220782754661a60df2a489daeaa121e4f397c0c42bb233faf1d221906e9cba051e302201d7cd389c92571f1b689d7d49548e48366adc4399d787ba75c81c18ee62edeee",
+      "signature_der_hex": "3045022100da8023363717dd5f2a2d821d69eb6b1c12d98c2782e4bfdd82921a839e8868850220588e36694c333d59b5f25d8ad43928240a78c874e1ef3dba4114eddb70fc3b1b",
       "verified": true,
       "chain_head": "d8cab5e420a8459bc8652559570522f811fb72647906edf84d8518f24e50425a",
       "payload": {
@@ -912,7 +912,7 @@
       "job_id": "BHQ-JOB-2026-QPU-0040",
       "trace_id": "f95abbbe-241c-5df4-aafc-76df672ae3d8",
       "signed_hash": "0e86b4dc119736dbe646125c49304d2452a31851543f341971b8e1b12abb53b5",
-      "signature_der_hex": "304402201e8a060ffaeec87de63530968d602d4804e6d7042899230275a455d77c703f480220513f28f6ccb1068a537145907b7a157c15382868da4f49767b13c8039c7708df",
+      "signature_der_hex": "30460221009b6608bb76b86f651305284ab6e5c2b608a2273047284254ad2d3f1cb806d4bc022100ac53550009d694186b8e6f964efe9f1e5bf75e9328067c7d01d2586caf9951e8",
       "verified": true,
       "chain_head": "d2f2c5724793207c07f7eecc37428cb847fbcb300ee981cbcbeafd8c5099bd28",
       "payload": {
@@ -934,7 +934,7 @@
       "job_id": "BHQ-JOB-2026-QPU-0041",
       "trace_id": "8041ed1a-7e31-5df3-b693-f844d9c083bf",
       "signed_hash": "66a2f920f32085c01a70309a1810443568ffe18673ca793ca0ac3e52ba3421ff",
-      "signature_der_hex": "304502200954af6af3ea367e9c5668667e3b5e3690d23597153edd6fe81d7d4518a204e8022100918f3f98d13905d63db8ce393c26fd49adf9ed05aef2a5257338bf7aad3568b9",
+      "signature_der_hex": "30440220487554b8d870d54daadd7cf60b4ac6720b071c28c9e8dff814fb4207f037c05f02206e2bd1c1ba169e80bcd66dbdf075f17e71ec662f11792cf552f50f145b453505",
       "verified": true,
       "chain_head": "01003b887d19e4d5f0a035da5cdb37490aecfc7e42c160b7aad5621a21c63fc5",
       "payload": {
@@ -956,7 +956,7 @@
       "job_id": "BHQ-JOB-2026-QPU-0042",
       "trace_id": "7a43a3f2-c6b1-58c6-8a05-72c04d565ec5",
       "signed_hash": "bb81ffabac49eb196cdc597edf2a230113b4948bfd052f525140b7e73130b4ad",
-      "signature_der_hex": "3045022069bf31acbd597468a62e677a854a3698c16d1ee5e404decff2a223d160bf6947022100f1c87bd30e5bbdafbe24c9e133a2211e4096b3b658d318f7ab72d6ec02ede7d8",
+      "signature_der_hex": "3046022100ec894ab7949da4f8156165d55922e69b3d235ceaf55e19794f1aec5d3a5122c8022100a64cbbc521a83eaf44793bd7dee358537de97779e0f05425360e4fed9aae2de7",
       "verified": true,
       "chain_head": "f8c32eac903706dc9c8120a91e16c96692834fa19d206fbb9d84c2553fb599ff",
       "payload": {
@@ -978,7 +978,7 @@
       "job_id": "BHQ-JOB-2026-QPU-0043",
       "trace_id": "82cbb2f8-6797-5a30-92c2-24f363d68a4c",
       "signed_hash": "9df865d46fb9fd95e04d1f028eff9bf87527c48d2cc4cd65cd6abeddc8340f83",
-      "signature_der_hex": "3046022100c254b25b647ea87a9df725a9091315285bfaf1cb3bd8e2d879910f58f83b5ca3022100e761e10407833e11f09f75df86ca4f6a697226f9bec036fb042fa60f9a7b6750",
+      "signature_der_hex": "30450221008d0935c0cfb01371e34eb907f476d92b2351a4ede7333e3d4f96687de7099279022015cbdde4a883169eaacfc6c2868863aff53704ef4fd89259e28798cd99506ee6",
       "verified": true,
       "chain_head": "43609ca65f32d2aa2b2a8777ed670c4fe101ed1e6615ce0de26d69f15b49c17a",
       "payload": {
@@ -1000,7 +1000,7 @@
       "job_id": "BHQ-JOB-2026-QPU-0044",
       "trace_id": "3faf541a-e251-5690-8de2-142c8e96e1fa",
       "signed_hash": "70f501981a7771b7ca186700e648e8b03944cead5c693972c3f5b7ebb9c4f52d",
-      "signature_der_hex": "3045022100934f0431e395ba94ca2bcaf15355855981009c2a228359745815e7918c37a87202206d7cb7180bd1fab05cb09ba53efb577307ea3acb095eba759f38ea417fd441f4",
+      "signature_der_hex": "30440220366bb837ffe24c8c62f6187c14beacdffa033bb37666f21c2633e917aa02f10b022030b7a2db5e8d34a2e5ba6f4a49ca5fa1ce22dc8d3d1b96b85435d0d887bf2d66",
       "verified": true,
       "chain_head": "85b569cd6d25056dae03ebf35377ca777c90a68208813d844b20475826261ce6",
       "payload": {
@@ -1022,7 +1022,7 @@
       "job_id": "BHQ-JOB-2026-QPU-0045",
       "trace_id": "ff3c01cf-4ed5-53c5-8e29-36b7efc22136",
       "signed_hash": "cfa06b26147b679c46190b4071f6baf9e21914695c026dfa18ca69b81a444c5f",
-      "signature_der_hex": "304502206a19b5b0700b4a8e8bd433d06e9d794229985d38c8344dba0df009fd16d17de5022100d0f311849ae43ed2e7fd8c5b73006c5072d22621bbe270a98214393cf2edbaa7",
+      "signature_der_hex": "30460221008c23a4c6efb8b5c755769ab7c6467f501d482d204d3086f44440d976777d98a5022100fb294cccfa0866a6ff3cc691a6429f3f1d47617ea2fb6bac87d2da1660de2644",
       "verified": true,
       "chain_head": "e305dcc16f8520884dd89dd9500aefd2f07f9e9dd053189905e894cbbcc5248f",
       "payload": {
@@ -1044,7 +1044,7 @@
       "job_id": "BHQ-JOB-2026-QPU-0046",
       "trace_id": "6e32d5d8-48ab-507f-84b3-cdbfa2f41412",
       "signed_hash": "7c8d356474a27a8398fd705a3ce163eb41970420ad70c1f7570d417c02316c9f",
-      "signature_der_hex": "3044022049efd01d9b3a84f0319b1398b365348fd6cc2a28abc87104d913d3d748e32e9602207e08f30ee6de90de642a28816c255404bb20cd097b3f3b973968d442045af973",
+      "signature_der_hex": "3044022055af20ff58de7b78ef4cf708e483a78685d92d647a8a7871ddf3ac940b4fed7802200d021be02eb2ac8a25ef09f0a65aefa52ddf8037a9acfefe01d181ff3ccc9cc7",
       "verified": true,
       "chain_head": "c8a79f71f7b15bd0826e895289f8bc2da8d8233763f15f1b661936503e82a4c1",
       "payload": {
@@ -1066,7 +1066,7 @@
       "job_id": "BHQ-JOB-2026-QPU-0047",
       "trace_id": "399b91a5-89b4-54a5-b8c1-0b76e969814a",
       "signed_hash": "b1aa348e319e79f34f55a6dbdd3dc7794a44a6184c22c501f4ba91bd5cecda51",
-      "signature_der_hex": "304602210097e4dcc3c3d9c4dec472503b98b58dc82b1fd8761e7d5a6d1e40ecf00d3194e8022100e46423ce7ae4ffead9f86b48437c469e996a7a7287d55eebac9d39851e761c23",
+      "signature_der_hex": "3046022100ea3c54c6ea1c7263e8e30923ccc23fce01efa1beddfa361c71801a8681b7dc98022100fcc5429469e3d2f6251e5828c2a1ef5eca99ed73f4a68821002003a6b99d3762",
       "verified": true,
       "chain_head": "eb249a31edcde58c36f956113c3aacff4560438128170fa180233ccc93e6d8d3",
       "payload": {
@@ -1088,7 +1088,7 @@
       "job_id": "BHQ-JOB-2026-QPU-0048",
       "trace_id": "91baf724-ddec-5fce-8184-a6e453c6254b",
       "signed_hash": "1ec0eab394ad28b6bcadf2349acef264a060ab4f439a1d30dc6735df8212674f",
-      "signature_der_hex": "3046022100c855219e2c4e1ba25644c456b88eaffe1c4f3bd18132b03c5f53e8a3f57c5053022100aae5ba0e5a39856883e9b718e60c1c604daedd3fcecb4fa62c4c814daf22b0f0",
+      "signature_der_hex": "304402204afcd5f16aa9832b0136a8b85776de6df63dec8b8fc71dde62eaad90d22bdbe6022052788463aeb711b7b2f796f51ef277749ecc31b4e49b2d9e127c85df0e33c3c3",
       "verified": true,
       "chain_head": "9b275c1ad427c87e7a38130115794858a32c8b3b01a8defa8f35069fc032ea5e",
       "payload": {
@@ -1110,7 +1110,7 @@
       "job_id": "BHQ-JOB-2026-QPU-0049",
       "trace_id": "db627cf0-2166-5581-baa3-6220d2facb06",
       "signed_hash": "c87b14cbdcdc26cc1c13aeb38ee142c7c1bad36d790cb262407dfc2578b980c0",
-      "signature_der_hex": "3046022100f3021643e8f1cde8c443f948f241c16150f0bddf060a0fcbfbb8bd2564c1f248022100bc6b1bf3c61d964842be663e28de831e02967cdf895d8a3e0a6038efd2a36438",
+      "signature_der_hex": "3045022100d74b2475f8514b76dbf97510b03e1a0995d6feafbbe84e3793b9739aade8c42e022008a2693fe2d7059591f664e8417d88cb366c13728b9267a7898120bbed0e9bff",
       "verified": true,
       "chain_head": "5e647f7e5195da33a96396233a0640fef08118d0cad02c2c769b8ef7862c9a32",
       "payload": {
@@ -1132,7 +1132,7 @@
       "job_id": "BHQ-JOB-2026-QPU-0050",
       "trace_id": "53f3a596-1e43-5da4-87d2-5d56c84b307b",
       "signed_hash": "597e208d162a3dfd5c774361b3c3ec4a0f6bc2c62ccba361545b7c73c5c0031d",
-      "signature_der_hex": "304602210097de3f92a92a2f90e07b402939546c72a29713a44312409156dad7e62712b9f3022100982fad1c06b21d5ae70c753176f58f52aa515333bd30fe1f838dd90c80cf6dc2",
+      "signature_der_hex": "30460221008de9172b156ea689722c3182594b83889d4181c7ae8864451354010eef8af1cf022100c9c52a14a0b20cf88a10bb0e6fd3e93c70ff36799fb544ba61adbce47061be4a",
       "verified": true,
       "chain_head": "f92517623ace40808a318675e9ff3c8357c23fe01efb71bf0a90c8596bc3fac2",
       "payload": {
@@ -1154,7 +1154,7 @@
       "job_id": "BHQ-JOB-2026-QPU-0051",
       "trace_id": "31a95d3a-a718-5675-92c1-e8216b0ae85a",
       "signed_hash": "fc8cc8a9b93336a14183bf617fc54b3ad3e50b4d26f22da9b3bf90d83d179f94",
-      "signature_der_hex": "304402207e65238139ad2a540b1b48788dfdaf20b7df498c5656f95a1953265de89814690220537afba5626963239f2827fc0aca74908148cd26bf8452b926298042b4122699",
+      "signature_der_hex": "304402206c04251b9438ead5787b502c152c0ab5c0d791a65acf9394b4b03def94efe0100220795a62cacdadc02cc227f33390d239ff08db5d4ed7f10a05c35f45084801a108",
       "verified": true,
       "chain_head": "6458e7481d85891947644d424b1bb2f5047ffaf68d19420fb3131fb18b942288",
       "payload": {
@@ -1176,7 +1176,7 @@
       "job_id": "BHQ-JOB-2026-QPU-0052",
       "trace_id": "dbdc1bd8-63f9-5dbf-8598-bf791a97f5e5",
       "signed_hash": "d6584b43594041c54b30b9019a36ae858c3c50e34f3b7acc716e0a8255aee128",
-      "signature_der_hex": "304502201598fe68253e78b5b44919bf7ccaa01503b8a49611c5656cf167e8d0668e4007022100d9d6d2988209d5ecb1f6ea6d1bac8aa6fad724a46527cca3bf3c911581c27470",
+      "signature_der_hex": "304402206475894763d33d2348907603438a59121253e594a057b22d2347e91a5b3b16ad022079d451fb157ab003d5237b943a5ce2e559e802942d62f04231f22f793ad3069d",
       "verified": true,
       "chain_head": "249f872f6bb8228adea98dc791374e306cd46b27532e6c4ae4dfadbe7e46bbf3",
       "payload": {
@@ -1198,7 +1198,7 @@
       "job_id": "BHQ-JOB-2026-QPU-0053",
       "trace_id": "7f0bd652-994b-5a2c-a642-b52ed1cd553c",
       "signed_hash": "acc81c0d8e1cb7b2385a4be28a881e44423fe0884be4a84f28aa672e0fb55615",
-      "signature_der_hex": "30450220684d14ac72263c6927d33cb1e726587f865a2083d2d63f255069811312859cc7022100938b213c13f8981c02241701659b0a8ebd0ea180568fcb020d9800cf1123fc44",
+      "signature_der_hex": "3044022038b0a0da84e21e8c9f576244b980b4ab557fea55a990713ff9f2f2effac19c46022022c039cfc876190e0dbd7fb3e4629fe20b1efb9e2a9b8eb06fb2941c9bb027e8",
       "verified": true,
       "chain_head": "0507539601d74e0bb9236fc55c3742d032fc8fc588046c5720b8495128bd19ff",
       "payload": {
@@ -1220,7 +1220,7 @@
       "job_id": "BHQ-JOB-2026-QPU-0054",
       "trace_id": "fe0dfd55-c41f-50e5-b61c-2e7c6a9deed0",
       "signed_hash": "5e16b4505e3601f35eaea44214f269f176ebc1b893f6ec5835ea99404ae16f97",
-      "signature_der_hex": "304402200f9bdf9dc8408352334fe8ae54f65c558d26286638e74b8b0d12906d18abb44502204eac91e17f9787be6bf3b10800a8efd7e7e95ae409505344618f7a7b6633b0e7",
+      "signature_der_hex": "304502204f301ce6b68d35e1d36dd55a9b8cf5258acbae4924bedafb37663621b8369005022100bc37b9da86b10301c2d749cd23bcd16f466fc59ccd0584eafb9d660c6fd28196",
       "verified": true,
       "chain_head": "08f5eccc8063ca1f00bbc049d63eb60f9f2b97d6f30b12cf312dcc35181c7a1c",
       "payload": {
@@ -1242,7 +1242,7 @@
       "job_id": "BHQ-JOB-2026-QPU-0055",
       "trace_id": "f19e283c-69ab-5a6f-8457-22e22d6e330e",
       "signed_hash": "f8829dddb1de5f96dffc857dbfd7874a47247bee78e3f3aec47fe95ca16f38a0",
-      "signature_der_hex": "3046022100ed6c74054d8f842bfed0ac903d2d20c9db8af1d2cf0f3c0e09b65c917a2fb683022100b100739a586655d4c5480ae832a1131962d820d5aee8ee537a82a47300328674",
+      "signature_der_hex": "304502204eae4f0bfcf33b4783ddcb1e006b0c1ab3b8b0c58af26ff0d147173b98d88de6022100b1b254175ec26427a9285a89390d9a7107dd19763f2381731878fe3af078ac53",
       "verified": true,
       "chain_head": "072cc95db4e114212fd2e55d698166bf1167488ef35cb1f57084c4d78eb9d66f",
       "payload": {
@@ -1264,7 +1264,7 @@
       "job_id": "BHQ-JOB-2026-QPU-0056",
       "trace_id": "96ea470d-035c-507a-824b-6f4e2133f437",
       "signed_hash": "baeb1a85c7f99774e91b20859c00f0eaf105995e2288e6efb21eaa3e40d4fdba",
-      "signature_der_hex": "3046022100bb0d6cc3fc6fcf7ee64f6314af2d830091fd4d65b4c101acc276e15ec13e3c6802210099b94b8ce92830e8514c6fde59f4beab28dd53d7a189ce732a58b5880babb693",
+      "signature_der_hex": "3045022100ca91b2b9d8acc7e6eac8d01e87994ff442f9953684abdcb85bca509f52a8ee0202201848634dcf3a1b558e26f66f35c517595ba960607cbb86a4bf9895e5df341720",
       "verified": true,
       "chain_head": "af6525fb97d6932043511878001274d6380f117afe6c99720dcd1a3f57d10ce2",
       "payload": {
@@ -1286,7 +1286,7 @@
       "job_id": "BHQ-JOB-2026-QPU-0057",
       "trace_id": "45d7df65-4093-5fbb-9cec-416697752388",
       "signed_hash": "dd60143e28697747608f18fbceecbc19fe4189a1c299b87c2c05669d7ba7c188",
-      "signature_der_hex": "304402203dac518027988f89b07ad280a8a7d731fe54ee43ec3c32ff777ca9a7b24e3d99022010b72e5daddd6be62af6a957375bc651ad7d864f9a4dd7f64e4dc69fdc7a5685",
+      "signature_der_hex": "304602210086b0c4fc62c6dfe00cca4b614bc3a59e34ff74724f55c9e7ea621a13d3c0f30b022100dbc02bf4c99537d107bd818377bac82b54cbfb3da395a15a9810eaef10dde907",
       "verified": true,
       "chain_head": "f7cb487f439858c3d9ad936cb0bc6383a38d59d5142690a150310094f31555bb",
       "payload": {
@@ -1308,7 +1308,7 @@
       "job_id": "BHQ-JOB-2026-QPU-0058",
       "trace_id": "16bd50cf-6219-564a-adda-1d29d90666d1",
       "signed_hash": "1273680cfb02d858d235a38726f2f3eafbc6cb6724192c8ebe8753d9327e9caf",
-      "signature_der_hex": "3046022100a60537164d2a5de8dc19d02bfeaf3ac789b648da407386e93442c2691756f325022100c3b19d5587b67be6ef558dcc054e798064582bdac806743d5a0fd57d06b7a4fc",
+      "signature_der_hex": "304502210088d81f955712adc698228ff24c3442de3830fa3927f195aad64459371f242ea7022032ebf5d53962b2c8bf6dffd157d8d65d107268604a29fc58c8281272d2eed2a9",
       "verified": true,
       "chain_head": "0364ae9cee94c2c6a27abd966a711f138a9b14052d93b18af84cc8dc55ef44f6",
       "payload": {
@@ -1330,7 +1330,7 @@
       "job_id": "BHQ-JOB-2026-QPU-0059",
       "trace_id": "dcbff125-bee5-59e2-a7d2-3f1c9cbb3281",
       "signed_hash": "53b4762531ae0d1fa6850a141383abfd658ce9066122c83deeda83e10bff2184",
-      "signature_der_hex": "3046022100d3daf67c2a5d082bc223036554691f9bb1ab66df5cfb699f07686fa9acbd1447022100e1d4638854da68eb39d623408418e43018a568bc06e38c773e3da2852ab6f413",
+      "signature_der_hex": "3045022100c94f017cc490a683fdf5b327b2a4b7b6aa9b45cd790f90b5408ad099a0a6171b022040884742ba09256cf6cba99ff5ebd5b423a9154ca7870d266daed965f9646ee6",
       "verified": true,
       "chain_head": "037d7aa304db0746b928ece313fdb262f114c44e7194ff0daa8dc3136e31a4f2",
       "payload": {
@@ -1352,7 +1352,7 @@
       "job_id": "BHQ-JOB-2026-QPU-0060",
       "trace_id": "1f8e323b-56e0-5d04-8968-0f3ff672dc6f",
       "signed_hash": "f2f26eec4fe3e3f9310e48ab6354f64530ecd673bcacbff575123bb88cc148ff",
-      "signature_der_hex": "30450220213026c58241b775bcd32ed42b4e2730230aa5083d9dcac8c581fe1d77f916f9022100f82fe1378850463187d5152eeed42f4e4505998c4b0d7a0136202fd7c8e903f1",
+      "signature_der_hex": "30460221009d2f0b2f8cb6fafbd9259b5b6efab4d8e3f1a6ba68332fd77195e6954bc88df4022100a7275e9c8739d63dc9230b0eb6754624a4eceb0ab312a5d12ed251270536cbe6",
       "verified": true,
       "chain_head": "6926ae8906c8f94bf8883db580c9c3c833cb29a03818d7279dc298896543222b",
       "payload": {
@@ -1374,7 +1374,7 @@
       "job_id": "BHQ-JOB-2026-QPU-0061",
       "trace_id": "c1a91939-ed0a-5744-b2f2-37b1b36f1bf2",
       "signed_hash": "0cc4ea6981899fcd5416cd7587fe69447d511b4e83970acdb046ac2108f648b4",
-      "signature_der_hex": "304402201aaf53e307e27f8348156895f0de6664483aee1c10f6c37fb3499d53ef2a3420022037c41996898b13dc0e0d0ec12dcf83a5387e9fe6711acace61ab68cd5e9cb160",
+      "signature_der_hex": "304402201b29ac1f8daaccbdf8706d4bfcd5970ebf7bd03f35e5c3bfdbbdde0810d71bc602207846698360b4389ce3d6095a895bedfa67b2d15feb256cace09bbbb98b8c5125",
       "verified": true,
       "chain_head": "a501b907e14c2af8804c797ac1bb0dab581a4405b2d091539357b97926199b12",
       "payload": {
@@ -1396,7 +1396,7 @@
       "job_id": "BHQ-JOB-2026-QPU-0062",
       "trace_id": "9b7f16aa-97a5-575e-853c-5f1df62d09f1",
       "signed_hash": "aef73ab6a663daf8acd18e90fe9cf6d2955cef2e79e779b4f0278aaee35097f3",
-      "signature_der_hex": "3044022078f12244f5fed9ae5f2da4cbc44128c96e92885cc7eb71e36d9b99e98a1887cf02207baefe3aa8beb681d38f15b0bfdc39962171cb4508d52a879a43b00af5835a96",
+      "signature_der_hex": "304502205c403127bee8201dc8dec01471eea0d07198b79a964ad7bb9c0f6346f5f616fb022100abbe2889829925ff717df2e329a9f23919cc3e6ff945bae6ed4cb760251ebee9",
       "verified": true,
       "chain_head": "4b2f222783a861b52fe21bdf708781f13d79ba80ea77f2ce6b2f0db1461f12fd",
       "payload": {
@@ -1418,7 +1418,7 @@
       "job_id": "BHQ-JOB-2026-QPU-0063",
       "trace_id": "5b8ed3c0-2899-5277-8387-1b3ce0f2dd48",
       "signed_hash": "a056aaf084ad6f2e3433f9ba34af06c0b28633d8a9b1e1aab8250be30fb220ad",
-      "signature_der_hex": "30440220448cf45dd3d733d7f27b8ad144a60374b6631507b38eda8bbfd516380864979c02201b57a270525f2ad902bd81fa668e08fcec8a433e22237a76010d70971acf50df",
+      "signature_der_hex": "304402201b6d41964dfbf4f675441a1ae7700e8138cd6e5ad977304781360be0af64be5302202989af8a2cd85ffe9d5591518e8b7f38e04dc0047eab6adede4fdbfccf6e6262",
       "verified": true,
       "chain_head": "0b1686a1e78e53f605586d562142f3967b25f9ee702ca5a2299fdd7224ab9c78",
       "payload": {
@@ -1440,7 +1440,7 @@
       "job_id": "BHQ-JOB-2026-QPU-0064",
       "trace_id": "6222f820-66d4-500b-95c4-dff157d6dca3",
       "signed_hash": "b154e75e423ad04af0b3a6db98d1cffcce91f6f1d61b7ca269e970b702302ffe",
-      "signature_der_hex": "3045022060a7ce4eb618f142a1c19a8f4ff7ebb682158334ffddc5fc416a4ea6a9ab4a08022100874803a892e78ca148dae5f8008725d6b43fda9a8bc0fdf8b1220931e036c1a2",
+      "signature_der_hex": "304402200d9f5d2e929c3b75abad4e11f61f691635027b3ee25000e255ce7a3c71dd23bc022015f054cfe169fc0c1687f547f121ad3e9e211a0c2067b01a6a62ad11c5fe09f0",
       "verified": true,
       "chain_head": "1d29336dce55bc787523c70194c9ef35007d968e5597eb300ee3d226778f0b12",
       "payload": {
@@ -1462,7 +1462,7 @@
       "job_id": "BHQ-JOB-2026-QPU-0065",
       "trace_id": "f3e52268-d4bc-5c41-aabb-5020cc040ace",
       "signed_hash": "f08a2633490d4f7fd28e83edf33095a4abde0f686fa7f640c98ec41cec02afea",
-      "signature_der_hex": "304602210089aab4e7d3435f27803ab3ab7dfb4a3539e8ddbd96ae9790a320dd6f0930763f022100b8637efececd9f0ee36e06365efa92d3e3d2cbecb4194f5779acc96f6d035585",
+      "signature_der_hex": "3046022100eae3fd9b231be3ef47b9fa0c4eb71757f99f2650844ff2f272884ee817ea493f022100ffe76a34ecde72b4a412965e1e223182f8a01a15b0f04b318b03fcbfff4ca554",
       "verified": true,
       "chain_head": "645becb4dd78e69d1d2dedb0afa064aa527e32cf823c52aff5824de1dc496266",
       "payload": {
@@ -1484,7 +1484,7 @@
       "job_id": "BHQ-JOB-2026-QPU-0066",
       "trace_id": "efe5c224-656a-5ee4-9351-da80acf034ef",
       "signed_hash": "5401dbf9372038bd20cb3fb5248a049addb8f65cde8f8851c89de48e5e1e855f",
-      "signature_der_hex": "3044022038efda23443f87bd9f0511da4c09b48f9fe9b09721e30633c4c89839f9ce3175022027eda2665fec3baae922200114f48742a972bbe8fa8c650fec760d06cca2b009",
+      "signature_der_hex": "3045022100b4867ca1ed34d645537a35b686778e709954e7372c8d1b89c29e1784317fbead02203cbf5d721f74389e7773622c2d8da4e1eb94ab9768a281cfd3aef17deb635601",
       "verified": true,
       "chain_head": "b6d88493948acccb31844b06bb458a8b588b2cb608be3069e32adaf24e243794",
       "payload": {
@@ -1506,7 +1506,7 @@
       "job_id": "BHQ-JOB-2026-QPU-0067",
       "trace_id": "3753dd86-0588-51ff-805f-4272073129dc",
       "signed_hash": "138004758fc550605bc6c0388bc14ac90b770e62df55a2411db7f96053b9efa1",
-      "signature_der_hex": "304502204f5535797c5f47dd6482379703e77e1e346c188e24f3ec1569c65403e0910e3c022100d1eaa9369a1f85a8222b83629fe0320654b6525b6e444477d1d5b502e97fe48b",
+      "signature_der_hex": "3044022075dea10af987a7a88cbedf9327db567dcad88686fcdd5c5a6394c2f6564722c602206440c95249ba4f49cd57854638a542f984f21589e5207a1956d26e013fbca833",
       "verified": true,
       "chain_head": "804db74d3c998c9ce05e41b788497bbb7adc861a861c7a35da11ab9f3a8121ba",
       "payload": {
@@ -1528,7 +1528,7 @@
       "job_id": "BHQ-JOB-2026-QPU-0068",
       "trace_id": "9959e47c-caa6-514c-a018-a5c5811e4ad4",
       "signed_hash": "863a64d2cd28ce1c8c6c4a26b0a85a8fcf1b672332aad515ee9d02e1bc36b147",
-      "signature_der_hex": "3044022057e3efdc206700debf0b489a7c387942f2ef554c0cc071b4a1a7cc43fbed6d5902203b13113ce37515232ec9c033e88205806773a3f1b7a34ca0952524452a768185",
+      "signature_der_hex": "3046022100f156ed981fe68b9cb9b2deaf699e101c20b017bd4f66b3db8ccf35e61397de3d022100a28d687ea317d55b6b5fd93ce2afc41c3f8059e00473683209b6e1394b61a9cb",
       "verified": true,
       "chain_head": "67f6c3de3fa65e94547f721e7e44d6bacd3b437f03fc55d4a9b52bbde823b75b",
       "payload": {
@@ -1550,7 +1550,7 @@
       "job_id": "BHQ-JOB-2026-QPU-0069",
       "trace_id": "3520c641-bc4d-54d7-8c87-c09a9d0cb2d5",
       "signed_hash": "ef096640e479c232b7154ee695fbb44615e40591797640e081fa74e08ddddbf0",
-      "signature_der_hex": "304502202ca65d4cf20a3abbdf8438515930ffa40f5b395f3347d3d1c0c4f6f827113ce50221009f05bec317e1baddca5c97c2cb81cdb04cc3caf36170a09480237ed15dc4f1bd",
+      "signature_der_hex": "304402200f2f36dc7085bfcdaf1ace812fde583df1a23c4a4c0cacdf50c7b150a608ce8602205d08e19ec2c8e58a41429a8abf890932b73e7a370c62ff9ed7569d8027b832bd",
       "verified": true,
       "chain_head": "182f626da551d37785a87d7e00c4684a121665551dad0aaef55384d2179848bf",
       "payload": {
@@ -1572,7 +1572,7 @@
       "job_id": "BHQ-JOB-2026-QPU-0070",
       "trace_id": "e913c6f8-5832-5336-899f-830fce6950e3",
       "signed_hash": "10688dde85259f87f6a4550e69df19191c78422b9fd608a4ef7cc6b6db4baf01",
-      "signature_der_hex": "3045022077dad20a43f82a4001b98dce9d806d446dd5a911e709aa43068c53c8a87f81b8022100a16dc9ef82bee0846a4006016cba63acaaaec4646c84037742f76e972459973d",
+      "signature_der_hex": "3046022100dd326f368921a3cf1f1ae6e0f9e647f21ee66300d8b2eae5bc165546e931319c022100c71e2651632f777a82808044cde5e4e8c616ed19865f162280e35066b7f7823d",
       "verified": true,
       "chain_head": "fc38296b1c313879ee3e1310ca6b338764af3202eab96a77a25b32a4dd8619ed",
       "payload": {
@@ -1594,7 +1594,7 @@
       "job_id": "BHQ-JOB-2026-QPU-0071",
       "trace_id": "87f4972c-ad68-5318-8663-d945dce03913",
       "signed_hash": "4e301b5244e33f4ec3f57c52a3e47967aeb82265f309faf78e3dbc4eacb21b63",
-      "signature_der_hex": "3045022038d60405b73324c3bf8d78b2fd46e865587bcaaa7c077c49db262788fa0251a10221008a2df5c30bb83f9f5f633bd8c886ca20bd9492e33dde651fee29277759452e5f",
+      "signature_der_hex": "3044022019e1f3c3f49db825c519871e8a26e3257bdf7830433a671f0da0db39baf3d9d702202faa42c05c8a14aea965e35a47078359b7e9664873b7437575ec93fd854e8572",
       "verified": true,
       "chain_head": "13b77e34f187bfa04f4b1903ca55f3c3293112860a8c471c2fb5af8a4dfb3eed",
       "payload": {
@@ -1616,7 +1616,7 @@
       "job_id": "BHQ-JOB-2026-QPU-0072",
       "trace_id": "650928f5-4567-5386-b994-16838e78875a",
       "signed_hash": "448325bb1b354faac60585cf79bd440943508a1cda2beeb8e0481b65c8a3993b",
-      "signature_der_hex": "3046022100e56c015953e79d398fe7aae8e239f64bb88de0a76d47b7850b9b34abc157bc59022100988a88ae41906b7d45009bfec5db924dbd0dde517383a68aaceb4d1cdc81938e",
+      "signature_der_hex": "304402205f649e7ebe3a30fdca261f1bdbc0e99a9072f15e03a91fdcdf6f623caf32de7702202ee84a0f7630ac45dbfe6bd4e7f6c24223a4006d00e0d47ec536c2038c705808",
       "verified": true,
       "chain_head": "2eb348c91c5eb1c581b767ed311f226fe40faf0975320dc01380609e2a57424e",
       "payload": {
@@ -1638,7 +1638,7 @@
       "job_id": "BHQ-JOB-2026-QPU-0073",
       "trace_id": "4f1a6840-34d4-52b4-ae9f-e4d15fa384c0",
       "signed_hash": "fd95abbfe163b6cdf587170a0a7230a8d1506252f12875438f679b5577b0e654",
-      "signature_der_hex": "3044022050ec27c3d62667e851cf9017431ecf36ff1a44b9377ff8d47699221bfba89007022041ea099b3b941636197e135246f826baff357c9d89597b56ea5c4dd63915b68c",
+      "signature_der_hex": "3045022100958269c73f997587549c8027772478423596879bc6d8616bea01a10ec42d0654022027ba7420999a8d577c92ad9571f2689e9d15c2ce48497c3ac8bf989782250348",
       "verified": true,
       "chain_head": "9b5cbe2b67aca75b57f194304749239b5894a712f6e1f9a47aedcdffb1adc34f",
       "payload": {
@@ -1660,7 +1660,7 @@
       "job_id": "BHQ-JOB-2026-QPU-0074",
       "trace_id": "e2696276-1a69-5a48-8e54-2e07a82e43cc",
       "signed_hash": "1b6342ad57ed9e1ec9bfb0e8cb041f894ea4a8bf82a27536e9c7199d60266dc8",
-      "signature_der_hex": "304502204fbefd81e6abc9de99dfe01fe13e5364abd988068676f973b94c1a78f829a8aa022100b9b4c2dac02c03ee9c69c67b64a523b66fe64612d19e901736a3982282769d5c",
+      "signature_der_hex": "3044022074b2f6502d2d75ba150673858675f64f90d3627d0a862c94b1f6fff08c805db5022079245a9565e326fef1c9fc30991162ce6c1d9c2365b8da72310e5ea43cf063c3",
       "verified": true,
       "chain_head": "d7d4d5cdb484e6fe446333cf044e802f800c9338c5946d4758c7f8537f6adfc5",
       "payload": {
@@ -1682,7 +1682,7 @@
       "job_id": "BHQ-JOB-2026-QPU-0075",
       "trace_id": "a49ed570-8df7-5e36-bb3e-434963f1777f",
       "signed_hash": "2f7b6f5c062b8fb55a409f8e5cb266b9ed97dc2b63f11b45fa3a26252876365e",
-      "signature_der_hex": "304402205c9da9cccaf32d3c46821d570dd3b9a6426b555334fca1a9374c8a5588bb5fee02203d08384eebb7f8eba51d87285d75ed495faeee179ee8868812a3317f582a7ed9",
+      "signature_der_hex": "3046022100d86644b79e61f3994d614768512a72c8a854307fa2bbe5fddc315e2d63dbe391022100c394902843e6901c6a5f3f0c6a6bd227205f66bbc27d906140619e02696fada2",
       "verified": true,
       "chain_head": "5c4394df02fcb82448711b84ce6d3b1b23aeda8af9ff6191359aeb2d7a48dc9b",
       "payload": {
@@ -1704,7 +1704,7 @@
       "job_id": "BHQ-JOB-2026-QPU-0076",
       "trace_id": "6c33b206-e47b-53c6-aeaf-66627ab41561",
       "signed_hash": "fd2e6a8078364569c9fe8ce1da67dd0c276a162f7edb19f3655f5688c7c9a14c",
-      "signature_der_hex": "304402201cbaea2bb0db65da04449cbfaa484f5966096cef0ba104ae9c3dd2954d9cbb7102202aeca87dc1bb69cad78c089c55612e28ef17bee93ca83d586ea990a0ea66908c",
+      "signature_der_hex": "30450220261b8a04a57bbfcf09cf79a5c53cfce1b228738e601461212ea09c92b7cfa5e30221008fc04292a9dd18305cb87816fcb11e0c4e5d2b5234758197b5acd863e90f817d",
       "verified": true,
       "chain_head": "fcbe1de49c3c86b984839d3f8cc28e34d12433d9793766da13554e47f5cc3f47",
       "payload": {
@@ -1726,7 +1726,7 @@
       "job_id": "BHQ-JOB-2026-QPU-0077",
       "trace_id": "ee43defb-d468-52ec-9b9f-a982f1c7b1c3",
       "signed_hash": "86f7fa4f802467a56a5b8fc53034b4f043cc207c5aebe290777094b39a724115",
-      "signature_der_hex": "304502204f8d51825b449f4965d9d531cb8ff554cdffee705e88776b7699402380bd1efd022100e2ba847efc711013d090af299c35e637c40a7914b6ce77a5422b5260b8d4456e",
+      "signature_der_hex": "304402200cf8d812f7e00c901d816943d4f21a30677f84dc70252c099eeabfda39e438a902203edb2d86da140f774dec479a2036da4957be45feea1eee9e310be5ec70143f78",
       "verified": true,
       "chain_head": "258aeb832a9ddcf9d7d9e16876abbf59ed1608a98434b59134be9973f1697705",
       "payload": {
@@ -1748,7 +1748,7 @@
       "job_id": "BHQ-JOB-2026-QPU-0078",
       "trace_id": "07376e62-063d-5aca-b14b-4fe2306498b3",
       "signed_hash": "6245d3ec77e5ef4fe7519d4bce06ddb6a9033826420910d8e943a862d7804d9d",
-      "signature_der_hex": "3046022100ee309b163efe48701763e7dcb4a0607430689b6ac7334ffd089b86660ab4ff7a022100c8c2e5ef275f9726798bd58ef27b92c004a746efb52fd6414ef7c3964d912223",
+      "signature_der_hex": "30460221009e9b49cc90920f24970124c35e93f43d30a559a7d7892e3ec5d72531cd224d27022100c4eeae131eb94eebbfbe19a85f523ab288260f7721f97547ce4407cbd5e29a87",
       "verified": true,
       "chain_head": "62980f3740c5fc5ff2c903f4bb3e3f726a6d9265ff5e7c3229ae336e709b93e5",
       "payload": {
@@ -1770,7 +1770,7 @@
       "job_id": "BHQ-JOB-2026-QPU-0079",
       "trace_id": "bdd29719-fe0c-525c-b758-da4ae69a57cd",
       "signed_hash": "1da597820d386164583db0efeb161b9fde29165f450a784a5eb515312ca8db77",
-      "signature_der_hex": "30450221008dec2c525b194b265d07d9dbae4408878a2350c8b8ae44b40013cc3f5ecab2a602207740df160746eb7ebe4546f1a313ab94e5a4184691f8b7b8e6a64747444a4942",
+      "signature_der_hex": "3046022100c0e5a3e9e410f9e657f7642b81c4a6938d37062aacb067178a1d74d7d9feb2430221009bf0e2d97e6e4b86c998f2e537e27e80d3d4d3b702538c1a4136e09b873e6d67",
       "verified": true,
       "chain_head": "b8540c53c6465abbe8fb27b17198a23506550e18bef65cde912e5fd988eeded2",
       "payload": {
@@ -1792,7 +1792,7 @@
       "job_id": "BHQ-JOB-2026-QPU-0080",
       "trace_id": "185ee29c-767c-5bc7-8b07-2589488282a3",
       "signed_hash": "7a90469d7edbc0b2a47b8af1e7a54c9c0ae2ab90ea879fe289527cda31a99856",
-      "signature_der_hex": "304502203a1bd510acad28e47f58ffc8919956339842ef3fcc191c7c7a6f49a3d872e8c5022100fde22d6d86ec883875e1cd265a173bd3908dab1e4a3c835f07d5faaef306f2d5",
+      "signature_der_hex": "304402202949217c29c78be45373ad95789df29e1a405ab0683e7bf2314bc3b1149bc2d602205f9b3309170d8751416efc472f4641d183dd808cb90fcf689c95643c7a4c0cb2",
       "verified": true,
       "chain_head": "059eca8c6af8c980025f9ad60e571192413a7cc25e0049fff13f58cc8c8862bf",
       "payload": {
@@ -1814,7 +1814,7 @@
       "job_id": "BHQ-JOB-2026-QPU-0081",
       "trace_id": "bb91d42f-08c2-5c75-9927-ff04be1a47b7",
       "signed_hash": "755260c77e97e8dd8395e73003811bcd454ee2084c577daea70ce910288a60ad",
-      "signature_der_hex": "3045022100e743fb9a06146de70262596e535389a2509f9851f9f978fdfe23fc6d95714ae602202b8f32e2354f5510feaf87f38566de178281cff4c0416d2e8f64eb6e5f43f3da",
+      "signature_der_hex": "3046022100e946151caf99df09266148c5a16579e623acffea92f2a3690124c41b0cfb8a3f022100e5a8b6e053240b330eb31aa4469ed0ee864d1d0bf48240060c36f3dad96f5712",
       "verified": true,
       "chain_head": "ce97fc2a72c0ce9d9832ac3c4c6043e0346595f811912722fff1a9f468faf77a",
       "payload": {
@@ -1836,7 +1836,7 @@
       "job_id": "BHQ-JOB-2026-QPU-0082",
       "trace_id": "4acb6878-275d-5aa4-aa45-1685e2a73341",
       "signed_hash": "1ab1ac269c41ba33e5fdc38febe6ac58124e8a74b34efb38abf76a1bf9d2f75c",
-      "signature_der_hex": "3045022016860aabcfa259d418527cb0f0bdf834bd1b237076c182d19f59c154abd945d3022100b877b6cf80d489690909f405be1053d84ac4ff604b5f3da2abe63601d73dfc1e",
+      "signature_der_hex": "30440220143280c9c52e3fead42aa01ef0fe7308414fc811f1b002dbad71f0d985934fc6022050db8ca2f7eacac86e868848dbcc83585c69cd7182ad6831058694fc15236fd2",
       "verified": true,
       "chain_head": "c31268fcbcc303ccf4cce6c73482cac3c4a9b5a06ffa1afd4635242c4829fc63",
       "payload": {
@@ -1858,7 +1858,7 @@
       "job_id": "BHQ-JOB-2026-QPU-0083",
       "trace_id": "7c0f2204-0373-5774-8df4-35a97c8f56d3",
       "signed_hash": "59a3595ddb2fb5329cc088fc0dc4d17f35aec755ab2e32d52707736adab52169",
-      "signature_der_hex": "3044022042204b4c6b9bbf163b09cb1145c815445e491a73c65c2568106cf2c7f0b3e7f2022012deaeb70c4831e7c03d23f90e538fded3a94119d896e705cfe3457fdac316ad",
+      "signature_der_hex": "304502210089f8322979e7c7a5da30b4c98725f096a52ab7605ad830059660e97c72cb15f702207d9b56c5bf1c1f32c37f19b473d0d5a0fd16213d8035af0ba2d88c59951e5617",
       "verified": true,
       "chain_head": "c03d73a6b5752c0739cfd384cdf0c08eda6d13e91e22dd7848c7364046102f21",
       "payload": {
@@ -1880,7 +1880,7 @@
       "job_id": "BHQ-JOB-2026-QPU-0084",
       "trace_id": "9609dd79-e1c1-5ed4-9f5d-14bd1abeb3b9",
       "signed_hash": "06dadcd9e68e70599baed96cc6c487d968b6dfce79c537a1825c7e4f33b9ebbc",
-      "signature_der_hex": "3045022034a0b5324a49d01246c8312b7455a9204e6195795aefa80761d2cc5e44f195ea022100eb16d92dadc7ab0874758579a600fbc75fc86db5d98b93937dc18c7004276eb4",
+      "signature_der_hex": "304402200a679563ba3f4c6cdb79835237fa35a95edc5d16928f2a3dcd66ecb658cb18f402206debcfdfb1b44676e64feea5250c34afb7dae4aebc63793a637942f152e18452",
       "verified": true,
       "chain_head": "302e5e10401ccb59dfe82dfc61add96a40daa29e7ca51263e1fd96b26da04f43",
       "payload": {
@@ -1902,7 +1902,7 @@
       "job_id": "BHQ-JOB-2026-QPU-0085",
       "trace_id": "4fade766-4b3a-5830-a04b-08289f1add38",
       "signed_hash": "d85406d1d83d0160740c4371036e4ca1743ccdd196c12998c7d3cddf4a5c7d0f",
-      "signature_der_hex": "3045022100d25a44a48848fa374d9b9373fb974e3e50bb44eb6fb0d64cb71e18175a1440a1022010cf237d2f64d7185b3dc9d54da85756d944763cebc8ae222e0687c68cb140d1",
+      "signature_der_hex": "3045022036decbef8d4e0e203ba7c3f048cc12bc505549512dea9b8f25344d36d85c3c230221009de2f4f3fb207987053cbb3d7a0a901315b304022e76dcc666e9fd52ec34f209",
       "verified": true,
       "chain_head": "4760513b72002c7ae136ed83caac12f1c40a463a1d0a3c69c69821ee68938c3a",
       "payload": {
@@ -1924,7 +1924,7 @@
       "job_id": "BHQ-JOB-2026-QPU-0086",
       "trace_id": "b1c716e2-c3c4-5421-96ba-31833b536d30",
       "signed_hash": "1488d52d887a35ad3ecbad86fc60a1cbba8eb4319170157f95cdd5248de8fdab",
-      "signature_der_hex": "304502207b82da618799e765bbdb22d05ee5efb975101b4734d6c772933b93ad98c89215022100b23e13bd16aa70948e8fce7cf1b6788022daadebe755b715aa05d016756969c3",
+      "signature_der_hex": "3046022100fea152ffce63c0665e084643e0849498b9f18221cf54ed7d995b1a99befeb379022100c3b242e64c0d9b18f30634d0d8dac1445bae620756da462cb97fc52da209a0c7",
       "verified": true,
       "chain_head": "7fbdad43c75860f7caa8dbb2605f441c4f859dc6d30adc7d042c3f595f48df75",
       "payload": {
@@ -1946,7 +1946,7 @@
       "job_id": "BHQ-JOB-2026-QPU-0087",
       "trace_id": "2f19eee9-aca1-505c-9e9a-2f2fc60cdd3a",
       "signed_hash": "9ec0dc7acd4374a69181da34a4ee59d91a5c8cee25ac39817ef89e603eb2fbe1",
-      "signature_der_hex": "304402205fb9fc260b929d55a2797c057c2b3d03da0b9851ee6b159beefbe4dc85c4a159022002bac02137367e2514f6b0c6a68163133b8122bc07ec862da484b3f1984edfc7",
+      "signature_der_hex": "3046022100c8d7cfb598ea5f3605861151ebea11bb56b9196e6d9693e0b5255d200da9cb7f022100dab71e8480a99b4eb96840d485bb6af135f9f609a80d21a5f8d101ff9a36fbbf",
       "verified": true,
       "chain_head": "fc5a6083114b1a62f496a74117aef97cf85b645bcc13187dd3f763b605bee247",
       "payload": {
@@ -1968,7 +1968,7 @@
       "job_id": "BHQ-JOB-2026-QPU-0088",
       "trace_id": "91e76217-a0d8-5599-83a1-1c083a6ac12c",
       "signed_hash": "476c59fadd8d2c732a270593fec7fe4a0338e61cf43328ecf627a436f9eaf972",
-      "signature_der_hex": "3045022100a203f29f2e4ff46256a1df9b1b6025dbcbb4e4e42e130dbe7931a00bef08419f02203a20e60c1ea7edaacc0c7d84a178f5ed957cd8fcc737813765f90f9109c58611",
+      "signature_der_hex": "304502205b9985b328abd93743bfaffab30d4059b52ecb4dde8c1215bb6a5787921c6d39022100bfe876d7f9af278ab9ba2110595f22d9c3c7fd88a5baf69ae4d4579673389930",
       "verified": true,
       "chain_head": "e89961923a737a2a9715ffa799f3d169f65bedff721af6dc7d2ea9c9007e6c18",
       "payload": {
@@ -1990,7 +1990,7 @@
       "job_id": "BHQ-JOB-2026-QPU-0089",
       "trace_id": "0a5fde9e-2ddd-5aff-924d-b9c6ab2cb17f",
       "signed_hash": "1597b8bb898dd871c0c875d1bdae89a3af9d2d84d4405b030899380c0562f62b",
-      "signature_der_hex": "3046022100ff0bdc0c87d986b643c6c25552be94ea1d3d6433b49c0adecf4e41f452e34bca022100f3a8bc93ffa95d7a2d17139dafc309857b8ffd881f2d03c9a7bf321cf7331a67",
+      "signature_der_hex": "304502204070b12131f971c398daa86cef4fa113b8940e86e70b02c9afcd4d788ce45b3a02210096e648111c25fa662f7b37e240668019aeace6fb76505c07099a2c852ec7ccfa",
       "verified": true,
       "chain_head": "5495dca4ab404da738ddfffd94a520c029a24cbad921a8ce70c3ffecfe62b58b",
       "payload": {
@@ -2012,7 +2012,7 @@
       "job_id": "BHQ-JOB-2026-QPU-0090",
       "trace_id": "c3cde0e9-d3fd-56ff-9f52-195f9c4a16a2",
       "signed_hash": "9eaea374bd9d84e150bd94c3609de05722b219c8e1b5c71924b2c0410340517c",
-      "signature_der_hex": "3045022100e3dbfd84a38bf4acf5f18cd9d9d8aee3f80ef8e4dc462f76c555a372cfd724150220593bd93618eb4abf3829cfd8f5131caa6823dd7b9d8ed9050705ce1efb46acc3",
+      "signature_der_hex": "3044022012586f9c1fd69eb7eb39b6013d6736859eb27beffd3855a8b7a6cc3585c485870220369a729073eae7c9ad5771625c790d4bc68bf348875a5f16d6fccff0dcd85808",
       "verified": true,
       "chain_head": "fa35d8966e15140128729c78436d34f634e192107ce9eef1e8c5b213c49cd012",
       "payload": {
@@ -2034,7 +2034,7 @@
       "job_id": "BHQ-JOB-2026-QPU-0091",
       "trace_id": "63b4ca3b-47c3-5e36-89b8-5302256cb8e5",
       "signed_hash": "39a898d8bfd853d74723b96c5e243569b26af8762e9b240d7376fe71e6a7ef7c",
-      "signature_der_hex": "3045022100bfcf2603fa3fdcd36a30239cde7b87816d4d24426cb94eafed39d5e7dc77f9bf02205118da4247007131f20ce2ad872a14644627b236880e54618ac9654e26d0ac1d",
+      "signature_der_hex": "3044022071c2fccc831c98b2e96e4cbb7e541d50e86256dfa2e4add5e828d0e19e9911210220064bba5e91f90962698f918b51befc559200c53e4c9d8951b925cf6bea92dd9a",
       "verified": true,
       "chain_head": "4c8719a1641fe10f8ef430773acf442ee1895e493da5b036b87277b7ac08c8cb",
       "payload": {
@@ -2056,7 +2056,7 @@
       "job_id": "BHQ-JOB-2026-QPU-0092",
       "trace_id": "7a04e5f6-f3bb-5928-8278-abe4339a34e6",
       "signed_hash": "cd0213ec348e74727080f8c7e6059985bf00bcdcea5d3ee51427b3a5c19ee776",
-      "signature_der_hex": "30450220023b01621d3c2645959303b25c0c4fb74c08f0c057d08dc3ae63dee1185bec35022100c66219421f50a950cc41beea40222854578a9ba65a0d2484d2734eaa3191e20d",
+      "signature_der_hex": "3045022000fbf10d34599afe947f54d92677387c2641f4e5e9350142432a085181a8e2e702210082be213cc08d4ddbf6bb3af12890863d9e406953f7c7de8ac8b202592e3ff96c",
       "verified": true,
       "chain_head": "e8542da221837cbd02bb18b451131041cf2f2581287b68684e512ce0319c955d",
       "payload": {
@@ -2078,7 +2078,7 @@
       "job_id": "BHQ-JOB-2026-QPU-0093",
       "trace_id": "38dadf44-323b-5fac-babc-874e22c83789",
       "signed_hash": "8ac9d673066fa845708bf2789d92d04cc227350347d4e53fca85cf4f668cd0d7",
-      "signature_der_hex": "304402202d5ad89f0a439a6203c49115014d197f9728b03f094f873bfab49429d1efdae9022025e69f60a2ada13124a5a6b2096fef0a413cd00214ff92042873a066d22d1e36",
+      "signature_der_hex": "3045022049fc4f52bee1558f22e66b86c5e1f60498c4db8d40ede55e2c51a2a5ff8617f2022100d1d30c5b49bb35ab72eff9c302523b1b5a31b1dd2c72cb968945b78020840499",
       "verified": true,
       "chain_head": "e18e60db001c0a85fe6644eca645b499e7000053d289078947a608decf631dba",
       "payload": {
@@ -2100,7 +2100,7 @@
       "job_id": "BHQ-JOB-2026-QPU-0094",
       "trace_id": "1c65283f-caa9-56d4-9df3-1bf6b0d25955",
       "signed_hash": "7282a9753277ddd3e3a42b5abf753db3ef44e8a639226af187dfe436ba66b841",
-      "signature_der_hex": "3046022100e8ecb23413578723f71908308f5f21b6c557b8807b720c477a4464333a9d2c3c022100914b137d65049903e762e091f4515ee68162b561f52ba411d982d50a81929071",
+      "signature_der_hex": "304502200ea12a47ba74a28126f19aa9bb151df2a00cc42013d64a3e5ec3e7fadafc1777022100bc763f8216e51787ec7f8787c19221d8e351d9651b01c264ae799a21ea3e5c49",
       "verified": true,
       "chain_head": "5a89c6ba4f29bb789ad18933466f694c2adcefe845edb2d63fd24a30eeab77da",
       "payload": {
@@ -2122,7 +2122,7 @@
       "job_id": "BHQ-JOB-2026-QPU-0095",
       "trace_id": "54730b9e-f93c-5a61-808b-4bfd3b78e118",
       "signed_hash": "c770fca9a030fd03ab355e6cf57a45647b16710f38bb48b6f63dda187d3f5f73",
-      "signature_der_hex": "3045022100f3af4929f3d6daf5f9555bd6ad6978146d70178bb88f17ef0cf2c87f362760070220716dbb966cb546ab22140d2fcb019a0865c80a36fd2994082a4b9c016b431c7c",
+      "signature_der_hex": "3045022100d3a6a3d2feac1119abdde911585ca84d7eb8ff2a29122492c2e5fdc749d0a86302207b279d1bf18c70ef47c4986ab8a9432dc8238f84bc262bfad237386cda8b9431",
       "verified": true,
       "chain_head": "c912489e76a30bc50a4e0c326ab0cd27b5673199e24bdb344784f18478e20cc9",
       "payload": {
@@ -2144,7 +2144,7 @@
       "job_id": "BHQ-JOB-2026-QPU-0096",
       "trace_id": "b8a3bfcb-e9ed-58e0-83da-053577bdb139",
       "signed_hash": "9079267901f149c7aabf7eaf8c578ec7b0988ebf529418b0b9880f85c366af51",
-      "signature_der_hex": "3044022066fc675bcf623b9e3addd7cda72c1e0202d0f94cf8271745a3073609d170d5d002202e5f6ea4968d5fcd007fde0d4c4790cb96f402531081a8fbb5378c36a9deb134",
+      "signature_der_hex": "3046022100c0ffeec637a9c3d50e70038d3311ab430a3f9a3dec9e1229a0fec15bc6c9667f022100e2104eed078c2bc5e08450a7f53eb86bea48a839eec4c3df81acd515188f5c1f",
       "verified": true,
       "chain_head": "aafd045b4537f130c71cd34cc4e9555c520d13fa4c079e2e913a79d38457f6df",
       "payload": {
@@ -2166,7 +2166,7 @@
       "job_id": "BHQ-JOB-2026-QPU-0097",
       "trace_id": "cd49bcf8-af62-598a-b41f-61e401f63b5c",
       "signed_hash": "eaaf24defb087aa00cc8470bc08a58d71d3f12b0672869a0083e6680d2ec3c87",
-      "signature_der_hex": "3046022100ad09fc2fca8d944564937439816bf8612a7be4e2e7353b21fa4f6ec7ad43ff98022100bfa7010986dfdb07f9887606903f6c970543368b832f108336a4eb5bb5bb60c0",
+      "signature_der_hex": "3045022054fe236bf2128b52418ced8c78335604c14f9bdb9429d4e4eea37aa5b6ea6dfe0221008545a910c7e9bfe3a2e6ca7dd1157ee0d59fb89ad9c3a1e7be70e561f7a59589",
       "verified": true,
       "chain_head": "e8bdd09804cafd13d68a76c457fbf9761f5e909cc9f026f1142c8e5cd6d2d51e",
       "payload": {
@@ -2188,7 +2188,7 @@
       "job_id": "BHQ-JOB-2026-QPU-0098",
       "trace_id": "e36bce2e-a6d8-5a60-b2a2-38f613320e93",
       "signed_hash": "811be0a240c0cd22b860c06519cad18355d74c2d1e0476e38775b825bac858ec",
-      "signature_der_hex": "30460221009af4b85ed7d93ca2677a8f04bf2a11d1d742c007a51606e5d552567251a171a9022100bf7b5cdccc0da4da151e92263b3bd0abae37996a1bab3e43259eff6a2b24d963",
+      "signature_der_hex": "3046022100b6d1fb43adc3bf195f621985cee4d048affd4dbf30c291e7ed3e4427c3f10665022100e3f18982998a448bb09a23eb8c9d15c08377a4b811e81a3f9792578344d1fa13",
       "verified": true,
       "chain_head": "6bdb061a87468e9cb1976d56ab89351b166ce808976248e0e133f6a27eb991e4",
       "payload": {
@@ -2210,7 +2210,7 @@
       "job_id": "BHQ-JOB-2026-QPU-0099",
       "trace_id": "a450a43b-7838-5e6f-a135-3b8afc1ea60e",
       "signed_hash": "515c269ec7acdd406e867f2764223f14b983b749ef50dfedfb6c06474b2554de",
-      "signature_der_hex": "3046022100c344314ce86251612d6000d30057d7867cc0cc668527a37a6b806b6eb51a381c022100ae331e83769cf8ce6b3c4ad0fcaaea406ca2782a18b9b99719e6c8e412768038",
+      "signature_der_hex": "304402206b3ae6c551370d02bca805303cc6c71beec90f7ec490d9ed8d546dec3fbe8a82022061902a6ac9eab5470aa6b772cf28c8f91db3fbee18c584cc37db128ea7bf569b",
       "verified": true,
       "chain_head": "29bcd27442bf05f6e9c0f3506cce3fe48587521d56b2bf83b43783ad3209da55",
       "payload": {
@@ -2232,7 +2232,7 @@
       "job_id": "BHQ-JOB-2026-QPU-0100",
       "trace_id": "be48d851-ff07-5111-abd6-7681214aef6f",
       "signed_hash": "cf143eb53a8da2eff6feeba37facff3d68c20284049d33a80a527e33049bd329",
-      "signature_der_hex": "30440220044c9cbcab4b7d390ca4ca8eaff0922363fd6c42bb7ac39936aee9e5871686ba022075832722b0316a8566daf8ca8a245531bd1c582244f65240d80d88f1e8927a25",
+      "signature_der_hex": "3045022059f800bbec1f9863d96eb60b973cd6f6da266aaa2cbcd08ed35ee3e65e43dbcf022100d4ef99fa04f487e635054bdbd5a67d7b55a36888f35ae4acee282e4dd777091e",
       "verified": true,
       "chain_head": "3ffd195ee6683004b48f85add39b05d57c4a0a102600e89ca1fd0b8ccf703eca",
       "payload": {

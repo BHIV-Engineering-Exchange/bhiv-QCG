@@ -1,187 +1,164 @@
-# Hybrid Quantum Communication Gateway (QCG)
+# BHQ Sovereign Quantum Computing, Photonic Systems & BioQuantum Research
+## Programme Repository & Lab Framework | Task ID: BHQ-INFRA-001
 
-A deterministic hybrid quantum/classical communication gateway built with Qiskit.
-Bridges probabilistic quantum output to deterministic classical contracts.
+**Programme Identifier:** `BHQ-INFRA-001`  
+**Priority:** P0 (Mission-Critical Engineering Baseline)  
+**Programme Lead & Integrator:** Ganesh Vishwakarma  
+**Platform Integration Lead:** Kanishk Singh  
+**Trust & Instrumentation Lead:** Pritesh Patra  
+**Runtime & Biological Simulation Lead:** Dhiraj  
+**Independent Contributor:** Candidate on Test Task  
+**Execution Model:** AI-accelerated, parallel workstreams, evidence-first  
+**Hardware Procurement Status:** **STRICTLY NOT AUTHORISED (GOVERNANCE RULE 8 ENFORCED)**  
+**Architecture Status:** **CONCEPTUAL DESIGN AND SIMULATION**  
 
-## Architecture ..
+---
+
+## 1. Programme Objective
+
+The objective of **`BHQ-INFRA-001`** is to establish a rigorous, evidence-backed engineering foundation for BHQ’s sovereign quantum infrastructure, photonic communications, nature-inspired computing, and BioQuantum research.
+
+The programme determines:
+1. What can be accurately simulated in software.
+2. What is scientifically justified versus speculative hypothesis.
+3. What strictly requires physical wet-lab or cryogenic experiments.
+4. Which existing infrastructure components can be reused without duplication.
+5. What quantitative requirements must be certified before hardware design or procurement.
+
+---
+
+## 2. Repository Structure
+
+In compliance with Section 5 of the assignment, the repository is structured as follows:
 
 ```
-TransmissionRequest
-      |
-      v
-[Layer 1] QuantumProducer       -- Qiskit superdense coding simulation
-      |
-      v  QuantumDistribution
-      |
-[Layer 2] TranslationLayer      -- Probabilistic -> deterministic contract
-      |
-      v  ClassicalContract
-      |
-[Layer 3] QuantumGateway        -- Orchestrates devices + replay guard
-      |
-      v
-[IndustrialEndpoint]            -- Deterministic ACK
+bhq-bioquantum-lab/ (c:\Users\PRITESH\Desktop\QCG\QCG_task1)
+├── README.md                     # Programme overview, setup, and execution runbook
+├── EXISTING_CAPABILITIES.md      # Comprehensive repository, algorithm, and service audit
+├── MODEL_REGISTER.md             # Candidate mechanisms, hypotheses, and evidence classifications
+├── ARCHITECTURE.md               # Sovereign system boundaries, interfaces, and component status
+├── REQUIREMENTS.md               # Computational, physical, instrumentation, and energy requirements
+├── BENCHMARK.md                  # Baselines, evaluation methods, and quantitative results
+├── BOM_BOQ_PREREQUISITES.md      # Prerequisites required prior to any BOM/BOQ preparation
+├── SIMULATION/                   # Executable biological & nature-inspired models
+│   ├── mycelium_network_model.py # Adaptive mycelial flux & FitzHugh-Nagumo action potential
+│   ├── config.json               # Simulation parameters and grid configuration
+│   └── sample_output.json        # Observable benchmark outputs and metric comparisons
+├── photonics_rf_systems/         # WS-C Photonic, Optical & Cryogenic RF simulation package
+│   ├── superdense_coding.py      # Remediated Qiskit little-endian Bell protocol (BLK-QCG-001)
+│   ├── optical_link_budget.py    # SMF-28 fiber propagation and QBER calculator
+│   └── cryogenic_rf_attenuation.py # 5-stage dilution refrigerator thermal photon ladder
+├── evidence/                     # Generated evidence records, profiles, and test scripts
+│   ├── validate_instrumentation.py # WS-D Friis noise cascade & White Rabbit timing validator
+│   ├── test_qcg_provenance.py    # Retained QCG ECDSA & Merkle tamper test suite
+│   ├── 02_PRITESH_PROVENANCE_TEST.json
+│   ├── 03_KANISHK_SUPERDENSE_FIX.json
+│   ├── 03_KANISHK_OPTICAL_LINK_BUDGET.csv
+│   ├── 03_KANISHK_CRYOGENIC_RF_PROFILE.json
+│   └── 04_DHIRAJ_INSTRUMENTATION_SPEC.json
+├── tests/                        # Automated CI test suites
+│   ├── test_bioquantum_simulation.py # WS-B & Candidate unit tests (6/6 passing)
+│   ├── test_photonics_rf_systems.py  # WS-C Photonic unit tests (18/18 passing)
+│   ├── test_qcg_provenance.py        # WS-D Provenance acceptance tests (4/4 passing)
+│   └── test_hybrid_runtime.py        # WS-A Hybrid runtime integration tests (16/16 passing)
+└── review_packets/
+    └── REVIEW_PACKET.md          # Consolidated findings, Section 7 reports, and Section 8 roadmap
 ```
 
-### ClassicalContract schema
-```json
-{
-  "trace_id":           "<uuid5>",
-  "confidence":         0.9287,
-  "decoded_message":    "NODE_READY",
-  "transmission_status":"OK",
-  "uncertainty_score":  0.0713,
-  "contract_version":   "1.0.0"
-}
-```
+---
 
-Transmission statuses:
-- `OK`       -- confidence >= 0.70, bits match
-- `DEGRADED` -- confidence in [0.40, 0.70), bits match
-- `REJECTED` -- confidence < 0.40, or bit mismatch (raises TranslationError)
+## 3. Team Ownership and Role Boundaries
 
-## Setup
+| Workstream | Domain | Accountable Owner | Core Responsibility |
+|:---|:---|:---|:---|
+| **Programme Lead** | Integration & Coordination | **Ganesh Vishwakarma** | Own overall plan, priorities, dependencies, evidence standards, and task allocations. |
+| **Workstream A** | Quantum Software & Runtime | **Ganesh Vishwakarma** | Audit quantum repos; implement AerSimulator QAOA/GHZ circuits; distinguish simulation from hardware. |
+| **Workstream B** | Biological Networks & BioQuantum | **Dhiraj** | Model mycelial signaling; define bounded hypotheses; separate bio-heuristic from quantum claims. |
+| **Workstream C** | Photonics, Electromagnetics & RF | **Kanishk Singh** | Superdense coding protocol; SMF-28 optical link budget; cryogenic microwave attenuation ladder. |
+| **Workstream D** | Mechatronics & Instrumentation | **Pritesh Patra** | Cryogenic transmon readout ($T_{\text{sys}} = 0.14\,\text{K}$); White Rabbit timing ($\Delta t = 6.2\,\text{ps}$); QCG provenance. |
+| **Workstream E** | Simulation & Evidence Support | **Joint / Candidate** | Repeatable experiments; automated test suites; comparative baselines; evidence preservation. |
+| **Candidate** | Independent Test Task | **Candidate on Test Task** | Author reproducible biological network model with passing automated tests and benchmark comparison. |
 
+---
+
+## 4. Scientific and Engineering Rules (Enforced)
+
+1. **Simulation is not physical validation.**
+2. **Classical electromagnetic processing is not automatically quantum computation.**
+3. **Biological signalling is not automatically computation.**
+4. **Ambient RF energy must be quantified before claiming useful energy harvesting.**
+5. **Sustainability must be assessed against a comparable workload and baseline.**
+6. **AI-generated designs require engineering review.**
+7. **Reuse verified infrastructure instead of duplicating it.**
+8. **No specialised hardware purchases or fabrication before requirements, feasibility, and explicit engineering approval.**
+9. **No physical quantum execution claims without evidence from an actual quantum backend.**
+10. **Record failures honestly and preserve reproducibility.**
+
+---
+
+## 5. Setup and Execution Runbook
+
+### 5.1 Environment Setup
 ```bash
+# Clone and enter workspace
+cd /path/to/bhq-bioquantum-lab
+
+# Install required dependencies
 pip install -r requirements.txt
-cp .env.example .env   # optional: tune thresholds / log format
 ```
 
-## Run
+### 5.2 Executing Workstream Models & Validations
 
+#### 1. Workstream B (Biological Mycelium Simulation & Candidate Task)
 ```bash
-# Full gateway demo + failure tests
-python hybrid_gateway.py
+# Run the executable mycelium transport simulation
+python SIMULATION/mycelium_network_model.py
 
-# Determinism proof (20 runs, exits 0 on pass, 1 on fail)
-python determinism_proof.py
-
-# Three-process pipeline demo
-python process_runner.py
-
-# Crash simulation
-python process_runner.py --crash producer
-python process_runner.py --crash execution
-python process_runner.py --crash consensus
-
-# Replay enforcer demo
-python replay_enforcer.py
-
-# KESHAV live integration test
-python keshav_live_client.py
-
-# Full evidence collection (KESHAV + unavailable services)
-python live_integration_evidence.py
+# Run the automated unit tests
+pytest tests/test_bioquantum_simulation.py -v
 ```
 
-## Test
-
+#### 2. Workstream C (Photonics, Superdense Coding & Cryogenic RF)
 ```bash
-pytest tests/ -v  # 384 tests, 0 failures
+# Run superdense coding verification across all 4 classical vectors
+python evidence/run_superdense_fix.py
+
+# Run optical fiber link budget sweep (0 - 100 km)
+python evidence/run_optical_link_budget.py
+
+# Run cryogenic attenuation profile simulation (300 K -> 10 mK)
+python evidence/run_cryogenic_rf_simulation.py
+
+# Run the automated photonics test suite
+pytest tests/test_photonics_rf_systems.py -v
 ```
 
-## Configuration
-
-All constants are in `config.py` and overridable via environment variables.
-See `.env.example` for the full list.
-
-## File Structure
-
-```
-# Core pipeline
-config.py                  -- All constants, env-overridable
-logger.py                  -- Structured JSON logger
-models.py                  -- Typed, validated data models
-quantum_producer.py        -- Layer 1: Qiskit quantum simulation
-translation_layer.py       -- Layer 2: QuantumDistribution -> ClassicalContract
-hybrid_gateway.py          -- Layers 3+4+5: Gateway, devices, failure handling
-determinism_proof.py       -- Layer 6: Determinism verification (20 runs + failure injection)
-tests/test_all.py          -- Full pytest suite (65 tests)
-.env.example               -- Config reference
-requirements.txt           -- Dependencies
-
-# Phase 2: Trust Layer
-node_identity.py           -- NodeIdentity, NodeSigner, NodeProof
-provenance.py              -- Contract signing and provenance verification
-consensus_simulation.py    -- Distributed consensus with signed attestations
-replay_bundle.py           -- Complete execution lineage artifact
-byzantine_simulation.py    -- Byzantine fault tolerance (6 cases)
-audit_trail.py             -- Merkle tamper-evident audit trail
-trust_chain.py             -- Chain-of-custody with NodeRegistry
-determinism_doctrine.py    -- Field classification oracle
-
-# Phase 3: Execution Infrastructure
-replay_enforcer.py         -- Sequence tracking, TTL, ACCEPTED/REJECTED_DUPLICATE/REJECTED_STALE
-producer_process.py        -- Independent OS process: contract production
-execution_process.py       -- Independent OS process: replay enforcement + execution
-consensus_process.py       -- Independent OS process: consensus verification
-process_runner.py          -- Orchestrator: spawns 3 processes, crash detection
-logs/process_1.log         -- Producer process evidence
-logs/process_2.log         -- Execution process evidence
-logs/process_3.log         -- Consensus process evidence
-
-# Communication Layer
-communication_contract.py  -- CommunicationRequest, TranslationContract, AcknowledgementContract, CommunicationResponse
-gateway.py                 -- Producer-agnostic CommunicationGateway (Q/C/H → same send())
-simulation.py              -- All 4 cross-system paths (Q→C, C→Q, H→C, H→Q)
-
-# Semantic & Authority Layer
-semantic_registry.py       -- 12 canonical term definitions
-governance_authority.py    -- Explicit authority declarations for GovernanceLayer, RuntimeCore, TraceStore
-participation_proof.py     -- Bytecode-level proof of identical execution path across producer types
-ecosystem_participation.py -- 6 ecosystem participants through universal trust pipeline
-runtime_demo.py            -- Full 6-phase demonstration
-
-# Live Ecosystem Integration
-keshav_live_client.py      -- Production HTTP client for live KESHAV API
-pritesh_live_client.py     -- Production HTTP client to simulate Pritesh payload to web server
-web_server.py              -- Local web server endpoint to ingest Pritesh payloads at /verify
-live_integration_evidence.py -- Evidence collection script for all live integrations
-integration_harness.py     -- TANTRA pipeline harness with KESHAV live integration
-
-# Handover documents
-ARCHITECTURE.md            -- System architecture reference
-DEPLOYMENT_GUIDE.md        -- Docker/K8s deployment instructions
-ECOSYSTEM_INTEGRATION.md   -- Ecosystem federation status (live vs pending)
-OPERATIONAL_RUNBOOK.md     -- On-call troubleshooting guide
-HANDOVER.md                -- Final system state and developer handover
-review_packets/            -- Review packet with evidence and code packets
-```
-
-## BHQ-INFRA-EOD-001 Integration & Handover
-
-### External Ecosystem Clients & Env Configuration
-All live ecosystem connectors are configured in `config.py` and `.env.example`:
-- `QCG_KESHAV_API_URL` (default `https://keshav-cia7.onrender.com`), `QCG_KESHAV_ENABLED`
-- `QCG_PRANA_API_URL` (default `http://163.128.209.18:8103`), `QCG_PRANA_TIMEOUT_SECONDS` (`40`), `QCG_PRANA_ENABLED`
-- `QCG_BUCKET_API_URL` (default `https://bhiv-bucket-i1l6.onrender.com`), `QCG_BUCKET_ENABLED`
-- `QCG_GANESH_API_URL` (default `https://bhiv-quantum-application-layer.onrender.com`), `QCG_GANESH_ENABLED`
-- `QCG_VAJRA_API_URL` (default `https://vajra.blackholeinfiverse.com`), `QCG_VAJRA_TIMEOUT_SECONDS` (`15`), `QCG_VAJRA_ENABLED`, and `VAJRA_TANTRA_SECRET` (set out-of-band; never commit secrets)
-
-### Reproducible Verification Commands
+#### 3. Workstream D (Cryogenic Instrumentation & Cryptographic Provenance)
 ```bash
-# Full regression + integration test suite (758 passed, 8 warnings on Python 3.11.9)
-python -m pytest tests/ -v
+# Run cryogenic readout chain and timing jitter validator
+python evidence/validate_instrumentation.py
 
-# Targeted VAJRA + WS-C + discovery + harness suites
-python -m pytest tests/test_vajra_integration.py tests/test_ws_c_tantra_vajra_integration.py tests/test_platform_service_registration.py tests/test_integration_harness.py -v
+# Run cryptographic provenance signing, Merkle ledger, and tamper tests
+python evidence/test_qcg_provenance.py
 
-# Quick VAJRA health check
-python -c "from vajra_client import VajraClient; print(VajraClient().health())"
+# Run automated provenance acceptance test
+pytest tests/test_qcg_provenance.py -v
 ```
 
-### Known Limitations & External Dependencies
-- Quantum execution uses Qiskit `AerSimulator` (`SIMULATED AND TESTED`); physical QPU execution remains `BLOCKED (MQR-01)`.
-- VAJRA `/api/health` and `/api/tantra/chain-integrity` are live (`200 OK`, note `/health` returns `404`); authenticated provenance writes (`POST /api/vajra/provenance/retrieval`) fail closed (`401`) without `VAJRA_TANTRA_SECRET` (`REQUIRES_EXTERNAL_ACCESS`).
-- Standalone `runtime_core.py` calls `PlatformCapabilitySDK` against `http://127.0.0.1:9010` (`start_platform_servers.py`) unless `PYTEST_CURRENT_TEST=1` is set.
-- `web_server.py` `/gc/validate` checks for a `Bearer ` header prefix and forwards to `TANTRAIntegrationHarness` (mutating replay/ledger state without parsing RS256 JWT claims); `/evidence/{hashed_trace}` returns a placeholder proof while `/evidence/certificate/{execution_id}` and `/evidence/trace/{trace_id}` use `EvidenceLedger`.
-- Bucket (`https://bhiv-bucket-i1l6.onrender.com/health` `503`, `:8012` timeout) and Marine Quantum Runtime `X-API-Key` remain externally blocked.
+#### 4. Workstream A (Hybrid Quantum Runtime Simulation)
+```bash
+# Run all 16 hybrid runtime classification and routing tests
+pytest tests/test_hybrid_runtime.py -v
+```
 
-### Rollback
-1. Disable external connectors without code changes by setting `QCG_VAJRA_ENABLED=false` (and/or `QCG_PRANA_ENABLED=false`, `QCG_KESHAV_ENABLED=false`) in `.env` and restarting `web_server.py` (or `kubectl rollout undo deployment/qcg-service`).
-2. Or revert code changes via `git revert <commit_sha>` and re-run `python -m pytest tests/ -v`.
+### 5.3 Full Test Suite Verification
+```bash
+# Execute all primary programme tests simultaneously
+pytest tests/test_bioquantum_simulation.py tests/test_photonics_rf_systems.py tests/test_qcg_provenance.py tests/test_hybrid_runtime.py -v
+```
 
-### Next Three Tasks After EOD
-1. **Integration hardening and defect closure** (provision `VAJRA_TANTRA_SECRET` & MQR `RUNTIME_API_KEY`, restore Bucket, align `/gc/validate` JWT & read-only behavior, replace `/evidence/{hashed_trace}` mock).
-2. **Parikshak workflow automation validation** (live `task -> submission -> evidence review -> decision -> next task`).
-3. **BIQOS ecosystem convergence map and release plan** (map verified capabilities to owners/interfaces and define the next increment).
+---
+
+## 6. Review & Handover
+For the complete consolidated report, Section 7 workstream reports, and the Section 8 roadmap for **Task 2 (Model Validation)**, **Task 3 (Instrumentation Design)**, and **Task 4 (Preliminary BOM/BOQ)**, inspect:
+- [`review_packets/REVIEW_PACKET.md`](file:///c:/Users/PRITESH/Desktop/QCG/QCG_task1/review_packets/REVIEW_PACKET.md)
