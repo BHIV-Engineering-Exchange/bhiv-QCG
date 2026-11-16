@@ -161,4 +161,4 @@ pytest tests/test_bioquantum_simulation.py tests/test_photonics_rf_systems.py te
 
 ## 6. Review & Handover
 For the complete consolidated report, Section 7 workstream reports, and the Section 8 roadmap for **Task 2 (Model Validation)**, **Task 3 (Instrumentation Design)**, and **Task 4 (Preliminary BOM/BOQ)**, inspect:
-- [`review_packets/REVIEW_PACKET.md`](file:///c:/Users/PRITESH/Desktop/QCG/QCG_task1/review_packets/REVIEW_PACKET.md)
+- [`review_packets/REVIEW_PACKET.md`](review_packets/REVIEW_PACKET.md)

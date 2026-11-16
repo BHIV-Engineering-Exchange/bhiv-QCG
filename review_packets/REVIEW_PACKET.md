@@ -25,14 +25,14 @@ Under the founding mandate of **`BHQ-INFRA-001`**, the team has completed Phase 
 
 | Milestone / Requirement | Verification Evidence | DoD Status |
 |:---|:---|:---:|
-| **1. Existing Infrastructure Audited** | Full inventory across repos, algorithms, and services in [`EXISTING_CAPABILITIES.md`](file:///c:/Users/PRITESH/Desktop/QCG/QCG_task1/EXISTING_CAPABILITIES.md). | **COMPLETE** |
+| **1. Existing Infrastructure Audited** | Full inventory across repos, algorithms, and services in [`EXISTING_CAPABILITIES.md`](../EXISTING_CAPABILITIES.md). | **COMPLETE** |
 | **2. Named Ownership Map Documented** | Ganesh (Prog/WS-A), Dhiraj/Candidate (WS-B), Kanishk (WS-C), Pritesh (WS-D), Candidate (WS-E). | **COMPLETE** |
-| **3. Executable Prototype Running** | Mycelium adaptive transport & FitzHugh-Nagumo model running in [`SIMULATION/mycelium_network_model.py`](file:///c:/Users/PRITESH/Desktop/QCG/QCG_task1/SIMULATION/mycelium_network_model.py). | **COMPLETE** |
+| **3. Executable Prototype Running** | Mycelium adaptive transport & FitzHugh-Nagumo model running in [`SIMULATION/mycelium_network_model.py`](../SIMULATION/mycelium_network_model.py). | **COMPLETE** |
 | **4. Automated Test Suites Passing** | `tests/test_bioquantum_simulation.py` (6/6), `tests/test_photonics_rf_systems.py` (18/18), `tests/test_qcg_provenance.py` (4/4). | **COMPLETE** |
-| **5. Suitable Baseline & Criteria Recorded** | Classical Kruskal MST, Dijkstra routing, baseband optics, room-temp RF in [`BENCHMARK.md`](file:///c:/Users/PRITESH/Desktop/QCG/QCG_task1/BENCHMARK.md). | **COMPLETE** |
-| **6. Conceptual Architecture Categorized** | Component status (Existing, Simulated, Proposed, Unverified) in [`ARCHITECTURE.md`](file:///c:/Users/PRITESH/Desktop/QCG/QCG_task1/ARCHITECTURE.md). | **COMPLETE** |
-| **7. Physical Assumptions & Unknowns Documented** | Parameter registers and open hypotheses recorded in [`MODEL_REGISTER.md`](file:///c:/Users/PRITESH/Desktop/QCG/QCG_task1/MODEL_REGISTER.md). | **COMPLETE** |
-| **8. Instrumentation & Hardware Dependencies Mapped** | Friis cascade, White Rabbit sync, and dependency hierarchy in [`REQUIREMENTS.md`](file:///c:/Users/PRITESH/Desktop/QCG/QCG_task1/REQUIREMENTS.md). | **COMPLETE** |
+| **5. Suitable Baseline & Criteria Recorded** | Classical Kruskal MST, Dijkstra routing, baseband optics, room-temp RF in [`BENCHMARK.md`](../BENCHMARK.md). | **COMPLETE** |
+| **6. Conceptual Architecture Categorized** | Component status (Existing, Simulated, Proposed, Unverified) in [`ARCHITECTURE.md`](../ARCHITECTURE.md). | **COMPLETE** |
+| **7. Physical Assumptions & Unknowns Documented** | Parameter registers and open hypotheses recorded in [`MODEL_REGISTER.md`](../MODEL_REGISTER.md). | **COMPLETE** |
+| **8. Instrumentation & Hardware Dependencies Mapped** | Friis cascade, White Rabbit sync, and dependency hierarchy in [`REQUIREMENTS.md`](../REQUIREMENTS.md). | **COMPLETE** |
 | **9. Review Packet with Logs & Links** | Consolidated evidence index, test output, and reproduction runbook in this document. | **COMPLETE** |
 | **10. Next Three Tasks with Named Owners** | Task 2, Task 3, Task 4 specified with owners and measurable criteria in Section 4. | **COMPLETE** |
 
@@ -159,10 +159,10 @@ Under the founding mandate of **`BHQ-INFRA-001`**, the team has completed Phase 
 * **Supervising Lead:** Ganesh Vishwakarma (Programme Lead)
 * **Assigned Engineering Task:** Implement an independent, reproducible simulation of a nature-inspired biological transport network, validate against a classical graph-theoretic baseline, author automated unit tests, and evaluate trade-offs.
 * **Deliverables Submitted:**
-  - Code: [`SIMULATION/mycelium_network_model.py`](file:///c:/Users/PRITESH/Desktop/QCG/QCG_task1/SIMULATION/mycelium_network_model.py)
-  - Configuration: [`SIMULATION/config.json`](file:///c:/Users/PRITESH/Desktop/QCG/QCG_task1/SIMULATION/config.json)
-  - Observable Output: [`SIMULATION/sample_output.json`](file:///c:/Users/PRITESH/Desktop/QCG/QCG_task1/SIMULATION/sample_output.json)
-  - Automated Tests: [`tests/test_bioquantum_simulation.py`](file:///c:/Users/PRITESH/Desktop/QCG/QCG_task1/tests/test_bioquantum_simulation.py)
+  - Code: [`SIMULATION/mycelium_network_model.py`](../SIMULATION/mycelium_network_model.py)
+  - Configuration: [`SIMULATION/config.json`](../SIMULATION/config.json)
+  - Observable Output: [`SIMULATION/sample_output.json`](../SIMULATION/sample_output.json)
+  - Automated Tests: [`tests/test_bioquantum_simulation.py`](../tests/test_bioquantum_simulation.py)
 * **Evaluation Criteria & Findings:**
   1. *Mathematical Correctness:* Implemented Physarum/mycelium flux equations ($dD/dt = |I|^\mu - \gamma D$) and Kruskal's MST algorithm correctly.
   2. *Reproducibility:* Model executes repeatably using configured pseudo-random seed ($42$).
@@ -238,15 +238,15 @@ Under the founding mandate of **`BHQ-INFRA-001`**, the team has completed Phase 
 
 All claims in this report are verifiable via local workspace artifacts:
 
-- **Audit & Inventory:** [`EXISTING_CAPABILITIES.md`](file:///c:/Users/PRITESH/Desktop/QCG/QCG_task1/EXISTING_CAPABILITIES.md)
-- **Concept Architecture:** [`ARCHITECTURE.md`](file:///c:/Users/PRITESH/Desktop/QCG/QCG_task1/ARCHITECTURE.md)
-- **Model Register & Hypotheses:** [`MODEL_REGISTER.md`](file:///c:/Users/PRITESH/Desktop/QCG/QCG_task1/MODEL_REGISTER.md)
-- **Requirements & Dependency Map:** [`REQUIREMENTS.md`](file:///c:/Users/PRITESH/Desktop/QCG/QCG_task1/REQUIREMENTS.md)
-- **Executable Prototype:** [`SIMULATION/mycelium_network_model.py`](file:///c:/Users/PRITESH/Desktop/QCG/QCG_task1/SIMULATION/mycelium_network_model.py)
-- **Simulation Config:** [`SIMULATION/config.json`](file:///c:/Users/PRITESH/Desktop/QCG/QCG_task1/SIMULATION/config.json)
-- **Simulation Output:** [`SIMULATION/sample_output.json`](file:///c:/Users/PRITESH/Desktop/QCG/QCG_task1/SIMULATION/sample_output.json)
-- **Automated Bio-Tests:** [`tests/test_bioquantum_simulation.py`](file:///c:/Users/PRITESH/Desktop/QCG/QCG_task1/tests/test_bioquantum_simulation.py)
-- **Comparative Benchmarks:** [`BENCHMARK.md`](file:///c:/Users/PRITESH/Desktop/QCG/QCG_task1/BENCHMARK.md)
-- **BOM/BOQ Prerequisites:** [`BOM_BOQ_PREREQUISITES.md`](file:///c:/Users/PRITESH/Desktop/QCG/QCG_task1/BOM_BOQ_PREREQUISITES.md)
-- **WS-C Photonics Artifacts:** [`photonics_rf_systems/`](file:///c:/Users/PRITESH/Desktop/QCG/QCG_task1/photonics_rf_systems/), [`evidence/03_KANISHK_SUPERDENSE_FIX.json`](file:///c:/Users/PRITESH/Desktop/QCG/QCG_task1/evidence/03_KANISHK_SUPERDENSE_FIX.json), [`evidence/03_KANISHK_OPTICAL_LINK_BUDGET.csv`](file:///c:/Users/PRITESH/Desktop/QCG/QCG_task1/evidence/03_KANISHK_OPTICAL_LINK_BUDGET.csv), [`evidence/03_KANISHK_CRYOGENIC_RF_PROFILE.json`](file:///c:/Users/PRITESH/Desktop/QCG/QCG_task1/evidence/03_KANISHK_CRYOGENIC_RF_PROFILE.json)
-- **WS-D Instrumentation Artifacts:** [`evidence/validate_instrumentation.py`](file:///c:/Users/PRITESH/Desktop/QCG/QCG_task1/evidence/validate_instrumentation.py), [`evidence/04_DHIRAJ_INSTRUMENTATION_SPEC.json`](file:///c:/Users/PRITESH/Desktop/QCG/QCG_task1/evidence/04_DHIRAJ_INSTRUMENTATION_SPEC.json), [`evidence/test_qcg_provenance.py`](file:///c:/Users/PRITESH/Desktop/QCG/QCG_task1/evidence/test_qcg_provenance.py), [`evidence/02_PRITESH_PROVENANCE_TEST.json`](file:///c:/Users/PRITESH/Desktop/QCG/QCG_task1/evidence/02_PRITESH_PROVENANCE_TEST.json)
+- **Audit & Inventory:** [`EXISTING_CAPABILITIES.md`](../EXISTING_CAPABILITIES.md)
+- **Concept Architecture:** [`ARCHITECTURE.md`](../ARCHITECTURE.md)
+- **Model Register & Hypotheses:** [`MODEL_REGISTER.md`](../MODEL_REGISTER.md)
+- **Requirements & Dependency Map:** [`REQUIREMENTS.md`](../REQUIREMENTS.md)
+- **Executable Prototype:** [`SIMULATION/mycelium_network_model.py`](../SIMULATION/mycelium_network_model.py)
+- **Simulation Config:** [`SIMULATION/config.json`](../SIMULATION/config.json)
+- **Simulation Output:** [`SIMULATION/sample_output.json`](../SIMULATION/sample_output.json)
+- **Automated Bio-Tests:** [`tests/test_bioquantum_simulation.py`](../tests/test_bioquantum_simulation.py)
+- **Comparative Benchmarks:** [`BENCHMARK.md`](../BENCHMARK.md)
+- **BOM/BOQ Prerequisites:** [`BOM_BOQ_PREREQUISITES.md`](../BOM_BOQ_PREREQUISITES.md)
+- **WS-C Photonics Artifacts:** [`photonics_rf_systems/`](../photonics_rf_systems/), [`evidence/03_KANISHK_SUPERDENSE_FIX.json`](../evidence/03_KANISHK_SUPERDENSE_FIX.json), [`evidence/03_KANISHK_OPTICAL_LINK_BUDGET.csv`](../evidence/03_KANISHK_OPTICAL_LINK_BUDGET.csv), [`evidence/03_KANISHK_CRYOGENIC_RF_PROFILE.json`](../evidence/03_KANISHK_CRYOGENIC_RF_PROFILE.json)
+- **WS-D Instrumentation Artifacts:** [`evidence/validate_instrumentation.py`](../evidence/validate_instrumentation.py), [`evidence/04_DHIRAJ_INSTRUMENTATION_SPEC.json`](../evidence/04_DHIRAJ_INSTRUMENTATION_SPEC.json), [`evidence/test_qcg_provenance.py`](../evidence/test_qcg_provenance.py), [`evidence/02_PRITESH_PROVENANCE_TEST.json`](../evidence/02_PRITESH_PROVENANCE_TEST.json)

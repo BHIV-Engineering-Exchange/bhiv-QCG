@@ -5,7 +5,7 @@
     "role": "Trust, Provenance & Integration Lead",
     "programme": "BHQ Sovereign Quantum Computing and Networking / BIQOS",
     "date": "2026-11-12",
-    "timestamp": "2026-11-12T18:07:46.390555+00:00",
+    "timestamp": "2026-11-16T11:01:54.913820+00:00",
     "target_endpoints": [
       "POST /verify",
       "POST /gc/validate",
@@ -27,50 +27,53 @@
       "test_id": "POS-01",
       "name": "Valid Signed Contract Acceptance via Ingestion Pipeline (/verify)",
       "passed": true,
-      "trace_id": "b26e71ec-6fa9-4209-9073-ecb269956aad",
+      "trace_id": "abee773c-c198-4397-9bba-6162d01e9f97",
       "flow_status": "COMPLETED",
       "trace_continuity": {
-        "sequence_number": 69,
+        "sequence_number": 1,
         "runtime_hash": "162f75fa0234506b7ddf05e0099cf01ef3efb4e11367c2666dc3c3a79c41c042",
         "final_hash": "162f75fa0234506b7ddf05e0099cf01ef3efb4e11367c2666dc3c3a79c41c042",
         "keshav_severity": "ERROR",
-        "prana_event_id": "",
-        "prana_status": "FAILED"
+        "prana_event_id": "49cdb467-a6f5-4757-a762-d9fa12703d12",
+        "prana_status": "forwarded",
+        "vajra_chain_intact": true,
+        "vajra_status": "REQUIRES_EXTERNAL_ACCESS"
       },
       "stage_timings_ms": {
-        "replay": 731.51,
-        "keshav_analysis": 104.69,
-        "trust": 21.1,
-        "execution": 41.54,
-        "consensus": 5.54,
-        "prana_ingest": 14.57
+        "replay": 3669.51,
+        "keshav_analysis": 19390.54,
+        "trust": 2045.08,
+        "execution": 2042.73,
+        "consensus": 4.74,
+        "prana_ingest": 26725.67,
+        "vajra_anchor": 654.51
       },
-      "duration_ms": 924.96
+      "duration_ms": 54536.46
     },
     {
       "test_id": "POS-02",
       "name": "MDU Execution Certificate with Merkle Proof (/evidence/certificate/{id})",
       "passed": true,
-      "execution_id": "7232fe95-fe5e-4900-81d0-5c8320ddb064",
+      "execution_id": "c8b149ef-b4df-4517-85e3-e0d900fa0597",
       "certificate": {
         "execution_record": {
-          "execution_id": "7232fe95-fe5e-4900-81d0-5c8320ddb064",
-          "trace_id": "b26e71ec-6fa9-4209-9073-ecb269956aad",
-          "replay_reference": 69,
+          "execution_id": "c8b149ef-b4df-4517-85e3-e0d900fa0597",
+          "trace_id": "abee773c-c198-4397-9bba-6162d01e9f97",
+          "replay_reference": 1,
           "execution_sequence": 1,
-          "producer_identity": "VAJRA_PROV_f4dba8a0",
+          "producer_identity": "VAJRA_PROV_05d7c843",
           "runtime_identity": "EXTERNAL_RUNTIME_v1",
           "governance_identity": "TANTRA_GOVERNANCE",
           "execution_status": "STARTED",
           "runtime_hash": "162f75fa0234506b7ddf05e0099cf01ef3efb4e11367c2666dc3c3a79c41c042",
-          "execution_hash": "f5871dd1565dec269c94dd4033b12b94d6dc3de923b1ae240b45b341e3913992",
+          "execution_hash": "b80f782b23ef9ac4b435be70bc96c51689456d21be86c81011b36d62856acf1c",
           "previous_execution_hash": "901131d838b17aac0f7885b81e03cbdc9f5157a00343d30ab22083685ed1416a",
           "execution_root_hash": "13c5f3000bee8e4f6dca00b8c16fb69684f37e8e14f93d6b944caf69aa0dcb4e",
           "schema_version": "1.0.0"
         },
         "certificate_type": "DeterministicExecutionCertificate",
-        "chain_hash": "299f0400ae1a8a9ca146ab47b3c53244f946edb0205f16d099d77ec0af557b0b",
-        "merkle_root": "299f0400ae1a8a9ca146ab47b3c53244f946edb0205f16d099d77ec0af557b0b",
+        "chain_hash": "974ce8c7bcda0dc9a43a941ac46e6c48f62ae97a91ae656716018c3cc129d47a",
+        "merkle_root": "974ce8c7bcda0dc9a43a941ac46e6c48f62ae97a91ae656716018c3cc129d47a",
         "ledger_sequence": 1,
         "schema_version": "1.0.0"
       }
@@ -80,21 +83,21 @@
       "name": "Canonical Replay Authority Lineage Query (/replay/lineage/{trace_id})",
       "passed": true,
       "verdict": {
-        "message_id": "b26e71ec-6fa9-4209-9073-ecb269956aad",
-        "sequence_number": 69,
+        "message_id": "abee773c-c198-4397-9bba-6162d01e9f97",
+        "sequence_number": 1,
         "status": "VALID",
         "reason": "",
         "lineage_record": {
-          "replay_id": "21d948f9-333d-5376-956d-00c29b8569fa",
-          "message_id": "b26e71ec-6fa9-4209-9073-ecb269956aad",
-          "sequence_number": 69,
+          "replay_id": "d79a8155-9547-528d-adba-c924ba30754c",
+          "message_id": "abee773c-c198-4397-9bba-6162d01e9f97",
+          "sequence_number": 1,
           "decision": "VALID",
-          "decision_timestamp": "2026-11-12T18:07:49.408291+00:00",
+          "decision_timestamp": "2026-11-16T11:02:02.865141+00:00",
           "origin_component": "CanonicalReplayAuthority",
           "schema_version": "1.0.0",
-          "trace_reference": "b26e71ec-6fa9-4209-9073-ecb269956aad",
-          "parent_reference": "68",
-          "verification_hash": "98bb60faf497fd1c2548c3bd6ace5fec3f0a8c85e3d67e3cb7ccb881b198f82b"
+          "trace_reference": "abee773c-c198-4397-9bba-6162d01e9f97",
+          "parent_reference": "",
+          "verification_hash": "59df2c5081c52cc5ce50b46c0a3a22eb017df95c274c98d51f374c8feff5bd60"
         }
       }
     },
@@ -179,5 +182,5 @@
     },
     "Overall_VAJRA_Trust_Boundary_Status": "PASSED"
   },
-  "total_duration_ms": 3700.68
+  "total_duration_ms": 125734.41
 }
