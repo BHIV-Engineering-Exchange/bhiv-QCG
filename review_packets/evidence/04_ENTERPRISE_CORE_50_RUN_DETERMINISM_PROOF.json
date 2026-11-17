@@ -1,0 +1,16 @@
+{
+  "standard": "SETU OS Architecture v6.0",
+  "task_id": "T-OUT-OF-SYLLABUS",
+  "candidate": "Kanishk Singh",
+  "total_runs": 50,
+  "unique_hash_count": 1,
+  "deterministic_sha256_hash": "21c81a205d79019506e68441aa0ced4e80340c6273183e039350036241b8a4f4",
+  "status": "VERIFIED_BIT_IDENTICAL",
+  "sample_run_hashes": [
+    "21c81a205d79019506e68441aa0ced4e80340c6273183e039350036241b8a4f4",
+    "21c81a205d79019506e68441aa0ced4e80340c6273183e039350036241b8a4f4",
+    "21c81a205d79019506e68441aa0ced4e80340c6273183e039350036241b8a4f4",
+    "21c81a205d79019506e68441aa0ced4e80340c6273183e039350036241b8a4f4",
+    "21c81a205d79019506e68441aa0ced4e80340c6273183e039350036241b8a4f4"
+  ]
+}

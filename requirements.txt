@@ -1,14 +1,18 @@
-qiskit>=2.0.0
-qiskit-aer>=0.15.0
-numpy>=1.24.0
-python-dotenv>=1.0.0
-cryptography>=42.0.0
-requests>=2.31.0
-fastapi>=0.110.0
-pydantic>=2.0.0
-uvicorn[standard]>=0.30.0
+# BHIV PKB Strictly Pinned Dependencies (SETU OS Architecture v6.0)
+fastapi==0.115.8
+pydantic==2.13.3
+pytest==9.0.3
+python-dotenv==1.2.2
 
-# Added for web_server.py telemetry
-opentelemetry-api>=1.20.0
-opentelemetry-sdk>=1.20.0
-opentelemetry-instrumentation-fastapi>=0.41b0
+# Sovereign Quantum & Core Runtime Components
+qiskit==2.5.2
+qiskit-aer==0.17.2
+numpy==2.4.6
+cryptography==50.0.0
+requests==2.32.3
+uvicorn==0.30.6
+
+# Telemetry & Observability
+opentelemetry-api==1.44.0
+opentelemetry-sdk==1.44.0
+opentelemetry-instrumentation-fastapi==0.65b0

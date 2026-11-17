@@ -40,6 +40,7 @@ logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(
 
 from middleware import ErrorBoundaryMiddleware, RequestTracingMiddleware, SecurityHeadersMiddleware
 from metrics import get_metrics
+from core.api import router as enterprise_core_router
 
 app = FastAPI(
     title="TANTRA Operational Readiness API",
@@ -53,6 +54,9 @@ app.add_middleware(ErrorBoundaryMiddleware)
 app.add_middleware(RequestTracingMiddleware)
 
 FastAPIInstrumentor.instrument_app(app)
+
+# BHIV Enterprise Core Router (SETU OS Architecture v6.0)
+app.include_router(enterprise_core_router)
 
 # Global harness instance
 harness = TANTRAIntegrationHarness()
