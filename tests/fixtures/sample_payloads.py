@@ -65,3 +65,27 @@ VALID_EVIDENCE_PACKET = {
     },
     "signature": "ecdsa_secp256k1_signature_hash_proof",
 }
+
+VALID_EVALUATION_REQUEST = {
+    "evaluation_id": "eval-gov-002-test",
+    "task_id": "T-GOV-002",
+    "candidate_name": "Kanishk Singh",
+    "repository_target": "bhiv-QCG",
+    "submission_evidence": {
+        "schema_compliance": True,
+        "test_pass_rate_percent": 100.0,
+        "total_tests": 15,
+        "failed_tests": 0,
+        "determinism_verified": True,
+        "runs_evaluated": 50,
+        "unique_hashes": 1,
+        "error_boundary_coverage_percent": 100.0,
+        "dependency_pinning_compliant": True,
+    },
+}
+
+INVALID_EVALUATION_REQUEST_MALFORMED = {
+    "evaluation_id": "eval-bad",
+    "task_id": "T-GOV-002",
+    # missing candidate_name, repository_target, submission_evidence
+}

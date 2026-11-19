@@ -157,3 +157,69 @@ class ExecutionErrorResponse(BaseModel):
     message: str = Field(...)
     trace_id: str = Field(...)
     timestamp_utc: str = Field(...)
+
+
+# ==========================================
+# PARIKSHAK Evaluation Engine Schemas (v1.0)
+# Standard: Governed Operational System (Gov-OS)
+# ==========================================
+
+class EvaluationRuleCategory(str, Enum):
+    SCHEMA_COMPLIANCE = "SCHEMA_COMPLIANCE"
+    TEST_PASS_RATE = "TEST_PASS_RATE"
+    DETERMINISM_PROOF = "DETERMINISM_PROOF"
+    ERROR_BOUNDARY_COVERAGE = "ERROR_BOUNDARY_COVERAGE"
+    DEPENDENCY_PINNING = "DEPENDENCY_PINNING"
+
+
+class EvaluationRuleItem(BaseModel):
+    """Individual rule definition for evaluation."""
+    model_config = ConfigDict(extra="forbid")
+
+    rule_id: str = Field(..., description="Unique rule identifier")
+    rule_name: str = Field(..., description="Descriptive rule name")
+    category: EvaluationRuleCategory = Field(..., description="Governance rule category")
+    weight: float = Field(..., ge=0.0, le=1.0, description="Normalized scoring weight")
+    min_score_required: float = Field(0.0, ge=0.0, le=100.0, description="Minimum acceptable threshold")
+
+
+class EvaluationCriteriaCheck(BaseModel):
+    """Evaluation result for an individual criteria check."""
+    model_config = ConfigDict(extra="forbid")
+
+    criterion_id: str = Field(...)
+    rule_id: str = Field(...)
+    category: EvaluationRuleCategory = Field(...)
+    passed: bool = Field(...)
+    observed_value: Any = Field(...)
+    score: float = Field(..., ge=0.0, le=100.0)
+    message: str = Field(...)
+
+
+class EvaluationRequest(BaseModel):
+    """Evaluation request payload for PARIKSHAK Evaluation Engine."""
+    model_config = ConfigDict(extra="forbid")
+
+    evaluation_id: str = Field(..., description="Unique evaluation request ID")
+    task_id: str = Field(..., description="Target task ID")
+    candidate_name: str = Field(..., description="Assigned candidate or engineer")
+    repository_target: str = Field(..., description="Target repository or module name")
+    submission_evidence: Dict[str, Any] = Field(..., description="Verified runtime evidence payload")
+    rules: Optional[List[EvaluationRuleItem]] = Field(None, description="Optional custom rule list")
+
+
+class EvaluationVerdict(BaseModel):
+    """Official cryptographic evaluation verdict issued by Parikshak."""
+    model_config = ConfigDict(extra="forbid")
+
+    verdict_id: str = Field(..., description="Unique verdict identifier")
+    task_id: str = Field(..., description="Target task ID")
+    candidate_name: str = Field(..., description="Assigned candidate name")
+    total_score: float = Field(..., ge=0.0, le=100.0, description="Composite weighted evaluation score")
+    verdict: str = Field(..., description="PASS or FAIL")
+    compliance_standard: str = Field("Gov-OS Core Compliance", description="Applied standard")
+    criteria_results: List[EvaluationCriteriaCheck] = Field(..., description="Granular rule results")
+    deterministic_verdict_hash: str = Field(..., min_length=64, max_length=64, description="Canonical SHA-256 state hash")
+    timestamp_utc: str = Field(...)
+    next_task_recommendation: Optional[str] = Field(None)
+

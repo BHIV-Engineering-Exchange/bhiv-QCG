@@ -1,6 +1,8 @@
-# BHIV PKB Strictly Pinned Dependencies (SETU OS Architecture v6.0)
+# PARIKSHAK PKB Strictly Pinned Dependencies (Gov-OS Core Compliance)
 fastapi==0.115.8
+uvicorn[standard]==0.34.0
 pydantic==2.13.3
+reportlab==4.4.1
 pytest==9.0.3
 python-dotenv==1.2.2
 
@@ -10,7 +12,6 @@ qiskit-aer==0.17.2
 numpy==2.4.6
 cryptography==50.0.0
 requests==2.32.3
-uvicorn==0.30.6
 
 # Telemetry & Observability
 opentelemetry-api==1.44.0

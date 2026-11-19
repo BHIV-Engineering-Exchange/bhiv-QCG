@@ -1,0 +1,19 @@
+{
+  "standard": "Governed Operational System (Gov-OS) Core Compliance",
+  "task_id": "T-GOV-002",
+  "target_product": "Parikshak Engineering Review Runtime",
+  "candidate": "Kanishk Singh",
+  "total_runs": 50,
+  "unique_hash_count": 1,
+  "deterministic_sha256_hash": "d2d7f3cc9d8875067602ccb63f0d2340cef6ae8a02ab5eb0b6a923be1359ded3",
+  "verdict": "PASS",
+  "score": 100.0,
+  "status": "VERIFIED_BIT_IDENTICAL",
+  "sample_run_hashes": [
+    "d2d7f3cc9d8875067602ccb63f0d2340cef6ae8a02ab5eb0b6a923be1359ded3",
+    "d2d7f3cc9d8875067602ccb63f0d2340cef6ae8a02ab5eb0b6a923be1359ded3",
+    "d2d7f3cc9d8875067602ccb63f0d2340cef6ae8a02ab5eb0b6a923be1359ded3",
+    "d2d7f3cc9d8875067602ccb63f0d2340cef6ae8a02ab5eb0b6a923be1359ded3",
+    "d2d7f3cc9d8875067602ccb63f0d2340cef6ae8a02ab5eb0b6a923be1359ded3"
+  ]
+}

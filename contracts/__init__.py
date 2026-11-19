@@ -12,6 +12,11 @@ from contracts.schemas import (
     NiyantranAssignmentPayload,
     ValidationErrorResponse,
     ExecutionErrorResponse,
+    EvaluationRuleCategory,
+    EvaluationRuleItem,
+    EvaluationCriteriaCheck,
+    EvaluationRequest,
+    EvaluationVerdict,
 )
 
 __all__ = [
@@ -26,4 +31,9 @@ __all__ = [
     "NiyantranAssignmentPayload",
     "ValidationErrorResponse",
     "ExecutionErrorResponse",
+    "EvaluationRuleCategory",
+    "EvaluationRuleItem",
+    "EvaluationCriteriaCheck",
+    "EvaluationRequest",
+    "EvaluationVerdict",
 ]

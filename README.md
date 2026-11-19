@@ -47,6 +47,10 @@ bhiv-QCG/
 │   ├── __init__.py
 │   ├── enterprise_engine.py      # Deterministic state machine traversal & SHA-256 state hashing
 │   └── api.py                    # Zero-500 error boundary router (/api/v1/enterprise-core)
+├── evaluation_engine/            # PARIKSHAK Review Runtime Evaluation Engine (T-GOV-002)
+│   ├── __init__.py
+│   └── rule_engine.py            # Gov-OS deterministic grading engine, PDF generation & security guards
+├── main.py                       # PARIKSHAK Evaluation Runtime API server
 ├── SIMULATION/                   # Executable biological & nature-inspired models
 │   ├── mycelium_network_model.py # Adaptive mycelial flux & FitzHugh-Nagumo action potential
 │   ├── config.json               # Simulation parameters and grid configuration
@@ -64,7 +68,8 @@ bhiv-QCG/
 │   ├── 03_KANISHK_CRYOGENIC_RF_PROFILE.json
 │   └── 04_DHIRAJ_INSTRUMENTATION_SPEC.json
 ├── tests/                        # Automated CI test suites
-│   ├── test_enterprise_core.py   # WP3: 5-Tier test suite & 50-run determinism verification
+│   ├── test_evaluation_engine.py # PARIKSHAK: 5-Tier test suite & 50-run determinism (T-GOV-002)
+│   ├── test_enterprise_core.py   # BHIV Core: 5-Tier test suite & 50-run determinism (T-OUT-OF-SYLLABUS)
 │   ├── test_bioquantum_simulation.py # WS-B & Candidate unit tests (6/6 passing)
 │   ├── test_photonics_rf_systems.py  # WS-C Photonic unit tests (18/18 passing)
 │   ├── test_qcg_provenance.py        # WS-D Provenance acceptance tests (4/4 passing)
@@ -166,10 +171,16 @@ pytest tests/test_hybrid_runtime.py -v
 pytest tests/test_enterprise_core.py -v
 ```
 
-### 5.4 Full Test Suite Verification
+### 5.4 PARIKSHAK Evaluation Engine Verification (Task ID: `T-GOV-002`)
+```bash
+# Execute the Parikshak Evaluation Engine 5-tier verification suite & 50-run determinism test
+pytest tests/test_evaluation_engine.py -v
+```
+
+### 5.5 Full Test Suite Verification
 ```bash
 # Execute all primary programme tests simultaneously
-pytest tests/test_enterprise_core.py tests/test_bioquantum_simulation.py tests/test_photonics_rf_systems.py tests/test_qcg_provenance.py tests/test_hybrid_runtime.py -v
+pytest tests/test_evaluation_engine.py tests/test_enterprise_core.py tests/test_bioquantum_simulation.py tests/test_photonics_rf_systems.py tests/test_qcg_provenance.py tests/test_hybrid_runtime.py -v
 ```
 
 ---
