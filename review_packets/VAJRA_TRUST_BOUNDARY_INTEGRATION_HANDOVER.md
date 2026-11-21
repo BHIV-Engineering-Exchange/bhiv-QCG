@@ -62,7 +62,7 @@ In the sovereign BIQOS / QCG architecture, **VAJRA does not operate as an isolat
 
 ## 2. Reproducible Test Evidence Summary
 
-Verified via [`scripts/run_vajra_qcg_endpoint_validation.py`](file:///c:/Users/PRITESH/Desktop/QCG/QCG_task1/scripts/run_vajra_qcg_endpoint_validation.py) and [`tests/test_vajra_qcg_endpoint_validation.py`](file:///c:/Users/PRITESH/Desktop/QCG/QCG_task1/tests/test_vajra_qcg_endpoint_validation.py):
+Verified via [`scripts/run_vajra_qcg_endpoint_validation.py`](../scripts/run_vajra_qcg_endpoint_validation.py) and [`tests/test_vajra_qcg_endpoint_validation.py`](../tests/test_vajra_qcg_endpoint_validation.py):
 
 | Test ID | Test Case Name | Operation / Fault Injected | System Response | Outcome |
 |:---:|:---|:---|:---:|:---:|
@@ -96,7 +96,7 @@ Verified via [`scripts/run_vajra_qcg_endpoint_validation.py`](file:///c:/Users/P
 * **Results and Evidence:**
   - 4 Positive Integration Tests passed.
   - 6 Negative & Adversarial Rejection Tests passed (100% rejection rate).
-  - Primary Evidence: [`evidence/02_PRITESH_VAJRA_ENDPOINTS_E2E.json`](file:///c:/Users/PRITESH/Desktop/QCG/QCG_task1/evidence/02_PRITESH_VAJRA_ENDPOINTS_E2E.json)
+  - Primary Evidence: [`evidence/02_PRITESH_VAJRA_ENDPOINTS_E2E.json`](../evidence/02_PRITESH_VAJRA_ENDPOINTS_E2E.json)
 * **Assumptions:** Private keys remain in-process inside `NodeSigner`; deterministic JSON serialization with sorted keys.
 * **Truth Classification:** `IMPLEMENTED AND TESTED`
 * **Application Security Proof Doctrine:**

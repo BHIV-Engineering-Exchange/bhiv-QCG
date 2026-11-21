@@ -65,7 +65,7 @@ The programme determines:
 In compliance with Section 5 of the assignment, the repository is structured as follows:
 
 ```
-bhq-bioquantum-lab/ (c:\Users\PRITESH\Desktop\QCG\QCG_task1)
+bhiv-QCG/
 ├── README.md                     # Programme overview, setup, and execution runbook
 ├── EXISTING_CAPABILITIES.md      # Comprehensive repository, algorithm, and service audit
 ├── MODEL_REGISTER.md             # Candidate mechanisms, hypotheses, and evidence classifications
@@ -73,6 +73,17 @@ bhq-bioquantum-lab/ (c:\Users\PRITESH\Desktop\QCG\QCG_task1)
 ├── REQUIREMENTS.md               # Computational, physical, instrumentation, and energy requirements
 ├── BENCHMARK.md                  # Baselines, evaluation methods, and quantitative results
 ├── BOM_BOQ_PREREQUISITES.md      # Prerequisites required prior to any BOM/BOQ preparation
+├── contracts/                    # WP1: Interface contracts & schemas v1.0 (SETU OS v6.0)
+│   ├── __init__.py
+│   └── schemas.py                # Strict Pydantic models (forbids rogue fields, fail-closed)
+├── core/                         # WP2: Enterprise Core Engine & API error boundaries
+│   ├── __init__.py
+│   ├── enterprise_engine.py      # Deterministic state machine traversal & SHA-256 state hashing
+│   └── api.py                    # Zero-500 error boundary router (/api/v1/enterprise-core)
+├── evaluation_engine/            # PARIKSHAK Review Runtime Evaluation Engine (T-GOV-002)
+│   ├── __init__.py
+│   └── rule_engine.py            # Gov-OS deterministic grading engine, PDF generation & security guards
+├── main.py                       # PARIKSHAK Evaluation Runtime API server
 ├── SIMULATION/                   # Executable biological & nature-inspired models
 │   ├── mycelium_network_model.py # Adaptive mycelial flux & FitzHugh-Nagumo action potential
 │   ├── config.json               # Simulation parameters and grid configuration
@@ -90,12 +101,15 @@ bhq-bioquantum-lab/ (c:\Users\PRITESH\Desktop\QCG\QCG_task1)
 │   ├── 03_KANISHK_CRYOGENIC_RF_PROFILE.json
 │   └── 04_DHIRAJ_INSTRUMENTATION_SPEC.json
 ├── tests/                        # Automated CI test suites
+│   ├── test_evaluation_engine.py # PARIKSHAK: 5-Tier test suite & 50-run determinism (T-GOV-002)
+│   ├── test_enterprise_core.py   # BHIV Core: 5-Tier test suite & 50-run determinism (T-OUT-OF-SYLLABUS)
 │   ├── test_bioquantum_simulation.py # WS-B & Candidate unit tests (6/6 passing)
 │   ├── test_photonics_rf_systems.py  # WS-C Photonic unit tests (18/18 passing)
 │   ├── test_qcg_provenance.py        # WS-D Provenance acceptance tests (4/4 passing)
 │   └── test_hybrid_runtime.py        # WS-A Hybrid runtime integration tests (16/16 passing)
 └── review_packets/
-    └── REVIEW_PACKET.md          # Consolidated findings, Section 7 reports, and Section 8 roadmap
+    ├── REVIEW_PACKET.md          # Consolidated findings & Enterprise Core review packet
+    └── evidence/                 # Verifiable proof logs (50-run determinism, test runs)
 ```
 
 ---
@@ -184,14 +198,26 @@ pytest tests/test_qcg_provenance.py -v
 pytest tests/test_hybrid_runtime.py -v
 ```
 
-### 5.3 Full Test Suite Verification
+### 5.3 Enterprise Core 5-Tier Verification (Task ID: `T-OUT-OF-SYLLABUS`)
+```bash
+# Execute the Enterprise Core 5-tier verification suite & 50-run determinism test
+pytest tests/test_enterprise_core.py -v
+```
+
+### 5.4 PARIKSHAK Evaluation Engine Verification (Task ID: `T-GOV-002`)
+```bash
+# Execute the Parikshak Evaluation Engine 5-tier verification suite & 50-run determinism test
+pytest tests/test_evaluation_engine.py -v
+```
+
+### 5.5 Full Test Suite Verification
 ```bash
 # Execute all primary programme tests simultaneously
-pytest tests/test_bioquantum_simulation.py tests/test_photonics_rf_systems.py tests/test_qcg_provenance.py tests/test_hybrid_runtime.py -v
+pytest tests/test_evaluation_engine.py tests/test_enterprise_core.py tests/test_bioquantum_simulation.py tests/test_photonics_rf_systems.py tests/test_qcg_provenance.py tests/test_hybrid_runtime.py -v
 ```
 
 ---
 
 ## 6. Review & Handover
 For the complete consolidated report, Section 7 workstream reports, and the Section 8 roadmap for **Task 2 (Model Validation)**, **Task 3 (Instrumentation Design)**, and **Task 4 (Preliminary BOM/BOQ)**, inspect:
-- [`review_packets/REVIEW_PACKET.md`](file:///c:/Users/PRITESH/Desktop/QCG/QCG_task1/review_packets/REVIEW_PACKET.md)
+- [`review_packets/REVIEW_PACKET.md`](review_packets/REVIEW_PACKET.md)

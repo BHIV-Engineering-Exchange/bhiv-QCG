@@ -1,0 +1,70 @@
+{
+  "task_id": "T-OUT-OF-SYLLABUS",
+  "target_product": "BHIV Enterprise Operating System Common Core",
+  "assigned_candidate": "Kanishk Singh",
+  "architectural_standard": "SETU OS Architecture v6.0",
+  "execution_timestamp_utc": "2026-11-17T11:03:39Z",
+  "environment": {
+    "os": "Windows",
+    "python": "3.11.9",
+    "pytest": "8.4.2",
+    "fastapi": "0.115.0",
+    "pydantic": "2.12.5"
+  },
+  "test_matrix": {
+    "total_collected": 12,
+    "passed": 12,
+    "failed": 0,
+    "skipped": 0,
+    "pass_rate_percent": 100.0,
+    "duration_seconds": 0.79
+  },
+  "test_tiers": [
+    {
+      "tier": "Tier 1: Unit Tests (Contracts & Schemas)",
+      "tests": [
+        "test_tier1_valid_task_definition",
+        "test_tier1_task_definition_missing_required_field",
+        "test_tier1_task_definition_forbids_extra_fields",
+        "test_tier1_evidence_packet_schema"
+      ],
+      "status": "PASSED"
+    },
+    {
+      "tier": "Tier 2: Integration Tests (State Machine & Pipeline Traversal)",
+      "tests": [
+        "test_tier2_full_lifecycle_state_machine"
+      ],
+      "status": "PASSED"
+    },
+    {
+      "tier": "Tier 3: Negative & Error Boundary Tests (Zero 500s)",
+      "tests": [
+        "test_tier3_forbidden_state_transition_leap",
+        "test_tier3_duplicate_task_registration_blocked",
+        "test_tier3_unknown_task_query_raises_not_found",
+        "test_tier3_api_error_boundary_on_malformed_task_payload",
+        "test_tier3_api_error_boundary_on_illegal_transition"
+      ],
+      "status": "PASSED"
+    },
+    {
+      "tier": "Tier 4: Determinism Standard (50-Run Verification)",
+      "tests": [
+        "test_tier4_50_run_deterministic_state_hash"
+      ],
+      "status": "PASSED",
+      "deterministic_sha256_hash": "21c81a205d79019506e68441aa0ced4e80340c6273183e039350036241b8a4f4",
+      "runs_evaluated": 50,
+      "unique_hashes": 1
+    },
+    {
+      "tier": "Tier 5: Regression & Compatibility",
+      "tests": [
+        "test_tier5_health_readiness_regression"
+      ],
+      "status": "PASSED"
+    }
+  ],
+  "governance_verdict": "VERIFIED_PASS"
+}
