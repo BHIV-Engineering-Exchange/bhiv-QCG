@@ -1,0 +1,359 @@
+{
+  "task_id": "T-GOV-002",
+  "candidate_name": "Kanishk Singh",
+  "total_runs": 50,
+  "canonical_state_hash": "e12aa6f0b368802cd3e19c1acaf78b7d00a6ed4835b8ce19de8ba968dd3d68b2",
+  "parity_percent": 100.0,
+  "runs": [
+    {
+      "run_index": 1,
+      "state_hash": "e12aa6f0b368802cd3e19c1acaf78b7d00a6ed4835b8ce19de8ba968dd3d68b2",
+      "verdict": "PASS",
+      "total_score": 100.0,
+      "latency_ms": 0.219
+    },
+    {
+      "run_index": 2,
+      "state_hash": "e12aa6f0b368802cd3e19c1acaf78b7d00a6ed4835b8ce19de8ba968dd3d68b2",
+      "verdict": "PASS",
+      "total_score": 100.0,
+      "latency_ms": 0.09
+    },
+    {
+      "run_index": 3,
+      "state_hash": "e12aa6f0b368802cd3e19c1acaf78b7d00a6ed4835b8ce19de8ba968dd3d68b2",
+      "verdict": "PASS",
+      "total_score": 100.0,
+      "latency_ms": 0.07
+    },
+    {
+      "run_index": 4,
+      "state_hash": "e12aa6f0b368802cd3e19c1acaf78b7d00a6ed4835b8ce19de8ba968dd3d68b2",
+      "verdict": "PASS",
+      "total_score": 100.0,
+      "latency_ms": 0.061
+    },
+    {
+      "run_index": 5,
+      "state_hash": "e12aa6f0b368802cd3e19c1acaf78b7d00a6ed4835b8ce19de8ba968dd3d68b2",
+      "verdict": "PASS",
+      "total_score": 100.0,
+      "latency_ms": 0.058
+    },
+    {
+      "run_index": 6,
+      "state_hash": "e12aa6f0b368802cd3e19c1acaf78b7d00a6ed4835b8ce19de8ba968dd3d68b2",
+      "verdict": "PASS",
+      "total_score": 100.0,
+      "latency_ms": 0.055
+    },
+    {
+      "run_index": 7,
+      "state_hash": "e12aa6f0b368802cd3e19c1acaf78b7d00a6ed4835b8ce19de8ba968dd3d68b2",
+      "verdict": "PASS",
+      "total_score": 100.0,
+      "latency_ms": 0.054
+    },
+    {
+      "run_index": 8,
+      "state_hash": "e12aa6f0b368802cd3e19c1acaf78b7d00a6ed4835b8ce19de8ba968dd3d68b2",
+      "verdict": "PASS",
+      "total_score": 100.0,
+      "latency_ms": 0.061
+    },
+    {
+      "run_index": 9,
+      "state_hash": "e12aa6f0b368802cd3e19c1acaf78b7d00a6ed4835b8ce19de8ba968dd3d68b2",
+      "verdict": "PASS",
+      "total_score": 100.0,
+      "latency_ms": 0.051
+    },
+    {
+      "run_index": 10,
+      "state_hash": "e12aa6f0b368802cd3e19c1acaf78b7d00a6ed4835b8ce19de8ba968dd3d68b2",
+      "verdict": "PASS",
+      "total_score": 100.0,
+      "latency_ms": 0.049
+    },
+    {
+      "run_index": 11,
+      "state_hash": "e12aa6f0b368802cd3e19c1acaf78b7d00a6ed4835b8ce19de8ba968dd3d68b2",
+      "verdict": "PASS",
+      "total_score": 100.0,
+      "latency_ms": 0.048
+    },
+    {
+      "run_index": 12,
+      "state_hash": "e12aa6f0b368802cd3e19c1acaf78b7d00a6ed4835b8ce19de8ba968dd3d68b2",
+      "verdict": "PASS",
+      "total_score": 100.0,
+      "latency_ms": 0.046
+    },
+    {
+      "run_index": 13,
+      "state_hash": "e12aa6f0b368802cd3e19c1acaf78b7d00a6ed4835b8ce19de8ba968dd3d68b2",
+      "verdict": "PASS",
+      "total_score": 100.0,
+      "latency_ms": 0.047
+    },
+    {
+      "run_index": 14,
+      "state_hash": "e12aa6f0b368802cd3e19c1acaf78b7d00a6ed4835b8ce19de8ba968dd3d68b2",
+      "verdict": "PASS",
+      "total_score": 100.0,
+      "latency_ms": 0.048
+    },
+    {
+      "run_index": 15,
+      "state_hash": "e12aa6f0b368802cd3e19c1acaf78b7d00a6ed4835b8ce19de8ba968dd3d68b2",
+      "verdict": "PASS",
+      "total_score": 100.0,
+      "latency_ms": 0.046
+    },
+    {
+      "run_index": 16,
+      "state_hash": "e12aa6f0b368802cd3e19c1acaf78b7d00a6ed4835b8ce19de8ba968dd3d68b2",
+      "verdict": "PASS",
+      "total_score": 100.0,
+      "latency_ms": 0.046
+    },
+    {
+      "run_index": 17,
+      "state_hash": "e12aa6f0b368802cd3e19c1acaf78b7d00a6ed4835b8ce19de8ba968dd3d68b2",
+      "verdict": "PASS",
+      "total_score": 100.0,
+      "latency_ms": 0.045
+    },
+    {
+      "run_index": 18,
+      "state_hash": "e12aa6f0b368802cd3e19c1acaf78b7d00a6ed4835b8ce19de8ba968dd3d68b2",
+      "verdict": "PASS",
+      "total_score": 100.0,
+      "latency_ms": 0.047
+    },
+    {
+      "run_index": 19,
+      "state_hash": "e12aa6f0b368802cd3e19c1acaf78b7d00a6ed4835b8ce19de8ba968dd3d68b2",
+      "verdict": "PASS",
+      "total_score": 100.0,
+      "latency_ms": 0.045
+    },
+    {
+      "run_index": 20,
+      "state_hash": "e12aa6f0b368802cd3e19c1acaf78b7d00a6ed4835b8ce19de8ba968dd3d68b2",
+      "verdict": "PASS",
+      "total_score": 100.0,
+      "latency_ms": 0.047
+    },
+    {
+      "run_index": 21,
+      "state_hash": "e12aa6f0b368802cd3e19c1acaf78b7d00a6ed4835b8ce19de8ba968dd3d68b2",
+      "verdict": "PASS",
+      "total_score": 100.0,
+      "latency_ms": 0.046
+    },
+    {
+      "run_index": 22,
+      "state_hash": "e12aa6f0b368802cd3e19c1acaf78b7d00a6ed4835b8ce19de8ba968dd3d68b2",
+      "verdict": "PASS",
+      "total_score": 100.0,
+      "latency_ms": 0.044
+    },
+    {
+      "run_index": 23,
+      "state_hash": "e12aa6f0b368802cd3e19c1acaf78b7d00a6ed4835b8ce19de8ba968dd3d68b2",
+      "verdict": "PASS",
+      "total_score": 100.0,
+      "latency_ms": 0.047
+    },
+    {
+      "run_index": 24,
+      "state_hash": "e12aa6f0b368802cd3e19c1acaf78b7d00a6ed4835b8ce19de8ba968dd3d68b2",
+      "verdict": "PASS",
+      "total_score": 100.0,
+      "latency_ms": 0.046
+    },
+    {
+      "run_index": 25,
+      "state_hash": "e12aa6f0b368802cd3e19c1acaf78b7d00a6ed4835b8ce19de8ba968dd3d68b2",
+      "verdict": "PASS",
+      "total_score": 100.0,
+      "latency_ms": 0.045
+    },
+    {
+      "run_index": 26,
+      "state_hash": "e12aa6f0b368802cd3e19c1acaf78b7d00a6ed4835b8ce19de8ba968dd3d68b2",
+      "verdict": "PASS",
+      "total_score": 100.0,
+      "latency_ms": 0.045
+    },
+    {
+      "run_index": 27,
+      "state_hash": "e12aa6f0b368802cd3e19c1acaf78b7d00a6ed4835b8ce19de8ba968dd3d68b2",
+      "verdict": "PASS",
+      "total_score": 100.0,
+      "latency_ms": 0.044
+    },
+    {
+      "run_index": 28,
+      "state_hash": "e12aa6f0b368802cd3e19c1acaf78b7d00a6ed4835b8ce19de8ba968dd3d68b2",
+      "verdict": "PASS",
+      "total_score": 100.0,
+      "latency_ms": 0.046
+    },
+    {
+      "run_index": 29,
+      "state_hash": "e12aa6f0b368802cd3e19c1acaf78b7d00a6ed4835b8ce19de8ba968dd3d68b2",
+      "verdict": "PASS",
+      "total_score": 100.0,
+      "latency_ms": 0.045
+    },
+    {
+      "run_index": 30,
+      "state_hash": "e12aa6f0b368802cd3e19c1acaf78b7d00a6ed4835b8ce19de8ba968dd3d68b2",
+      "verdict": "PASS",
+      "total_score": 100.0,
+      "latency_ms": 0.045
+    },
+    {
+      "run_index": 31,
+      "state_hash": "e12aa6f0b368802cd3e19c1acaf78b7d00a6ed4835b8ce19de8ba968dd3d68b2",
+      "verdict": "PASS",
+      "total_score": 100.0,
+      "latency_ms": 0.045
+    },
+    {
+      "run_index": 32,
+      "state_hash": "e12aa6f0b368802cd3e19c1acaf78b7d00a6ed4835b8ce19de8ba968dd3d68b2",
+      "verdict": "PASS",
+      "total_score": 100.0,
+      "latency_ms": 0.064
+    },
+    {
+      "run_index": 33,
+      "state_hash": "e12aa6f0b368802cd3e19c1acaf78b7d00a6ed4835b8ce19de8ba968dd3d68b2",
+      "verdict": "PASS",
+      "total_score": 100.0,
+      "latency_ms": 0.048
+    },
+    {
+      "run_index": 34,
+      "state_hash": "e12aa6f0b368802cd3e19c1acaf78b7d00a6ed4835b8ce19de8ba968dd3d68b2",
+      "verdict": "PASS",
+      "total_score": 100.0,
+      "latency_ms": 0.047
+    },
+    {
+      "run_index": 35,
+      "state_hash": "e12aa6f0b368802cd3e19c1acaf78b7d00a6ed4835b8ce19de8ba968dd3d68b2",
+      "verdict": "PASS",
+      "total_score": 100.0,
+      "latency_ms": 0.045
+    },
+    {
+      "run_index": 36,
+      "state_hash": "e12aa6f0b368802cd3e19c1acaf78b7d00a6ed4835b8ce19de8ba968dd3d68b2",
+      "verdict": "PASS",
+      "total_score": 100.0,
+      "latency_ms": 0.045
+    },
+    {
+      "run_index": 37,
+      "state_hash": "e12aa6f0b368802cd3e19c1acaf78b7d00a6ed4835b8ce19de8ba968dd3d68b2",
+      "verdict": "PASS",
+      "total_score": 100.0,
+      "latency_ms": 0.047
+    },
+    {
+      "run_index": 38,
+      "state_hash": "e12aa6f0b368802cd3e19c1acaf78b7d00a6ed4835b8ce19de8ba968dd3d68b2",
+      "verdict": "PASS",
+      "total_score": 100.0,
+      "latency_ms": 0.045
+    },
+    {
+      "run_index": 39,
+      "state_hash": "e12aa6f0b368802cd3e19c1acaf78b7d00a6ed4835b8ce19de8ba968dd3d68b2",
+      "verdict": "PASS",
+      "total_score": 100.0,
+      "latency_ms": 0.044
+    },
+    {
+      "run_index": 40,
+      "state_hash": "e12aa6f0b368802cd3e19c1acaf78b7d00a6ed4835b8ce19de8ba968dd3d68b2",
+      "verdict": "PASS",
+      "total_score": 100.0,
+      "latency_ms": 0.045
+    },
+    {
+      "run_index": 41,
+      "state_hash": "e12aa6f0b368802cd3e19c1acaf78b7d00a6ed4835b8ce19de8ba968dd3d68b2",
+      "verdict": "PASS",
+      "total_score": 100.0,
+      "latency_ms": 0.044
+    },
+    {
+      "run_index": 42,
+      "state_hash": "e12aa6f0b368802cd3e19c1acaf78b7d00a6ed4835b8ce19de8ba968dd3d68b2",
+      "verdict": "PASS",
+      "total_score": 100.0,
+      "latency_ms": 0.045
+    },
+    {
+      "run_index": 43,
+      "state_hash": "e12aa6f0b368802cd3e19c1acaf78b7d00a6ed4835b8ce19de8ba968dd3d68b2",
+      "verdict": "PASS",
+      "total_score": 100.0,
+      "latency_ms": 0.045
+    },
+    {
+      "run_index": 44,
+      "state_hash": "e12aa6f0b368802cd3e19c1acaf78b7d00a6ed4835b8ce19de8ba968dd3d68b2",
+      "verdict": "PASS",
+      "total_score": 100.0,
+      "latency_ms": 0.045
+    },
+    {
+      "run_index": 45,
+      "state_hash": "e12aa6f0b368802cd3e19c1acaf78b7d00a6ed4835b8ce19de8ba968dd3d68b2",
+      "verdict": "PASS",
+      "total_score": 100.0,
+      "latency_ms": 0.044
+    },
+    {
+      "run_index": 46,
+      "state_hash": "e12aa6f0b368802cd3e19c1acaf78b7d00a6ed4835b8ce19de8ba968dd3d68b2",
+      "verdict": "PASS",
+      "total_score": 100.0,
+      "latency_ms": 0.046
+    },
+    {
+      "run_index": 47,
+      "state_hash": "e12aa6f0b368802cd3e19c1acaf78b7d00a6ed4835b8ce19de8ba968dd3d68b2",
+      "verdict": "PASS",
+      "total_score": 100.0,
+      "latency_ms": 0.05
+    },
+    {
+      "run_index": 48,
+      "state_hash": "e12aa6f0b368802cd3e19c1acaf78b7d00a6ed4835b8ce19de8ba968dd3d68b2",
+      "verdict": "PASS",
+      "total_score": 100.0,
+      "latency_ms": 0.048
+    },
+    {
+      "run_index": 49,
+      "state_hash": "e12aa6f0b368802cd3e19c1acaf78b7d00a6ed4835b8ce19de8ba968dd3d68b2",
+      "verdict": "PASS",
+      "total_score": 100.0,
+      "latency_ms": 0.048
+    },
+    {
+      "run_index": 50,
+      "state_hash": "e12aa6f0b368802cd3e19c1acaf78b7d00a6ed4835b8ce19de8ba968dd3d68b2",
+      "verdict": "PASS",
+      "total_score": 100.0,
+      "latency_ms": 0.049
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "total_evaluations": 50,
+  "latency_ms": {
+    "min": 0.044,
+    "p50": 0.046,
+    "p95": 0.07,
+    "p99": 0.219,
+    "max": 0.219
+  },
+  "throughput_ops_per_sec": 19053.43,
+  "memory_delta_mb": 0.12,
+  "error_rate_percent": 0.0,
+  "sla_target_ms": 50.0,
+  "sla_met": true
+}

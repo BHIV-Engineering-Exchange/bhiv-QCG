@@ -1,0 +1,61 @@
+{
+  "assignment_id": "asgn-aab4a4c54d47",
+  "assigned_task_id": "T-GOV-003",
+  "target_product": "Parikshak Engineering Review Runtime (PARIKSHAK)",
+  "candidate_id": "user-kanishk-singh",
+  "candidate_name": "Kanishk Singh",
+  "task_title": "Autonomous Gov-OS Ledger Synchronization & Replay Audit",
+  "calibrated_duration": "180-360 Minutes (3-6 Hours)",
+  "difficulty_level": "INTERMEDIATE",
+  "phase_specifications": [
+    {
+      "phase": 1,
+      "title": "Contract Inspection & Ledger Ingress",
+      "checkpoint_minute": 60,
+      "target": "Define Gov-OS ledger synchronization interfaces and cryptographic block ingress.",
+      "completion_criteria": "Ledger ingress interfaces validate against Gov-OS v1.0 standard with zero type errors."
+    },
+    {
+      "phase": 2,
+      "title": "Deterministic Replay Audit & Merkle Proof Generation",
+      "checkpoint_minute": 180,
+      "target": "Implement replay engine validating historical transactions against canonical state hashes.",
+      "completion_criteria": "Replay audit engine verifies 50 historical states with 100% cryptographic parity."
+    },
+    {
+      "phase": 3,
+      "title": "Automated 5-Tier Verification & Adversarial Resilience",
+      "checkpoint_minute": 270,
+      "target": "Execute test suite including tamper detection, fork resolution, and replay verification.",
+      "completion_criteria": "100% test pass rate across unit, integration, and negative matrices."
+    },
+    {
+      "phase": 4,
+      "title": "Review Packet Evidence & Niyantran Handoff",
+      "checkpoint_minute": 360,
+      "target": "Assemble REVIEW_PACKET.md with cryptographic replay logs and handover to Saarthi.",
+      "completion_criteria": "Governed review packet verified and committed within calibrated SLA."
+    }
+  ],
+  "dod_matrix": [
+    {
+      "requirement": "Zero-Context-Switch Handover",
+      "status": "VERIFIED"
+    },
+    {
+      "requirement": "Deterministic Replay Parity",
+      "status": "VERIFIED"
+    },
+    {
+      "requirement": "Strict Version Pinning (==)",
+      "status": "VERIFIED"
+    },
+    {
+      "requirement": "Gov-OS Core Compliance",
+      "status": "VERIFIED"
+    }
+  ],
+  "governance_authority": "GC Shakti / Niyantran Task Orchestration",
+  "zero_context_switch_ready": true,
+  "assignment_timestamp": "2026-11-21T10:50:32.383771+00:00"
+}

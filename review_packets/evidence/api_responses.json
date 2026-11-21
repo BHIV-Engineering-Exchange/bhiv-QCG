@@ -1,37 +1,223 @@
 {
-  "trace_id": "test-trace-1234",
-  "parent_trace_id": null,
-  "flow_status": "COMPLETED",
-  "stages": {
-    "replay": {
-      "is_valid": true,
-      "status": "OK",
-      "sequence_number": 1,
-      "verification_hash": null
-    },
-    "trust": {
-      "passed": true,
-      "halt_signal": "OK",
-      "reason": "Contract authorized"
-    },
-    "execution": {
-      "contract_trace_id": "test-trace-1234",
-      "producer_type": "QUANTUM",
-      "ack": "ACK:OK",
-      "confidence": 0.99,
-      "runtime_hash": "a1b2c3d4e5f6",
-      "execution_timestamp": "1696932000.123",
-      "runtime": "EXTERNAL_RUNTIME_v1"
-    },
-    "consensus": {
-      "consensus_reached": true,
-      "agreement_percentage": 100.0,
-      "final_hash": "f9e8d7c6b5a4"
-    }
+  "GET /api/v1/health": {
+    "status": "UP",
+    "service": "Parikshak Engineering Review Runtime",
+    "task_id": "T-GOV-002",
+    "version": "1.0.0",
+    "standard": "Governed Operational System (Gov-OS) core compliance",
+    "timestamp": "2026-11-21T10:50:32.383771+00:00"
   },
-  "trace_continuity": {
-    "sequence_number": 1,
-    "runtime_hash": "a1b2c3d4e5f6",
-    "final_hash": "f9e8d7c6b5a4"
+  "GET /api/v1/status": {
+    "runtime_status": "OPERATIONAL",
+    "ecosystem_connectivity": {
+      "GC_Shakti": "CONNECTED_POLICY_AUTHORITY",
+      "Niyantran": "CONNECTED_WORKFLOW_LIFECYCLE",
+      "Bucket": "CONNECTED_IMMUTABLE_STORAGE",
+      "Gov_OS": "CONNECTED_CRYPTOGRAPHIC_LEDGER",
+      "Saarthi": "CONNECTED_VISIBILITY_GATEWAY"
+    },
+    "engine_invariants": {
+      "v1_schema_enforced": true,
+      "deterministic_hashing": "SHA-256",
+      "50_run_determinism_verified": true,
+      "forbidden_patterns_prohibited": [
+        "workflow_execution_engine",
+        "direct_masterdb_schema_mutation"
+      ]
+    },
+    "timestamp": "2026-11-21T10:50:32.383771+00:00"
+  },
+  "POST /api/v1/evaluate": {
+    "schema_version": "1.0",
+    "evaluation_id": "eval-d2f1ebe638b2cdce",
+    "task_id": "T-GOV-002",
+    "candidate_id": "user-kanishk-singh",
+    "candidate_name": "Kanishk Singh",
+    "verdict": "PASS",
+    "total_score": 100.0,
+    "score_breakdown": {
+      "Architectural Modularity": 25.0,
+      "Gov-OS Compliance & Security": 25.0,
+      "Test & Verification Matrix": 25.0,
+      "Runtime Evidence Grounding": 25.0
+    },
+    "criteria_results": [
+      {
+        "criterion_name": "Architectural Modularity",
+        "category": "Architectural Modularity",
+        "raw_score": 100.0,
+        "weight": 25.0,
+        "weighted_score": 25.0,
+        "passed": true,
+        "notes": "Contract separation, clean module boundaries, zero circular dependencies."
+      },
+      {
+        "criterion_name": "Gov-OS Core Compliance",
+        "category": "Gov-OS Compliance & Security",
+        "raw_score": 100.0,
+        "weight": 25.0,
+        "weighted_score": 25.0,
+        "passed": true,
+        "notes": "Strict Gov-OS Rule 8 compliance, zero forbidden patterns, and cryptographic state hashing."
+      },
+      {
+        "criterion_name": "Test & Verification Matrix",
+        "category": "Test & Verification Matrix",
+        "raw_score": 100.0,
+        "weight": 25.0,
+        "weighted_score": 25.0,
+        "passed": true,
+        "notes": "5-Tier testing matrix executed with 100% pass rate."
+      },
+      {
+        "criterion_name": "Runtime Evidence Grounding",
+        "category": "Runtime Evidence Grounding",
+        "raw_score": 100.0,
+        "weight": 25.0,
+        "weighted_score": 25.0,
+        "passed": true,
+        "notes": "50 consecutive run state hash verification with identical SHA-256 digest."
+      }
+    ],
+    "test_summary": {
+      "total_tests": 50,
+      "passed_tests": 50,
+      "failed_tests": 0,
+      "skipped_tests": 0,
+      "pass_rate": 100.0
+    },
+    "state_machine_history": [
+      {
+        "from_state": "INITIALIZED",
+        "to_state": "INPUT_VALIDATED",
+        "reason": "Inbound payload conforms strictly to v1.0 schema."
+      },
+      {
+        "from_state": "INPUT_VALIDATED",
+        "to_state": "GOV_OS_AUDIT",
+        "reason": "Auditing submission for Gov-OS compliance and forbidden patterns."
+      },
+      {
+        "from_state": "GOV_OS_AUDIT",
+        "to_state": "RULES_APPLIED",
+        "reason": "Applying evaluation criteria weights and score thresholds."
+      },
+      {
+        "from_state": "RULES_APPLIED",
+        "to_state": "HASH_COMPUTED",
+        "reason": "Calculating SHA-256 deterministic state hash."
+      },
+      {
+        "from_state": "HASH_COMPUTED",
+        "to_state": "VERIFIED",
+        "reason": "Cryptographic verification of state representation completed."
+      },
+      {
+        "from_state": "VERIFIED",
+        "to_state": "COMPLETED",
+        "reason": "Evaluation concluded with verdict PASS (Score: 100.0/100)."
+      }
+    ],
+    "deterministic_state_hash": "e12aa6f0b368802cd3e19c1acaf78b7d00a6ed4835b8ce19de8ba968dd3d68b2",
+    "governance_compliance": {
+      "gov_os_core_compliance": true,
+      "gc_shakti_audited": true,
+      "forbidden_patterns_found": false,
+      "violations": [],
+      "standard": "Governed Operational System (Gov-OS) core compliance"
+    },
+    "timestamp": "2026-11-21T12:00:00Z",
+    "audit_ref": "audit-govos-89accc8f41372136"
+  },
+  "POST /api/v1/verify": {
+    "verified": true,
+    "evaluation_id": "eval-d2f1ebe638b2cdce",
+    "computed_hash": "e12aa6f0b368802cd3e19c1acaf78b7d00a6ed4835b8ce19de8ba968dd3d68b2",
+    "expected_hash": "e12aa6f0b368802cd3e19c1acaf78b7d00a6ed4835b8ce19de8ba968dd3d68b2",
+    "deterministic_match": true,
+    "gov_os_compliant": true,
+    "verification_timestamp": "2026-11-21T10:50:32.383771+00:00",
+    "audit_notes": [
+      "Deterministic hash equality confirmed.",
+      "Gov-OS core compliance verified."
+    ]
+  },
+  "POST /api/v1/assign-task": {
+    "assignment_id": "asgn-aab4a4c54d47",
+    "assigned_task_id": "T-GOV-003",
+    "target_product": "Parikshak Engineering Review Runtime (PARIKSHAK)",
+    "candidate_id": "user-kanishk-singh",
+    "candidate_name": "Kanishk Singh",
+    "task_title": "Autonomous Gov-OS Ledger Synchronization & Replay Audit",
+    "calibrated_duration": "180-360 Minutes (3-6 Hours)",
+    "difficulty_level": "INTERMEDIATE",
+    "phase_specifications": [
+      {
+        "phase": 1,
+        "title": "Contract Inspection & Ledger Ingress",
+        "checkpoint_minute": 60,
+        "target": "Define Gov-OS ledger synchronization interfaces and cryptographic block ingress.",
+        "completion_criteria": "Ledger ingress interfaces validate against Gov-OS v1.0 standard with zero type errors."
+      },
+      {
+        "phase": 2,
+        "title": "Deterministic Replay Audit & Merkle Proof Generation",
+        "checkpoint_minute": 180,
+        "target": "Implement replay engine validating historical transactions against canonical state hashes.",
+        "completion_criteria": "Replay audit engine verifies 50 historical states with 100% cryptographic parity."
+      },
+      {
+        "phase": 3,
+        "title": "Automated 5-Tier Verification & Adversarial Resilience",
+        "checkpoint_minute": 270,
+        "target": "Execute test suite including tamper detection, fork resolution, and replay verification.",
+        "completion_criteria": "100% test pass rate across unit, integration, and negative matrices."
+      },
+      {
+        "phase": 4,
+        "title": "Review Packet Evidence & Niyantran Handoff",
+        "checkpoint_minute": 360,
+        "target": "Assemble REVIEW_PACKET.md with cryptographic replay logs and handover to Saarthi.",
+        "completion_criteria": "Governed review packet verified and committed within calibrated SLA."
+      }
+    ],
+    "dod_matrix": [
+      {
+        "requirement": "Zero-Context-Switch Handover",
+        "status": "VERIFIED"
+      },
+      {
+        "requirement": "Deterministic Replay Parity",
+        "status": "VERIFIED"
+      },
+      {
+        "requirement": "Strict Version Pinning (==)",
+        "status": "VERIFIED"
+      },
+      {
+        "requirement": "Gov-OS Core Compliance",
+        "status": "VERIFIED"
+      }
+    ],
+    "governance_authority": "GC Shakti / Niyantran Task Orchestration",
+    "zero_context_switch_ready": true,
+    "assignment_timestamp": "2026-11-21T10:50:32.383771+00:00"
+  },
+  "GET /api/v1/audit": {
+    "total_records": 1,
+    "audit_records": [
+      {
+        "evaluation_id": "eval-d2f1ebe638b2cdce",
+        "task_id": "T-GOV-002",
+        "candidate_id": "user-kanishk-singh",
+        "verdict": "PASS",
+        "total_score": 100.0,
+        "deterministic_state_hash": "e12aa6f0b368802cd3e19c1acaf78b7d00a6ed4835b8ce19de8ba968dd3d68b2",
+        "timestamp": "2026-11-21T12:00:00Z",
+        "audit_ref": "audit-govos-89accc8f41372136"
+      }
+    ],
+    "ledger_type": "Gov-OS Immutable In-Memory Ledger",
+    "timestamp": "2026-11-21T10:50:32.383771+00:00"
   }
 }
