@@ -1,14 +1,21 @@
-<<<<<<< HEAD
-"""
-contracts/schemas.py — Parikshak Engineering Review Runtime Interface Schemas (v1.0)
-Standard: Governed Operational System (Gov-OS) Core Compliance
+"""contracts/schemas.py — Unified Interface Schemas (v1.0)
+
+Standards:
+- SETU OS Architecture v6.0 (Enterprise Core)
+- Governed Operational System (Gov-OS) Core Compliance (PARIKSHAK Evaluation Runtime)
 """
 
-from typing import List, Dict, Any, Optional
-from pydantic import BaseModel, Field, ConfigDict
-from enum import Enum
+from __future__ import annotations
+
 from datetime import datetime
+from enum import Enum
+from typing import Any, Dict, List, Optional
+from pydantic import BaseModel, ConfigDict, Field, field_validator
 
+
+# ============================================================================
+# PARIKSHAK Review Runtime Interface Schemas (Gov-OS Compliance)
+# ============================================================================
 
 class EvaluationState(str, Enum):
     INITIALIZED = "INITIALIZED"
@@ -155,19 +162,11 @@ class ErrorEnvelope(BaseModel):
     details: Optional[List[Dict[str, Any]]] = None
     request_id: str
     timestamp: str
-=======
-"""v1.0 Interface Schemas for BHIV Enterprise Operating System Common Core.
 
-Standard: SETU OS Architecture v6.0
-Integration Block: BHIV Core, GC Shakti, Niyantran, Bucket, Gov-OS, Saarthi
-"""
 
-from __future__ import annotations
-
-from enum import Enum
-from typing import Any, Dict, List, Optional
-from pydantic import BaseModel, ConfigDict, Field, field_validator
-
+# ============================================================================
+# BHIV Enterprise Common Core Schemas (SETU OS Architecture v6.0)
+# ============================================================================
 
 class TaskPriorityEnum(str, Enum):
     P0 = "P0"
@@ -259,7 +258,7 @@ class EvidencePacket(BaseModel):
     source_module_id: str = Field("BHIV_ENTERPRISE_CORE", description="Publishing module identifier")
     artifact_type: str = Field("GOVERNED_REVIEW_PACKET", description="Category of evidence")
     parent_hash: str = Field(..., description="Continuity parent SHA-256 hash")
-    payload: Dict[str, Any] = Field(..., description="Cryptographic payload payload")
+    payload: Dict[str, Any] = Field(..., description="Cryptographic payload")
     signature: str = Field(..., description="ECDSA / HMAC cryptographic attestation")
 
 
@@ -317,10 +316,9 @@ class ExecutionErrorResponse(BaseModel):
     timestamp_utc: str = Field(...)
 
 
-# ==========================================
-# PARIKSHAK Evaluation Engine Schemas (v1.0)
-# Standard: Governed Operational System (Gov-OS)
-# ==========================================
+# ============================================================================
+# Additional PARIKSHAK Rule Engine Schemas (Gov-OS)
+# ============================================================================
 
 class EvaluationRuleCategory(str, Enum):
     SCHEMA_COMPLIANCE = "SCHEMA_COMPLIANCE"
@@ -380,5 +378,3 @@ class EvaluationVerdict(BaseModel):
     deterministic_verdict_hash: str = Field(..., min_length=64, max_length=64, description="Canonical SHA-256 state hash")
     timestamp_utc: str = Field(...)
     next_task_recommendation: Optional[str] = Field(None)
-
->>>>>>> fc3ed141ac5b1a024e1222b9642fff407ee2851b

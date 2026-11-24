@@ -1,7 +1,6 @@
 {
-  "sequence_counter": 5,
+  "sequence_counter": 10,
   "entries": {
-<<<<<<< HEAD
     "56354ee0-af47-430d-810a-9c712db5e295": {
       "message_id": "56354ee0-af47-430d-810a-9c712db5e295",
       "sequence_number": 1,
@@ -26,32 +25,31 @@
       "message_id": "687408ee-f5e3-4db4-ae26-c32771477554",
       "sequence_number": 5,
       "issued_at": 1795259915.3703763
-=======
+    },
     "abee773c-c198-4397-9bba-6162d01e9f97": {
       "message_id": "abee773c-c198-4397-9bba-6162d01e9f97",
-      "sequence_number": 1,
+      "sequence_number": 6,
       "issued_at": 1794826919.198038
     },
     "b8a932e9-015f-45ae-923b-55825f550139": {
       "message_id": "b8a932e9-015f-45ae-923b-55825f550139",
-      "sequence_number": 2,
+      "sequence_number": 7,
       "issued_at": 1794826973.7344954
     },
     "ae94dded-cb80-4df2-8fc6-ebb524eb6028": {
       "message_id": "ae94dded-cb80-4df2-8fc6-ebb524eb6028",
-      "sequence_number": 3,
+      "sequence_number": 8,
       "issued_at": 1794827019.407295
     },
     "135901a8-e927-421c-a724-ded45e1d46d6": {
       "message_id": "135901a8-e927-421c-a724-ded45e1d46d6",
-      "sequence_number": 4,
+      "sequence_number": 9,
       "issued_at": 1794827025.5813463
     },
     "1d587e19-da21-4e56-a5e8-b034ec901533": {
       "message_id": "1d587e19-da21-4e56-a5e8-b034ec901533",
-      "sequence_number": 5,
+      "sequence_number": 10,
       "issued_at": 1794827036.468114
->>>>>>> fc3ed141ac5b1a024e1222b9642fff407ee2851b
     }
   }
 }

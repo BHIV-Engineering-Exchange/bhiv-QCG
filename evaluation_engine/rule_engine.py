@@ -1,4 +1,5 @@
-<<<<<<< HEAD
+from __future__ import annotations
+
 """
 evaluation_engine/rule_engine.py — Parikshak Evaluation Engine Logic & Verification Runtime
 Task ID: T-GOV-002
@@ -410,14 +411,9 @@ class EvaluationEngine:
                 "Gov-OS core compliance verified."
             ]
         )
-=======
-"""PARIKSHAK Evaluation Rule Engine Implementation.
-
-Standard: Governed Operational System (Gov-OS) Core Compliance
-Authority: Parikshak Engineering Review Runtime
-"""
-
-from __future__ import annotations
+# ============================================================================
+# PARIKSHAK Evaluation Rule Engine Implementation (Gov-OS Compliance)
+# ============================================================================
 
 import copy
 import hashlib
@@ -739,4 +735,3 @@ class EvaluationRuleEngine:
         elements.append(crit_table)
         doc.build(elements)
         return output_path
->>>>>>> fc3ed141ac5b1a024e1222b9642fff407ee2851b

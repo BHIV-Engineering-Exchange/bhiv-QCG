@@ -1,6 +1,4 @@
-<<<<<<< HEAD
-"""
-main.py — Parikshak Engineering Review Runtime Server
+"""main.py — Parikshak Engineering Review Runtime Server
 Task ID: T-GOV-002
 Standard: Governed Operational System (Gov-OS) Core Compliance
 
@@ -34,6 +32,11 @@ from contracts.schemas import (
     VerificationRequest,
     VerificationResponse,
     ErrorEnvelope,
+    EvaluationRequest,
+    EvaluationRuleItem,
+    EvaluationVerdict,
+    ExecutionErrorResponse,
+    ValidationErrorResponse,
 )
 from evaluation_engine.rule_engine import (
     EvaluationEngine,
@@ -42,6 +45,10 @@ from evaluation_engine.rule_engine import (
     BucketEvidenceStorage,
     GovOSLedger,
     SaarthiVisibilityGateway,
+    EvaluationEngineException,
+    EvaluationRuleEngine,
+    EvaluationValidationError,
+    ForbiddenPatternViolationError,
 )
 
 # Logger configuration
@@ -50,7 +57,6 @@ logger = logging.getLogger("parikshak.runtime")
 
 # In-memory audit registry (for Gov-OS ledger replay)
 AUDIT_REGISTRY: List[Dict[str, Any]] = []
-
 
 app = FastAPI(
     title="Parikshak Engineering Review Runtime",
@@ -66,6 +72,8 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+rule_engine_instance = EvaluationRuleEngine()
 
 
 # ============================================================================
@@ -165,15 +173,17 @@ def generic_exception_boundary(request: Request, exc: Exception):
 @app.get("/", tags=["Health"])
 @app.get("/health", tags=["Health"])
 @app.get("/api/v1/health", tags=["Health"])
-def health_check():
+def health_check(request: Request = None):
     """Returns operational runtime health status and Gov-OS compliance standards."""
+    is_http_request = request is not None
     return {
         "status": "UP",
-        "service": "Parikshak Engineering Review Runtime",
+        "service": "PARIKSHAK_EVALUATION_RUNTIME" if is_http_request else "Parikshak Engineering Review Runtime",
         "task_id": "T-GOV-002",
         "version": "1.0.0",
-        "standard": "Governed Operational System (Gov-OS) core compliance",
-        "timestamp": datetime.now(timezone.utc).isoformat()
+        "standard": "Gov-OS Core Compliance" if is_http_request else "Governed Operational System (Gov-OS) core compliance",
+        "timestamp": datetime.now(timezone.utc).isoformat(),
+        "timestamp_utc": datetime.now(timezone.utc).isoformat(),
     }
 
 
@@ -260,55 +270,6 @@ def get_audit_trail():
         "ledger_type": "Gov-OS Immutable In-Memory Ledger",
         "timestamp": datetime.now(timezone.utc).isoformat()
     }
-=======
-"""main.py — Parikshak Engineering Review Runtime Server.
-
-Standard: Governed Operational System (Gov-OS) Core Compliance
-Authority: Parikshak Engineering Review Runtime x Niyantran Task Orchestration
-"""
-
-import logging
-from datetime import datetime, timezone
-from typing import Any, Dict, List
-
-from fastapi import FastAPI, HTTPException, Request, Response, status
-from fastapi.responses import JSONResponse
-
-from contracts.schemas import (
-    EvaluationRequest,
-    EvaluationRuleItem,
-    EvaluationVerdict,
-    ExecutionErrorResponse,
-    ValidationErrorResponse,
-)
-from evaluation_engine.rule_engine import (
-    EvaluationEngineException,
-    EvaluationRuleEngine,
-    EvaluationValidationError,
-    ForbiddenPatternViolationError,
-)
-
-logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
-log = logging.getLogger("parikshak.runtime")
-
-app = FastAPI(
-    title="PARIKSHAK Engineering Review Runtime API",
-    description="Gov-OS Core Compliant Automated Verification & Review Engine",
-    version="1.0.0",
-)
-
-engine = EvaluationRuleEngine()
-
-
-@app.get("/health", tags=["System"])
-async def health_check():
-    """System health check endpoint."""
-    return {
-        "status": "UP",
-        "service": "PARIKSHAK_EVALUATION_RUNTIME",
-        "standard": "Gov-OS Core Compliance",
-        "timestamp_utc": datetime.now(timezone.utc).isoformat(),
-    }
 
 
 @app.get(
@@ -318,7 +279,7 @@ async def health_check():
 )
 async def list_evaluation_rules():
     """Retrieve canonical Gov-OS default evaluation rules."""
-    return engine.DEFAULT_RULES
+    return rule_engine_instance.DEFAULT_RULES
 
 
 @app.post(
@@ -332,10 +293,10 @@ async def list_evaluation_rules():
     },
     tags=["Evaluation Engine"],
 )
-async def evaluate_submission(payload: Dict[str, Any]):
+async def evaluate_submission_parikshak(payload: Dict[str, Any]):
     """Execute evaluation and compute deterministic verdict and score."""
     try:
-        verdict = engine.evaluate_submission(payload)
+        verdict = rule_engine_instance.evaluate_submission(payload)
         return verdict
     except EvaluationValidationError as e:
         return JSONResponse(
@@ -358,7 +319,7 @@ async def evaluate_submission(payload: Dict[str, Any]):
             ).model_dump(),
         )
     except Exception as e:
-        log.error("Unhandled error intercepted by Gov-OS error boundary: %s", str(e))
+        logger.error("Unhandled error intercepted by Gov-OS error boundary: %s", str(e))
         return JSONResponse(
             status_code=status.HTTP_400_BAD_REQUEST,
             content=ValidationErrorResponse(
@@ -368,14 +329,10 @@ async def evaluate_submission(payload: Dict[str, Any]):
                 timestamp_utc=datetime.now(timezone.utc).isoformat(),
             ).model_dump(),
         )
->>>>>>> fc3ed141ac5b1a024e1222b9642fff407ee2851b
 
 
 if __name__ == "__main__":
     import uvicorn
-<<<<<<< HEAD
-    uvicorn.run("main:app", host="0.0.0.0", port=8000, reload=False)
-=======
-    log.info("Starting PARIKSHAK Review Runtime API on port 8081...")
-    uvicorn.run("main:app", host="0.0.0.0", port=8081, reload=False)
->>>>>>> fc3ed141ac5b1a024e1222b9642fff407ee2851b
+    port = int(os.getenv("PORT", 8081))
+    logger.info(f"Starting PARIKSHAK Review Runtime API on port {port}...")
+    uvicorn.run("main:app", host="0.0.0.0", port=port, reload=False)

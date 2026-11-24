@@ -1,33 +1,22 @@
-<<<<<<< HEAD
-=======
-# PARIKSHAK PKB Strictly Pinned Dependencies (Gov-OS Core Compliance)
->>>>>>> fc3ed141ac5b1a024e1222b9642fff407ee2851b
+# PARIKSHAK PKB & Enterprise Core Unified Dependencies
+# Governed Operational System (Gov-OS) & SETU OS Architecture v6.0 Compliance
+
 fastapi==0.115.8
 uvicorn[standard]==0.34.0
 pydantic==2.13.3
 reportlab==4.4.1
 pytest==9.0.3
 python-dotenv==1.2.2
-<<<<<<< HEAD
-cryptography==42.0.8
-requests==2.31.0
-numpy==1.24.4
-qiskit==1.1.0
-qiskit-aer==0.14.2
-opentelemetry-api==1.20.0
-opentelemetry-sdk==1.20.0
-opentelemetry-instrumentation-fastapi==0.41b0
-=======
 
 # Sovereign Quantum & Core Runtime Components
-qiskit==2.5.2
-qiskit-aer==0.17.2
-numpy==2.4.6
-cryptography==50.0.0
-requests==2.32.3
+cryptography>=42.0.8
+requests>=2.31.0
+numpy>=1.24.4
+qiskit>=1.1.0
+qiskit-aer>=0.14.2
+qiskit-ibm-runtime>=0.20.0
 
 # Telemetry & Observability
-opentelemetry-api==1.44.0
-opentelemetry-sdk==1.44.0
-opentelemetry-instrumentation-fastapi==0.65b0
->>>>>>> fc3ed141ac5b1a024e1222b9642fff407ee2851b
+opentelemetry-api>=1.20.0
+opentelemetry-sdk>=1.20.0
+opentelemetry-instrumentation-fastapi>=0.41b0

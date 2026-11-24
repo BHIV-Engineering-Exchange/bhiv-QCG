@@ -26,6 +26,7 @@ from __future__ import annotations
 import hashlib
 import json
 import logging
+import os
 import threading
 import time
 import uuid
@@ -187,6 +188,45 @@ class QuantumProviderRegistry:
         """List only available (healthy) providers."""
         with self._lock:
             return [p for p in self._providers.values() if p.is_available]
+
+    def discover_cloud_providers(self) -> List[QuantumProviderRecord]:
+        """
+        Dynamically query configured cloud quantum providers (e.g. IBM Quantum Runtime).
+        Registers discovered devices and returns the new records.
+        """
+        discovered = []
+        token = os.getenv("QISKIT_IBM_TOKEN")
+        channel = os.getenv("QISKIT_IBM_CHANNEL", "ibm_cloud")
+        instance = os.getenv("QISKIT_IBM_INSTANCE")
+
+        if token:
+            try:
+                from qiskit_ibm_runtime import QiskitRuntimeService
+                service = QiskitRuntimeService(token=token, channel=channel, instance=instance if instance else None)
+                for b in service.backends():
+                    status_obj = b.status()
+                    record = QuantumProviderRecord(
+                        provider_id=f"ibmq-{b.name}",
+                        provider_name=f"IBM Quantum ({b.name})",
+                        provider_type="LOCAL_SIMULATOR" if b.simulator else "LIVE_HARDWARE",
+                        status=ProviderStatus.AVAILABLE.value if status_obj.operational else ProviderStatus.DEGRADED.value,
+                        capabilities={
+                            "hardware_access": not b.simulator,
+                            "pending_jobs": getattr(status_obj, "pending_jobs", 0),
+                            "basis_gates": list(getattr(b, "operation_names", [])),
+                        },
+                        max_qubits=getattr(b, "num_qubits", 127),
+                        supported_gates=list(getattr(b, "operation_names", [])),
+                        backend_name=b.name,
+                        last_health_check=datetime.now(timezone.utc).isoformat(),
+                        last_health_result="OPERATIONAL" if status_obj.operational else "MAINTENANCE",
+                    )
+                    self.register_provider(record)
+                    discovered.append(record)
+            except Exception as e:
+                logger.warning("Could not dynamically discover IBM Quantum backends: %s", e)
+
+        return discovered
 
     def get_best_provider(
         self,
