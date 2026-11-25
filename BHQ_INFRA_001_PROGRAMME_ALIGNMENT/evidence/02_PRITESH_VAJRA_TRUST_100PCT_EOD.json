@@ -7,7 +7,7 @@
     "date": "2026-11-04",
     "target_state": "TANTRA-VAJRA-BIQOS Convergence",
     "truth_classification": "IMPLEMENTED AND TESTED",
-    "timestamp": "2026-11-21T11:18:34.597986+00:00",
+    "timestamp": "2026-11-25T09:46:54.712939+00:00",
     "completion_percentage": 100.0
   },
   "pipeline_stages": {
@@ -20,19 +20,19 @@
         "circuit_depth": 5,
         "shots": 4096,
         "measurement_counts": {
-          "0000": 2071,
-          "1111": 2025
+          "1111": 2092,
+          "0000": 2004
         },
         "entanglement_fidelity": 1.0,
         "backend": "AerSimulator(qiskit_aer)",
         "hardware_classification": "QUANTUM_SIMULATED"
       },
-      "duration_ms": 39.06
+      "duration_ms": 27.84
     },
     "stage_2_tantra": {
       "status": "COMPLETED",
-      "trace_id": "97ac1980-b049-513b-aa37-b915619ee4ce",
-      "payload_hash": "0fb11c3cd122feb2fdc614396a4b9a0150db629a7c39481ee6addebddc597b24",
+      "trace_id": "0f5e940f-ff2c-52d5-a37e-da69abb2568b",
+      "payload_hash": "f3f23bba22ed38685b908b911de16855365790d0832c98016846a4160a225e0a",
       "confidence": 1.0,
       "execution_classification": "QUANTUM_SIMULATED",
       "duration_ms": 0.0
@@ -40,63 +40,63 @@
     "stage_3_qcg_runtime": {
       "status": "COMPLETED",
       "routing_path": "SIMULATOR",
-      "runtime_hash": "80978a145529aa11dc53109e8a94f0fed64f65de7ee5be22223804b077c62093",
+      "runtime_hash": "e98f7e893c128bf7e738823b7fcfc48bf1f7a10412cfa769a95a73b858e656fc",
       "classification": "QUANTUM_SIMULATED",
       "duration_ms": 0.0
     },
     "stage_4_vajra_trust": {
       "status": "COMPLETED",
       "producer_id": "VAJRA-QPU-PRODUCER-001",
-      "public_key_der": "3059301306072a8648ce3d020106082a8648ce3d030107034200040d946eaa6d8631cae63e9c8a0640c04e136517daeb62b6d3bb3fe48e3376e8ee920d5dddfe514e03d5ee9faa5dfcdc1ddd803f20882e54d5942a65b9aafbed6c",
-      "producer_signature": "3046022100f990e48a7d1d38a10bd1ca98ba1d7d21ff7c65185d1bdade996a94643cfd0cc2022100d87a6d75769b82883845ec4dfe4d0d7824f53332e8de59565bceac019f0e8f3f",
-      "contract_signature": "3045022031a708828a1371ae2467864e89feea1ceed83db2b8185b9f3edc7e3f478804c2022100d7bea6af124589f8732c029f8e31eb558231ff3b418804ff7bb4d8c5bdc7ad2d",
+      "public_key_der": "3059301306072a8648ce3d020106082a8648ce3d03010703420004995ade573d139f916856defbaeadb72fbe341d868e99e72bb6002fa29f986266fcc9fe4d811029555abf3cb151a71eefa9f803f7d2dbc2f3fa09da778a0eaf37",
+      "producer_signature": "3046022100a8453adf44f71e21ecd82b66ec79453cbf7d6da09346487c893c0c7996d26930022100e2b9e97daec5455e7617ab0dd4d2f7af1d3b0d4894d82f0d8d036aa620b0ec6a",
+      "contract_signature": "3046022100e0b65c053cd1f829439c21ffdd8d2687818b08d70988c75e1bc8ee544e0755f6022100aa8721af979b41846c01d190a7d7c730cc384f0bfc10ee74ebd4900a61a2f0a4",
       "provenance_status": "VERIFIED",
       "execution_record": {
-        "execution_id": "BHQ-EXEC-281700ba12",
-        "trace_id": "97ac1980-b049-513b-aa37-b915619ee4ce",
-        "replay_reference": "replay-ref-97ac1980",
+        "execution_id": "BHQ-EXEC-63498e3b8f",
+        "trace_id": "0f5e940f-ff2c-52d5-a37e-da69abb2568b",
+        "replay_reference": "replay-ref-0f5e940f",
         "execution_sequence": 1,
         "producer_identity": "VAJRA-QPU-PRODUCER-001",
         "runtime_identity": "QCG_AER_RUNTIME_v2",
         "governance_identity": "TANTRA_GOVERNANCE_AUTH_001",
         "execution_status": "COMPLETED",
-        "runtime_hash": "80978a145529aa11dc53109e8a94f0fed64f65de7ee5be22223804b077c62093",
-        "execution_hash": "d1802781f559d4353bd0c745629ef9ad522e6863a1ef1915235a84605d332ffb",
+        "runtime_hash": "e98f7e893c128bf7e738823b7fcfc48bf1f7a10412cfa769a95a73b858e656fc",
+        "execution_hash": "e8039c52ea0382542b18dec7bc297bede48acaef21448afb0c288c693c57ebf4",
         "previous_execution_hash": "901131d838b17aac0f7885b81e03cbdc9f5157a00343d30ab22083685ed1416a",
         "execution_root_hash": "",
         "schema_version": "2.0.0"
       },
-      "canonical_merkle_root": "5175f208502a6a9fea67381d177c17bdb54085c654e25aa1aa17e4a81b2ee2e1",
+      "canonical_merkle_root": "b67bc8954b06423944515173ab33252e6705131bdf564e43c4cbb34db72c424a",
       "certificate": {
         "execution_record": {
-          "execution_id": "BHQ-EXEC-281700ba12",
-          "trace_id": "97ac1980-b049-513b-aa37-b915619ee4ce",
-          "replay_reference": "replay-ref-97ac1980",
+          "execution_id": "BHQ-EXEC-63498e3b8f",
+          "trace_id": "0f5e940f-ff2c-52d5-a37e-da69abb2568b",
+          "replay_reference": "replay-ref-0f5e940f",
           "execution_sequence": 1,
           "producer_identity": "VAJRA-QPU-PRODUCER-001",
           "runtime_identity": "QCG_AER_RUNTIME_v2",
           "governance_identity": "TANTRA_GOVERNANCE_AUTH_001",
           "execution_status": "COMPLETED",
-          "runtime_hash": "80978a145529aa11dc53109e8a94f0fed64f65de7ee5be22223804b077c62093",
-          "execution_hash": "d1802781f559d4353bd0c745629ef9ad522e6863a1ef1915235a84605d332ffb",
+          "runtime_hash": "e98f7e893c128bf7e738823b7fcfc48bf1f7a10412cfa769a95a73b858e656fc",
+          "execution_hash": "e8039c52ea0382542b18dec7bc297bede48acaef21448afb0c288c693c57ebf4",
           "previous_execution_hash": "901131d838b17aac0f7885b81e03cbdc9f5157a00343d30ab22083685ed1416a",
           "execution_root_hash": "",
           "schema_version": "2.0.0"
         },
         "certificate_type": "DeterministicExecutionCertificate",
-        "chain_hash": "5175f208502a6a9fea67381d177c17bdb54085c654e25aa1aa17e4a81b2ee2e1",
-        "merkle_root": "5175f208502a6a9fea67381d177c17bdb54085c654e25aa1aa17e4a81b2ee2e1",
+        "chain_hash": "b67bc8954b06423944515173ab33252e6705131bdf564e43c4cbb34db72c424a",
+        "merkle_root": "b67bc8954b06423944515173ab33252e6705131bdf564e43c4cbb34db72c424a",
         "ledger_sequence": 1,
         "schema_version": "1.0.0"
       },
       "lineage_valid": true,
-      "duration_ms": 1.0
+      "duration_ms": 0.0
     },
     "stage_5_observability": {
       "status": "COMPLETED",
-      "trace_id": "97ac1980-b049-513b-aa37-b915619ee4ce",
+      "trace_id": "0f5e940f-ff2c-52d5-a37e-da69abb2568b",
       "history_count": 1,
-      "total_pipeline_latency_ms": 40.06
+      "total_pipeline_latency_ms": 27.84
     }
   },
   "adversarial_suite": [
@@ -122,7 +122,7 @@
       "result": "TAMPERED",
       "expected": "TAMPERED",
       "passed": true,
-      "duration_ms": 0.0
+      "duration_ms": 2.01
     },
     {
       "scenario_id": "ADV-04",
@@ -138,7 +138,7 @@
       "result": "TAMPERED",
       "expected": "TAMPERED",
       "passed": true,
-      "duration_ms": 1.5
+      "duration_ms": 0.0
     },
     {
       "scenario_id": "ADV-06",
@@ -189,7 +189,7 @@
     "canonical_merkle_root": "8e4ce781e58f80aa5fa130040b9d833f70579b5d427c1d0f3713010d7672f7c3",
     "replayed_merkle_root": "8e4ce781e58f80aa5fa130040b9d833f70579b5d427c1d0f3713010d7672f7c3",
     "determinism_pass": true,
-    "batch_duration_ms": 69.9
+    "batch_duration_ms": 106.62
   },
   "acceptance_criteria": {
     "Criterion_1_Workload_Aer_Simulation": {
@@ -214,5 +214,5 @@
     },
     "Overall_100_Percent_EOD_Status": "PASSED"
   },
-  "total_suite_duration_ms": 111.47
+  "total_suite_duration_ms": 138.47
 }

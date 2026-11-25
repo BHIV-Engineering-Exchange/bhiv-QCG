@@ -14,7 +14,7 @@ import json
 import logging
 import time
 import uuid
-from typing import Dict, Any
+from typing import Dict, Any, Optional, List
 
 from fastapi import FastAPI, HTTPException, Request, Response, Header, Depends
 from fastapi.responses import PlainTextResponse, RedirectResponse
@@ -414,10 +414,65 @@ class HybridSubmitRequest(BaseModel):
     workload: Dict[str, Any]
     workload_type: str = "GENERAL"
     problem_size: int = 0
+    shots: Optional[int] = None
+    target_backend: Optional[str] = None
+    target_provider: Optional[str] = None
     is_qubo_compatible: bool = False
     requires_entanglement: bool = False
     requires_live_hardware: bool = False
     classical_fallback_acceptable: bool = True
+    execution_options: Optional[Dict[str, Any]] = None
+    routing_flags: Optional[Dict[str, Any]] = None
+
+
+class CircuitValidateRequest(BaseModel):
+    """Request body for OpenQASM circuit validation."""
+    qasm_payload: str
+    circuit_format: Optional[str] = "OPENQASM_3"
+
+
+@app.post("/quantum/validate", tags=["Quantum Studio"])
+async def validate_circuit(payload: CircuitValidateRequest):
+    """
+    Authoritative circuit validation endpoint for OpenQASM 3.0 and 2.0.
+    Returns circuit metrics (qubits, depth, gate counts) on success,
+    or descriptive syntax error on failure.
+    """
+    from qiskit import QuantumCircuit
+    qasm_str = payload.qasm_payload.strip()
+    if not qasm_str:
+        raise HTTPException(status_code=422, detail="Circuit payload cannot be empty.")
+    
+    qc = None
+    parse_format = "OPENQASM_3"
+    try:
+        from qiskit import qasm3
+        qc = qasm3.loads(qasm_str)
+    except Exception as e3:
+        try:
+            qc = QuantumCircuit.from_qasm_str(qasm_str)
+            parse_format = "OPENQASM_2"
+        except Exception as e2:
+            raise HTTPException(
+                status_code=422,
+                detail=f"OpenQASM compilation error: {str(e3)} (QASM3) / {str(e2)} (QASM2)"
+            )
+            
+    ops = dict(qc.count_ops())
+    total_gates = sum(ops.values())
+    two_q_gates = sum(v for k, v in ops.items() if k in ("cx", "cz", "ecr", "swap"))
+    two_q_ratio = round((two_q_gates / total_gates) * 100, 1) if total_gates > 0 else 0.0
+
+    return {
+        "valid": True,
+        "format": parse_format,
+        "num_qubits": qc.num_qubits,
+        "circuit_depth": qc.depth(),
+        "total_gates": total_gates,
+        "two_qubit_gates": two_q_gates,
+        "two_qubit_ratio_percent": two_q_ratio,
+        "gate_counts": ops,
+    }
 
 
 class CapabilityDispatchRequest(BaseModel):
@@ -447,17 +502,34 @@ async def hybrid_submit(payload: HybridSubmitRequest):
     start = _time.time()
     orchestrator = _get_orchestrator()
 
+    # Normalize fields from top-level into workload dictionary
+    workload = dict(payload.workload)
+    if payload.target_backend and "target_backend" not in workload:
+        workload["target_backend"] = payload.target_backend
+    if payload.target_provider and "target_provider" not in workload:
+        workload["target_provider"] = payload.target_provider
+    if payload.shots and "shots" not in workload:
+        workload["shots"] = payload.shots
+    if payload.execution_options and "execution_options" not in workload:
+        workload["execution_options"] = payload.execution_options
+
+    target_be = payload.target_backend or workload.get("target_backend")
+    w_type = payload.workload_type
+    if w_type == "GENERAL" and ("qasm_payload" in workload or target_be):
+        w_type = "QUANTUM"
+
     metadata = WorkloadMetadata(
-        workload_id=payload.workload.get("workload_id", str(uuid.uuid4())),
-        workload_type=payload.workload_type,
-        problem_size=payload.problem_size,
+        workload_id=workload.get("workload_id", str(uuid.uuid4())),
+        workload_type=w_type,
+        problem_size=payload.problem_size or workload.get("problem_size", 2),
         is_qubo_compatible=payload.is_qubo_compatible,
-        requires_entanglement=payload.requires_entanglement,
+        requires_entanglement=payload.requires_entanglement or ("cx" in str(workload.get("qasm_payload", ""))),
         requires_live_hardware=payload.requires_live_hardware,
         classical_fallback_acceptable=payload.classical_fallback_acceptable,
+        target_backend=target_be,
     )
 
-    result = orchestrator.submit_workload(payload.workload, metadata)
+    result = orchestrator.submit_workload(workload, metadata)
     return _to_invocation_result(result, start_time=start)
 
 

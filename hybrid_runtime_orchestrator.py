@@ -395,41 +395,54 @@ class HybridRuntimeOrchestrator:
         qasm_str = workload.get("qasm_payload") or nested_workload.get("qasm_payload")
 
         if qasm_str:
+            qc = None
             try:
-                qc = QuantumCircuit.from_qasm_str(qasm_str)
-                shots = workload.get("shots", config.SHOTS)
-                if provider.is_local_simulator:
-                    sim = AerSimulator()
-                    job = sim.run(qc, shots=shots)
-                    counts = job.result().get_counts(qc)
-                    return {
-                        "status": "EXECUTED",
-                        "execution_type": "QUANTUM_LOCAL",
-                        "provider": provider.provider_id,
-                        "counts": counts,
-                        "shots": shots,
-                        "num_qubits": qc.num_qubits,
-                        "circuit_depth": qc.depth(),
-                        "confidence": 0.99,
-                    }
-                else:
-                    from ibmq_hardware_adapter import QiskitRuntimeHardwareAdapter
-                    adapter = QiskitRuntimeHardwareAdapter(backend_name=getattr(provider, "backend_name", None))
-                    opt_level = workload.get("execution_options", {}).get("optimization_level", 2)
-                    res = adapter.execute_circuit(qc, shots=shots, optimization_level=opt_level)
-                    return {
-                        "status": "EXECUTED",
-                        "execution_type": "QUANTUM_LIVE" if res.get("is_live_hardware") else "QUANTUM_SIMULATED",
-                        "provider": provider.provider_id,
-                        "counts": res.get("measured_distribution", {}),
-                        "shots": shots,
-                        "num_qubits": res.get("num_qubits", qc.num_qubits),
-                        "circuit_depth": res.get("circuit_depth", qc.depth()),
-                        "job_id": res.get("job_id"),
-                        "confidence": 0.98 if res.get("is_live_hardware") else 0.95,
-                    }
-            except Exception as e:
-                logger.warning("Custom QASM execution failed: %s, falling back to standard workload.", e)
+                # Try OpenQASM 3 first
+                from qiskit import qasm3
+                qc = qasm3.loads(qasm_str)
+            except Exception as e3:
+                # Fall back to OpenQASM 2
+                try:
+                    qc = QuantumCircuit.from_qasm_str(qasm_str)
+                except Exception as e2:
+                    logger.error("OpenQASM compilation failed: QASM3 error: %s; QASM2 error: %s", e3, e2)
+                    raise ValueError(f"OpenQASM compilation error: {e3}") from e3
+
+            shots = workload.get("shots") or nested_workload.get("shots") or config.SHOTS
+            target_backend = workload.get("target_backend") or nested_workload.get("target_backend")
+            is_aer = provider.is_local_simulator or (target_backend in ("aer_simulator", "qiskit-aer-local"))
+
+            if is_aer:
+                sim = AerSimulator()
+                job = sim.run(qc, shots=shots)
+                counts = job.result().get_counts(qc)
+                return {
+                    "status": "EXECUTED",
+                    "execution_type": "QUANTUM_LOCAL",
+                    "provider": "aer_simulator",
+                    "counts": counts,
+                    "shots": shots,
+                    "num_qubits": qc.num_qubits,
+                    "circuit_depth": qc.depth(),
+                    "confidence": 0.99,
+                }
+            else:
+                from ibmq_hardware_adapter import QiskitRuntimeHardwareAdapter
+                backend_name = target_backend or getattr(provider, "backend_name", None)
+                adapter = QiskitRuntimeHardwareAdapter(backend_name=backend_name)
+                opt_level = workload.get("execution_options", {}).get("optimization_level", 2)
+                res = adapter.execute_circuit(qc, shots=shots, optimization_level=opt_level)
+                return {
+                    "status": "EXECUTED",
+                    "execution_type": "QUANTUM_LIVE" if res.get("is_live_hardware") else "QUANTUM_SIMULATED",
+                    "provider": provider.provider_id,
+                    "counts": res.get("measured_distribution", {}),
+                    "shots": shots,
+                    "num_qubits": res.get("num_qubits", qc.num_qubits),
+                    "circuit_depth": res.get("circuit_depth", qc.depth()),
+                    "job_id": res.get("job_id"),
+                    "confidence": 0.98 if res.get("is_live_hardware") else 0.95,
+                }
 
         if provider.is_local_simulator:
             return self._run_local_quantum(workload)
@@ -672,6 +685,8 @@ class HybridRuntimeOrchestrator:
         """Stage 8: Final provenance output for BHEX handover."""
         return {
             "trace_id": trace_id,
+            "execution_id": f"qcg-exec-{trace_id[:8]}",
+            "leaf_hash": classified.result_hash,
             "classification": classified.classification,
             "execution_path": classified.execution_path,
             "provider_id": classified.provider_id,

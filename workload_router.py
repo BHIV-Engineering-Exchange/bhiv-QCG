@@ -99,6 +99,7 @@ class WorkloadMetadata:
     requires_live_hardware: bool = False       # Must run on real quantum hardware
     max_acceptable_noise: float = 1.0          # Noise tolerance [0, 1]
     classical_fallback_acceptable: bool = True # Can fall back to classical
+    target_backend: Optional[str] = None       # Specific requested backend ID
     constraints: Dict[str, Any] = field(default_factory=dict)
 
     def to_dict(self) -> dict:
@@ -133,7 +134,12 @@ class WorkloadRouter:
         5. Large optimization (> 100 variables on current NISQ) → HYBRID_REQUIRED
         6. Default → CLASSICAL_PREFERRED
         """
-        if metadata.requires_live_hardware or metadata.requires_entanglement:
+        if (
+            metadata.requires_live_hardware
+            or metadata.requires_entanglement
+            or metadata.workload_type in ("QUANTUM", "CIRCUIT", "OPENQASM_3", "OPENQASM_2")
+            or metadata.target_backend
+        ):
             return WorkloadSuitability.QUANTUM_REQUIRED
 
         if metadata.is_qubo_compatible:
@@ -162,10 +168,22 @@ class WorkloadRouter:
 
         # Get available providers
         available = self._registry.list_available_providers()
-        best_provider = self._registry.get_best_provider(
-            min_qubits=metadata.problem_size,
-            prefer_live=metadata.requires_live_hardware,
-        )
+        best_provider = None
+        if metadata.target_backend:
+            for p in available:
+                if (
+                    p.provider_id == metadata.target_backend
+                    or getattr(p, "backend_name", None) == metadata.target_backend
+                    or (metadata.target_backend in ("aer_simulator", "qiskit-aer-local") and p.is_local_simulator)
+                ):
+                    best_provider = p
+                    break
+
+        if best_provider is None:
+            best_provider = self._registry.get_best_provider(
+                min_qubits=metadata.problem_size,
+                prefer_live=metadata.requires_live_hardware,
+            )
 
         # Determine routing based on suitability + availability
         if suitability == WorkloadSuitability.CLASSICAL_PREFERRED:

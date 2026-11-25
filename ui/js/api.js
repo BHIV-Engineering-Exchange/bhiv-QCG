@@ -35,6 +35,26 @@ const QCG_API = {
     },
 
     /**
+     * Authoritative OpenQASM circuit validation against backend parser.
+     */
+    async validateCircuit(qasmPayload) {
+        try {
+            const resp = await fetch(`${this.baseUrl}/quantum/validate`, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ qasm_payload: qasmPayload })
+            });
+            if (!resp.ok) {
+                const errData = await resp.json().catch(() => ({}));
+                return { valid: false, error: errData.detail || `HTTP ${resp.status}` };
+            }
+            return await resp.json();
+        } catch (err) {
+            return { valid: false, error: err.message };
+        }
+    },
+
+    /**
      * Submit a quantum or hybrid workload to QCG.
      */
     async submitCircuit(payload) {

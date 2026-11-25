@@ -7,7 +7,7 @@
     "date": "2026-11-04",
     "execution_target": "TANTRA-VAJRA-BIQOS Convergence",
     "truth_classification": "IMPLEMENTED AND TESTED",
-    "timestamp": "2026-11-21T11:18:34.716079+00:00"
+    "timestamp": "2026-11-25T09:46:54.864005+00:00"
   },
   "test_results": [
     {
@@ -17,17 +17,17 @@
       "details": {
         "tantra_node": {
           "node_id": "TANTRA-ORCH-001",
-          "public_key": "3059301306072a8648ce3d020106082a8648ce3d0301070342000420f51b57c1e3d710654287ca5303d18a056f63465601b85b7376ab74d032586ecfff874eca3ec2329592bf1d5a627489c2fdb2d78bd2d19724c1db48a36eb13e",
+          "public_key": "3059301306072a8648ce3d020106082a8648ce3d0301070342000434d72ac7d7b5078912f511032b94bed5d79f13996d854e1c9667bc808f5ac403769b5657b19923f34189dfd1af267b89bcf10c0dbd21539490c6ecc0fc2e5251",
           "node_role": "ORCHESTRATOR",
           "version": "2.0.0",
-          "created_at": "2026-11-21T11:18:34.716079+00:00"
+          "created_at": "2026-11-25T09:46:54.864005+00:00"
         },
         "vajra_node": {
           "node_id": "VAJRA-QPU-PROD-001",
-          "public_key": "3059301306072a8648ce3d020106082a8648ce3d030107034200043655483b1ed44588c891f39ad61e50aaf955f43c4f703839430db0781a0b1a948bfe5fa983603ccd7cda789885ee56fe410d149b765144fe8853696f71d868da",
+          "public_key": "3059301306072a8648ce3d020106082a8648ce3d03010703420004e903ade216ea4ee8578f8e31dda4a75c9836fac2dc27fbd439e8c11ed71e58c65411e47dcc1f2716e1061e5fab85a0e878f43c6ced5d91540a0a4cf7384e3c74",
           "node_role": "QUANTUM_PRODUCER",
           "version": "2.0.0",
-          "created_at": "2026-11-21T11:18:34.716079+00:00"
+          "created_at": "2026-11-25T09:46:54.864005+00:00"
         }
       }
     },
@@ -71,7 +71,7 @@
         "producer_id": "",
         "producer_signature": "",
         "contract_signature": "",
-        "timestamp": "2026-11-21T11:18:34.716605+00:00"
+        "timestamp": "2026-11-25T09:46:54.864005+00:00"
       }
     },
     {
@@ -79,8 +79,8 @@
       "name": "VAJRA Dual-Layer Signing and Direct Verification (Happy Path)",
       "passed": true,
       "status": "VERIFIED",
-      "producer_signature": "3046022100f4bbe90939487f6f8498544540dbe699492a2682d210224ea90068896e4649c40221008ec04c0a0f93b36ce94f88237d39ace44cbf468dd21d2185cfb542b661e33bf6",
-      "contract_signature": "30440220421f3ac40fea864c75c78730190e2104edf07e434da2230a4564a8667227eb5e02200d46aec01a744eb10ebd9bc2d1dbf27ee55a1727dc81c4104c4ea1758bc38d03"
+      "producer_signature": "304402202e6c2b0b864cbbe6a5e711121faa474c5f0f9245d6b45c8a13dba19ec6dc8c8e022059e16d17e7d6bb51f3ea18df1e65c3a96a7cb8c668dc4ec8c6c46c0f53008388",
+      "contract_signature": "3046022100d6966a646ddee02f4a75595ba0081cc73c1cd39c4bdf22af8e82c9e7a9daf4eb0221008f926c85f730422101b608d20997e1c59f24c950871a0c9a52036c22b45b8e44"
     },
     {
       "test_id": "TEST-TV-04",
@@ -139,7 +139,7 @@
     "verification_rate_percent": 100.0,
     "adversarial_scenarios_tested": 7,
     "adversarial_rejection_rate_percent": 100.0,
-    "total_duration_ms": 13.02
+    "total_duration_ms": 15.25
   },
   "tamper_proofs": [],
   "acceptance_criteria": {
