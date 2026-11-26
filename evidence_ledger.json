@@ -149,6 +149,21 @@
       "previous_execution_hash": "7575fcfcd3ac02ea674d2c2b6b79927bdcd0041d317734bdbfeddb7220bb7dde",
       "execution_root_hash": "d3249d0cc40293eace546e6de9a4bb55f948d63a2275f3bef2bd409e7b518120",
       "schema_version": "2.0.0"
+    },
+    {
+      "execution_id": "a820efc0-e492-4a48-9c9c-b859e5727436",
+      "trace_id": "1e40f918-dae4-4edd-ae2c-65152e193960",
+      "replay_reference": 0,
+      "execution_sequence": 11,
+      "producer_identity": "qiskit-aer-local",
+      "runtime_identity": "HYBRID_RUNTIME_v1",
+      "governance_identity": "QCG_GOVERNANCE",
+      "execution_status": "LOCAL",
+      "runtime_hash": "b503d3e3c803cdbfaa7e0a9657a666af47db8d83a888a96a4e2b70f57352bb4d",
+      "execution_hash": "8b9ceee00d527c669ce15d6d2ded5e70479bb4568feffb29c668ee0d6190a112",
+      "previous_execution_hash": "155bfd50933a68faeea1898f74793ec9fecb462b9564abb2ddb4cec3839445eb",
+      "execution_root_hash": "a2f6274ad2203b501c73c2d00fe2d8b8b63c313b09165c9fb857dc4aa6be6a9f",
+      "schema_version": "2.0.0"
     }
   ],
   "evidence_hashes": [
@@ -161,9 +176,10 @@
     "c99b42cc0c15f519ea335d82b6c8a93d234c903107b6adccf2e986c57c40897c",
     "d507d83bc30b08f825d3e5b81276e9bce9aa6f98241a0c2393bdf3919b205968",
     "7575fcfcd3ac02ea674d2c2b6b79927bdcd0041d317734bdbfeddb7220bb7dde",
-    "155bfd50933a68faeea1898f74793ec9fecb462b9564abb2ddb4cec3839445eb"
+    "155bfd50933a68faeea1898f74793ec9fecb462b9564abb2ddb4cec3839445eb",
+    "9e4bcbd0538718a740559d94895502a371688b5c5a9929dfc13db048b0150103"
   ],
-  "current_head": "155bfd50933a68faeea1898f74793ec9fecb462b9564abb2ddb4cec3839445eb",
-  "saved_at": "2026-11-26T08:24:26.263909+00:00",
-  "chain_length": 10
+  "current_head": "9e4bcbd0538718a740559d94895502a371688b5c5a9929dfc13db048b0150103",
+  "saved_at": "2026-11-26T12:06:07.540539+00:00",
+  "chain_length": 11
 }
