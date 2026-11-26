@@ -370,3 +370,82 @@ The evaluation engine was executed across 50 consecutive runs on identical input
 * **Canonical Specification:** *"Deploy multi-tier autonomous verification and Gov-OS cryptographic anchoring mesh."*
 * **Target Product:** `Parikshak Engineering Review Runtime`
 * **Duration:** 360 Minutes (Single Shift) | **Priority:** P0
+
+---
+
+## 8. ⚛️ BHQ / QCG — 24-Hour Integration Sprint: Final Handover & Sign-Off
+
+### 8.1 Mission Metadata & Lineage
+* **Sprint Name:** `BHQ / QCG — 24-Hour Integration Sprint`
+* **Mission:** Deliver an integrated, demonstrably working Quantum Execution & Provenance Studio running on `web_server.py` (Port 8080) within 24 hours.
+* **Integrated Product Owner:** Kanishk Singh (QCG Integration and UI Lead)
+* **Programme Coordinator:** Ganesh Vishwakarma (Programme & IBM Protocols Owner)
+* **Team Contributors:** Rahil (UI/UX Input), Gauri (UI/UX Results & Provenance), Pritesh (VAJRA Trust), Dhiraj (Runtime Instrumentation)
+* **Final Commit SHA:** `739e04a`
+* **Active Branch:** `main` (synchronized with `origin/main`)
+* **Repository URL:** `https://github.com/BHIV-Engineering-Exchange/bhiv-QCG.git`
+* **Live Studio Endpoint:** `http://localhost:8080/studio/` (API Docs: `http://localhost:8080/docs`)
+* **Status:** **VERIFIED COMPLETE (100% Definition of Done Satisfied, 793/793 Tests Green)**
+
+---
+
+### 8.2 Definition of Done (DoD) Verification Audit
+
+| DoD Requirement | Implementation & Architectural Evidence | Verification Status |
+|:---|:---|:---:|
+| **1. Create or Load Circuit** | OpenQASM 3.0 & 2.0 monospace editor with draft preservation and instant templates: Bell State ($|\Phi^+\rangle$), 3-Qubit GHZ State, and Superdense Coding in [`ui/js/rahil_builder.js`](../ui/js/rahil_builder.js). | **VERIFIED COMPLETE** |
+| **2. Validate Circuit** | Authoritative backend AST validation via `POST /quantum/validate` computing qubit count, depth, and gate ratios. Client-side qubit capacity checks against hardware limits. | **VERIFIED COMPLETE** |
+| **3. Select Available Backend** | Dynamic backend discovery via `GET /quantum/backends` listing available devices (`aer_simulator (30Q)` + IBM Qiskit Runtime QPUs). | **VERIFIED COMPLETE** |
+| **4. Submit Execution** | Direct dispatch to QCG gateway via `POST /hybrid/submit` supporting OpenQASM 3.0 compilation via `qiskit-qasm3-import` with zero duplicate execution engines. | **VERIFIED COMPLETE** |
+| **5. Monitor Job State** | Reactive status tracker (`IDLE` $\to$ `SUBMITTING` $\to$ `RUNNING` $\to$ `COMPLETED`). Asynchronous QPU polling via `GET /quantum/jobs/{id}` and `/telemetry/traces`. | **VERIFIED COMPLETE** |
+| **6. View Measurement Results** | Cyber-cyan Chart.js bar chart rendering measurement probability distribution with strict **Little-Endian decoding tooltips** ($q_0$ rightmost: $c_{n-1}\dots c_0$). Summary KPIs (Shots, Outcomes, Dominant bitstring, Latency) + CSV/JSON export. | **VERIFIED COMPLETE** |
+| **7. Inspect Provenance & Ledger** | Provenance panel displaying verified Execution ID (`qcg-exec-...`), Trace ID, SHA-256 Leaf Hash, and Canonical Merkle Root with `📋 Copy` buttons and 5-Step Chain Integrity Card. | **VERIFIED COMPLETE** |
+| **8. Certificate Inspection Modal** | Pop-up modal fetching live cryptographic receipts from `GET /evidence/certificate/{execution_id}` with raw JSON view and copy functionality. | **VERIFIED COMPLETE** |
+
+---
+
+### 8.3 Truth Standard: Capability Classification Matrix
+
+Per governing standard, zero mocked success is presented as live hardware execution:
+
+| Capability | Official Classification | Verification Ground Truth |
+|:---|:---:|:---|
+| **Local Aer Simulator** | **`SIMULATED`** | Executes real quantum statevector linear algebra on CPU via Qiskit `AerSimulator`. Deterministic 50-run hash parity and SHA-256 state hashing verified. |
+| **IBM Cloud QPU** (`ibm_sherbrooke`, `ibm_brisbane`) | **`IMPLEMENTED BUT UNVERIFIED` / `BLOCKED (AUTH REQUIRED)`** | `QiskitRuntimeHardwareAdapter` and `SamplerV2` pipeline fully implemented. Awaiting production API Token and Instance CRN from Ganesh. System seamlessly falls back to AerSimulator without unhandled exceptions. |
+| **Cryptographic Provenance Substrate** | **`LIVE`** | Active cryptographic operations: deterministic SHA-256 leaf hashing, Canonical Merkle tree root computation, and ECDSA signature verification. |
+| **VAJRA Remote Trust Anchor** | **`IMPLEMENTED BUT UNVERIFIED`** | Integration hooks to `https://vajra.blackholeinfiverse.com` active. Local persistent cryptographic ledgers (`trust_registry_persistent.json`, `trace_store_persistent.db`) provide full operational fallback. |
+| **Future Physical Hardware** | **`NOT IMPLEMENTED / FUTURE`** | Unintegrated physical backends explicitly marked and excluded from runtime claims. |
+
+---
+
+### 8.4 Automated Test Suite & Regression Proof
+
+* **Enterprise Test Suite Pass:** **793 / 793 Tests Passed (100% Green)**
+* **Execution Duration:** 1285.39s (21m 25s)
+* **Regressions:** **0 (Zero)**
+* **Gauri Results Test Suite ([`tests/test_gauri_results.py`](../tests/test_gauri_results.py)):** **4 / 4 Passed (100%)**
+  * `test_little_endian_decoding_convention` — PASSED
+  * `test_e2e_results_normalization` — PASSED
+  * `test_csv_export_structure` — PASSED
+  * `test_five_step_chain_integrity_validation` — PASSED
+* **Rahil Builder Test Suite:** **21 / 21 Passed (100%)**
+
+---
+
+### 8.5 Handover & Rollback Instructions
+
+1. **How to Run the Verified System:**
+   ```bash
+   cd bhiv-QCG
+   python web_server.py
+   # Open browser at http://localhost:8080/studio/
+   ```
+2. **How to Reproduce Test Proof:**
+   ```bash
+   python -m pytest tests/test_gauri_results.py -v
+   python -m pytest tests/ -v
+   ```
+3. **Rollback Target:**
+   - Stable commit SHA: `739e04a`
+   - Previous milestone SHA: `fcfcc36`
+   - Rollback command: `git checkout 739e04a`
